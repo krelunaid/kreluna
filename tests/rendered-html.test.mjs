@@ -44,7 +44,7 @@ test("renders the Kreluna ecosystem homepage", async () => {
   assert.match(html, /href="https:\/\/www\.kreluna\.it\/en\/" hreflang="en" lang="en"/i);
   assert.match(html, /href="https:\/\/www\.kreluna\.it\/intelligenza-artificiale-aziende\.html"/i);
   assert.match(html, /href="https:\/\/www\.kreluna\.it\/ai-studi-professionali\.html"/i);
-  assert.match(html, /href="https:\/\/www\.kreluna\.it\/cybersecurity-pmi-studi-professionali\.html"/i);
+  assert.match(html, /href="https:\/\/cra24\.kreluna\.it\/"/i);
   assert.equal((html.match(/<title>/gi) ?? []).length, 1);
   assert.equal((html.match(/<meta name="description"/gi) ?? []).length, 1);
   assert.equal((html.match(/<h1\b/gi) ?? []).length, 1);

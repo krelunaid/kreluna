@@ -38,7 +38,7 @@ const products = [
       "Strumenti dedicati a security assessment, gestione delle vulnerabilità, workflow degli incidenti e conformità tecnica.",
     color: "cyan",
     status: "In sviluppo",
-    href: "https://www.kreluna.it/cybersecurity-pmi-studi-professionali.html",
+    href: "https://cra24.kreluna.it/",
     features: ["Security assessment", "Vulnerability management", "Compliance tecnica"],
   },
   {
