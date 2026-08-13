@@ -1,0 +1,17 @@
+{
+  "environment": "beta",
+  "status": "predeploy",
+  "chainId": 84532,
+  "chainName": "Base Sepolia",
+  "rpcUrl": "https://sepolia.base.org",
+  "explorerUrl": "https://sepolia-explorer.base.org",
+  "token": {
+    "name": "Kreluna Token Beta",
+    "symbol": "KRL",
+    "decimals": 18,
+    "contractAddress": null,
+    "logoUrl": "https://www.kreluna.it/kreluna-logo.png",
+    "projectedSupply": "100000000",
+    "projectedTestAllocation": "10000000"
+  }
+}

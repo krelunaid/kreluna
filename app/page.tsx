@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 
+const assetBasePath = process.env.NEXT_PUBLIC_ARUBA_BASE_PATH ?? "";
+
 const products = [
   {
     slug: "kreluna-ai",
@@ -12,7 +14,7 @@ const products = [
       "Non solo risposte. Ragionamento adattivo, ricerca, scrittura e pianificazione in un'esperienza naturale.",
     color: "violet",
     status: "In sviluppo",
-    href: "https://www.kreluna.it/#kreluna",
+    href: "https://www.kreluna.it/kreluna-ai/#kreluna",
     features: ["Ragionamento adattivo", "Ricerca e analisi", "Scrittura e studio"],
   },
   {
@@ -24,7 +26,7 @@ const products = [
       "Organizza documenti, clienti, pratiche e scadenze. Prepara il lavoro e lascia a te il controllo delle azioni importanti.",
     color: "gold",
     status: "In sviluppo",
-    href: "https://www.kreluna.it/#office",
+    href: "https://www.kreluna.it/kreluna-ai/#office",
     features: ["Document intelligence", "Pratiche e scadenze", "Approval center"],
   },
   {
@@ -36,7 +38,7 @@ const products = [
       "Strumenti dedicati a security assessment, gestione delle vulnerabilità, workflow degli incidenti e conformità tecnica.",
     color: "cyan",
     status: "In sviluppo",
-    href: "https://www.kreluna.it/#cyber",
+    href: "https://www.kreluna.it/kreluna-ai/#cyber",
     features: ["Security assessment", "Vulnerability management", "Compliance tecnica"],
   },
   {
@@ -54,14 +56,14 @@ const products = [
   {
     slug: "krl",
     name: "Kreluna Token",
-    eyebrow: "Utility token · KRL",
-    tagline: "L'utilità dell'ecosistema, su Base.",
+    eyebrow: "Utility demo · KRL Beta",
+    tagline: "L'utilità si prova, prima del lancio.",
     description:
-      "KRL è il modulo token a offerta fissa progettato per un futuro utilizzo nei servizi Kreluna. L'utilità concreta non è ancora attiva né definita.",
+      "KRL Beta è il prototipo su Base Sepolia per provare wallet e crediti AI dimostrativi. Nessun valore reale e nessuna vendita.",
     color: "mint",
-    status: "Base tecnica pronta",
-    href: "#krl",
-    features: ["Base · ERC-20", "Offerta fissa", "Vendita non attiva"],
+    status: "Beta · Testnet",
+    href: `${assetBasePath}/krl/`,
+    features: ["Base Sepolia", "100M progettati", "Vendita disattivata"],
   },
 ] as const;
 
@@ -78,7 +80,7 @@ function ArrowIcon() {
 function Logo() {
   return (
     <a className="brand" href="#top" aria-label="Kreluna, torna all'inizio">
-      <img src="/kreluna-logo.png" alt="" />
+      <img src={`${assetBasePath}/kreluna-logo.png`} alt="" />
       <span>KRELUNA</span>
     </a>
   );
@@ -89,7 +91,12 @@ export default function Home() {
   const [cookieVisible, setCookieVisible] = useState(false);
 
   useEffect(() => {
-    const seen = window.localStorage.getItem("kreluna-cookie-choice");
+    let seen: string | null = null;
+    try {
+      seen = window.localStorage.getItem("kreluna-cookie-choice");
+    } catch {
+      // The page remains usable when browser storage is unavailable.
+    }
     if (!seen) setCookieVisible(true);
 
     const observer = new IntersectionObserver(
@@ -101,19 +108,26 @@ export default function Home() {
   }, []);
 
   const chooseCookies = (choice: string) => {
-    window.localStorage.setItem("kreluna-cookie-choice", choice);
+    try {
+      window.localStorage.setItem("kreluna-cookie-choice", choice);
+    } catch {
+      // Closing the banner does not depend on local storage.
+    }
     setCookieVisible(false);
   };
 
   return (
-    <main id="top">
+    <main
+      id="top"
+      style={{ "--sphere-image": `url('${assetBasePath}/kreluna-sphere.jpg')` } as React.CSSProperties}
+    >
       <header className="site-header">
         <Logo />
         <nav className="desktop-nav" aria-label="Navigazione principale">
           <a href="#products">Prodotti</a>
           <a href="#vision">Visione</a>
           <a href="#likecash">LikeCash</a>
-          <a href="#krl">KRL</a>
+          <a href={`${assetBasePath}/krl/`}>KRL Beta</a>
           <a href="https://www.kreluna.it/azienda.html">Azienda</a>
         </nav>
         <div className="nav-actions">
@@ -128,7 +142,7 @@ export default function Home() {
         <a href="#products" onClick={() => setMenuOpen(false)}>Prodotti</a>
         <a href="#vision" onClick={() => setMenuOpen(false)}>Visione</a>
         <a href="#likecash" onClick={() => setMenuOpen(false)}>LikeCash</a>
-        <a href="#krl" onClick={() => setMenuOpen(false)}>KRL</a>
+        <a href={`${assetBasePath}/krl/`} onClick={() => setMenuOpen(false)}>KRL Beta</a>
         <a href="https://www.kreluna.it/azienda.html">Azienda</a>
         <a href="https://www.kreluna.it/contatti.html">Contatti</a>
       </div>
@@ -156,10 +170,10 @@ export default function Home() {
         <div className="orbit-system" aria-hidden="true">
           <div className="orbit orbit-one"><i className="satellite violet" /></div>
           <div className="orbit orbit-two"><i className="satellite gold" /></div>
-          <div className="orbit orbit-three"><i className="satellite cyan" /><i className="satellite coral" /></div>
-          <i className="satellite mint hero-mint" />
+          <div className="orbit orbit-three"><i className="satellite cyan" /></div>
+          <div className="orbit orbit-four"><i className="satellite coral" /></div>
+          <div className="orbit orbit-five"><i className="satellite mint hero-mint" /></div>
           <div className="hero-sphere" />
-          <span className="orb-label">Kreluna<br />Core</span>
         </div>
 
         <a className="scroll-cue" href="#products">Scopri l'ecosistema <span>↓</span></a>
@@ -253,21 +267,22 @@ export default function Home() {
         <div className="krl-panel reveal">
           <div className="krl-copy">
             <div className="eyebrow mint-text"><i /> Kreluna Token · KRL</div>
-            <h2>L'utilità prende forma.<br /><em>In modo verificabile.</em></h2>
+            <h2>La Beta è pronta.<br /><em>Provala senza valore reale.</em></h2>
             <p>
-              KRL è il token previsto per l'ecosistema Kreluna: un modulo tecnico
-              a offerta fissa progettato per la rete Base e per una futura integrazione
-              con servizi come abbonamenti e marketplace.
+              KRL Beta mostra come il token potrà apparire nel wallet e trasformarsi
+              in utilità dentro Kreluna. La prova usa Base Sepolia e crediti AI
+              dimostrativi: nessun acquisto, prezzo o rendimento.
             </p>
             <div className="krl-facts" aria-label="Caratteristiche di KRL">
-              <span><b>Base</b>Rete prevista</span>
-              <span><b>1 miliardo</b>Offerta fissa</span>
-              <span><b>ERC-20</b>Standard token</span>
+              <span><b>Base Sepolia</b>Rete di prova</span>
+              <span><b>100 milioni</b>Fornitura progettata</span>
+              <span><b>Testnet</b>Nessun valore reale</span>
             </div>
             <div className="krl-notice">
               <i />
-              <p><b>Stato: sviluppo tecnico.</b> La base è verificata localmente, ma KRL non è pubblicato su Base, non ha ancora un'utilità attiva e non è in vendita.</p>
+              <p><b>Stato: Beta pubblica.</b> Puoi provare interfaccia, wallet e simulatore AI. Il contratto testnet non è ancora pubblicato e la vendita resta disattivata.</p>
             </div>
+            <a className="button button-primary krl-beta-link" href={`${assetBasePath}/krl/`}>Apri KRL Beta <ArrowIcon /></a>
           </div>
           <div className="krl-visual" aria-hidden="true">
             <div className="ledger-grid" />
@@ -280,9 +295,9 @@ export default function Home() {
           </div>
         </div>
         <p className="krl-disclaimer reveal">
-          Informazioni preliminari: non costituiscono un'offerta o un invito all'acquisto.
-          Nessuna garanzia di valore o rendimento. Un eventuale lancio resta subordinato a utilità
-          reale e dimostrabile, audit indipendente e verifiche legali e regolamentari.
+          Solo testnet: KRL Beta non ha valore monetario, non è acquistabile e non attribuisce
+          rendimenti o diritti economici. Il deployment on-chain sarà indicato soltanto con un
+          indirizzo Base Sepolia pubblicamente verificabile.
         </p>
       </section>
 
