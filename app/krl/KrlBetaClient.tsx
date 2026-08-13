@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import {
   BASE_SEPOLIA,
@@ -48,6 +48,9 @@ function Brand({ assetBasePath }: { assetBasePath: string }) {
 export default function KrlBetaClient({ assetBasePath }: { assetBasePath: string }) {
   const [config, setConfig] = useState<KrlConfig>(() => validateRuntimeConfig(DEFAULT_KRL_CONFIG) as KrlConfig);
   const [configNotice, setConfigNotice] = useState("");
+  const [provider, setProvider] = useState<Eip1193Provider | null>(() => (
+    typeof window === "undefined" ? null : window.ethereum ?? null
+  ));
   const [account, setAccount] = useState<string | null>(null);
   const [chainId, setChainId] = useState<number | null>(null);
   const [walletNotice, setWalletNotice] = useState("Wallet non collegato");
@@ -57,23 +60,31 @@ export default function KrlBetaClient({ assetBasePath }: { assetBasePath: string
   const [demoCredits, setDemoCredits] = useState(0);
   const [demoNotice, setDemoNotice] = useState("Carica il saldo dimostrativo per iniziare.");
 
-  const provider = typeof window === "undefined" ? undefined : window.ethereum;
   const networkReady = chainId === BASE_SEPOLIA.chainId;
   const contractReady = isValidAddress(config.token.contractAddress);
 
-  const refreshBalance = useCallback(async (nextAccount: string | null, nextChainId: number | null) => {
-    if (!nextAccount || nextChainId !== BASE_SEPOLIA.chainId || !isValidAddress(config.token.contractAddress)) {
-      setBalance(null);
-      return;
+  useEffect(() => {
+    const handleProviderInjection = () => setProvider(window.ethereum ?? null);
+    window.addEventListener("ethereum#initialized", handleProviderInjection, { once: true });
+    return () => window.removeEventListener("ethereum#initialized", handleProviderInjection);
+  }, []);
+
+  useEffect(() => {
+    let active = true;
+    if (!account || chainId !== BASE_SEPOLIA.chainId || !isValidAddress(config.token.contractAddress)) {
+      return () => { active = false; };
     }
-    try {
-      const raw = await readTokenBalance(config, nextAccount);
-      setBalance(formatTokenAmount(raw, config.token.decimals));
-    } catch {
-      setBalance(null);
-      setWalletNotice("Saldo temporaneamente non disponibile.");
-    }
-  }, [config]);
+    void readTokenBalance(config, account)
+      .then((raw) => {
+        if (active) setBalance(formatTokenAmount(raw, config.token.decimals));
+      })
+      .catch(() => {
+        if (!active) return;
+        setBalance(null);
+        setWalletNotice("Saldo temporaneamente non disponibile.");
+      });
+    return () => { active = false; };
+  }, [account, chainId, config]);
 
   useEffect(() => {
     let active = true;
@@ -83,40 +94,35 @@ export default function KrlBetaClient({ assetBasePath }: { assetBasePath: string
         return response.json();
       })
       .then((value) => validateRuntimeConfig(value) as KrlConfig)
-      .then(async (value) => {
+      .then((value) => {
         if (!active) return;
+        setBalance(null);
         setConfig(value);
-        if (account && chainId === BASE_SEPOLIA.chainId && isValidAddress(value.token.contractAddress)) {
-          try {
-            const raw = await readTokenBalance(value, account);
-            if (active) setBalance(formatTokenAmount(raw, value.token.decimals));
-          } catch {
-            if (active) setBalance(null);
-          }
-        }
+        setConfigNotice("");
       })
       .catch(() => {
-        if (active) setConfigNotice("Configurazione protetta: contratto mantenuto disattivato.");
+        if (!active) return;
+        setConfig(validateRuntimeConfig(DEFAULT_KRL_CONFIG) as KrlConfig);
+        setBalance(null);
+        setConfigNotice("Configurazione protetta: contratto mantenuto disattivato.");
       });
     return () => { active = false; };
-  }, [account, assetBasePath, chainId]);
+  }, [assetBasePath]);
 
   useEffect(() => {
-    if (!provider?.on) return;
+    if (!provider?.on || !provider.removeListener) return;
     const handleAccounts = (...args: unknown[]) => {
       const accounts = Array.isArray(args[0]) ? args[0] : [];
       const next = typeof accounts[0] === "string" && isValidAddress(accounts[0]) ? accounts[0] : null;
       setAccount(next);
       setBalance(null);
       setWalletNotice(next ? "Wallet collegato" : "Wallet scollegato");
-      if (next) void refreshBalance(next, chainId);
     };
     const handleChain = (...args: unknown[]) => {
       const next = normalizeChainId(args[0]);
       setChainId(next);
       setBalance(null);
       setWalletNotice(next === BASE_SEPOLIA.chainId ? "Base Sepolia attiva" : "Passa a Base Sepolia per continuare");
-      if (account) void refreshBalance(account, next);
     };
     const handleDisconnect = () => {
       setAccount(null);
@@ -132,7 +138,7 @@ export default function KrlBetaClient({ assetBasePath }: { assetBasePath: string
       provider.removeListener?.("chainChanged", handleChain);
       provider.removeListener?.("disconnect", handleDisconnect);
     };
-  }, [account, chainId, provider, refreshBalance]);
+  }, [provider]);
 
   const connectWallet = async () => {
     if (!provider) {
@@ -149,8 +155,8 @@ export default function KrlBetaClient({ assetBasePath }: { assetBasePath: string
       const nextChainId = normalizeChainId(rawChainId);
       setAccount(nextAccount);
       setChainId(nextChainId);
+      setBalance(null);
       setWalletNotice(nextChainId === BASE_SEPOLIA.chainId ? "Wallet collegato su Base Sepolia" : "Wallet collegato: ora passa a Base Sepolia");
-      void refreshBalance(nextAccount, nextChainId);
     } catch (error) {
       setWalletNotice(walletErrorMessage(error));
     } finally {
@@ -165,10 +171,10 @@ export default function KrlBetaClient({ assetBasePath }: { assetBasePath: string
     }
     setBusy(true);
     try {
-      await ensureBaseSepolia(provider);
-      setChainId(BASE_SEPOLIA.chainId);
+      const activeChainId = await ensureBaseSepolia(provider);
+      setBalance(null);
+      setChainId(activeChainId);
       setWalletNotice("Base Sepolia attiva");
-      void refreshBalance(account, BASE_SEPOLIA.chainId);
     } catch (error) {
       setWalletNotice(walletErrorMessage(error));
     } finally {
@@ -180,6 +186,13 @@ export default function KrlBetaClient({ assetBasePath }: { assetBasePath: string
     if (!provider || !contractReady) return;
     setBusy(true);
     try {
+      const activeChainId = normalizeChainId(await provider.request({ method: "eth_chainId" }));
+      setChainId(activeChainId);
+      if (activeChainId !== BASE_SEPOLIA.chainId) {
+        setBalance(null);
+        setWalletNotice("Passa a Base Sepolia prima di aggiungere KRL Beta.");
+        return;
+      }
       const accepted = await provider.request({
         method: "wallet_watchAsset",
         params: {
@@ -221,6 +234,7 @@ export default function KrlBetaClient({ assetBasePath }: { assetBasePath: string
 
   const contractLabel = contractReady ? shortenAddress(config.token.contractAddress) : "Non ancora pubblicato";
   const explorerAccountUrl = account ? `${config.explorerUrl}/address/${account}` : config.explorerUrl;
+  const explorerContractUrl = contractReady ? `${config.explorerUrl}/address/${config.token.contractAddress}` : null;
   const walletPrimaryAction = !account
     ? { label: busy ? "Attendi nel wallet…" : "Collega wallet di prova", action: connectWallet }
     : !networkReady
@@ -277,13 +291,13 @@ export default function KrlBetaClient({ assetBasePath }: { assetBasePath: string
 
       <section className="beta-status beta-shell" id="stato" aria-labelledby="status-title">
         <div className="beta-section-heading">
-          <div className="beta-eyebrow"><i /> Stato verificabile</div>
-          <h2 id="status-title">Prima la prova.<br /><em>Poi il lancio.</em></h2>
+          <div className="beta-eyebrow"><i /> Stato della beta</div>
+          <h2 id="status-title">Una prova tecnica.<br /><em>Nessuna vendita.</em></h2>
         </div>
         <div className="status-grid">
           <article><span>Rete</span><b>Base Sepolia</b><small>Chain ID 84532</small></article>
-          <article><span>Fornitura progettata</span><b>100.000.000 KRL</b><small>Fissa, senza creazione futura</small></article>
-          <article><span>Quota tecnica test</span><b>10.000.000 KRL</b><small>Inclusa nella fornitura totale</small></article>
+          <article><span>Fornitura progettata</span><b>100.000.000 KRL</b><small>Parametro della demo, non ancora on-chain</small></article>
+          <article><span>Vendita</span><b>Non disponibile</b><small>Nessun prezzo, acquisto o raccolta attiva</small></article>
           <article><span>Contratto</span><b>{contractLabel}</b><small>{contractReady ? "Indirizzo testnet configurato" : "Deployment in preparazione"}</small></article>
         </div>
         <p className="status-footnote">
@@ -295,10 +309,11 @@ export default function KrlBetaClient({ assetBasePath }: { assetBasePath: string
       <section className="wallet-section beta-shell" id="wallet" aria-labelledby="wallet-title">
         <div className="wallet-copy">
           <div className="beta-eyebrow"><i /> Wallet di prova</div>
-          <h2 id="wallet-title">Il tuo KRL,<br /><em>quando sarà on-chain.</em></h2>
+          <h2 id="wallet-title">Wallet di prova.<br /><em>Contratto non pubblicato.</em></h2>
           <p>
             Collega un wallet senza condividere password o parole di recupero. La pagina può preparare
-            Base Sepolia; saldo e aggiunta del token si attiveranno dopo il deployment verificabile.
+            Base Sepolia; saldo e aggiunta restano disattivati finché non viene pubblicato
+            un contratto Base Sepolia verificabile. Il collegamento richiede un browser con wallet integrato.
           </p>
           <div className="wallet-safety">
             <span aria-hidden="true">✓</span>
@@ -307,7 +322,7 @@ export default function KrlBetaClient({ assetBasePath }: { assetBasePath: string
         </div>
 
         <div className="wallet-panel">
-          <div className="wallet-panel-top">
+          <div className="wallet-panel-top" role="status" aria-live="polite">
             <span className={`wallet-dot ${account && networkReady ? "ready" : ""}`} />
             <span>{walletNotice}</span>
             <b>TESTNET</b>
@@ -315,12 +330,19 @@ export default function KrlBetaClient({ assetBasePath }: { assetBasePath: string
           <div className="wallet-balance">
             <span>Saldo KRL Beta</span>
             <strong>{balance ?? "—"}</strong>
-            <small>{contractReady ? "Saldo letto da Base Sepolia" : "Disponibile dopo il deployment del contratto"}</small>
+            <small>{contractReady ? "Saldo letto da Base Sepolia" : "Disattivato: contratto non pubblicato"}</small>
           </div>
           <dl className="wallet-details">
             <div><dt>Wallet</dt><dd title={account ?? undefined}>{account ? shortenAddress(account) : "Non collegato"}</dd></div>
             <div><dt>Rete</dt><dd>{chainId ? (networkReady ? "Base Sepolia" : `Rete ${chainId}`) : "—"}</dd></div>
-            <div><dt>Contratto</dt><dd>{contractLabel}</dd></div>
+            <div>
+              <dt>Contratto</dt>
+              <dd>
+                {explorerContractUrl
+                  ? <a href={explorerContractUrl} target="_blank" rel="noreferrer">{config.token.contractAddress}</a>
+                  : contractLabel}
+              </dd>
+            </div>
           </dl>
           <div className="wallet-actions">
             {walletPrimaryAction && (
@@ -350,7 +372,7 @@ export default function KrlBetaClient({ assetBasePath }: { assetBasePath: string
             <h2 id="utility-title">Dai token<br /><em>all’utilità AI.</em></h2>
           </div>
           <p>
-            Questa prova mostra il futuro flusso Kreluna senza usare blockchain, denaro o servizi a pagamento.
+            Questa prova simula un possibile flusso Kreluna senza usare blockchain, denaro o servizi a pagamento.
             I valori restano soltanto in questa pagina e si azzerano ricaricandola.
           </p>
         </div>
@@ -382,13 +404,13 @@ export default function KrlBetaClient({ assetBasePath }: { assetBasePath: string
 
       <section className="how-section beta-shell" aria-labelledby="how-title">
         <div className="beta-section-heading">
-          <div className="beta-eyebrow"><i /> Come funzionerà</div>
+          <div className="beta-eyebrow"><i /> Come funziona la demo</div>
           <h2 id="how-title">Tre passaggi.<br /><em>Nessuna chiave condivisa.</em></h2>
         </div>
         <ol className="how-grid">
           <li><span>01</span><h3>Collega il wallet</h3><p>Autorizzi soltanto la visualizzazione del tuo indirizzo pubblico.</p></li>
           <li><span>02</span><h3>Passa alla testnet</h3><p>Il wallet prepara Base Sepolia, una rete senza denaro reale.</p></li>
-          <li><span>03</span><h3>Aggiungi KRL Beta</h3><p>Dopo il deployment, un pulsante importerà simbolo, contratto e logo.</p></li>
+          <li><span>03</span><h3>Aggiungi KRL Beta</h3><p>Se il contratto verrà pubblicato, il pulsante potrà importare simbolo, contratto e logo.</p></li>
         </ol>
       </section>
 
@@ -400,8 +422,8 @@ export default function KrlBetaClient({ assetBasePath }: { assetBasePath: string
         <div className="faq-list">
           <details><summary>Posso acquistare KRL Beta?</summary><p>No. Non è in vendita e non può essere acquistato con euro o altre cripto-attività.</p></details>
           <details><summary>Ha un prezzo o un valore di mercato?</summary><p>No. È una configurazione dimostrativa su rete di prova, senza valore monetario.</p></details>
-          <details><summary>Dove vedo il contratto?</summary><p>Non è ancora pubblicato. Quando sarà disponibile, mostreremo qui l’indirizzo Base Sepolia verificabile.</p></details>
-          <details><summary>A cosa servono i crediti AI demo?</summary><p>Soltanto a simulare il futuro flusso di utilità. Non sono acquistabili, convertibili o riscattabili.</p></details>
+          <details><summary>Dove vedo il contratto?</summary><p>Non è pubblicato. Un eventuale indirizzo Base Sepolia verificabile sarà mostrato qui.</p></details>
+          <details><summary>A cosa servono i crediti AI demo?</summary><p>Soltanto a simulare un possibile flusso di utilità. Non sono acquistabili, convertibili o riscattabili.</p></details>
         </div>
       </section>
 
@@ -409,8 +431,8 @@ export default function KrlBetaClient({ assetBasePath }: { assetBasePath: string
         <div>
           <span className="sale-off-icon" aria-hidden="true">×</span>
           <div><b>Acquisto non disponibile</b><p>Questa beta serve esclusivamente a provare interfaccia, wallet e utilità dimostrativa.</p></div>
+          <span>SALE · OFF</span>
         </div>
-        <span>SALE · OFF</span>
       </section>
 
       <footer className="beta-footer beta-shell">

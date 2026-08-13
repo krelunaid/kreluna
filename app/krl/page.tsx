@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "KRL Beta — Utility in prova",
-    description: "Demo tecnica Kreluna su Base Sepolia.",
+    description: "Demo tecnica Kreluna su Base Sepolia. Nessun valore reale e nessuna vendita.",
     images: [`${assetBasePath}/krl-beta-og.png`],
   },
 };

@@ -11,7 +11,6 @@
     "decimals": 18,
     "contractAddress": null,
     "logoUrl": "https://www.kreluna.it/kreluna-logo.png",
-    "projectedSupply": "100000000",
-    "projectedTestAllocation": "10000000"
+    "projectedSupply": "100000000"
   }
 }

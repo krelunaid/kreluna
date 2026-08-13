@@ -1,59 +1,137 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 const assetBasePath = process.env.NEXT_PUBLIC_ARUBA_BASE_PATH ?? "";
 const isArubaPreview = assetBasePath.length > 0;
+const siteUrl = "https://www.kreluna.it";
+const siteTitle = "Kreluna — Creiamo prodotti per ciò che viene dopo";
+const siteDescription =
+  "Kreluna progetta software e intelligenza artificiale. Scopri Kreluna AI, Office, Cyber, LikeCash, Kreluna Token (KRL) e i prossimi progetti dell'ecosistema.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.kreluna.it"),
-  title: "Kreluna — Creiamo prodotti per ciò che viene dopo",
-  description: "Kreluna progetta software e intelligenza artificiale. Scopri Kreluna AI, Office, Cyber, LikeCash, Kreluna Token (KRL) e i prossimi progetti dell'ecosistema.",
-  alternates: { canonical: isArubaPreview ? `${assetBasePath}/` : "/" },
-  robots: isArubaPreview ? { index: false, follow: false } : undefined,
-  other: {
-    "application-name": "Kreluna",
+  metadataBase: new URL(siteUrl),
+  title: siteTitle,
+  description: siteDescription,
+  applicationName: "Kreluna",
+  creator: "Kreluna",
+  publisher: "Kreluna",
+  category: "technology",
+  alternates: {
+    canonical: isArubaPreview ? `${assetBasePath}/` : "/",
+    languages: {
+      it: "/",
+      en: "/en/",
+      "x-default": "/",
+    },
   },
-  icons: { icon: `${assetBasePath}/kreluna-logo.png`, apple: `${assetBasePath}/kreluna-logo.png` },
+  robots: isArubaPreview
+    ? { index: false, follow: false }
+    : {
+        index: true,
+        follow: true,
+        googleBot: {
+          index: true,
+          follow: true,
+          "max-image-preview": "large",
+          "max-snippet": -1,
+          "max-video-preview": -1,
+        },
+      },
+  icons: {
+    icon: [{ url: `${assetBasePath}/kreluna-logo.png`, type: "image/png", sizes: "128x128" }],
+    apple: [{ url: `${assetBasePath}/kreluna-logo.png`, type: "image/png", sizes: "128x128" }],
+  },
+  manifest: `${assetBasePath}/site.webmanifest`,
   openGraph: {
-    title: "Kreluna — Creiamo prodotti per ciò che viene dopo",
+    title: siteTitle,
     description: "Un'unica visione. Progetti diversi. Scopri l'ecosistema Kreluna.",
     url: isArubaPreview ? `${assetBasePath}/` : "/",
     siteName: "Kreluna",
     locale: "it_IT",
+    alternateLocale: ["en_GB"],
     type: "website",
-    images: [{ url: `${assetBasePath}/og-v2.png`, width: 1731, height: 909, alt: "Kreluna — Creiamo prodotti per ciò che viene dopo" }],
+    images: [
+      {
+        url: `${assetBasePath}/og-kreluna.jpg`,
+        width: 1200,
+        height: 630,
+        type: "image/jpeg",
+        alt: siteTitle,
+      },
+    ],
   },
-  twitter: { card: "summary_large_image", title: "Kreluna", description: "Creiamo prodotti per ciò che viene dopo.", images: [`${assetBasePath}/og-v2.png`] },
+  twitter: {
+    card: "summary_large_image",
+    title: siteTitle,
+    description: "Un'unica visione. Progetti diversi. Scopri l'ecosistema Kreluna.",
+    images: [`${assetBasePath}/og-kreluna.jpg`],
+  },
+};
+
+export const viewport: Viewport = {
+  colorScheme: "dark",
+  themeColor: "#0a0a10",
+};
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${siteUrl}/#organization`,
+      name: "Kreluna",
+      alternateName: "Kreluna Ecosystem",
+      url: `${siteUrl}/`,
+      description: siteDescription,
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteUrl}/kreluna-logo.png`,
+        width: 128,
+        height: 128,
+      },
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "customer support",
+        url: `${siteUrl}/contatti.html`,
+        availableLanguage: ["Italian", "English"],
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      url: `${siteUrl}/`,
+      name: "Kreluna",
+      alternateName: "Kreluna Ecosystem",
+      description: siteDescription,
+      publisher: { "@id": `${siteUrl}/#organization` },
+      inLanguage: ["it-IT", "en-GB"],
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${siteUrl}/#webpage`,
+      url: `${siteUrl}/`,
+      name: siteTitle,
+      description: siteDescription,
+      isPartOf: { "@id": `${siteUrl}/#website` },
+      about: { "@id": `${siteUrl}/#organization` },
+      inLanguage: "it-IT",
+    },
+  ],
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        "@id": "https://www.kreluna.it/#organization",
-        name: "Kreluna",
-        url: "https://www.kreluna.it/",
-        logo: "https://www.kreluna.it/kreluna-logo.png",
-        email: "krelunaid@gmail.com",
-      },
-      {
-        "@type": "WebSite",
-        "@id": "https://www.kreluna.it/#website",
-        url: "https://www.kreluna.it/",
-        name: "Kreluna",
-        publisher: { "@id": "https://www.kreluna.it/#organization" },
-        inLanguage: "it-IT",
-      },
-    ],
-  };
-
   return (
-    <html lang="it">
+    <html lang="it-IT">
+      <head>
+        <link rel="preload" href={`${assetBasePath}/fonts/inter-latin.woff2`} as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href={`${assetBasePath}/fonts/space-grotesk-latin.woff2`} as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href={`${assetBasePath}/fonts/newsreader-500-italic.woff2`} as="font" type="font/woff2" crossOrigin="anonymous" />
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+      </head>
       <body>
         {children}
         <script
+          id="kreluna-structured-data"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />

@@ -8,7 +8,8 @@
   --beta-violet: #8b7cff;
   --beta-line: rgba(105, 240, 192, 0.16);
   min-height: 100vh;
-  overflow: hidden;
+  overflow-x: clip;
+  overflow-y: visible;
   color: var(--beta-ink);
   background:
     radial-gradient(circle at 78% 10%, rgba(139, 124, 255, 0.12), transparent 30%),
@@ -409,6 +410,7 @@
 .wallet-details div:last-child { border-bottom: 0; }
 .wallet-details dt { color: var(--beta-muted); font-size: 0.73rem; }
 .wallet-details dd { margin: 0; font: 500 0.69rem var(--mono); text-align: right; }
+.wallet-details dd a { overflow-wrap: anywhere; word-break: break-word; text-decoration: underline; text-decoration-color: rgba(105, 240, 192, 0.45); text-underline-offset: 3px; }
 
 .wallet-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 20px; }
 .wallet-actions .beta-button { width: 100%; padding-inline: 12px; }
@@ -543,7 +545,7 @@
 }
 
 @media (max-width: 700px) {
-  .krl-testnet-bar { align-items: flex-start; gap: 8px; padding-inline: 14px; font-size: 0.57rem; line-height: 1.45; }
+  .krl-testnet-bar { align-items: flex-start; gap: 8px; padding-inline: 14px; font-size: 0.68rem; line-height: 1.45; }
   .krl-testnet-bar b { flex: 0 0 auto; }
   .beta-header { height: 65px; padding-inline: 19px; }
   .beta-back { font-size: 0.7rem; }

@@ -43,16 +43,23 @@ test("normalizes Base Sepolia chain identifiers", () => {
   assert.equal(normalizeChainId("0x14a34"), BASE_SEPOLIA.chainId);
   assert.equal(normalizeChainId("84532"), BASE_SEPOLIA.chainId);
   assert.equal(normalizeChainId({}), null);
+  assert.equal(normalizeChainId("0x14a34junk"), null);
+  assert.equal(normalizeChainId("84532foo"), null);
 });
 
 test("switches to Base Sepolia without adding an existing chain", async () => {
   const calls = [];
-  const provider = { request: async (call) => { calls.push(call); return null; } };
-  await ensureBaseSepolia(provider);
-  assert.deepEqual(calls, [{
-    method: "wallet_switchEthereumChain",
-    params: [{ chainId: "0x14a34" }],
-  }]);
+  const provider = {
+    request: async (call) => {
+      calls.push(call);
+      return call.method === "eth_chainId" ? "0x14a34" : null;
+    },
+  };
+  assert.equal(await ensureBaseSepolia(provider), BASE_SEPOLIA.chainId);
+  assert.deepEqual(calls.map((call) => call.method), [
+    "wallet_switchEthereumChain",
+    "eth_chainId",
+  ]);
 });
 
 test("adds Base Sepolia only when the wallet reports an unknown chain", async () => {
@@ -60,17 +67,26 @@ test("adds Base Sepolia only when the wallet reports an unknown chain", async ()
   const provider = {
     request: async (call) => {
       calls.push(call);
-      if (call.method === "wallet_switchEthereumChain") {
+      if (call.method === "wallet_switchEthereumChain" && calls.length === 1) {
         throw { code: "4902" };
       }
-      return null;
+      return call.method === "eth_chainId" ? "0x14a34" : null;
     },
   };
   await ensureBaseSepolia(provider);
-  assert.equal(calls.length, 2);
+  assert.equal(calls.length, 4);
   assert.equal(calls[1].method, "wallet_addEthereumChain");
   assert.equal(calls[1].params[0].chainId, "0x14a34");
   assert.deepEqual(calls[1].params[0].rpcUrls, ["https://sepolia.base.org"]);
+  assert.equal(calls[2].method, "wallet_switchEthereumChain");
+  assert.equal(calls[3].method, "eth_chainId");
+});
+
+test("does not assume Base Sepolia is active after a wallet switch", async () => {
+  const provider = {
+    request: async (call) => call.method === "eth_chainId" ? "0x1" : null,
+  };
+  await assert.rejects(() => ensureBaseSepolia(provider), /non è attiva/);
 });
 
 test("does not swallow a rejected wallet request", async () => {

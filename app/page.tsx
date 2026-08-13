@@ -14,7 +14,7 @@ const products = [
       "Non solo risposte. Ragionamento adattivo, ricerca, scrittura e pianificazione in un'esperienza naturale.",
     color: "violet",
     status: "In sviluppo",
-    href: "https://www.kreluna.it/kreluna-ai/#kreluna",
+    href: "https://www.kreluna.it/intelligenza-artificiale-aziende.html",
     features: ["Ragionamento adattivo", "Ricerca e analisi", "Scrittura e studio"],
   },
   {
@@ -26,7 +26,7 @@ const products = [
       "Organizza documenti, clienti, pratiche e scadenze. Prepara il lavoro e lascia a te il controllo delle azioni importanti.",
     color: "gold",
     status: "In sviluppo",
-    href: "https://www.kreluna.it/kreluna-ai/#office",
+    href: "https://www.kreluna.it/ai-studi-professionali.html",
     features: ["Document intelligence", "Pratiche e scadenze", "Approval center"],
   },
   {
@@ -38,7 +38,7 @@ const products = [
       "Strumenti dedicati a security assessment, gestione delle vulnerabilità, workflow degli incidenti e conformità tecnica.",
     color: "cyan",
     status: "In sviluppo",
-    href: "https://www.kreluna.it/kreluna-ai/#cyber",
+    href: "https://www.kreluna.it/cybersecurity-pmi-studi-professionali.html",
     features: ["Security assessment", "Vulnerability management", "Compliance tecnica"],
   },
   {
@@ -57,9 +57,9 @@ const products = [
     slug: "krl",
     name: "Kreluna Token",
     eyebrow: "Utility demo · KRL Beta",
-    tagline: "L'utilità si prova, prima del lancio.",
+    tagline: "L’utilità si simula nella Beta.",
     description:
-      "KRL Beta è il prototipo su Base Sepolia per provare wallet e crediti AI dimostrativi. Nessun valore reale e nessuna vendita.",
+      "KRL Beta simula crediti AI e prepara il wallet per Base Sepolia. Nessun valore reale e nessuna vendita.",
     color: "mint",
     status: "Beta · Testnet",
     href: `${assetBasePath}/krl/`,
@@ -80,7 +80,9 @@ function ArrowIcon() {
 function Logo() {
   return (
     <a className="brand" href="#top" aria-label="Kreluna, torna all'inizio">
-      <img src={`${assetBasePath}/kreluna-logo.png`} alt="" />
+      {/* The logo is a tiny local decorative asset with fixed intrinsic dimensions. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={`${assetBasePath}/kreluna-logo.png`} alt="" width="128" height="128" decoding="async" />
       <span>KRELUNA</span>
     </a>
   );
@@ -97,14 +99,19 @@ export default function Home() {
     } catch {
       // The page remains usable when browser storage is unavailable.
     }
-    if (!seen) setCookieVisible(true);
+    const cookieTimer = !seen
+      ? window.setTimeout(() => setCookieVisible(true), 0)
+      : undefined;
 
     const observer = new IntersectionObserver(
       (entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("visible")),
       { threshold: 0.12 },
     );
     document.querySelectorAll(".reveal").forEach((node) => observer.observe(node));
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      if (cookieTimer !== undefined) window.clearTimeout(cookieTimer);
+    };
   }, []);
 
   const chooseCookies = (choice: string) => {
@@ -133,11 +140,19 @@ export default function Home() {
         <div className="nav-actions">
           <a className="contact-link" href="https://www.kreluna.it/contatti.html">Contatti</a>
           <a className="button button-small button-primary" href="#products">Esplora</a>
-          <button className="menu-button" onClick={() => setMenuOpen(true)} aria-label="Apri il menu">☰</button>
+          <button
+            className="menu-button"
+            onClick={() => setMenuOpen(true)}
+            aria-label="Apri il menu"
+            aria-controls="mobile-navigation"
+            aria-expanded={menuOpen}
+          >
+            ☰
+          </button>
         </div>
       </header>
 
-      <div className={`mobile-menu ${menuOpen ? "open" : ""}`} aria-hidden={!menuOpen}>
+      <div id="mobile-navigation" className={`mobile-menu ${menuOpen ? "open" : ""}`} aria-hidden={!menuOpen}>
         <button onClick={() => setMenuOpen(false)} aria-label="Chiudi il menu">×</button>
         <a href="#products" onClick={() => setMenuOpen(false)}>Prodotti</a>
         <a href="#vision" onClick={() => setMenuOpen(false)}>Visione</a>
@@ -155,7 +170,7 @@ export default function Home() {
         <div className="spark spark-two">✦</div>
         <div className="hero-copy reveal visible">
           <div className="eyebrow"><i /> Kreluna · tecnologia che prende forma</div>
-          <h1>Creiamo prodotti<br />per ciò che <em>viene dopo.</em></h1>
+          <h1>Creiamo prodotti<br />{" "}per ciò che <em>viene dopo.</em></h1>
           <p>
             Kreluna progetta software e intelligenza artificiale per persone,
             professionisti e imprese. Ogni progetto ha una propria identità.
@@ -176,7 +191,7 @@ export default function Home() {
           <div className="hero-sphere" />
         </div>
 
-        <a className="scroll-cue" href="#products">Scopri l'ecosistema <span>↓</span></a>
+        <a className="scroll-cue" href="#products">Scopri l’ecosistema <span>↓</span></a>
       </section>
 
       <section className="statement section-shell" id="vision">
@@ -193,11 +208,11 @@ export default function Home() {
       <section className="products section-shell" id="products">
         <div className="section-heading reveal">
           <div>
-            <div className="eyebrow"><i /> L'ecosistema Kreluna</div>
-            <h2>Un'unica visione.<br /><em>Progetti diversi.</em></h2>
+            <div className="eyebrow"><i /> L’ecosistema Kreluna</div>
+            <h2>Un’unica visione.<br />{" "}<em>Progetti diversi.</em></h2>
           </div>
           <p>
-            Dall'intelligenza artificiale al lavoro professionale, dalla sicurezza
+            Dall’intelligenza artificiale al lavoro professionale, dalla sicurezza
             a LikeCash e KRL. Questo spazio è pensato per crescere insieme a Kreluna.
           </p>
         </div>
@@ -227,7 +242,7 @@ export default function Home() {
                 </div>
               </div>
               <a href={product.href} className="card-link" aria-label={`Scopri ${product.name}`}>
-                Scopri il progetto <ArrowIcon />
+                Scopri {product.name} <ArrowIcon />
               </a>
             </article>
           ))}
@@ -247,7 +262,7 @@ export default function Home() {
         <div className="likecash-panel reveal">
           <div className="likecash-copy">
             <div className="eyebrow coral-text"><i /> LikeCash · by Kreluna</div>
-            <h2>Un nuovo progetto<br />sta prendendo <em>forma.</em></h2>
+            <h2>Un nuovo progetto<br />{" "}sta prendendo <em>forma.</em></h2>
             <p>
               LikeCash è un progetto Kreluna in sviluppo. Stiamo definendo esperienza,
               funzionalità e lancio; condivideremo qui informazioni confermate, un passo alla volta.
@@ -269,9 +284,8 @@ export default function Home() {
             <div className="eyebrow mint-text"><i /> Kreluna Token · KRL</div>
             <h2>La Beta è pronta.<br /><em>Provala senza valore reale.</em></h2>
             <p>
-              KRL Beta mostra come il token potrà apparire nel wallet e trasformarsi
-              in utilità dentro Kreluna. La prova usa Base Sepolia e crediti AI
-              dimostrativi: nessun acquisto, prezzo o rendimento.
+              KRL Beta simula l’aspetto nel wallet e un flusso locale di crediti AI.
+              La prova usa Base Sepolia: nessun acquisto, prezzo, rendimento o servizio reale.
             </p>
             <div className="krl-facts" aria-label="Caratteristiche di KRL">
               <span><b>Base Sepolia</b>Rete di prova</span>
@@ -290,13 +304,13 @@ export default function Home() {
             <div className="token-ring token-ring-b" />
             <div className="krl-token"><span>KRL</span><small>BY KRELUNA</small></div>
             <span className="chain-label label-base">BASE</span>
-            <span className="chain-label label-supply">FIXED SUPPLY</span>
+            <span className="chain-label label-supply">SUPPLY PROGETTATA</span>
             <span className="chain-label label-dev">IN DEVELOPMENT</span>
           </div>
         </div>
         <p className="krl-disclaimer reveal">
           Solo testnet: KRL Beta non ha valore monetario, non è acquistabile e non attribuisce
-          rendimenti o diritti economici. Il deployment on-chain sarà indicato soltanto con un
+          rendimenti o diritti economici. Un eventuale deployment on-chain sarà indicato soltanto con un
           indirizzo Base Sepolia pubblicamente verificabile.
         </p>
       </section>
@@ -305,7 +319,7 @@ export default function Home() {
         <div className="section-heading compact reveal">
           <div>
             <div className="eyebrow"><i /> Il modo Kreluna</div>
-            <h2>Una firma che<br /><em>si riconosce.</em></h2>
+            <h2>Una firma che<br />{" "}<em>si riconosce.</em></h2>
           </div>
         </div>
         <div className="principles-grid">
@@ -322,8 +336,8 @@ export default function Home() {
       <section className="closing section-shell reveal">
         <div className="closing-orb" aria-hidden="true" />
         <div className="eyebrow"><i /> Kreluna</div>
-        <h2>Questo è solo<br /><em>l'inizio.</em></h2>
-        <p>Scopri ciò che stiamo costruendo e segui l'evoluzione dell'ecosistema.</p>
+        <h2>Questo è solo<br />{" "}<em>l’inizio.</em></h2>
+        <p>Scopri ciò che stiamo costruendo e segui l’evoluzione dell’ecosistema.</p>
         <a className="button button-primary" href="#products">Esplora i progetti <ArrowIcon /></a>
       </section>
 
@@ -342,6 +356,7 @@ export default function Home() {
             <a href="https://www.kreluna.it/azienda.html">Azienda</a>
             <a href="https://www.kreluna.it/risorse.html">Risorse</a>
             <a href="https://www.kreluna.it/contatti.html">Contatti</a>
+            <a href="https://www.kreluna.it/en/" hrefLang="en" lang="en">English</a>
           </div>
           <div className="footer-column">
             <h5>Legale</h5>
@@ -358,7 +373,7 @@ export default function Home() {
 
       {cookieVisible && (
         <aside className="cookie-banner" aria-label="Preferenze cookie">
-          <p>Questo prototipo usa solo memoria tecnica nel browser per ricordare questa scelta. <a href="https://www.kreluna.it/cookie.html">Scopri di più</a>.</p>
+          <p>Questo sito usa solo memoria tecnica nel browser per ricordare questa scelta. <a href="https://www.kreluna.it/cookie.html">Scopri di più</a>.</p>
           <div>
             <button onClick={() => chooseCookies("technical")}>Solo tecnici</button>
             <button className="accept" onClick={() => chooseCookies("accepted")}>Va bene</button>

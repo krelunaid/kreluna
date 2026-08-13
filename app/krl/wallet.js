@@ -21,7 +21,6 @@ export const DEFAULT_KRL_CONFIG = Object.freeze({
     contractAddress: null,
     logoUrl: "https://www.kreluna.it/kreluna-logo.png",
     projectedSupply: "100000000",
-    projectedTestAllocation: "10000000",
   }),
 });
 
@@ -76,7 +75,6 @@ export function validateRuntimeConfig(value) {
       contractAddress: token.contractAddress,
       logoUrl: isHttpsUrl(token.logoUrl) ? token.logoUrl : DEFAULT_KRL_CONFIG.token.logoUrl,
       projectedSupply: "100000000",
-      projectedTestAllocation: "10000000",
     },
   };
 }
@@ -114,12 +112,23 @@ export async function ensureBaseSepolia(provider) {
         blockExplorerUrls: [BASE_SEPOLIA.explorerUrl],
       }],
     });
+    await provider.request({
+      method: "wallet_switchEthereumChain",
+      params: [{ chainId: BASE_SEPOLIA.chainIdHex }],
+    });
   }
+
+  const activeChainId = normalizeChainId(await provider.request({ method: "eth_chainId" }));
+  if (activeChainId !== BASE_SEPOLIA.chainId) {
+    throw new Error("Base Sepolia non è attiva.");
+  }
+  return activeChainId;
 }
 
 export function normalizeChainId(value) {
-  if (typeof value === "number" && Number.isSafeInteger(value)) return value;
+  if (typeof value === "number" && Number.isSafeInteger(value) && value >= 0) return value;
   if (typeof value !== "string") return null;
+  if (!/^(?:0x[0-9a-fA-F]+|[0-9]+)$/.test(value)) return null;
   const parsed = Number.parseInt(value, value.startsWith("0x") ? 16 : 10);
   return Number.isSafeInteger(parsed) ? parsed : null;
 }
