@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     url: "/",
     siteName: "Kreluna",
     locale: "it_IT",
-    alternateLocale: ["en_US"],
+    alternateLocale: ["en_GB"],
     type: "website",
     images: [
       {
@@ -100,7 +100,7 @@ const structuredData = {
       alternateName: "Kreluna Ecosystem",
       description: siteDescription,
       publisher: { "@id": `${siteUrl}/#organization` },
-      inLanguage: ["it-IT", "en-US"],
+      inLanguage: ["it-IT", "en-GB"],
     },
     {
       "@type": "WebPage",
@@ -110,12 +110,6 @@ const structuredData = {
       description: siteDescription,
       isPartOf: { "@id": `${siteUrl}/#website` },
       about: { "@id": `${siteUrl}/#organization` },
-      primaryImageOfPage: {
-        "@type": "ImageObject",
-        url: `${siteUrl}/og-kreluna.jpg`,
-        width: 1200,
-        height: 630,
-      },
       inLanguage: "it-IT",
     },
   ],
@@ -125,14 +119,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="it-IT">
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        {/* The root App Router layout is shared by every route in this site. */}
-        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;600&family=Newsreader:ital,wght@1,500&family=Space+Grotesk:wght@500;600;700&display=swap"
-        />
+        <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/newsreader-500-italic.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
       </head>
       <body>
         {children}

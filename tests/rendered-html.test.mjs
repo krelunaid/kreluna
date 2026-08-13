@@ -34,12 +34,17 @@ test("renders the Kreluna ecosystem homepage", async () => {
   assert.match(html, /hreflang="x-default" href="https:\/\/www\.kreluna\.it\/?"/i);
   assert.match(html, /name="robots" content="index, follow"/i);
   assert.match(html, /property="og:image" content="https:\/\/www\.kreluna\.it\/og-kreluna\.jpg"/i);
+  assert.doesNotMatch(html, /fonts\.googleapis\.com|fonts\.gstatic\.com/i);
+  assert.match(html, /rel="preload" href="\/fonts\/space-grotesk-latin\.woff2" as="font"/i);
   assert.match(html, /<script id="kreluna-structured-data" type="application\/ld\+json">/i);
   assert.match(html, /"@type":"Organization"/);
   assert.match(html, /"@type":"WebSite"/);
   assert.match(html, /"@type":"WebPage"/);
   assert.match(html, /<img src="\/kreluna-logo\.png" alt="" width="128" height="128"/i);
   assert.match(html, /href="https:\/\/www\.kreluna\.it\/en\/" hreflang="en" lang="en"/i);
+  assert.match(html, /href="https:\/\/www\.kreluna\.it\/intelligenza-artificiale-aziende\.html"/i);
+  assert.match(html, /href="https:\/\/www\.kreluna\.it\/ai-studi-professionali\.html"/i);
+  assert.match(html, /href="https:\/\/www\.kreluna\.it\/cybersecurity-pmi-studi-professionali\.html"/i);
   assert.equal((html.match(/<title>/gi) ?? []).length, 1);
   assert.equal((html.match(/<meta name="description"/gi) ?? []).length, 1);
   assert.equal((html.match(/<h1\b/gi) ?? []).length, 1);

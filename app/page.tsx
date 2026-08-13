@@ -12,7 +12,7 @@ const products = [
       "Non solo risposte. Ragionamento adattivo, ricerca, scrittura e pianificazione in un'esperienza naturale.",
     color: "violet",
     status: "In sviluppo",
-    href: "https://www.kreluna.it/kreluna-ai/#kreluna",
+    href: "https://www.kreluna.it/intelligenza-artificiale-aziende.html",
     features: ["Ragionamento adattivo", "Ricerca e analisi", "Scrittura e studio"],
   },
   {
@@ -24,7 +24,7 @@ const products = [
       "Organizza documenti, clienti, pratiche e scadenze. Prepara il lavoro e lascia a te il controllo delle azioni importanti.",
     color: "gold",
     status: "In sviluppo",
-    href: "https://www.kreluna.it/kreluna-ai/#office",
+    href: "https://www.kreluna.it/ai-studi-professionali.html",
     features: ["Document intelligence", "Pratiche e scadenze", "Approval center"],
   },
   {
@@ -36,7 +36,7 @@ const products = [
       "Strumenti dedicati a security assessment, gestione delle vulnerabilità, workflow degli incidenti e conformità tecnica.",
     color: "cyan",
     status: "In sviluppo",
-    href: "https://www.kreluna.it/kreluna-ai/#cyber",
+    href: "https://www.kreluna.it/cybersecurity-pmi-studi-professionali.html",
     features: ["Security assessment", "Vulnerability management", "Compliance tecnica"],
   },
   {
@@ -228,7 +228,7 @@ export default function Home() {
                 </div>
               </div>
               <a href={product.href} className="card-link" aria-label={`Scopri ${product.name}`}>
-                Scopri il progetto <ArrowIcon />
+                Scopri {product.name} <ArrowIcon />
               </a>
             </article>
           ))}
