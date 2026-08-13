@@ -25,5 +25,7 @@ test("renders the Kreluna ecosystem homepage", async () => {
   assert.match(html, /Kreluna Office/);
   assert.match(html, /Kreluna Cyber/);
   assert.match(html, /LikeCash/);
+  assert.match(html, /Kreluna Token/);
+  assert.match(html, /Vendita non attiva/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape|react-loading-skeleton/i);
 });

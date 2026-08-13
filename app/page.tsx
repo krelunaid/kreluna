@@ -51,6 +51,18 @@ const products = [
     href: "#likecash",
     features: ["by Kreluna", "In progettazione", "Aggiornamenti in arrivo"],
   },
+  {
+    slug: "krl",
+    name: "Kreluna Token",
+    eyebrow: "Utility token · KRL",
+    tagline: "L'utilità dell'ecosistema, su Base.",
+    description:
+      "KRL è il modulo token a offerta fissa progettato per un futuro utilizzo nei servizi Kreluna. L'utilità concreta non è ancora attiva né definita.",
+    color: "mint",
+    status: "Base tecnica pronta",
+    href: "#krl",
+    features: ["Base · ERC-20", "Offerta fissa", "Vendita non attiva"],
+  },
 ] as const;
 
 const principles = [
@@ -101,6 +113,7 @@ export default function Home() {
           <a href="#products">Prodotti</a>
           <a href="#vision">Visione</a>
           <a href="#likecash">LikeCash</a>
+          <a href="#krl">KRL</a>
           <a href="https://www.kreluna.it/azienda.html">Azienda</a>
         </nav>
         <div className="nav-actions">
@@ -115,6 +128,7 @@ export default function Home() {
         <a href="#products" onClick={() => setMenuOpen(false)}>Prodotti</a>
         <a href="#vision" onClick={() => setMenuOpen(false)}>Visione</a>
         <a href="#likecash" onClick={() => setMenuOpen(false)}>LikeCash</a>
+        <a href="#krl" onClick={() => setMenuOpen(false)}>KRL</a>
         <a href="https://www.kreluna.it/azienda.html">Azienda</a>
         <a href="https://www.kreluna.it/contatti.html">Contatti</a>
       </div>
@@ -143,6 +157,7 @@ export default function Home() {
           <div className="orbit orbit-one"><i className="satellite violet" /></div>
           <div className="orbit orbit-two"><i className="satellite gold" /></div>
           <div className="orbit orbit-three"><i className="satellite cyan" /><i className="satellite coral" /></div>
+          <i className="satellite mint hero-mint" />
           <div className="hero-sphere" />
           <span className="orb-label">Kreluna<br />Core</span>
         </div>
@@ -169,7 +184,7 @@ export default function Home() {
           </div>
           <p>
             Dall'intelligenza artificiale al lavoro professionale, dalla sicurezza
-            a LikeCash. Questo spazio è pensato per crescere insieme a Kreluna.
+            a LikeCash e KRL. Questo spazio è pensato per crescere insieme a Kreluna.
           </p>
         </div>
 
@@ -187,7 +202,9 @@ export default function Home() {
                 <span>{String(index + 1).padStart(2, "0")}</span>
               </div>
               <div className="card-copy">
-                <p className="signature">{product.slug === "likecash" ? "by Kreluna" : "Kreluna ecosystem"}</p>
+                <p className="signature">
+                  {product.slug === "likecash" ? "by Kreluna" : product.slug === "krl" ? "KRL · Kreluna ecosystem" : "Kreluna ecosystem"}
+                </p>
                 <h3>{product.name}</h3>
                 <h4>{product.tagline}</h4>
                 <p>{product.description}</p>
@@ -230,6 +247,43 @@ export default function Home() {
             <div className="cash-glint">✦</div>
           </div>
         </div>
+      </section>
+
+      <section className="krl section-shell" id="krl">
+        <div className="krl-panel reveal">
+          <div className="krl-copy">
+            <div className="eyebrow mint-text"><i /> Kreluna Token · KRL</div>
+            <h2>L'utilità prende forma.<br /><em>In modo verificabile.</em></h2>
+            <p>
+              KRL è il token previsto per l'ecosistema Kreluna: un modulo tecnico
+              a offerta fissa progettato per la rete Base e per una futura integrazione
+              con servizi come abbonamenti e marketplace.
+            </p>
+            <div className="krl-facts" aria-label="Caratteristiche di KRL">
+              <span><b>Base</b>Rete prevista</span>
+              <span><b>1 miliardo</b>Offerta fissa</span>
+              <span><b>ERC-20</b>Standard token</span>
+            </div>
+            <div className="krl-notice">
+              <i />
+              <p><b>Stato: sviluppo tecnico.</b> La base è verificata localmente, ma KRL non è pubblicato su Base, non ha ancora un'utilità attiva e non è in vendita.</p>
+            </div>
+          </div>
+          <div className="krl-visual" aria-hidden="true">
+            <div className="ledger-grid" />
+            <div className="token-ring token-ring-a" />
+            <div className="token-ring token-ring-b" />
+            <div className="krl-token"><span>KRL</span><small>BY KRELUNA</small></div>
+            <span className="chain-label label-base">BASE</span>
+            <span className="chain-label label-supply">FIXED SUPPLY</span>
+            <span className="chain-label label-dev">IN DEVELOPMENT</span>
+          </div>
+        </div>
+        <p className="krl-disclaimer reveal">
+          Informazioni preliminari: non costituiscono un'offerta o un invito all'acquisto.
+          Nessuna garanzia di valore o rendimento. Un eventuale lancio resta subordinato a utilità
+          reale e dimostrabile, audit indipendente e verifiche legali e regolamentari.
+        </p>
       </section>
 
       <section className="principles section-shell">
