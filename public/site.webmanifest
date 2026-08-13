@@ -1,0 +1,18 @@
+{
+  "name": "Kreluna — Ecosistema",
+  "short_name": "Kreluna",
+  "description": "Software e intelligenza artificiale per persone, professionisti e imprese.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a10",
+  "theme_color": "#0a0a10",
+  "lang": "it-IT",
+  "icons": [
+    {
+      "src": "/kreluna-logo.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
