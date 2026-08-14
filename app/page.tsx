@@ -230,9 +230,8 @@ function EcosystemShowcase() {
 
         <a className="ecosystem-store-feature" href={storeUrl} aria-label="Entra in Kreluna Store">
           <span className="ecosystem-store-feature-copy">
-            <small>Catalogo dimostrativo · In sviluppo</small>
             <strong>Kreluna Store</strong>
-            <span>Uno spazio unico per esplorare concept di app, software e strumenti Kreluna.</span>
+            <span>App, software e strumenti organizzati per te e per la tua azienda.</span>
             <b>Entra nello Store <span aria-hidden="true">→</span></b>
           </span>
           <StoreBagMark />
@@ -367,12 +366,11 @@ export default function Home() {
       <header className="site-header">
         <Logo />
         <nav className="desktop-nav" aria-label="Navigazione principale">
-          <a href="#products">Prodotti</a>
+          <a href="https://www.kreluna.it/intelligenza-artificiale-aziende.html">AI</a>
+          <a href="https://www.kreluna.it/ai-studi-professionali.html">Office</a>
+          <a href="https://cra24.kreluna.it/">Cyber</a>
+          <a href="https://www.kreluna.it/contatti.html">Connect</a>
           <a href={storeUrl}>Store</a>
-          <a href="#vision">Visione</a>
-          <a href="#likecash">LikeCash</a>
-          <a href={`${assetBasePath}/krl/`}>KRL Beta</a>
-          <a href="https://www.kreluna.it/azienda.html">Azienda</a>
         </nav>
         <div className="nav-actions">
           <a className="contact-link" href="https://www.kreluna.it/contatti.html">Contatti</a>
@@ -399,12 +397,11 @@ export default function Home() {
             }}
             aria-label="Chiudi il menu"
           >×</button>
-          <a href="#products" onClick={() => setMenuOpen(false)}>Prodotti</a>
+          <a href="https://www.kreluna.it/intelligenza-artificiale-aziende.html" onClick={() => setMenuOpen(false)}>AI</a>
+          <a href="https://www.kreluna.it/ai-studi-professionali.html" onClick={() => setMenuOpen(false)}>Office</a>
+          <a href="https://cra24.kreluna.it/" onClick={() => setMenuOpen(false)}>Cyber</a>
+          <a href="https://www.kreluna.it/contatti.html" onClick={() => setMenuOpen(false)}>Connect</a>
           <a href={storeUrl} onClick={() => setMenuOpen(false)}>Store</a>
-          <a href="#vision" onClick={() => setMenuOpen(false)}>Visione</a>
-          <a href="#likecash" onClick={() => setMenuOpen(false)}>LikeCash</a>
-          <a href={`${assetBasePath}/krl/`} onClick={() => setMenuOpen(false)}>KRL Beta</a>
-          <a href="https://www.kreluna.it/azienda.html">Azienda</a>
           <a href="https://www.kreluna.it/contatti.html">Contatti</a>
         </div>
       )}
@@ -454,6 +451,10 @@ export default function Home() {
         </p>
       </section>
 
+      <div className="section-shell">
+        <EcosystemShowcase />
+      </div>
+
       <section className="products section-shell" id="products">
         <div className="section-heading reveal">
           <div>
@@ -496,8 +497,6 @@ export default function Home() {
             </article>
           ))}
         </div>
-
-        <EcosystemShowcase />
 
         <div className="future-card reveal">
           <div className="future-mark">＋</div>
