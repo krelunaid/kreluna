@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const assetBasePath = process.env.NEXT_PUBLIC_ARUBA_BASE_PATH ?? "";
 
@@ -91,6 +91,7 @@ function Logo() {
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [cookieVisible, setCookieVisible] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     let seen: string | null = null;
@@ -114,6 +115,22 @@ export default function Home() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!menuOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      setMenuOpen(false);
+      window.requestAnimationFrame(() => menuButtonRef.current?.focus());
+    };
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [menuOpen]);
+
   const chooseCookies = (choice: string) => {
     try {
       window.localStorage.setItem("kreluna-cookie-choice", choice);
@@ -124,10 +141,11 @@ export default function Home() {
   };
 
   return (
-    <main
+    <div
       id="top"
       style={{ "--sphere-image": `url('${assetBasePath}/kreluna-sphere.jpg')` } as React.CSSProperties}
     >
+      <a className="skip-link" href="#main-content">Vai al contenuto</a>
       <header className="site-header">
         <Logo />
         <nav className="desktop-nav" aria-label="Navigazione principale">
@@ -141,6 +159,7 @@ export default function Home() {
           <a className="contact-link" href="https://www.kreluna.it/contatti.html">Contatti</a>
           <a className="button button-small button-primary" href="#products">Esplora</a>
           <button
+            ref={menuButtonRef}
             className="menu-button"
             onClick={() => setMenuOpen(true)}
             aria-label="Apri il menu"
@@ -152,22 +171,32 @@ export default function Home() {
         </div>
       </header>
 
-      <div id="mobile-navigation" className={`mobile-menu ${menuOpen ? "open" : ""}`} aria-hidden={!menuOpen}>
-        <button onClick={() => setMenuOpen(false)} aria-label="Chiudi il menu">×</button>
-        <a href="#products" onClick={() => setMenuOpen(false)}>Prodotti</a>
-        <a href="#vision" onClick={() => setMenuOpen(false)}>Visione</a>
-        <a href="#likecash" onClick={() => setMenuOpen(false)}>LikeCash</a>
-        <a href={`${assetBasePath}/krl/`} onClick={() => setMenuOpen(false)}>KRL Beta</a>
-        <a href="https://www.kreluna.it/azienda.html">Azienda</a>
-        <a href="https://www.kreluna.it/contatti.html">Contatti</a>
-      </div>
+      {menuOpen && (
+        <div id="mobile-navigation" className="mobile-menu open" role="dialog" aria-modal="true" aria-label="Navigazione mobile">
+          <button
+            onClick={() => {
+              setMenuOpen(false);
+              window.requestAnimationFrame(() => menuButtonRef.current?.focus());
+            }}
+            aria-label="Chiudi il menu"
+          >×</button>
+          <a href="#products" onClick={() => setMenuOpen(false)}>Prodotti</a>
+          <a href="#vision" onClick={() => setMenuOpen(false)}>Visione</a>
+          <a href="#likecash" onClick={() => setMenuOpen(false)}>LikeCash</a>
+          <a href={`${assetBasePath}/krl/`} onClick={() => setMenuOpen(false)}>KRL Beta</a>
+          <a href="https://www.kreluna.it/azienda.html">Azienda</a>
+          <a href="https://www.kreluna.it/contatti.html">Contatti</a>
+        </div>
+      )}
+
+      <main id="main-content">
 
       <section className="hero section-shell">
         <div className="ambient ambient-one" />
         <div className="ambient ambient-two" />
         <div className="cosmic-grid" />
-        <div className="spark spark-one">✦</div>
-        <div className="spark spark-two">✦</div>
+        <div className="spark spark-one" aria-hidden="true">✦</div>
+        <div className="spark spark-two" aria-hidden="true">✦</div>
         <div className="hero-copy reveal visible">
           <div className="eyebrow"><i /> Kreluna · tecnologia che prende forma</div>
           <h1>Creiamo prodotti<br />{" "}per ciò che <em>viene dopo.</em></h1>
@@ -195,10 +224,10 @@ export default function Home() {
       </section>
 
       <section className="statement section-shell" id="vision">
-        <div className="statement-line reveal">
+        <h2 className="statement-line reveal">
           <span>Un marchio.</span>
           <strong>Più possibilità.</strong>
-        </div>
+        </h2>
         <p className="reveal">
           Kreluna non è soltanto un prodotto. È la casa in cui idee diverse diventano
           esperienze utili, coerenti e riconoscibili.
@@ -287,11 +316,11 @@ export default function Home() {
               KRL Beta simula l’aspetto nel wallet e un flusso locale di crediti AI.
               La prova usa Base Sepolia: nessun acquisto, prezzo, rendimento o servizio reale.
             </p>
-            <div className="krl-facts" aria-label="Caratteristiche di KRL">
-              <span><b>Base Sepolia</b>Rete di prova</span>
-              <span><b>100 milioni</b>Fornitura progettata</span>
-              <span><b>Testnet</b>Nessun valore reale</span>
-            </div>
+            <dl className="krl-facts">
+              <div><dt>Base Sepolia</dt><dd>Rete di prova</dd></div>
+              <div><dt>100 milioni</dt><dd>Fornitura progettata</dd></div>
+              <div><dt>Testnet</dt><dd>Nessun valore reale</dd></div>
+            </dl>
             <div className="krl-notice">
               <i />
               <p><b>Stato: Beta pubblica.</b> Puoi provare interfaccia, wallet e simulatore AI. Il contratto testnet non è ancora pubblicato e la vendita resta disattivata.</p>
@@ -313,6 +342,125 @@ export default function Home() {
           rendimenti o diritti economici. Un eventuale deployment on-chain sarà indicato soltanto con un
           indirizzo Base Sepolia pubblicamente verificabile.
         </p>
+      </section>
+
+      <section className="editorial-home section-shell" id="come-lavoriamo">
+        <div className="section-heading reveal">
+          <div>
+            <div className="eyebrow"><i /> Dal problema al progetto</div>
+            <h2>Tecnologia applicata<br />al <em>lavoro reale.</em></h2>
+          </div>
+          <p>
+            Kreluna parte da un processo osservabile, dalle informazioni autorizzate e da una
+            persona responsabile del risultato. Le applicazioni qui descritte sono casi d’uso da
+            valutare: disponibilità e integrazioni vengono confermate solo sul perimetro concreto.
+          </p>
+        </div>
+        <div className="editorial-home-grid">
+          <article className="editorial-home-card reveal">
+            <span>AI · Aziende</span>
+            <h3>Conoscenza e attività operative</h3>
+            <p>
+              Ricerca su procedure approvate, preparazione di brief, classificazione di documenti
+              e supporto alle richieste interne. Fonti, permessi ed escalation devono essere
+              definiti prima di collegare CRM, ERP, posta o archivi.
+            </p>
+            <a href="https://www.kreluna.it/intelligenza-artificiale-aziende.html">AI per aziende <ArrowIcon /></a>
+          </article>
+          <article className="editorial-home-card reveal">
+            <span>AI · Professionisti</span>
+            <h3>Pratiche, fascicoli e approvazioni</h3>
+            <p>
+              Documenti, email e scadenze possono essere preparati in un flusso più leggibile.
+              Pareri, atti, comunicazioni e decisioni restano al professionista, con separazione
+              tra clienti e fonti verificabili.
+            </p>
+            <a href="https://www.kreluna.it/ai-studi-professionali.html">AI per studi professionali <ArrowIcon /></a>
+          </article>
+          <article className="editorial-home-card reveal">
+            <span>Workflow</span>
+            <h3>Automazione con gestione delle eccezioni</h3>
+            <p>
+              Un’automazione utile coordina ingresso, regole, responsabilità e casi fuori
+              standard. Prima del pilota vengono definiti baseline, arresto sicuro, approvazioni
+              e costo di gestione, non soltanto il tempo che si spera di risparmiare.
+            </p>
+            <a href="https://www.kreluna.it/automazione-processi-aziendali.html">Automazione dei processi <ArrowIcon /></a>
+          </article>
+          <article className="editorial-home-card reveal">
+            <span>Cybersecurity</span>
+            <h3>Rischi comprensibili e priorità pratiche</h3>
+            <p>
+              Identità, vulnerabilità, email, backup e risposta agli incidenti richiedono un
+              perimetro autorizzato. Un rapporto tecnico aiuta a decidere, ma non viene presentato
+              come certificazione o monitoraggio continuo se non espressamente concordato.
+            </p>
+            <a href="https://www.kreluna.it/cybersecurity-pmi-studi-professionali.html">Cybersecurity per PMI <ArrowIcon /></a>
+          </article>
+        </div>
+      </section>
+
+      <section className="editorial-method section-shell">
+        <div className="section-heading reveal">
+          <div>
+            <div className="eyebrow"><i /> Un percorso verificabile</div>
+            <h2>Prima il perimetro.<br /><em>Poi la tecnologia.</em></h2>
+          </div>
+          <p>
+            Il metodo evita promesse astratte: un progetto procede solo quando obiettivo, dati,
+            responsabilità e criteri di accettazione sono abbastanza chiari da poter essere testati.
+          </p>
+        </div>
+        <ol className="home-steps">
+          <li className="reveal"><span>01</span><div><h3>Descrivere il lavoro</h3><p>Ingresso, persone, sistemi, attese, eccezioni e risultato atteso vengono messi sulla stessa mappa.</p></div></li>
+          <li className="reveal"><span>02</span><div><h3>Definire i confini</h3><p>Fonti consentite, azioni vietate, permessi, approvazioni e condizioni di arresto diventano espliciti.</p></div></li>
+          <li className="reveal"><span>03</span><div><h3>Provare su scala ridotta</h3><p>Il pilota usa dati sintetici, minimizzati o autorizzati e criteri stabiliti prima della prova.</p></div></li>
+          <li className="reveal"><span>04</span><div><h3>Misurare e decidere</h3><p>Tempo, qualità, rilavorazioni ed eccezioni vengono confrontati con la situazione iniziale.</p></div></li>
+        </ol>
+      </section>
+
+      <section className="editorial-trust section-shell">
+        <div className="trust-panel reveal">
+          <div>
+            <div className="eyebrow"><i /> Dati, AI Act e GDPR</div>
+            <h2>Controllo umano non è una frase decorativa.</h2>
+            <p>
+              Significa assegnare una persona al risultato, limitare gli accessi, mostrare le
+              fonti quando servono e impedire al sistema di eseguire azioni importanti senza il
+              passaggio previsto. Fornitore, conservazione, subprocessori e trasferimenti devono
+              essere valutati sulla configurazione effettiva.
+            </p>
+            <p>
+              AI Act e GDPR dipendono da ruolo, dati e utilizzo concreto. Kreluna non dichiara una
+              conformità automatica e non sostituisce la valutazione di professionisti legali,
+              privacy o di sicurezza.
+            </p>
+            <div className="trust-links">
+              <a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj?locale=it">AI Act — testo ufficiale</a>
+              <a href="https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en">EDPB — guida per PMI</a>
+              <a href="https://www.nist.gov/itl/ai-risk-management-framework">NIST AI RMF</a>
+            </div>
+          </div>
+          <div className="home-faq">
+            <h3>Domande frequenti</h3>
+            <details><summary>Che cos’è Kreluna?</summary><p>Kreluna è un progetto italiano in sviluppo dedicato ad AI, automazione e cybersecurity. I dati societari e fiscali saranno pubblicati quando disponibili.</p></details>
+            <details><summary>I prodotti sono già acquistabili?</summary><p>Non viene dichiarata una disponibilità generale. Accesso, funzioni, integrazioni e condizioni vengono confermati per ogni richiesta.</p></details>
+            <details><summary>Kreluna sostituisce software o professionisti?</summary><p>No in modo automatico. Il ruolo proposto è preparare e collegare il lavoro mantenendo sistemi ufficiali, responsabilità e approvazioni sotto controllo umano.</p></details>
+            <details><summary>Posso inviare documenti per una valutazione?</summary><p>Nel primo contatto no: descrivi il contesto senza allegare dati personali, credenziali o documenti riservati. Un eventuale campione viene concordato dopo aver definito il perimetro.</p></details>
+          </div>
+        </div>
+      </section>
+
+      <section className="resources-home section-shell reveal">
+        <div>
+          <div className="eyebrow"><i /> Kreluna Risorse</div>
+          <h2>Guide per decidere prima di acquistare.</h2>
+          <p>
+            Protezione dei dati riservati, scelta del primo processo da automatizzare e controlli
+            essenziali contro phishing e ransomware: contenuti pratici con fonti istituzionali.
+          </p>
+        </div>
+        <a className="button button-secondary" href="https://www.kreluna.it/risorse.html">Esplora le guide <ArrowIcon /></a>
       </section>
 
       <section className="principles section-shell">
@@ -340,6 +488,7 @@ export default function Home() {
         <p>Scopri ciò che stiamo costruendo e segui l’evoluzione dell’ecosistema.</p>
         <a className="button button-primary" href="#products">Esplora i progetti <ArrowIcon /></a>
       </section>
+      </main>
 
       <footer>
         <div className="footer-main">
@@ -348,18 +497,18 @@ export default function Home() {
             <p>Tecnologia e intelligenza artificiale per ciò che viene dopo.</p>
           </div>
           <div className="footer-column">
-            <h5>Prodotti</h5>
+            <p className="footer-heading">Prodotti</p>
             {products.map((product) => <a key={product.slug} href={product.href}>{product.name}</a>)}
           </div>
           <div className="footer-column">
-            <h5>Kreluna</h5>
+            <p className="footer-heading">Kreluna</p>
             <a href="https://www.kreluna.it/azienda.html">Azienda</a>
             <a href="https://www.kreluna.it/risorse.html">Risorse</a>
             <a href="https://www.kreluna.it/contatti.html">Contatti</a>
             <a href="https://www.kreluna.it/en/" hrefLang="en" lang="en">English</a>
           </div>
           <div className="footer-column">
-            <h5>Legale</h5>
+            <p className="footer-heading">Legale</p>
             <a href="https://www.kreluna.it/privacy.html">Privacy</a>
             <a href="https://www.kreluna.it/termini.html">Termini</a>
             <a href="https://www.kreluna.it/cookie.html">Cookie</a>
@@ -380,6 +529,6 @@ export default function Home() {
           </div>
         </aside>
       )}
-    </main>
+    </div>
   );
 }

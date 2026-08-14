@@ -21,17 +21,17 @@ test("renders the Kreluna ecosystem homepage", async () => {
 
   const html = await response.text();
   assert.match(html, /<html lang="it-IT">/i);
-  assert.match(html, /Kreluna — Creiamo prodotti per ciò che viene dopo/);
+  assert.match(html, /Kreluna \| AI, automazione e cybersecurity/);
   assert.match(html, /Kreluna AI/);
   assert.match(html, /Kreluna Office/);
   assert.match(html, /Kreluna Cyber/);
   assert.match(html, /LikeCash/);
   assert.match(html, /Kreluna Token/);
   assert.match(html, /Vendita disattivata/);
-  assert.match(html, /rel="canonical" href="https:\/\/www\.kreluna\.it\/?"/i);
-  assert.match(html, /hreflang="it" href="https:\/\/www\.kreluna\.it\/?"/i);
+  assert.match(html, /rel="canonical" href="https:\/\/www\.kreluna\.it\/"/i);
+  assert.match(html, /hreflang="it" href="https:\/\/www\.kreluna\.it\/"/i);
   assert.match(html, /hreflang="en" href="https:\/\/www\.kreluna\.it\/en\/"/i);
-  assert.match(html, /hreflang="x-default" href="https:\/\/www\.kreluna\.it\/?"/i);
+  assert.match(html, /hreflang="x-default" href="https:\/\/www\.kreluna\.it\/"/i);
   assert.match(html, /name="robots" content="index, follow"/i);
   assert.match(html, /property="og:image" content="https:\/\/www\.kreluna\.it\/og-kreluna\.jpg"/i);
   assert.doesNotMatch(html, /fonts\.googleapis\.com|fonts\.gstatic\.com/i);
@@ -40,11 +40,15 @@ test("renders the Kreluna ecosystem homepage", async () => {
   assert.match(html, /"@type":"Organization"/);
   assert.match(html, /"@type":"WebSite"/);
   assert.match(html, /"@type":"WebPage"/);
+  assert.match(html, /"@type":"FAQPage"/);
   assert.match(html, /<img src="\/kreluna-logo\.png" alt="" width="128" height="128"/i);
   assert.match(html, /href="https:\/\/www\.kreluna\.it\/en\/" hreflang="en" lang="en"/i);
   assert.match(html, /href="https:\/\/www\.kreluna\.it\/intelligenza-artificiale-aziende\.html"/i);
   assert.match(html, /href="https:\/\/www\.kreluna\.it\/ai-studi-professionali\.html"/i);
   assert.match(html, /href="https:\/\/cra24\.kreluna\.it\/"/i);
+  assert.match(html, /class="skip-link" href="#main-content"/i);
+  assert.match(html, /<main id="main-content">/i);
+  assert.match(html, /AI Act — testo ufficiale/i);
   assert.equal((html.match(/<title>/gi) ?? []).length, 1);
   assert.equal((html.match(/<meta name="description"/gi) ?? []).length, 1);
   assert.equal((html.match(/<h1\b/gi) ?? []).length, 1);
@@ -56,7 +60,7 @@ test("renders the Kreluna ecosystem homepage", async () => {
   assert.ok(jsonLdMatch);
   const jsonLd = JSON.parse(jsonLdMatch[1]);
   const graphTypes = jsonLd["@graph"].map((entry) => entry["@type"]);
-  assert.deepEqual(graphTypes, ["Organization", "WebSite", "WebPage"]);
+  assert.deepEqual(graphTypes, ["Organization", "WebSite", "WebPage", "FAQPage"]);
   assert.equal(jsonLd["@graph"][0]["@id"], "https://www.kreluna.it/#organization");
 
   const ids = new Set(
@@ -117,7 +121,8 @@ test("ships lightweight, production-ready discovery assets", async () => {
   const manifest = JSON.parse(await readFile("public/site.webmanifest", "utf8"));
   assert.equal(manifest.lang, "it-IT");
   assert.equal(manifest.start_url, "/");
-  assert.equal(manifest.icons[0].src, "/kreluna-logo.png");
+  assert.equal(manifest.icons[0].src, "/favicon-192.png");
+  assert.equal(manifest.icons[1].src, "/favicon-512.png");
 
   const socialImage = await stat("public/og-kreluna.jpg");
   assert.ok(socialImage.size < 250_000, `Social image is ${socialImage.size} bytes`);

@@ -4,9 +4,9 @@ import "./globals.css";
 const assetBasePath = process.env.NEXT_PUBLIC_ARUBA_BASE_PATH ?? "";
 const isArubaPreview = assetBasePath.length > 0;
 const siteUrl = "https://www.kreluna.it";
-const siteTitle = "Kreluna — Creiamo prodotti per ciò che viene dopo";
+const siteTitle = "Kreluna | AI, automazione e cybersecurity";
 const siteDescription =
-  "Kreluna progetta software e intelligenza artificiale. Scopri Kreluna AI, Office, Cyber, LikeCash, Kreluna Token (KRL) e i prossimi progetti dell'ecosistema.";
+  "Kreluna progetta AI, automazione dei processi e cybersecurity intorno al lavoro reale, con controllo umano, dati protetti e limiti dichiarati.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -16,14 +16,6 @@ export const metadata: Metadata = {
   creator: "Kreluna",
   publisher: "Kreluna",
   category: "technology",
-  alternates: {
-    canonical: isArubaPreview ? `${assetBasePath}/` : "/",
-    languages: {
-      it: "/",
-      en: "/en/",
-      "x-default": "/",
-    },
-  },
   robots: isArubaPreview
     ? { index: false, follow: false }
     : {
@@ -38,14 +30,16 @@ export const metadata: Metadata = {
         },
       },
   icons: {
-    icon: [{ url: `${assetBasePath}/kreluna-logo.png`, type: "image/png", sizes: "128x128" }],
-    apple: [{ url: `${assetBasePath}/kreluna-logo.png`, type: "image/png", sizes: "128x128" }],
+    icon: [
+      { url: `${assetBasePath}/favicon-32.png`, type: "image/png", sizes: "32x32" },
+      { url: `${assetBasePath}/favicon-192.png`, type: "image/png", sizes: "192x192" },
+    ],
+    apple: [{ url: `${assetBasePath}/favicon-192.png`, type: "image/png", sizes: "192x192" }],
   },
   manifest: `${assetBasePath}/site.webmanifest`,
   openGraph: {
     title: siteTitle,
-    description: "Un'unica visione. Progetti diversi. Scopri l'ecosistema Kreluna.",
-    url: isArubaPreview ? `${assetBasePath}/` : "/",
+    description: "AI, automazione e cybersecurity progettate intorno a lavoro reale, responsabilità umana e limiti verificabili.",
     siteName: "Kreluna",
     locale: "it_IT",
     alternateLocale: ["en_GB"],
@@ -63,7 +57,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: siteTitle,
-    description: "Un'unica visione. Progetti diversi. Scopri l'ecosistema Kreluna.",
+    description: "AI, automazione e cybersecurity progettate intorno a lavoro reale, responsabilità umana e limiti verificabili.",
     images: [`${assetBasePath}/og-kreluna.jpg`],
   },
 };
@@ -95,6 +89,12 @@ const structuredData = {
         url: `${siteUrl}/contatti.html`,
         availableLanguage: ["Italian", "English"],
       },
+      knowsAbout: [
+        "Artificial intelligence",
+        "Business process automation",
+        "Cybersecurity",
+        "Professional services workflows",
+      ],
     },
     {
       "@type": "WebSite",
@@ -116,6 +116,44 @@ const structuredData = {
       about: { "@id": `${siteUrl}/#organization` },
       inLanguage: "it-IT",
     },
+    {
+      "@type": "FAQPage",
+      "@id": `${siteUrl}/#faq`,
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "Che cos’è Kreluna?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Kreluna è un progetto italiano in sviluppo dedicato ad AI, automazione e cybersecurity. I dati societari e fiscali saranno pubblicati quando disponibili.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "I prodotti Kreluna sono già acquistabili?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Non viene dichiarata una disponibilità generale. Accesso, funzioni, integrazioni e condizioni vengono confermati per ogni richiesta.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Kreluna sostituisce software o professionisti?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "No in modo automatico. Il ruolo proposto è preparare e collegare il lavoro mantenendo sistemi ufficiali, responsabilità e approvazioni sotto controllo umano.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Posso inviare documenti per una valutazione?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Nel primo contatto no. È sufficiente descrivere il contesto senza allegare dati personali, credenziali o documenti riservati.",
+          },
+        },
+      ],
+    },
   ],
 };
 
@@ -123,6 +161,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="it-IT">
       <head>
+        <link rel="canonical" href={isArubaPreview ? `${assetBasePath}/` : `${siteUrl}/`} />
+        <link rel="alternate" hrefLang="it" href={`${siteUrl}/`} />
+        <link rel="alternate" hrefLang="en" href={`${siteUrl}/en/`} />
+        <link rel="alternate" hrefLang="x-default" href={`${siteUrl}/`} />
+        <meta property="og:url" content={isArubaPreview ? `${assetBasePath}/` : `${siteUrl}/`} />
         <link rel="preload" href={`${assetBasePath}/fonts/inter-latin.woff2`} as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href={`${assetBasePath}/fonts/space-grotesk-latin.woff2`} as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href={`${assetBasePath}/fonts/newsreader-500-italic.woff2`} as="font" type="font/woff2" crossOrigin="anonymous" />
