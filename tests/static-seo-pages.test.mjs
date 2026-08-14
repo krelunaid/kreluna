@@ -123,7 +123,8 @@ test("ships the redirect, security, cache, compression and MIME policy", async (
   assert.match(rules, /Content-Security-Policy/);
   assert.match(rules, /X-Content-Type-Options/);
   assert.match(rules, /max-age=31536000, immutable/);
-  assert.match(rules, /BROTLI_COMPRESS|DEFLATE/);
+  assert.match(rules, /BROTLI_COMPRESS/);
+  assert.match(rules, /DEFLATE/);
   assert.match(rules, /application\/manifest\+json \.webmanifest/);
   assert.match(rules, /text\/x-component \.rsc/);
 });
