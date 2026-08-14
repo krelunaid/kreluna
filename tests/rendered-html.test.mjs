@@ -50,7 +50,18 @@ test("renders the Kreluna ecosystem homepage", async () => {
     html,
     /href="https:\/\/kreluna-store\.andreagadducci\.chatgpt\.site"/i,
   );
-  assert.match(html, /Un catalogo ordinato\. La home resta essenziale\./i);
+  assert.match(html, /Un ecosistema\./i);
+  assert.match(html, /Tutto quello che ti serve\./i);
+  assert.match(html, /Trova il software giusto per te\./i);
+  assert.match(html, /Kreluna Focus/i);
+  assert.match(html, /Kreluna CRM/i);
+  assert.match(html, /Magazzino Pro/i);
+  assert.match(html, /Kora AI/i);
+  assert.match(html, /Catalogo dimostrativo/i);
+  assert.match(html, /Schede trasparenti/i);
+  assert.match(html, /In sviluppo/i);
+  assert.match(html, /Controllo umano/i);
+  assert.doesNotMatch(html, /1M\+|500\+|Rimborsi garantiti|Sicuro e verificato/i);
   assert.match(html, /class="skip-link" href="#main-content"/i);
   assert.match(html, /<main id="main-content">/i);
   assert.match(html, /AI Act — testo ufficiale/i);
