@@ -16,6 +16,14 @@ export const metadata: Metadata = {
   creator: "Kreluna",
   publisher: "Kreluna",
   category: "technology",
+  alternates: {
+    canonical: "/",
+    languages: {
+      it: "/",
+      en: "/en/",
+      "x-default": "/",
+    },
+  },
   robots: isArubaPreview
     ? { index: false, follow: false }
     : {
@@ -44,6 +52,7 @@ export const metadata: Metadata = {
     locale: "it_IT",
     alternateLocale: ["en_GB"],
     type: "website",
+    url: "/",
     images: [
       {
         url: `${assetBasePath}/og-kreluna.jpg`,
@@ -67,7 +76,7 @@ export const viewport: Viewport = {
   themeColor: "#0a0a10",
 };
 
-const structuredData = {
+const siteStructuredData = {
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -106,54 +115,6 @@ const structuredData = {
       publisher: { "@id": `${siteUrl}/#organization` },
       inLanguage: ["it-IT", "en-GB"],
     },
-    {
-      "@type": "WebPage",
-      "@id": `${siteUrl}/#webpage`,
-      url: `${siteUrl}/`,
-      name: siteTitle,
-      description: siteDescription,
-      isPartOf: { "@id": `${siteUrl}/#website` },
-      about: { "@id": `${siteUrl}/#organization` },
-      inLanguage: "it-IT",
-    },
-    {
-      "@type": "FAQPage",
-      "@id": `${siteUrl}/#faq`,
-      mainEntity: [
-        {
-          "@type": "Question",
-          name: "Che cos’è Kreluna?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Kreluna è un progetto italiano in sviluppo dedicato ad AI, automazione e cybersecurity. I dati societari e fiscali saranno pubblicati quando disponibili.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "I prodotti Kreluna sono già acquistabili?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Non viene dichiarata una disponibilità generale. Accesso, funzioni, integrazioni e condizioni vengono confermati per ogni richiesta.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Kreluna sostituisce software o professionisti?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "No in modo automatico. Il ruolo proposto è preparare e collegare il lavoro mantenendo sistemi ufficiali, responsabilità e approvazioni sotto controllo umano.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Posso inviare documenti per una valutazione?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Nel primo contatto no. È sufficiente descrivere il contesto senza allegare dati personali, credenziali o documenti riservati.",
-          },
-        },
-      ],
-    },
   ],
 };
 
@@ -161,11 +122,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="it-IT">
       <head>
-        <link rel="canonical" href={isArubaPreview ? `${assetBasePath}/` : `${siteUrl}/`} />
-        <link rel="alternate" hrefLang="it" href={`${siteUrl}/`} />
-        <link rel="alternate" hrefLang="en" href={`${siteUrl}/en/`} />
-        <link rel="alternate" hrefLang="x-default" href={`${siteUrl}/`} />
-        <meta property="og:url" content={isArubaPreview ? `${assetBasePath}/` : `${siteUrl}/`} />
         <link rel="preload" href={`${assetBasePath}/fonts/inter-latin.woff2`} as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href={`${assetBasePath}/fonts/space-grotesk-latin.woff2`} as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href={`${assetBasePath}/fonts/newsreader-500-italic.woff2`} as="font" type="font/woff2" crossOrigin="anonymous" />
@@ -174,9 +130,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body>
         {children}
         <script
-          id="kreluna-structured-data"
+          id="kreluna-site-structured-data"
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteStructuredData) }}
         />
       </body>
     </html>
