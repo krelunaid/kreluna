@@ -1,0 +1,14 @@
+:root {
+  --bg: #e8eef6;
+  --title: #1b2744;
+  --muted: #6d7890;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; background: var(--bg); color: var(--title); font-family: Outfit, system-ui, sans-serif; }
+.page { min-height: 100svh; display: grid; place-items: center; padding: 24px; }
+.powered { position: absolute; top: 20px; left: 24px; font-size: 13px; letter-spacing: 0.18em; }
+.brand { color: #3d6dff; font-weight: 600; }
+.copy { max-width: 28rem; text-align: center; }
+h1 { font-size: 1.4rem; font-weight: 600; }
+.muted { color: var(--muted); }
+.desktop-open { display: inline-block; margin-top: 16px; padding: 10px 18px; border-radius: 999px; background: #3d6dff; color: #fff; text-decoration: none; }
