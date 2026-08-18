@@ -30,7 +30,6 @@ export function Dock({ mobile = false }: { mobile?: boolean }) {
           type="button"
           onClick={() => {
             openApp("browser");
-            window.open("https://www.google.com/", "_blank", "noopener,noreferrer");
           }}
           className="relative flex flex-col items-center"
           aria-label={lang === "it" ? "Navigazione" : "Navigation"}

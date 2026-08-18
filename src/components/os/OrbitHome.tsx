@@ -146,7 +146,6 @@ export function OrbitHome() {
                 }
                 if (item.id === "orbit") {
                   openApp("browser");
-                  window.open("https://www.google.com/", "_blank", "noopener,noreferrer");
                   return;
                 }
                 if (item.id === nav && (item.id === "apps" || item.id === "stars")) {
