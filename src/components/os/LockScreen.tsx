@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { LunaMark } from "./Mark";
 import { Wallpaper } from "./Wallpaper";
 import { useOs } from "@/lib/os/store";
@@ -37,13 +37,13 @@ export function LockScreen() {
     return lang === "it" ? `${weekday} ${day} ${month}` : `${weekday}, ${month} ${day}`;
   }, [now, lang, copy.months]);
 
-  const tryUnlock = async (value?: string) => {
+  const tryUnlock = useCallback(async (value?: string) => {
     const ok = await unlock(value);
     if (!ok) {
       setBad(true);
       setPin("");
     }
-  };
+  }, [unlock]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -54,7 +54,7 @@ export function LockScreen() {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [pinHash, unlock]);
+  }, [pinHash, tryUnlock]);
 
   return (
     <div className="relative flex h-full w-full flex-col items-center justify-between overflow-hidden bg-ink px-6 py-12 text-paper sm:py-16">

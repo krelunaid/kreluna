@@ -9,9 +9,9 @@ import type {
   AppId,
   Approval,
   CtxMenu,
-  DeskNav,
   FsNode,
   Lang,
+  LuminaNodeId,
   MailItem,
   Mime,
   Note,
@@ -73,14 +73,11 @@ export interface Prefs {
   brightness: number;
   showActivity: boolean;
   showReminders: boolean;
-  showOrbits: boolean;
   lite: boolean;
   wallId: string;
   wallDim: 0 | 1 | 2;
   saverMin: number;
   saverClock: boolean;
-  appsOpen: "grid" | "store";
-  deskInk: "auto" | "dark" | "light";
   pinHash: string;
   lockMin: number;
   coreNet: boolean;
@@ -142,14 +139,11 @@ function savePrefs(s: OsState) {
     brightness: s.brightness,
     showActivity: s.showActivity,
     showReminders: s.showReminders,
-    showOrbits: s.showOrbits,
     lite: s.lite,
     wallId: s.wallId,
     wallDim: s.wallDim,
     saverMin: s.saverMin,
     saverClock: s.saverClock,
-    appsOpen: s.appsOpen,
-    deskInk: s.deskInk,
     pinHash: s.pinHash,
     lockMin: s.lockMin,
     coreNet: s.coreNet,
@@ -180,8 +174,8 @@ export interface OsState {
   theme: Theme;
   setupDone: boolean;
   operator: string;
-  deskNav: DeskNav;
   orbit: OrbitId;
+  activeLuminaNode: LuminaNodeId | null;
   wins: Win[];
   focused: string | null;
   zTop: number;
@@ -211,14 +205,11 @@ export interface OsState {
   ctx: CtxMenu | null;
   showActivity: boolean;
   showReminders: boolean;
-  showOrbits: boolean;
   lite: boolean;
   wallId: string;
   wallDim: 0 | 1 | 2;
   saverMin: number;
   saverClock: boolean;
-  appsOpen: "grid" | "store";
-  deskInk: "auto" | "dark" | "light";
   pinHash: string;
   lockMin: number;
   coreNet: boolean;
@@ -235,14 +226,11 @@ export interface OsState {
   setOperator: (name: string) => void;
   setShowActivity: (v: boolean) => void;
   setShowReminders: (v: boolean) => void;
-  setShowOrbits: (v: boolean) => void;
   setLite: (v: boolean) => void;
   setWall: (id: string) => void;
   setWallDim: (n: 0 | 1 | 2) => void;
   setSaverMin: (n: number) => void;
   setSaverClock: (v: boolean) => void;
-  setAppsOpen: (v: "grid" | "store") => void;
-  setDeskInk: (v: "auto" | "dark" | "light") => void;
   setPin: (pin: string) => Promise<boolean>;
   clearPin: () => void;
   setLockMin: (n: number) => void;
@@ -250,8 +238,8 @@ export interface OsState {
   bumpIdle: () => void;
   wakeSaver: () => void;
   startSaver: () => void;
-  setDeskNav: (nav: DeskNav) => void;
   setOrbit: (id: OrbitId) => void;
+  setActiveLuminaNode: (id: LuminaNodeId) => void;
   importFiles: (files: File[], parent?: string) => Promise<void>;
   toggleFocus: () => void;
   setVolume: (n: number) => void;
@@ -314,8 +302,8 @@ export const useOs = create<OsState>((set, get) => ({
   theme: seed.theme ?? "dawn",
   setupDone: seed.setupDone ?? true,
   operator: seed.operator ?? "Luca",
-  deskNav: "home",
   orbit: "lavoro",
+  activeLuminaNode: null,
   wins: [],
   focused: null,
   zTop: 40,
@@ -352,14 +340,11 @@ export const useOs = create<OsState>((set, get) => ({
   ctx: null,
   showActivity: seed.showActivity ?? true,
   showReminders: seed.showReminders ?? true,
-  showOrbits: seed.showOrbits ?? true,
   lite: seed.lite ?? (typeof window !== "undefined" ? suggestLite(readCaps()) : false),
   wallId: !seed.wallId || seed.wallId === "orbita" ? "universo" : seed.wallId,
   wallDim: seed.wallDim ?? 1,
   saverMin: seed.saverMin ?? 2,
   saverClock: seed.saverClock ?? true,
-  appsOpen: seed.appsOpen === "store" ? "store" : "grid",
-  deskInk: seed.deskInk === "dark" || seed.deskInk === "light" ? seed.deskInk : "auto",
   pinHash: typeof seed.pinHash === "string" ? seed.pinHash : "",
   lockMin: seed.lockMin ?? 5,
   coreNet: seed.coreNet === true,
@@ -430,10 +415,6 @@ export const useOs = create<OsState>((set, get) => ({
     set({ showReminders });
     savePrefs(get());
   },
-  setShowOrbits: (showOrbits) => {
-    set({ showOrbits });
-    savePrefs(get());
-  },
   setLite: (lite) => {
     set({ lite });
     savePrefs(get());
@@ -452,14 +433,6 @@ export const useOs = create<OsState>((set, get) => ({
   },
   setSaverClock: (saverClock) => {
     set({ saverClock });
-    savePrefs(get());
-  },
-  setAppsOpen: (appsOpen) => {
-    set({ appsOpen });
-    savePrefs(get());
-  },
-  setDeskInk: (deskInk) => {
-    set({ deskInk });
     savePrefs(get());
   },
   setPin: async (pin) => {
@@ -491,28 +464,6 @@ export const useOs = create<OsState>((set, get) => ({
   startSaver: () => {
     if (get().phase === "desktop" && get().saverMin > 0) set({ saverOn: true });
   },
-  setDeskNav: (deskNav) => {
-    set({ deskNav });
-    if (deskNav === "files") {
-      get().openApp("files");
-      const win = get().wins.find((w) => w.appId === "files" && w.space === get().space);
-      if (win && !win.max) get().maxWin(win.id);
-    }
-    if (deskNav === "apps") {
-      if (get().appsOpen === "store") {
-        get().openApp("store");
-      } else {
-        set({ wins: get().wins.map((w) => ({ ...w, min: true })), focused: null });
-      }
-    }
-    if (deskNav === "settings") get().openApp("settings");
-    if (deskNav === "home") {
-      set({ mobileApp: null });
-    }
-    if (deskNav === "orbit") {
-      set({ deskNav: "home" });
-    }
-  },
   setOrbit: (orbit) => {
     set({ orbit });
     const folder =
@@ -520,6 +471,7 @@ export const useOs = create<OsState>((set, get) => ({
       get().fs.find((n) => n.kind === "folder" && n.orbit === orbit);
     if (folder) get().setFsFolder(folder.id);
   },
+  setActiveLuminaNode: (activeLuminaNode) => set({ activeLuminaNode }),
   importFiles: async (files, parent) => {
     const dest = parent ?? get().fsFolder ?? "down";
     for (const file of files) {
@@ -594,7 +546,7 @@ export const useOs = create<OsState>((set, get) => ({
       get().installApp(appId);
     }
     const mobile =
-      typeof window !== "undefined" && window.matchMedia("(max-width: 719px)").matches;
+      typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches;
     if (mobile) {
       set({ mobileApp: appId, spotlight: false, control: false, notifPanel: false, switcher: false });
       return;

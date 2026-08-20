@@ -8,7 +8,12 @@ export function PhotosApp() {
   const setWall = useOs((s) => s.setWall);
   const wallId = useOs((s) => s.wallId);
   const pics = [
-    ...WALLS.map((w) => ({ id: `wall-${w.id}`, name: lang === "it" ? w.it : w.en, src: w.src, wall: w.id })),
+    ...WALLS.filter((w) => Boolean(w.src)).map((w) => ({
+      id: `wall-${w.id}`,
+      name: lang === "it" ? w.it : w.en,
+      src: w.src,
+      wall: w.id,
+    })),
     ...fs
       .filter((n) => n.kind === "file" && n.mime === "img" && !n.trashed && n.content)
       .map((n) => ({ id: n.id, name: n.name, src: n.content as string, wall: null as string | null })),

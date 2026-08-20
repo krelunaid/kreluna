@@ -1,5 +1,4 @@
 import { useMemo, useState } from "react";
-import { useNavigate } from "@tanstack/react-router";
 import { SignedIn, SignedOut, UserButton } from "@/lib/auth/gates";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import { readCaps } from "@/lib/os/compat";
@@ -24,10 +23,6 @@ export function SettingsApp() {
   const setSaverMin = useOs((s) => s.setSaverMin);
   const saverClock = useOs((s) => s.saverClock);
   const setSaverClock = useOs((s) => s.setSaverClock);
-  const appsOpen = useOs((s) => s.appsOpen);
-  const setAppsOpen = useOs((s) => s.setAppsOpen);
-  const deskInk = useOs((s) => s.deskInk);
-  const setDeskInk = useOs((s) => s.setDeskInk);
   const pinHash = useOs((s) => s.pinHash);
   const setPin = useOs((s) => s.setPin);
   const clearPin = useOs((s) => s.clearPin);
@@ -51,10 +46,13 @@ export function SettingsApp() {
   const fs = useOs((s) => s.fs);
   const planted = fs.some((n) => n.name === "Kreluna.sys.luna" && !n.trashed);
   const copy = t(lang);
-  const nav = useNavigate();
   const { user, isPending } = useCurrentUserState();
   const { canInstall, standalone, install, host } = useInstall();
   const caps = useMemo(() => readCaps(), []);
+  const desktop =
+    typeof document !== "undefined" &&
+    (document.documentElement.dataset.krelunaHost === "desktop" ||
+      (typeof window !== "undefined" && "__TAURI_INTERNALS__" in window));
   const [pinDraft, setPinDraft] = useState("");
   const [pinMsg, setPinMsg] = useState("");
 
@@ -83,7 +81,7 @@ export function SettingsApp() {
                 <p className="mt-1 text-xs text-mist">{copy.settings.guestHint}</p>
                 <button
                   type="button"
-                  onClick={() => nav({ to: "/login" })}
+                  onClick={() => window.location.assign("/login")}
                   className="mt-3 rounded-lg bg-luna px-3 py-1.5 text-xs font-medium text-luna-ink"
                 >
                   {copy.settings.signIn}
@@ -204,21 +202,9 @@ export function SettingsApp() {
             {copy.themeDawn}
           </Seg>
         </div>
-        <p className="mt-4 mb-2 text-xs text-mist">{lang === "it" ? "Scritte sulla home" : "Home text"}</p>
-        <div className="grid grid-cols-3 gap-2">
-          <Seg on={deskInk === "auto"} onClick={() => setDeskInk("auto")}>
-            Auto
-          </Seg>
-          <Seg on={deskInk === "dark"} onClick={() => setDeskInk("dark")}>
-            {lang === "it" ? "Scure" : "Dark"}
-          </Seg>
-          <Seg on={deskInk === "light"} onClick={() => setDeskInk("light")}>
-            {lang === "it" ? "Chiare" : "Light"}
-          </Seg>
-        </div>
       </section>
       <section className="mt-6">
-        <p className="text-[11px] tracking-wide text-mist uppercase">{lang === "it" ? "Sfondi" : "Wallpapers"}</p>
+        <p className="text-[11px] tracking-wide text-mist uppercase">{lang === "it" ? "Sfondo blocco e salvaschermo" : "Lock and screensaver wallpaper"}</p>
         <div className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-4">
           {WALLS.map((w) => (
             <button
@@ -280,22 +266,6 @@ export function SettingsApp() {
       <section className="mt-6">
         <p className="text-[11px] tracking-wide text-mist uppercase">{copy.settings.home}</p>
         <div className="mt-2 space-y-3 rounded-xl bg-ink-3 p-4">
-          <div>
-            <p className="text-sm">{lang === "it" ? "Il tasto App apre" : "The App button opens"}</p>
-            <p className="mt-1 text-xs text-mist">
-              {lang === "it"
-                ? "Griglia: le app sulla home, niente finestre extra. Archivio: solo i pacchetti .luna."
-                : "Grid: apps on the home, no extra windows. Archive: only .luna packages."}
-            </p>
-            <div className="mt-2 grid grid-cols-2 gap-2">
-              <Seg on={appsOpen === "grid"} onClick={() => setAppsOpen("grid")}>
-                {lang === "it" ? "Griglia" : "Grid"}
-              </Seg>
-              <Seg on={appsOpen === "store"} onClick={() => setAppsOpen("store")}>
-                {lang === "it" ? "Archivio" : "Archive"}
-              </Seg>
-            </div>
-          </div>
           <Toggle
             label={copy.settings.activity}
             hint={lang === "it" ? "Sulla home, a destra." : "On the home, right side."}
@@ -343,14 +313,28 @@ export function SettingsApp() {
         <p className="text-[11px] tracking-wide text-mist uppercase">{copy.settings.install}</p>
         <div className="mt-2 rounded-xl bg-ink-3 p-4 text-sm leading-relaxed">
           <p className="font-medium text-paper">
-            {lang === "it" ? "Una finestra tua, a tutto schermo" : "Your own window, full screen"}
+            {desktop
+              ? lang === "it"
+                ? "Kreluna Desktop installata"
+                : "Kreluna Desktop installed"
+              : lang === "it"
+                ? "Una finestra tua, a tutto schermo"
+                : "Your own window, full screen"}
           </p>
           <p className="mt-2 text-mist">
-            {lang === "it"
-              ? "Non installa un sistema sul disco. Mette Kreluna nel Dock o in Home, a schermo intero. Il Mac o il telefono restano. Cambia solo come la apri."
-              : "It does not install a system on the disk. It puts Kreluna in the Dock or Home, full screen. The Mac or the phone stay. Only how you open it changes."}
+            {desktop
+              ? lang === "it"
+                ? "Questa è l’applicazione nativa di Kreluna. Windows o macOS restano il sistema operativo: Kreluna usa il loro kernel e mantiene Lumina come ambiente di lavoro."
+                : "This is the native Kreluna application. Windows or macOS remain the operating system: Kreluna uses their kernel and keeps Lumina as your workspace."
+              : lang === "it"
+                ? "Non installa un sistema sul disco. Mette Kreluna nel Dock o in Home, a schermo intero. Il Mac o il telefono restano. Cambia solo come la apri."
+                : "It does not install a system on the disk. It puts Kreluna in the Dock or Home, full screen. The Mac or phone stay. Only how you open it changes."}
           </p>
-          {standalone ? (
+          {desktop ? (
+            <p className="mt-3 text-luna">
+              {lang === "it" ? "Modalità desktop locale attiva." : "Local desktop mode is active."}
+            </p>
+          ) : standalone ? (
             <p className="mt-3 text-luna">
               {lang === "it" ? "Già impiantata su questo schermo." : "Already planted on this screen."}
             </p>
@@ -397,9 +381,9 @@ export function SettingsApp() {
       <section className="mt-6">
         <p className="text-[11px] tracking-wide text-mist uppercase">{copy.settings.system}</p>
         <dl className="mt-2 divide-y divide-line rounded-xl bg-ink-3 text-sm">
-          <Row k={copy.settings.version} v="Kreluna 1.0" />
-          <Row k={copy.settings.kernel} v="Luna" />
-          <Row k={copy.settings.build} v="2026.08.16" />
+          <Row k={copy.settings.version} v="Kreluna Desktop 1.0.0" />
+          <Row k={lang === "it" ? "Motore" : "Runtime"} v="Luna Runtime 1" />
+          <Row k={copy.settings.build} v="2026.08.17" />
           <Row k={lang === "it" ? "Ospite" : "Host"} v={typeof navigator !== "undefined" ? navigator.userAgent.split(" ").slice(-2).join(" ") : "—"} />
           <Row k={lang === "it" ? "Memoria" : "Memory"} v={caps.memory ? `${caps.memory} GB` : lang === "it" ? "non dichiarata" : "not reported"} />
           <Row k="Touch" v={caps.touch ? (lang === "it" ? "sì" : "yes") : lang === "it" ? "no" : "no"} />
@@ -417,13 +401,13 @@ export function SettingsApp() {
         </button>
       </section>
       <section className="mt-6">
-        <p className="text-[11px] tracking-wide text-mist uppercase">{lang === "it" ? "Impianto" : "Implant"}</p>
+        <p className="text-[11px] tracking-wide text-mist uppercase">{lang === "it" ? "Ripristino" : "Recovery"}</p>
         <div className="mt-2 space-y-2 rounded-xl bg-ink-3 p-4 text-sm leading-relaxed text-mist">
-          <p className="font-medium text-paper">{lang === "it" ? "Userspace pronto. Kernel mercoledì." : "Userspace ready. Kernel on Wednesday."}</p>
+          <p className="font-medium text-paper">{lang === "it" ? "Pacchetto di sistema Kreluna" : "Kreluna system package"}</p>
           <p>
             {lang === "it"
-              ? "Questo è il Perimetro. L’impianto è l’immagine che il tuo kernel carica."
-              : "This is the Perimeter. The implant is the image your kernel loads."}
+              ? "Crea un pacchetto leggibile da Luna Runtime con configurazione e manifesto del sistema. Non sostituisce Windows o macOS."
+              : "Creates a package readable by Luna Runtime containing the system configuration and manifest. It does not replace Windows or macOS."}
           </p>
           <p className="text-xs">
             {planted
@@ -439,7 +423,7 @@ export function SettingsApp() {
             onClick={() => openNode(implant())}
             className="rounded-lg bg-luna px-3 py-2 text-xs font-medium text-luna-ink"
           >
-            {lang === "it" ? "Impianta ora" : "Implant now"}
+            {lang === "it" ? "Crea pacchetto" : "Create package"}
           </button>
         </div>
       </section>

@@ -1,0 +1,17 @@
+[package]
+name = "kreluna"
+version = "1.0.0"
+description = "Kreluna Desktop"
+edition = "2021"
+
+[lib]
+name = "kreluna_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tauri = { version = "2", features = [] }

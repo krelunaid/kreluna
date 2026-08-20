@@ -1,8 +1,8 @@
 export type Lang = "it" | "en";
 export type Theme = "night" | "dawn";
 export type Phase = "boot" | "setup" | "lock" | "desktop" | "sleep" | "shutdown";
-export type DeskNav = "home" | "orbit" | "stars" | "files" | "apps" | "settings";
 export type OrbitId = "lavoro" | "personale" | "studio" | "progetti" | "finanza";
+export type LuminaNodeId = OrbitId | "files";
 
 export type AppId =
   | "core"

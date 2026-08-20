@@ -46,7 +46,6 @@ export const CATALOG: Record<AppId, AppMeta> = {
 export const DOCK_APPS: AppId[] = [
   "core",
   "files",
-  "browser",
   "mail",
   "calendar",
   "office",

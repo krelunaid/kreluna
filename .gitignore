@@ -1,6 +1,7 @@
 node_modules
 vendor
 dist
+dist-desktop
 .output
 .tanstack
 .nitro
@@ -17,4 +18,6 @@ attachments
 AGENTS.md
 /tmp
 artifacts
+src-tauri/target
+src-tauri/gen
 .node_modules.lock

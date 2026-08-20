@@ -4,25 +4,20 @@ import { Boot } from "./Boot";
 import { Setup } from "./Setup";
 import { LockScreen } from "./LockScreen";
 import { SleepScreen, ShutdownScreen } from "./Power";
-import { MenuBar } from "./MenuBar";
-import { Dock } from "./Dock";
 import { WindowFrame } from "./Window";
 import {
   AboutDialog,
-  ControlCenter,
   MobileApp,
-  MobileHome,
-  NotificationCenter,
   Spotlight,
 } from "./Chrome";
 import { AppSwitcher, ContextMenu } from "./Desktop";
-import { Wallpaper } from "./Wallpaper";
 import { Screensaver } from "./Screensaver";
-import { OrbitHome } from "./OrbitHome";
+import { LuminaHome } from "./LuminaHome";
 import { ponteBoot, ponteCut, ponteSnap, ponteSub } from "@/lib/os/ponte";
 
 export function OsShell() {
   const phase = useOs((s) => s.phase);
+  const lang = useOs((s) => s.lang);
   const theme = useOs((s) => s.theme);
   const wins = useOs((s) => s.wins);
   const space = useOs((s) => s.space);
@@ -44,8 +39,12 @@ export function OsShell() {
   const lockMin = useOs((s) => s.lockMin);
   const lock = useOs((s) => s.lock);
   const operator = useOs((s) => s.operator);
-  const [reel, setReel] = useState(false);
   const [ponteTick, setPonteTick] = useState(0);
+  const [hydrated, setHydrated] = useState(false);
+
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
 
   useEffect(() => {
     ponteBoot(operator);
@@ -56,9 +55,10 @@ export function OsShell() {
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
+    document.documentElement.lang = lang;
     document.documentElement.style.colorScheme = theme === "dawn" ? "light" : "dark";
     document.documentElement.toggleAttribute("data-lite", lite);
-  }, [theme, lite]);
+  }, [theme, lang, lite]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -112,6 +112,15 @@ export function OsShell() {
     };
   }, [phase, saverMin, startSaver, bumpIdle, lockMin, lock]);
 
+  if (!hydrated) {
+    return (
+      <div className="relative grid min-h-[100vh] min-h-svh place-items-center overflow-hidden bg-[#eaf2ff] text-[#15376b]">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,#fff,transparent_58%)]" />
+        <p className="relative font-display text-sm font-semibold tracking-[0.32em]">KRELUNA</p>
+      </div>
+    );
+  }
+
   if (phase === "boot") return <Boot />;
   if (phase === "setup") return <Setup />;
   if (phase === "lock") return <LockScreen />;
@@ -122,7 +131,6 @@ export function OsShell() {
 
   return (
     <div className="relative h-full min-h-[100vh] min-h-svh overflow-hidden bg-ink text-paper">
-      <Wallpaper />
       <div
         className="pointer-events-none absolute inset-0 z-[95] bg-navy"
         style={{ opacity: (100 - brightness) / 160 }}
@@ -142,7 +150,6 @@ export function OsShell() {
         </div>
       )}
       <div className="relative z-10 flex h-full flex-col">
-        <MenuBar />
         <div className="relative min-h-0 flex-1">
           <div
             className="hidden h-full md:block"
@@ -151,46 +158,19 @@ export function OsShell() {
               setCtx({ x: e.clientX, y: e.clientY, kind: "desk" });
             }}
           >
-            <OrbitHome />
+            <LuminaHome />
             {visible.map((w) => (
               <WindowFrame key={w.id} win={w} />
             ))}
           </div>
           <div className="flex h-full flex-col md:hidden">
-            {mobileApp ? <MobileApp id={mobileApp} /> : <OrbitHome />}
+            {mobileApp ? <MobileApp id={mobileApp} /> : <LuminaHome />}
           </div>
           <Spotlight />
-          <ControlCenter />
-          <NotificationCenter />
           <AboutDialog />
           <AppSwitcher />
           <ContextMenu />
-          {reel && (
-            <div className="absolute inset-0 z-[80] grid place-items-center bg-navy/70 p-5">
-              <div className="relative w-full max-w-5xl overflow-hidden rounded-3xl shadow-win">
-                <button
-                  type="button"
-                  onClick={() => setReel(false)}
-                  className="absolute top-3 right-3 z-10 grid size-8 place-items-center rounded-full bg-ink-2/90 text-paper"
-                  aria-label="Chiudi"
-                >
-                  ×
-                </button>
-                <video
-                  src="/os/kreluna-presentazione.mp4?v=2"
-                  controls
-                  autoPlay
-                  playsInline
-                  className="aspect-video w-full bg-navy"
-                />
-              </div>
-            </div>
-          )}
         </div>
-        <div className="hidden md:block">
-          <Dock />
-        </div>
-        <div className="md:hidden">{!mobileApp && <Dock mobile />}</div>
       </div>
     </div>
   );
