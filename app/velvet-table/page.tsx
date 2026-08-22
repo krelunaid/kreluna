@@ -128,7 +128,7 @@ const structuredData = {
 const moods = [
   { name: "Intima", copy: "Luci morbide, ritmo tranquillo e spazio per parlare.", image: "/velvet-table/view-alcove.jpg", alt: "Sala raccolta con luci calde, immagine utilizzata nell’app Velvet Table" },
   { name: "Panoramica", copy: "Una vista che diventa parte dell’esperienza.", image: "/velvet-table/view-window.jpg", alt: "Sala ristorante vicina alle finestre, immagine utilizzata nell’app Velvet Table" },
-  { name: "In giardino", copy: "Verde, aria aperta e un tempo più disteso.", image: "/velvet-table/view-garden.jpg", alt: "Tavoli in un giardino, immagine utilizzata nell’app Velvet Table" },
+  { name: "In giardino", copy: "Verde, aria aperta e un tempo più disteso.", image: "/velvet-table/garden-restaurant.jpg", alt: "Ristorante in un vero giardino con tavoli tra alberi, piante e lanterne" },
   { name: "Editoriale", copy: "Design riconoscibile e una sala che racconta una storia.", image: "/velvet-table/salon.jpg", alt: "Interno contemporaneo di un ristorante, immagine utilizzata nell’app Velvet Table" },
   { name: "Sera", copy: "Luce bassa, toni profondi e un’atmosfera più intensa.", image: "/velvet-table/night.jpg", alt: "Ristorante di sera con illuminazione soffusa, immagine utilizzata nell’app Velvet Table" },
   { name: "Sensoriale", copy: "Tavolo, servizio e dettagli diventano parte del rito.", image: "/velvet-table/hero.jpg", alt: "Esperienza gastronomica al tavolo, immagine principale di Velvet Table" },

@@ -145,7 +145,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         `${SITE_URL}/velvet-table/hero.jpg`,
         `${SITE_URL}/velvet-table/salon.jpg`,
         `${SITE_URL}/velvet-table/view-window.jpg`,
-        `${SITE_URL}/velvet-table/view-garden.jpg`,
+        `${SITE_URL}/velvet-table/garden-restaurant.jpg`,
       ],
       alternates: {
         languages: {
