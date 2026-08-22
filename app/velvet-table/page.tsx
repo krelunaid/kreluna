@@ -3,13 +3,22 @@ import Link from "next/link";
 
 const siteUrl = "https://www.kreluna.it";
 const pageUrl = `${siteUrl}/velvet-table`;
-const title = "Velvet Table | Prenota il ristorante partendo dall’atmosfera";
+const title = "Velvet Table | Ristoranti e tavoli scelti per atmosfera";
 const description =
-  "Velvet Table è il concept Kreluna per trovare e prenotare un ristorante partendo dall’atmosfera desiderata, dall’occasione e dalla compagnia.";
+  "Velvet Table è il concierge gastronomico Kreluna per scegliere ristorante, sala e tavolo partendo da occasione, atmosfera, vista e compagnia.";
 
 export const metadata: Metadata = {
   title,
   description,
+  keywords: [
+    "prenotare ristorante per atmosfera",
+    "ristorante romantico",
+    "tavolo panoramico",
+    "ristorante con luce soffusa",
+    "concierge gastronomico",
+    "Velvet Table",
+  ],
+  robots: { index: true, follow: true, "max-image-preview": "large" },
   alternates: {
     canonical: pageUrl,
     languages: {
@@ -25,7 +34,7 @@ export const metadata: Metadata = {
     locale: "it_IT",
     images: [
       {
-        url: `${siteUrl}/og-kreluna.jpg`,
+        url: `${siteUrl}/velvet-table/og.jpg`,
         width: 1200,
         height: 630,
         alt: "Velvet Table — prenota l’atmosfera, non solo il tavolo",
@@ -36,7 +45,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title,
     description,
-    images: [`${siteUrl}/og-kreluna.jpg`],
+    images: [`${siteUrl}/velvet-table/og.jpg`],
   },
 };
 
@@ -52,6 +61,12 @@ const structuredData = {
       inLanguage: "it-IT",
       isPartOf: { "@id": `${siteUrl}/#website` },
       about: { "@id": `${pageUrl}#service` },
+      primaryImageOfPage: {
+        "@type": "ImageObject",
+        url: `${siteUrl}/velvet-table/hero.jpg`,
+        width: 1600,
+        height: 1067,
+      },
       dateModified: "2026-08-23",
     },
     {
@@ -111,12 +126,12 @@ const structuredData = {
 };
 
 const moods = [
-  ["Intima", "Luci morbide, ritmo tranquillo e spazio per parlare."],
-  ["Vivace", "Energia, musica e una sala adatta a una serata dinamica."],
-  ["Panoramica", "Una vista che diventa parte dell’esperienza."],
-  ["Rilassata", "Informale, accogliente e senza fretta."],
-  ["Elegante", "Cura del servizio e atmosfera per un’occasione speciale."],
-  ["Sorprendente", "Un luogo capace di rendere la serata memorabile."],
+  { name: "Intima", copy: "Luci morbide, ritmo tranquillo e spazio per parlare.", image: "/velvet-table/view-alcove.jpg", alt: "Sala raccolta con luci calde, immagine utilizzata nell’app Velvet Table" },
+  { name: "Panoramica", copy: "Una vista che diventa parte dell’esperienza.", image: "/velvet-table/view-window.jpg", alt: "Sala ristorante vicina alle finestre, immagine utilizzata nell’app Velvet Table" },
+  { name: "In giardino", copy: "Verde, aria aperta e un tempo più disteso.", image: "/velvet-table/view-garden.jpg", alt: "Tavoli in un giardino, immagine utilizzata nell’app Velvet Table" },
+  { name: "Editoriale", copy: "Design riconoscibile e una sala che racconta una storia.", image: "/velvet-table/salon.jpg", alt: "Interno contemporaneo di un ristorante, immagine utilizzata nell’app Velvet Table" },
+  { name: "Sera", copy: "Luce bassa, toni profondi e un’atmosfera più intensa.", image: "/velvet-table/night.jpg", alt: "Ristorante di sera con illuminazione soffusa, immagine utilizzata nell’app Velvet Table" },
+  { name: "Sensoriale", copy: "Tavolo, servizio e dettagli diventano parte del rito.", image: "/velvet-table/hero.jpg", alt: "Esperienza gastronomica al tavolo, immagine principale di Velvet Table" },
 ] as const;
 
 export default function VelvetTablePage() {
@@ -143,12 +158,12 @@ export default function VelvetTablePage() {
         <section className="velvet-page-hero section-shell">
           <div className="velvet-page-glow" aria-hidden="true" />
           <div className="velvet-page-hero-copy">
-            <div className="eyebrow velvet-text"><i /> Concept Kreluna · in sviluppo</div>
-            <h1>Prenota l’atmosfera.<br /><em>Non solo il tavolo.</em></h1>
+            <div className="eyebrow velvet-text"><i /> Concierge gastronomico · by Kreluna</div>
+            <h1>La sera, scelta<br /><em>come un grand hotel.</em></h1>
             <p>
-              Velvet Table nasce per trovare un ristorante partendo da come vuoi sentirti:
-              una cena intima, una serata vivace, una vista speciale o un momento rilassato.
-              L’esperienza desiderata viene prima; disponibilità e prenotazione completano la scelta.
+              Un tavolo, una vista, un rito. Non un elenco. Velvet Table trova il ristorante
+              partendo dall’occasione e dall’atmosfera che vuoi vivere, poi ti accompagna verso
+              sala, tavolo e prenotazione.
             </p>
             <div className="hero-actions">
               <a className="button velvet-page-button" href="#come-funziona">Scopri come funziona ↓</a>
@@ -159,13 +174,12 @@ export default function VelvetTablePage() {
               vengono presentati con trasparenza mentre il progetto prende forma.
             </p>
           </div>
-          <div className="velvet-compass" aria-label="Atmosfere considerate da Velvet Table">
-            <span className="velvet-compass-center">La tua<br /><strong>serata</strong></span>
-            <span className="mood mood-one">Intima</span>
-            <span className="mood mood-two">Vivace</span>
-            <span className="mood mood-three">Panoramica</span>
-            <span className="mood mood-four">Rilassata</span>
-          </div>
+          <figure className="velvet-app-hero">
+            {/* Immagine originale già utilizzata dal prototipo Velvet Table. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/velvet-table/hero.jpg" width="1600" height="1067" alt="Esperienza gastronomica al tavolo, immagine originale dell’app Velvet Table" fetchPriority="high" />
+            <figcaption><span>01</span><strong>Esperienza prima della disponibilità</strong><small>Visuale originale del prototipo</small></figcaption>
+          </figure>
         </section>
 
         <section className="velvet-definition section-shell">
@@ -205,12 +219,17 @@ export default function VelvetTablePage() {
             <div className="eyebrow velvet-text"><i /> Il linguaggio dell’atmosfera</div>
             <h2>Non una categoria.<br />Una sensazione riconoscibile.</h2>
           </div>
+          <p className="velvet-original-note">Le immagini qui sotto sono quelle già utilizzate nell’esperienza originale dell’app Velvet Table.</p>
           <div className="velvet-atmosphere-grid">
-            {moods.map(([name, copy], index) => (
-              <article key={name}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <h3>{name}</h3>
-                <p>{copy}</p>
+            {moods.map((mood, index) => (
+              <article key={mood.name}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={mood.image} width="1400" height="933" loading="lazy" alt={mood.alt} />
+                <div>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <h3>{mood.name}</h3>
+                  <p>{mood.copy}</p>
+                </div>
               </article>
             ))}
           </div>

@@ -87,6 +87,9 @@ test("renders the dedicated Velvet Table concept page", async () => {
   const html = await response.text();
   assert.match(html, /Prenota l’atmosfera/i);
   assert.match(html, /Velvet Table non è ancora un servizio attivo/i);
+  assert.match(html, /src="\/velvet-table\/hero\.jpg"/i);
+  assert.match(html, /src="\/velvet-table\/view-window\.jpg"/i);
+  assert.match(html, /property="og:image" content="https:\/\/www\.kreluna\.it\/velvet-table\/og\.jpg"/i);
   assert.match(html, /rel="canonical" href="https:\/\/www\.kreluna\.it\/velvet-table"/i);
   assert.equal((html.match(/rel="canonical"/gi) ?? []).length, 1);
   assert.match(html, /"@type":"Service"/);

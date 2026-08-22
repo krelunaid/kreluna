@@ -48,7 +48,7 @@ const products = [
     tagline: "Prenota l’atmosfera, non solo il tavolo.",
     description:
       "Un concept Kreluna per scegliere il locale partendo dal tipo di serata: intima, vivace, panoramica o rilassata. Poi si passa alla disponibilità e alla prenotazione.",
-    color: "coral",
+    color: "velvet",
     status: "Concept in sviluppo",
     href: "/velvet-table",
     features: ["Atmosfera desiderata", "Occasione e compagnia", "Prenotazione guidata"],

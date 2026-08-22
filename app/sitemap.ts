@@ -141,6 +141,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: "2026-08-23",
       changeFrequency: "monthly",
       priority: 0.8,
+      images: [
+        `${SITE_URL}/velvet-table/hero.jpg`,
+        `${SITE_URL}/velvet-table/salon.jpg`,
+        `${SITE_URL}/velvet-table/view-window.jpg`,
+        `${SITE_URL}/velvet-table/view-garden.jpg`,
+      ],
       alternates: {
         languages: {
           it: `${SITE_URL}/velvet-table`,
