@@ -76,110 +76,6 @@ const principles = [
   ["03", "Crescita naturale", "Un nuovo progetto si aggiunge all'ecosistema senza dover ripensare ogni volta l'intero sito."],
 ];
 
-const ecosystemQuickCards = [
-  {
-    name: "Kreluna AI",
-    description: "Intelligenza artificiale progettata intorno al lavoro reale.",
-    symbol: "✦",
-    tone: "violet",
-    href: "https://www.kreluna.it/intelligenza-artificiale-aziende.html",
-  },
-  {
-    name: "Kreluna Office",
-    description: "Strumenti professionali per organizzare attività e documenti.",
-    symbol: "▰",
-    tone: "green",
-    href: "https://www.kreluna.it/ai-studi-professionali.html",
-  },
-  {
-    name: "Kreluna Cyber",
-    description: "Percorsi e strumenti dedicati alla sicurezza informatica.",
-    symbol: "◇",
-    tone: "blue",
-    href: "https://cra24.kreluna.it/",
-  },
-  {
-    name: "Kreluna Connect",
-    description: "Un punto di contatto per collegare esigenze e progetti.",
-    symbol: "↗",
-    tone: "orange",
-    href: "https://www.kreluna.it/contatti.html",
-  },
-  {
-    name: "Kreluna Store",
-    description: "Concept di app e strumenti organizzati per bisogno.",
-    symbol: "▢",
-    tone: "rose",
-    href: storeUrl,
-  },
-] as const;
-
-const storePreviewApps = [
-  {
-    name: "LikeCash",
-    category: "Denaro e risparmio",
-    description: "Entrate, spese e obiettivi in uno spazio leggibile.",
-    symbol: "€",
-    tone: "mint",
-    platforms: ["Web", "iPhone", "Android"],
-  },
-  {
-    name: "Kreluna Focus",
-    category: "Tempo e organizzazione",
-    description: "Priorità, routine e tempo protetto senza rumore.",
-    symbol: "F",
-    tone: "violet",
-    platforms: ["Web", "iPhone", "Mac"],
-  },
-  {
-    name: "Kreluna CRM",
-    category: "Clienti e vendite",
-    description: "Relazioni e prossime azioni in una vista ordinata.",
-    symbol: "C",
-    tone: "gold",
-    platforms: ["Web", "Windows", "Mac"],
-  },
-  {
-    name: "Magazzino Pro",
-    category: "Scorte e prodotti",
-    description: "Movimenti e livelli di scorta presentati con chiarezza.",
-    symbol: "M",
-    tone: "blue",
-    platforms: ["Web", "Windows", "Android"],
-  },
-  {
-    name: "Kora AI",
-    category: "Assistente personale",
-    description: "Ricerca, scrittura e sintesi con contesto controllabile.",
-    symbol: "✦",
-    tone: "cyan",
-    platforms: ["Web", "Mac", "iPhone"],
-  },
-] as const;
-
-const storeFilterChips = [
-  "Tutto",
-  "Per te",
-  "Aziende",
-  "AI & Agenti",
-  "Giochi",
-  "iPhone",
-  "Android",
-  "Windows",
-  "Mac",
-  "Web",
-  "Gratis",
-  "Premium",
-] as const;
-
-const storeTrustItems = [
-  ["◇", "Catalogo dimostrativo", "I concept sono presentati come tali.", "violet"],
-  ["≡", "Schede trasparenti", "Stato e formula sono sempre dichiarati.", "green"],
-  ["…", "In sviluppo", "La disponibilità non viene anticipata.", "orange"],
-  ["◎", "Controllo umano", "Le decisioni importanti restano alle persone.", "blue"],
-  ["i", "Informazioni essenziali", "Nessun prezzo o risultato promesso.", "rose"],
-] as const;
-
 function ArrowIcon() {
   return <span aria-hidden="true">↗</span>;
 }
@@ -192,117 +88,6 @@ function Logo() {
       <img src={`${assetBasePath}/kreluna-logo.png`} alt="" width="128" height="128" decoding="async" />
       <span>KRELUNA</span>
     </a>
-  );
-}
-
-function StoreBagMark() {
-  return <span className="store-bag-mark" aria-hidden="true"><b>K</b></span>;
-}
-
-function EcosystemShowcase() {
-  return (
-    <section className="ecosystem-showcase reveal" aria-labelledby="ecosystem-showcase-title">
-      <div className="ecosystem-showcase-hero">
-        <div className="ecosystem-showcase-copy">
-          <p className="ecosystem-kicker">Kreluna · un unico ecosistema</p>
-          <h2 id="ecosystem-showcase-title">
-            Un ecosistema.<br />
-            <span>Tutto quello che ti serve.</span>
-          </h2>
-          <p>
-            Kreluna riunisce app, software, servizi e intelligenza artificiale per
-            semplificare attività quotidiane e far crescere il lavoro.
-          </p>
-          <div className="ecosystem-showcase-actions">
-            <a className="ecosystem-primary-action" href={storeUrl}>Scopri Kreluna Store <span aria-hidden="true">→</span></a>
-            <a className="ecosystem-secondary-action" href="#products">Esplora l’ecosistema <span aria-hidden="true">▶</span></a>
-          </div>
-        </div>
-
-        <div className="ecosystem-universe" aria-hidden="true">
-          <div className="ecosystem-planet" />
-          <div className="ecosystem-planet-glow" />
-          <div className="ecosystem-universe-label">
-            <strong>K R E L U N A</strong>
-            <small>Tutto. In un unico universo.</small>
-          </div>
-        </div>
-
-        <a className="ecosystem-store-feature" href={storeUrl} aria-label="Entra in Kreluna Store">
-          <span className="ecosystem-store-feature-copy">
-            <small>Catalogo dimostrativo · In sviluppo</small>
-            <strong>Kreluna Store</strong>
-            <span>Uno spazio unico per esplorare concept di app, software e strumenti Kreluna.</span>
-            <b>Entra nello Store <span aria-hidden="true">→</span></b>
-          </span>
-          <StoreBagMark />
-        </a>
-      </div>
-
-      <div className="ecosystem-quick-grid" aria-label="Prodotti dell’ecosistema Kreluna">
-        {ecosystemQuickCards.map((item) => (
-          <a className={`ecosystem-quick-card ${item.tone}`} href={item.href} key={item.name}>
-            <span className="ecosystem-quick-icon" aria-hidden="true">{item.symbol}</span>
-            <strong>{item.name}</strong>
-            <span>{item.description}</span>
-            <b>Scopri di più <span aria-hidden="true">→</span></b>
-          </a>
-        ))}
-        <aside className="ecosystem-status-cell" aria-label="Stato del catalogo Kreluna Store">
-          <strong>Stato del catalogo</strong>
-          <span><i aria-hidden="true" /> Concept dimostrativi</span>
-          <span><i aria-hidden="true" /> Disponibilità dichiarata</span>
-          <span><i aria-hidden="true" /> Nessuna promessa commerciale</span>
-          <span><i aria-hidden="true" /> Controllo umano</span>
-        </aside>
-      </div>
-
-      <div className="ecosystem-store-preview">
-        <div className="ecosystem-store-intro">
-          <p className="ecosystem-kicker">Kreluna Store</p>
-          <h3>Trova il software giusto per te.</h3>
-          <p>
-            Esplora concept dimostrativi per la vita quotidiana, il lavoro e l’impresa.
-            Ogni scheda indica con chiarezza stato e formula.
-          </p>
-          <a className="ecosystem-search-preview" href={storeUrl} aria-label="Cerca app nel Kreluna Store">
-            <span aria-hidden="true">⌕</span>
-            <span>Cerca app, software, strumenti…</span>
-          </a>
-          <div className="ecosystem-filter-chips" aria-label="Esplora i filtri nel Kreluna Store">
-            {storeFilterChips.map((chip, index) => (
-              <a className={index === 0 ? "active" : undefined} href={storeUrl} key={chip}>{chip}</a>
-            ))}
-          </div>
-          <a className="ecosystem-store-link" href={storeUrl}>Vai allo Store completo <span aria-hidden="true">→</span></a>
-        </div>
-
-        <div className="ecosystem-app-grid" aria-label="Concept in evidenza nel Kreluna Store">
-          {storePreviewApps.map((app) => (
-            <a className="ecosystem-app-card" href={storeUrl} key={app.name}>
-              <span className={`ecosystem-app-icon ${app.tone}`} aria-hidden="true">{app.symbol}</span>
-              <span className="ecosystem-app-state">Catalogo dimostrativo</span>
-              <strong>{app.name}</strong>
-              <small>{app.category}</small>
-              <p>{app.description}</p>
-              <span className="ecosystem-platforms">
-                {app.platforms.map((platform) => <i key={platform}>{platform}</i>)}
-              </span>
-              <b>Scopri il concept</b>
-            </a>
-          ))}
-        </div>
-      </div>
-
-      <div className="ecosystem-trust-strip" aria-label="Informazioni sullo stato del Kreluna Store">
-        {storeTrustItems.map(([symbol, title, description, tone]) => (
-          <div className={tone} key={title}>
-            <span aria-hidden="true">{symbol}</span>
-            <p><strong>{title}</strong><small>{description}</small></p>
-          </div>
-        ))}
-      </div>
-    </section>
   );
 }
 
@@ -497,7 +282,23 @@ export default function Home() {
           ))}
         </div>
 
-        <EcosystemShowcase />
+        <a className="store-gateway reveal" href={storeUrl} aria-label="Esplora Kreluna Store">
+          <span className="store-gateway-copy">
+            <span className="eyebrow"><i /> Kreluna Store</span>
+            <strong>Un catalogo ordinato. La home resta essenziale.</strong>
+            <small>
+              App, software e agenti AI per persone e aziende, organizzati per bisogno,
+              piattaforma e piano.
+            </small>
+          </span>
+          <span className="store-gateway-icons" aria-hidden="true">
+            <i className="store-icon store-icon-mint">€</i>
+            <i className="store-icon store-icon-cyan">AI</i>
+            <i className="store-icon store-icon-gold">O</i>
+            <i className="store-icon store-icon-coral">+</i>
+          </span>
+          <span className="store-gateway-action">Esplora lo Store <ArrowIcon /></span>
+        </a>
 
         <div className="future-card reveal">
           <div className="future-mark">＋</div>
