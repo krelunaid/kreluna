@@ -42,16 +42,15 @@ const products = [
     features: ["Security assessment", "Vulnerability management", "Compliance tecnica"],
   },
   {
-    slug: "likecash",
-    name: "LikeCash",
-    eyebrow: "Nuovo progetto · by Kreluna",
-    tagline: "Un nuovo progetto sta prendendo forma.",
-    description:
-      "LikeCash è il nuovo progetto firmato Kreluna. Identità, funzioni e disponibilità saranno raccontate qui, man mano che prendono forma.",
+    slug: "velvet-tablet",
+    name: "Velvet Tablet",
+    eyebrow: "",
+    tagline: "",
+    description: "",
     color: "coral",
-    status: "Dettagli in arrivo",
-    href: "#likecash",
-    features: ["by Kreluna", "In progettazione", "Aggiornamenti in arrivo"],
+    status: "",
+    href: "#velvet-tablet",
+    features: [],
   },
   {
     slug: "krl",
@@ -151,7 +150,7 @@ export default function Home() {
         <nav className="desktop-nav" aria-label="Navigazione principale">
           <a href="#products">Prodotti</a>
           <a href="#vision">Visione</a>
-          <a href="#likecash">LikeCash</a>
+          <a href="#velvet-tablet">Velvet Tablet</a>
           <a href={`${assetBasePath}/krl/`}>KRL Beta</a>
           <a href="https://www.kreluna.it/azienda.html">Azienda</a>
         </nav>
@@ -182,7 +181,7 @@ export default function Home() {
           >×</button>
           <a href="#products" onClick={() => setMenuOpen(false)}>Prodotti</a>
           <a href="#vision" onClick={() => setMenuOpen(false)}>Visione</a>
-          <a href="#likecash" onClick={() => setMenuOpen(false)}>LikeCash</a>
+          <a href="#velvet-tablet" onClick={() => setMenuOpen(false)}>Velvet Tablet</a>
           <a href={`${assetBasePath}/krl/`} onClick={() => setMenuOpen(false)}>KRL Beta</a>
           <a href="https://www.kreluna.it/azienda.html">Azienda</a>
           <a href="https://www.kreluna.it/contatti.html">Contatti</a>
@@ -242,17 +241,19 @@ export default function Home() {
           </div>
           <p>
             Dall’intelligenza artificiale al lavoro professionale, dalla sicurezza
-            a LikeCash e KRL. Questo spazio è pensato per crescere insieme a Kreluna.
+            a Velvet Tablet e KRL. Questo spazio è pensato per crescere insieme a Kreluna.
           </p>
         </div>
 
         <div className="product-grid">
           {products.map((product, index) => (
-            <article className={`product-card ${product.color} reveal`} key={product.slug} style={{ "--delay": `${index * 90}ms` } as React.CSSProperties}>
-              <div className="card-topline">
-                <span>{product.eyebrow}</span>
-                <span className="status"><i /> {product.status}</span>
-              </div>
+            <article id={product.slug} className={`product-card ${product.color} reveal`} key={product.slug} style={{ "--delay": `${index * 90}ms` } as React.CSSProperties}>
+              {product.slug !== "velvet-tablet" && (
+                <div className="card-topline">
+                  <span>{product.eyebrow}</span>
+                  <span className="status"><i /> {product.status}</span>
+                </div>
+              )}
               <div className="product-visual" aria-hidden="true">
                 <div className="mini-grid" />
                 <div className="product-orbit" />
@@ -260,19 +261,27 @@ export default function Home() {
                 <span>{String(index + 1).padStart(2, "0")}</span>
               </div>
               <div className="card-copy">
-                <p className="signature">
-                  {product.slug === "likecash" ? "by Kreluna" : product.slug === "krl" ? "KRL · Kreluna ecosystem" : "Kreluna ecosystem"}
-                </p>
+                {product.slug !== "velvet-tablet" && (
+                  <p className="signature">
+                    {product.slug === "krl" ? "KRL · Kreluna ecosystem" : "Kreluna ecosystem"}
+                  </p>
+                )}
                 <h3>{product.name}</h3>
-                <h4>{product.tagline}</h4>
-                <p>{product.description}</p>
-                <div className="feature-list">
-                  {product.features.map((feature) => <span key={feature}>{feature}</span>)}
-                </div>
+                {product.slug !== "velvet-tablet" && (
+                  <>
+                    <h4>{product.tagline}</h4>
+                    <p>{product.description}</p>
+                    <div className="feature-list">
+                      {product.features.map((feature) => <span key={feature}>{feature}</span>)}
+                    </div>
+                  </>
+                )}
               </div>
-              <a href={product.href} className="card-link" aria-label={`Scopri ${product.name}`}>
-                Scopri {product.name} <ArrowIcon />
-              </a>
+              {product.slug !== "velvet-tablet" && (
+                <a href={product.href} className="card-link" aria-label={`Scopri ${product.name}`}>
+                  Scopri {product.name} <ArrowIcon />
+                </a>
+              )}
             </article>
           ))}
         </div>
@@ -283,26 +292,6 @@ export default function Home() {
             <div className="eyebrow"><i /> Il prossimo progetto</div>
             <h3>Lo spazio è già pronto.</h3>
             <p>Nome, identità e racconto: quando nasce una nuova idea Kreluna, il sito cresce senza ricominciare da zero.</p>
-          </div>
-        </div>
-      </section>
-
-      <section className="likecash section-shell" id="likecash">
-        <div className="likecash-panel reveal">
-          <div className="likecash-copy">
-            <div className="eyebrow coral-text"><i /> LikeCash · by Kreluna</div>
-            <h2>Un nuovo progetto<br />{" "}sta prendendo <em>forma.</em></h2>
-            <p>
-              LikeCash è un progetto Kreluna in sviluppo. Stiamo definendo esperienza,
-              funzionalità e lancio; condivideremo qui informazioni confermate, un passo alla volta.
-            </p>
-            <span className="development-pill"><i /> In sviluppo · Dettagli in arrivo</span>
-          </div>
-          <div className="likecash-visual" aria-hidden="true">
-            <div className="cash-ring ring-a" />
-            <div className="cash-ring ring-b" />
-            <div className="cash-orb"><span>LIKE<br />CASH</span></div>
-            <div className="cash-glint">✦</div>
           </div>
         </div>
       </section>

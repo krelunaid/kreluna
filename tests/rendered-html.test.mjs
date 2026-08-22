@@ -25,7 +25,8 @@ test("renders the Kreluna ecosystem homepage", async () => {
   assert.match(html, /Kreluna AI/);
   assert.match(html, /Kreluna Office/);
   assert.match(html, /Kreluna Cyber/);
-  assert.match(html, /LikeCash/);
+  assert.match(html, /Velvet Tablet/);
+  assert.doesNotMatch(html, /LikeCash/i);
   assert.match(html, /Kreluna Token/);
   assert.match(html, /Vendita disattivata/);
   assert.match(html, /rel="canonical" href="https:\/\/www\.kreluna\.it\/"/i);
