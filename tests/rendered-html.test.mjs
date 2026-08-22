@@ -81,12 +81,27 @@ test("keeps the retired KRL Beta route unavailable", async () => {
   assert.equal(response.status, 404);
 });
 
+test("renders the dedicated Velvet Table concept page", async () => {
+  const response = await render("/velvet-table");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /Prenota l’atmosfera/i);
+  assert.match(html, /Velvet Table non è ancora un servizio attivo/i);
+  assert.match(html, /rel="canonical" href="https:\/\/www\.kreluna\.it\/velvet-table\/"/i);
+  assert.match(html, /"@type":"Service"/);
+  assert.match(html, /"@type":"FAQPage"/);
+  assert.doesNotMatch(html, /LikeCash|KRL Beta/i);
+  assert.equal((html.match(/<h1\b/gi) ?? []).length, 1);
+});
+
 test("publishes a crawlable robots policy", async () => {
   const response = await render("/robots.txt");
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/plain\b/i);
 
   const robots = await response.text();
+  assert.match(robots, /User-Agent: OAI-SearchBot[\s\S]*Allow: \//i);
+  assert.match(robots, /User-Agent: GPTBot[\s\S]*Disallow: \//i);
   assert.match(robots, /User-Agent: \*/i);
   assert.match(robots, /Allow: \//i);
   assert.match(robots, /Sitemap: https:\/\/www\.kreluna\.it\/sitemap\.xml/i);
@@ -98,9 +113,10 @@ test("publishes canonical localized URLs in the sitemap", async () => {
   assert.match(response.headers.get("content-type") ?? "", /(?:application|text)\/xml/i);
 
   const sitemap = await response.text();
-  assert.equal((sitemap.match(/<url>/gi) ?? []).length, 28);
+  assert.equal((sitemap.match(/<url>/gi) ?? []).length, 29);
   assert.match(sitemap, /<loc>https:\/\/www\.kreluna\.it\/<\/loc>/i);
   assert.match(sitemap, /<loc>https:\/\/www\.kreluna\.it\/en\/<\/loc>/i);
+  assert.match(sitemap, /<loc>https:\/\/www\.kreluna\.it\/velvet-table\/<\/loc>/i);
   assert.match(sitemap, /hreflang="it" href="https:\/\/www\.kreluna\.it\/"/i);
   assert.match(sitemap, /hreflang="en" href="https:\/\/www\.kreluna\.it\/en\/"/i);
   assert.match(sitemap, /hreflang="x-default" href="https:\/\/www\.kreluna\.it\/"/i);

@@ -50,7 +50,7 @@ const products = [
       "Un concept Kreluna per scegliere il locale partendo dal tipo di serata: intima, vivace, panoramica o rilassata. Poi si passa alla disponibilità e alla prenotazione.",
     color: "coral",
     status: "Concept in sviluppo",
-    href: "#velvet-table",
+    href: "/velvet-table/",
     features: ["Atmosfera desiderata", "Occasione e compagnia", "Prenotazione guidata"],
   },
 ] as const;
@@ -290,6 +290,9 @@ export default function Home() {
               <span>Panoramica</span>
               <span>Rilassata</span>
             </div>
+            <a className="button button-secondary velvet-cta" href="/velvet-table/">
+              Scopri il concept <ArrowIcon />
+            </a>
           </div>
           <ol className="velvet-journey" aria-label="Come funzionerebbe Velvet Table">
             <li><span>01</span><div><strong>Racconta la serata</strong><p>Atmosfera, occasione, compagnia e preferenze essenziali.</p></div></li>

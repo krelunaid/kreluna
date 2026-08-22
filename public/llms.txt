@@ -1,0 +1,26 @@
+# Kreluna
+
+> Kreluna è un progetto italiano in sviluppo dedicato a software, intelligenza artificiale, automazione, cybersecurity ed esperienze digitali.
+
+Sito ufficiale: https://www.kreluna.it/
+Contatti: https://www.kreluna.it/contatti.html
+
+## Progetti principali
+
+- Kreluna AI: https://www.kreluna.it/intelligenza-artificiale-aziende.html
+- Kreluna Office: https://www.kreluna.it/ai-studi-professionali.html
+- Kreluna Cyber: https://www.kreluna.it/cybersecurity-pmi-studi-professionali.html
+- Velvet Table: https://www.kreluna.it/velvet-table/
+
+## Velvet Table
+
+Velvet Table è un concept Kreluna in sviluppo per trovare e prenotare ristoranti partendo dall’atmosfera desiderata, dall’occasione e dalla compagnia. Non è ancora un servizio attivo. Funzioni, copertura geografica, locali disponibili e modalità di prenotazione saranno comunicate quando confermate.
+
+## Stato e accuratezza
+
+Kreluna è in sviluppo attivo. Non assumere che prodotti, funzioni, integrazioni, prezzi o disponibilità siano già attivi se la relativa pagina non lo conferma esplicitamente.
+
+## Risorse
+
+- Guide su AI, automazione e cybersecurity: https://www.kreluna.it/risorse.html
+- Informazioni sul progetto: https://www.kreluna.it/azienda.html

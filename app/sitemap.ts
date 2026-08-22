@@ -19,7 +19,7 @@ const pages: readonly LocalizedPage[] = [
   {
     it: "/",
     en: "/en/",
-    lastModifiedIt: "2026-08-14",
+    lastModifiedIt: "2026-08-23",
     lastModifiedEn: "2026-08-14",
     changeFrequency: "weekly",
     priority: 1,
@@ -109,7 +109,7 @@ function absoluteUrl(path: string): string {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return pages.flatMap((page) => {
+  const localizedPages = pages.flatMap((page) => {
     const languages = {
       it: absoluteUrl(page.it),
       en: absoluteUrl(page.en),
@@ -133,4 +133,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
       },
     ];
   });
+
+  return [
+    ...localizedPages,
+    {
+      url: `${SITE_URL}/velvet-table/`,
+      lastModified: "2026-08-23",
+      changeFrequency: "monthly",
+      priority: 0.8,
+      alternates: {
+        languages: {
+          it: `${SITE_URL}/velvet-table/`,
+          "x-default": `${SITE_URL}/velvet-table/`,
+        },
+      },
+    },
+  ];
 }
