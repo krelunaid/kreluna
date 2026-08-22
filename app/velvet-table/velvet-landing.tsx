@@ -39,7 +39,7 @@ export default function VelvetLanding({ locale }: { locale: VelvetLocale }) {
         <section className="velvet-faq section-shell" id="faq"><div className="velvet-section-heading"><div className="eyebrow velvet-text"><i /> {copy.faqKicker}</div><h2>{copy.faqTitle}</h2></div><div className="velvet-faq-list">{copy.faqs.map((faq) => <article key={faq.question}><h3>{faq.question}</h3><p>{faq.answer}</p></article>)}</div></section>
         <section className="velvet-closing section-shell"><div><div className="eyebrow velvet-text"><i /> Velvet Table by Kreluna</div><h2>{copy.closingTitle}</h2><p>{copy.closingBody}</p></div><a className="button velvet-page-button" href="mailto:krelunaid@gmail.com?subject=Velvet%20Table%20project">{copy.closingCta}</a></section>
       </main>
-      <footer className="velvet-page-footer"><Link href="/">Kreluna</Link><span>{copy.footer}</span><a href="https://www.kreluna.it/privacy.html">Privacy</a></footer>
+      <footer className="velvet-page-footer"><Link href="/">Kreluna</Link><span>{copy.footer}</span><a href="/privacy.html">Privacy</a></footer>
       <script id="velvet-table-structured-data" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
     </div>
   );

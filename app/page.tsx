@@ -3,6 +3,46 @@
 import { useEffect, useRef, useState } from "react";
 
 const assetBasePath = process.env.NEXT_PUBLIC_ARUBA_BASE_PATH ?? "";
+const homeSiteUrl = "https://www.kreluna.it";
+const homeStructuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${homeSiteUrl}/#organization`,
+      name: "Kreluna",
+      alternateName: "Kreluna Ecosystem",
+      url: `${homeSiteUrl}/`,
+      logo: { "@type": "ImageObject", url: `${homeSiteUrl}/kreluna-logo.png`, width: 128, height: 128 },
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${homeSiteUrl}/#website`,
+      url: `${homeSiteUrl}/`,
+      name: "Kreluna",
+      publisher: { "@id": `${homeSiteUrl}/#organization` },
+      inLanguage: ["it-IT", "en-GB"],
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${homeSiteUrl}/#webpage`,
+      url: `${homeSiteUrl}/`,
+      name: "Kreluna | AI, automazione e cybersecurity",
+      isPartOf: { "@id": `${homeSiteUrl}/#website` },
+      about: { "@id": `${homeSiteUrl}/#organization` },
+      inLanguage: "it-IT",
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${homeSiteUrl}/#faq`,
+      mainEntity: [{
+        "@type": "Question",
+        name: "Che cos’è Kreluna?",
+        acceptedAnswer: { "@type": "Answer", text: "Kreluna è un progetto italiano in sviluppo dedicato ad AI, automazione e cybersecurity." },
+      }],
+    },
+  ],
+};
 
 const products = [
   {
@@ -133,6 +173,7 @@ export default function Home() {
       id="top"
       style={{ "--sphere-image": `url('${assetBasePath}/kreluna-sphere.jpg')` } as React.CSSProperties}
     >
+      <script id="kreluna-structured-data" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(homeStructuredData) }} />
       <a className="skip-link" href="#main-content">Vai al contenuto</a>
       <header className="site-header">
         <Logo />

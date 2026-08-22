@@ -90,11 +90,12 @@ test("renders the dedicated Velvet Table concept page", async () => {
   assert.match(html, /src="\/velvet-table\/hero\.jpg"/i);
   assert.match(html, /src="\/velvet-table\/view-window\.jpg"/i);
   assert.match(html, /src="\/velvet-table\/garden-restaurant\.jpg"/i);
-  assert.match(html, /property="og:image" content="https:\/\/www\.kreluna\.it\/velvet-table\/og\.jpg"/i);
-  assert.match(html, /rel="canonical" href="https:\/\/www\.kreluna\.it\/velvet-table"/i);
+  assert.match(html, /property="og:image" content="https:\/\/kreluna-ecosistema\.andreagadducci\.chatgpt\.site\/velvet-table\/og\.jpg"/i);
+  assert.match(html, /rel="canonical" href="https:\/\/kreluna-ecosistema\.andreagadducci\.chatgpt\.site\/velvet-table"/i);
   assert.equal((html.match(/rel="canonical"/gi) ?? []).length, 1);
   assert.match(html, /"@type":"Service"/);
   assert.match(html, /"@type":"FAQPage"/);
+  assert.doesNotMatch(html, /www\.kreluna\.it/i);
   assert.doesNotMatch(html, /LikeCash|KRL Beta/i);
   assert.equal((html.match(/<h1\b/gi) ?? []).length, 1);
 });
@@ -132,7 +133,7 @@ test("publishes a crawlable robots policy", async () => {
   assert.match(robots, /User-Agent: GPTBot[\s\S]*Disallow: \//i);
   assert.match(robots, /User-Agent: \*/i);
   assert.match(robots, /Allow: \//i);
-  assert.match(robots, /Sitemap: https:\/\/www\.kreluna\.it\/sitemap\.xml/i);
+  assert.match(robots, /Sitemap: https:\/\/kreluna-ecosistema\.andreagadducci\.chatgpt\.site\/sitemap\.xml/i);
 });
 
 test("publishes canonical localized URLs in the sitemap", async () => {
@@ -144,15 +145,15 @@ test("publishes canonical localized URLs in the sitemap", async () => {
   assert.equal((sitemap.match(/<url>/gi) ?? []).length, 33);
   assert.match(sitemap, /<loc>https:\/\/www\.kreluna\.it\/<\/loc>/i);
   assert.match(sitemap, /<loc>https:\/\/www\.kreluna\.it\/en\/<\/loc>/i);
-  assert.match(sitemap, /<loc>https:\/\/www\.kreluna\.it\/velvet-table<\/loc>/i);
-  assert.match(sitemap, /<loc>https:\/\/www\.kreluna\.it\/fr\/velvet-table<\/loc>/i);
-  assert.match(sitemap, /hreflang="de" href="https:\/\/www\.kreluna\.it\/de\/velvet-table"/i);
+  assert.match(sitemap, /<loc>https:\/\/kreluna-ecosistema\.andreagadducci\.chatgpt\.site\/velvet-table<\/loc>/i);
+  assert.match(sitemap, /<loc>https:\/\/kreluna-ecosistema\.andreagadducci\.chatgpt\.site\/fr\/velvet-table<\/loc>/i);
+  assert.match(sitemap, /hreflang="de" href="https:\/\/kreluna-ecosistema\.andreagadducci\.chatgpt\.site\/de\/velvet-table"/i);
   assert.match(sitemap, /hreflang="it" href="https:\/\/www\.kreluna\.it\/"/i);
   assert.match(sitemap, /hreflang="en" href="https:\/\/www\.kreluna\.it\/en\/"/i);
   assert.match(sitemap, /hreflang="x-default" href="https:\/\/www\.kreluna\.it\/"/i);
   assert.doesNotMatch(sitemap, /kreluna-ai/i);
   assert.doesNotMatch(sitemap, /privacy|termini|cookie/i);
-  assert.doesNotMatch(sitemap, /andreagadducci\.chatgpt\.site|<loc>[^<]*#/i);
+  assert.doesNotMatch(sitemap, /<loc>[^<]*#/i);
 });
 
 test("ships lightweight, production-ready discovery assets", async () => {
