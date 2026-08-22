@@ -42,15 +42,16 @@ const products = [
     features: ["Security assessment", "Vulnerability management", "Compliance tecnica"],
   },
   {
-    slug: "velvet-tablet",
-    name: "Velvet Tablet",
-    eyebrow: "",
-    tagline: "",
-    description: "",
+    slug: "velvet-table",
+    name: "Velvet Table",
+    eyebrow: "Dining experience",
+    tagline: "Prenota l’atmosfera, non solo il tavolo.",
+    description:
+      "Un concept Kreluna per scegliere il locale partendo dal tipo di serata: intima, vivace, panoramica o rilassata. Poi si passa alla disponibilità e alla prenotazione.",
     color: "coral",
-    status: "",
-    href: "#velvet-tablet",
-    features: [],
+    status: "Concept in sviluppo",
+    href: "#velvet-table",
+    features: ["Atmosfera desiderata", "Occasione e compagnia", "Prenotazione guidata"],
   },
 ] as const;
 
@@ -138,7 +139,7 @@ export default function Home() {
         <nav className="desktop-nav" aria-label="Navigazione principale">
           <a href="#products">Prodotti</a>
           <a href="#vision">Visione</a>
-          <a href="#velvet-tablet">Velvet Tablet</a>
+          <a href="#velvet-table">Velvet Table</a>
           <a href="https://www.kreluna.it/azienda.html">Azienda</a>
         </nav>
         <div className="nav-actions">
@@ -168,7 +169,7 @@ export default function Home() {
           >×</button>
           <a href="#products" onClick={() => setMenuOpen(false)}>Prodotti</a>
           <a href="#vision" onClick={() => setMenuOpen(false)}>Visione</a>
-          <a href="#velvet-tablet" onClick={() => setMenuOpen(false)}>Velvet Tablet</a>
+          <a href="#velvet-table" onClick={() => setMenuOpen(false)}>Velvet Table</a>
           <a href="https://www.kreluna.it/azienda.html">Azienda</a>
           <a href="https://www.kreluna.it/contatti.html">Contatti</a>
         </div>
@@ -226,19 +227,17 @@ export default function Home() {
           </div>
           <p>
             Dall’intelligenza artificiale al lavoro professionale, dalla sicurezza
-            fino a Velvet Tablet. Questo spazio è pensato per crescere insieme a Kreluna.
+            fino a Velvet Table. Questo spazio è pensato per crescere insieme a Kreluna.
           </p>
         </div>
 
         <div className="product-grid">
           {products.map((product, index) => (
             <article id={product.slug} className={`product-card ${product.color} reveal`} key={product.slug} style={{ "--delay": `${index * 90}ms` } as React.CSSProperties}>
-              {product.slug !== "velvet-tablet" && (
-                <div className="card-topline">
-                  <span>{product.eyebrow}</span>
-                  <span className="status"><i /> {product.status}</span>
-                </div>
-              )}
+              <div className="card-topline">
+                <span>{product.eyebrow}</span>
+                <span className="status"><i /> {product.status}</span>
+              </div>
               <div className="product-visual" aria-hidden="true">
                 <div className="mini-grid" />
                 <div className="product-orbit" />
@@ -246,27 +245,17 @@ export default function Home() {
                 <span>{String(index + 1).padStart(2, "0")}</span>
               </div>
               <div className="card-copy">
-                {product.slug !== "velvet-tablet" && (
-                  <p className="signature">
-                    Kreluna ecosystem
-                  </p>
-                )}
+                <p className="signature">Kreluna ecosystem</p>
                 <h3>{product.name}</h3>
-                {product.slug !== "velvet-tablet" && (
-                  <>
-                    <h4>{product.tagline}</h4>
-                    <p>{product.description}</p>
-                    <div className="feature-list">
-                      {product.features.map((feature) => <span key={feature}>{feature}</span>)}
-                    </div>
-                  </>
-                )}
+                <h4>{product.tagline}</h4>
+                <p>{product.description}</p>
+                <div className="feature-list">
+                  {product.features.map((feature) => <span key={feature}>{feature}</span>)}
+                </div>
               </div>
-              {product.slug !== "velvet-tablet" && (
-                <a href={product.href} className="card-link" aria-label={`Scopri ${product.name}`}>
-                  Scopri {product.name} <ArrowIcon />
-                </a>
-              )}
+              <a href={product.href} className="card-link" aria-label={`Scopri ${product.name}`}>
+                Scopri {product.name} <ArrowIcon />
+              </a>
             </article>
           ))}
         </div>
@@ -278,6 +267,35 @@ export default function Home() {
             <h3>Lo spazio è già pronto.</h3>
             <p>Nome, identità e racconto: quando nasce una nuova idea Kreluna, il sito cresce senza ricominciare da zero.</p>
           </div>
+        </div>
+      </section>
+
+      <section className="velvet-table section-shell" id="velvet-table">
+        <div className="velvet-panel reveal">
+          <div className="velvet-copy">
+            <div className="eyebrow velvet-text"><i /> Velvet Table · concept in sviluppo</div>
+            <h2>Prima scegli l’atmosfera.<br /><em>Poi il tavolo.</em></h2>
+            <p>
+              Velvet Table nasce per trasformare la prenotazione in una scelta di esperienza.
+              L’idea è descrivere come vuoi vivere la serata — intima, vivace, elegante,
+              panoramica o rilassata — e trovare locali coerenti con quel momento.
+            </p>
+            <p>
+              Cucina, zona, budget, orario e disponibilità restano importanti, ma arrivano
+              dentro un contesto più umano: con chi sei, che occasione è e quale atmosfera cerchi.
+            </p>
+            <div className="velvet-moods" aria-label="Esempi di atmosfera">
+              <span>Intima</span>
+              <span>Vivace</span>
+              <span>Panoramica</span>
+              <span>Rilassata</span>
+            </div>
+          </div>
+          <ol className="velvet-journey" aria-label="Come funzionerebbe Velvet Table">
+            <li><span>01</span><div><strong>Racconta la serata</strong><p>Atmosfera, occasione, compagnia e preferenze essenziali.</p></div></li>
+            <li><span>02</span><div><strong>Scopri i locali in sintonia</strong><p>Una selezione breve, con il motivo per cui ogni proposta è adatta.</p></div></li>
+            <li><span>03</span><div><strong>Passa alla prenotazione</strong><p>Disponibilità e conferma del tavolo dopo aver scelto l’esperienza.</p></div></li>
+          </ol>
         </div>
       </section>
 
