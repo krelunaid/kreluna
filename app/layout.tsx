@@ -16,6 +16,14 @@ export const metadata: Metadata = {
   creator: "Kreluna",
   publisher: "Kreluna",
   category: "technology",
+  alternates: {
+    canonical: `${siteUrl}/`,
+    languages: {
+      it: `${siteUrl}/`,
+      en: `${siteUrl}/en/`,
+      "x-default": `${siteUrl}/`,
+    },
+  },
   robots: isArubaPreview
     ? { index: false, follow: false }
     : {
@@ -44,6 +52,7 @@ export const metadata: Metadata = {
     locale: "it_IT",
     alternateLocale: ["en_GB"],
     type: "website",
+    url: `${siteUrl}/`,
     images: [
       {
         url: `${assetBasePath}/og-kreluna.jpg`,
@@ -161,11 +170,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="it-IT" suppressHydrationWarning>
       <head>
-        <link rel="canonical" href={isArubaPreview ? `${assetBasePath}/` : `${siteUrl}/`} />
-        <link rel="alternate" hrefLang="it" href={`${siteUrl}/`} />
-        <link rel="alternate" hrefLang="en" href={`${siteUrl}/en/`} />
-        <link rel="alternate" hrefLang="x-default" href={`${siteUrl}/`} />
-        <meta property="og:url" content={isArubaPreview ? `${assetBasePath}/` : `${siteUrl}/`} />
         <link rel="preload" href={`${assetBasePath}/fonts/inter-latin.woff2`} as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href={`${assetBasePath}/fonts/space-grotesk-latin.woff2`} as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href={`${assetBasePath}/fonts/newsreader-500-italic.woff2`} as="font" type="font/woff2" crossOrigin="anonymous" />

@@ -31,10 +31,10 @@ test("renders the Kreluna ecosystem homepage", async () => {
   assert.match(html, /Prima scegli l’atmosfera/i);
   assert.doesNotMatch(html, /LikeCash/i);
   assert.doesNotMatch(html, /Kreluna Token|KRL Beta|Vendita disattivata/i);
-  assert.match(html, /rel="canonical" href="https:\/\/www\.kreluna\.it\/"/i);
-  assert.match(html, /hreflang="it" href="https:\/\/www\.kreluna\.it\/"/i);
+  assert.match(html, /rel="canonical" href="https:\/\/www\.kreluna\.it"/i);
+  assert.match(html, /hreflang="it" href="https:\/\/www\.kreluna\.it"/i);
   assert.match(html, /hreflang="en" href="https:\/\/www\.kreluna\.it\/en\/"/i);
-  assert.match(html, /hreflang="x-default" href="https:\/\/www\.kreluna\.it\/"/i);
+  assert.match(html, /hreflang="x-default" href="https:\/\/www\.kreluna\.it"/i);
   assert.match(html, /name="robots" content="index, follow"/i);
   assert.match(html, /property="og:image" content="https:\/\/www\.kreluna\.it\/og-kreluna\.jpg"/i);
   assert.doesNotMatch(html, /fonts\.googleapis\.com|fonts\.gstatic\.com/i);
@@ -88,6 +88,7 @@ test("renders the dedicated Velvet Table concept page", async () => {
   assert.match(html, /Prenota l’atmosfera/i);
   assert.match(html, /Velvet Table non è ancora un servizio attivo/i);
   assert.match(html, /rel="canonical" href="https:\/\/www\.kreluna\.it\/velvet-table"/i);
+  assert.equal((html.match(/rel="canonical"/gi) ?? []).length, 1);
   assert.match(html, /"@type":"Service"/);
   assert.match(html, /"@type":"FAQPage"/);
   assert.doesNotMatch(html, /LikeCash|KRL Beta/i);
