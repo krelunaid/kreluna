@@ -283,7 +283,10 @@ footer { border-top: 1px solid var(--line); padding: 64px max(5vw, 24px) 30px; }
 .velvet-page-header nav { display: flex; gap: 28px; }
 .velvet-page-header nav a { color: var(--muted); font-size: .82rem; transition: color .2s ease; }
 .velvet-page-header nav a:hover { color: var(--vt-champagne); }
-.velvet-page-header > .button { justify-self: end; }
+.velvet-header-actions { justify-self: end; display: flex; align-items: center; gap: 22px; }
+.velvet-page-header .velvet-language-nav { gap: 5px; padding: 4px; border: 1px solid rgba(215,177,109,.16); border-radius: 999px; }
+.velvet-page-header .velvet-language-nav a { min-width: 28px; padding: 6px 7px; border-radius: 999px; text-align: center; color: #9f9188; font: 600 .62rem var(--mono); letter-spacing: .04em; }
+.velvet-page-header .velvet-language-nav a[aria-current="page"] { background: var(--vt-champagne); color: var(--vt-ink); }
 .velvet-page-button { border-color: rgba(215,177,109,.22); background: linear-gradient(135deg,#e6c899,#b98d48); color: #160f0b; box-shadow: 0 12px 36px rgba(215,177,109,.14); }
 .velvet-page-button:hover { box-shadow: 0 16px 45px rgba(215,177,109,.26); }
 .velvet-page-hero { position: relative; min-height: 100svh; max-width: 1600px; margin: 0 auto; padding-top: 170px; padding-bottom: 100px; display: grid; grid-template-columns: 1.04fr .96fr; align-items: center; gap: clamp(45px,7vw,110px); }
@@ -359,7 +362,7 @@ footer { border-top: 1px solid var(--line); padding: 64px max(5vw, 24px) 30px; }
   .footer-main { grid-template-columns: 2fr 1fr 1fr; }
   .footer-main .footer-column:last-child { display: none; }
   .velvet-page-header { grid-template-columns: 1fr auto; }
-  .velvet-page-header nav { display: none; }
+  .velvet-page-header .velvet-section-nav { display: none; }
   .velvet-page-hero { grid-template-columns: 1fr; padding-top: 150px; }
   .velvet-app-hero { width: min(80vw,560px); }
   .velvet-definition-grid { grid-template-columns: 1fr; }
@@ -408,7 +411,9 @@ footer { border-top: 1px solid var(--line); padding: 64px max(5vw, 24px) 30px; }
   .cookie-banner { align-items: stretch; flex-direction: column; gap: 13px; }
   .cookie-banner > div, .cookie-banner button { flex: 1; }
   .velvet-page-header { height: 72px; }
-  .velvet-page-header > .button { display: none; }
+  .velvet-header-actions > .button { display: none; }
+  .velvet-page-header .velvet-language-nav { display: flex; gap: 2px; }
+  .velvet-page-header .velvet-language-nav a { min-width: 24px; padding: 5px; font-size: .56rem; }
   .velvet-page-hero { padding-top: 125px; padding-bottom: 80px; }
   .velvet-page-hero h1 { font-size: clamp(3rem,14vw,4.5rem); }
   .velvet-app-hero { width: 92vw; margin-top: 20px; border-radius: 160px 160px 20px 20px; }

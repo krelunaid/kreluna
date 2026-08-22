@@ -10,7 +10,11 @@ Contatti: https://www.kreluna.it/contatti.html
 - Kreluna AI: https://www.kreluna.it/intelligenza-artificiale-aziende.html
 - Kreluna Office: https://www.kreluna.it/ai-studi-professionali.html
 - Kreluna Cyber: https://www.kreluna.it/cybersecurity-pmi-studi-professionali.html
-- Velvet Table: https://www.kreluna.it/velvet-table
+- Velvet Table (Italiano): https://www.kreluna.it/velvet-table
+- Velvet Table (English): https://www.kreluna.it/en/velvet-table
+- Velvet Table (Français): https://www.kreluna.it/fr/velvet-table
+- Velvet Table (Español): https://www.kreluna.it/es/velvet-table
+- Velvet Table (Deutsch): https://www.kreluna.it/de/velvet-table
 
 ## Velvet Table
 

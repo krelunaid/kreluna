@@ -108,6 +108,15 @@ function absoluteUrl(path: string): string {
   return new URL(path, SITE_URL).toString();
 }
 
+const velvetLanguages = {
+  it: `${SITE_URL}/velvet-table`,
+  en: `${SITE_URL}/en/velvet-table`,
+  fr: `${SITE_URL}/fr/velvet-table`,
+  es: `${SITE_URL}/es/velvet-table`,
+  de: `${SITE_URL}/de/velvet-table`,
+  "x-default": `${SITE_URL}/velvet-table`,
+};
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const localizedPages = pages.flatMap((page) => {
     const languages = {
@@ -136,8 +145,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     ...localizedPages,
-    {
-      url: `${SITE_URL}/velvet-table`,
+    ...Object.entries(velvetLanguages)
+      .filter(([language]) => language !== "x-default")
+      .map(([, url]) => ({
+      url,
       lastModified: "2026-08-23",
       changeFrequency: "monthly",
       priority: 0.8,
@@ -147,12 +158,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         `${SITE_URL}/velvet-table/view-window.jpg`,
         `${SITE_URL}/velvet-table/garden-restaurant.jpg`,
       ],
-      alternates: {
-        languages: {
-          it: `${SITE_URL}/velvet-table`,
-          "x-default": `${SITE_URL}/velvet-table`,
-        },
-      },
-    },
+      alternates: { languages: velvetLanguages },
+    })),
   ];
 }
