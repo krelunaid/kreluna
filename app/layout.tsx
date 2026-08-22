@@ -159,7 +159,7 @@ const structuredData = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="it-IT">
+    <html lang="it-IT" suppressHydrationWarning>
       <head>
         <link rel="canonical" href={isArubaPreview ? `${assetBasePath}/` : `${siteUrl}/`} />
         <link rel="alternate" hrefLang="it" href={`${siteUrl}/`} />

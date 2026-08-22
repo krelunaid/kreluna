@@ -20,7 +20,7 @@ test("renders the Kreluna ecosystem homepage", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<html lang="it-IT">/i);
+  assert.match(html, /<html lang="it-IT"/i);
   assert.match(html, /Kreluna \| AI, automazione e cybersecurity/);
   assert.match(html, /Kreluna AI/);
   assert.match(html, /Kreluna Office/);
