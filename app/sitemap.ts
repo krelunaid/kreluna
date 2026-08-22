@@ -8,7 +8,7 @@ type ChangeFrequency = NonNullable<
 
 type LocalizedPage = {
   it: string;
-  en?: string;
+  en: string;
   lastModifiedIt?: string;
   lastModifiedEn?: string;
   changeFrequency: ChangeFrequency;
@@ -23,12 +23,6 @@ const pages: readonly LocalizedPage[] = [
     lastModifiedEn: "2026-08-14",
     changeFrequency: "weekly",
     priority: 1,
-  },
-  {
-    it: "/store/",
-    lastModifiedIt: "2026-08-14",
-    changeFrequency: "weekly",
-    priority: 0.9,
   },
   {
     it: "/intelligenza-artificiale-aziende.html",
@@ -116,22 +110,6 @@ function absoluteUrl(path: string): string {
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return pages.flatMap((page) => {
-    if (!page.en) {
-      const url = absoluteUrl(page.it);
-      return [{
-        url,
-        lastModified: page.lastModifiedIt ?? "2026-08-14",
-        changeFrequency: page.changeFrequency,
-        priority: page.priority,
-        alternates: {
-          languages: {
-            it: url,
-            "x-default": url,
-          },
-        },
-      }];
-    }
-
     const languages = {
       it: absoluteUrl(page.it),
       en: absoluteUrl(page.en),

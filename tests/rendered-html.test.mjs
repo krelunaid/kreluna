@@ -28,16 +28,15 @@ test("renders the Kreluna ecosystem homepage", async () => {
   assert.match(html, /LikeCash/);
   assert.match(html, /Kreluna Token/);
   assert.match(html, /Vendita disattivata/);
-  assert.match(html, /rel="canonical" href="https:\/\/www\.kreluna\.it\/?"/i);
-  assert.match(html, /hreflang="it" href="https:\/\/www\.kreluna\.it\/?"/i);
+  assert.match(html, /rel="canonical" href="https:\/\/www\.kreluna\.it\/"/i);
+  assert.match(html, /hreflang="it" href="https:\/\/www\.kreluna\.it\/"/i);
   assert.match(html, /hreflang="en" href="https:\/\/www\.kreluna\.it\/en\/"/i);
-  assert.match(html, /hreflang="x-default" href="https:\/\/www\.kreluna\.it\/?"/i);
+  assert.match(html, /hreflang="x-default" href="https:\/\/www\.kreluna\.it\/"/i);
   assert.match(html, /name="robots" content="index, follow"/i);
   assert.match(html, /property="og:image" content="https:\/\/www\.kreluna\.it\/og-kreluna\.jpg"/i);
   assert.doesNotMatch(html, /fonts\.googleapis\.com|fonts\.gstatic\.com/i);
   assert.match(html, /rel="preload" href="\/fonts\/space-grotesk-latin\.woff2" as="font"/i);
-  assert.match(html, /<script id="kreluna-site-structured-data" type="application\/ld\+json">/i);
-  assert.match(html, /<script id="kreluna-home-structured-data" type="application\/ld\+json">/i);
+  assert.match(html, /<script id="kreluna-structured-data" type="application\/ld\+json">/i);
   assert.match(html, /"@type":"Organization"/);
   assert.match(html, /"@type":"WebSite"/);
   assert.match(html, /"@type":"WebPage"/);
@@ -47,13 +46,19 @@ test("renders the Kreluna ecosystem homepage", async () => {
   assert.match(html, /href="https:\/\/www\.kreluna\.it\/intelligenza-artificiale-aziende\.html"/i);
   assert.match(html, /href="https:\/\/www\.kreluna\.it\/ai-studi-professionali\.html"/i);
   assert.match(html, /href="https:\/\/cra24\.kreluna\.it\/"/i);
-  assert.match(html, /href="\/store\/"/i);
-  assert.doesNotMatch(html, /kreluna-store\.andreagadducci\.chatgpt\.site/i);
+  assert.match(
+    html,
+    /href="https:\/\/kreluna-store\.andreagadducci\.chatgpt\.site"/i,
+  );
   assert.match(html, /Un ecosistema\./i);
   assert.match(html, /Tutto quello che ti serve\./i);
-  assert.match(html, /Scopri la visione\. Poi apri il catalogo\./i);
-  assert.match(html, /Presentazione sul sito Kreluna/i);
-  assert.match(html, /Catalogo chiaro separato/i);
+  assert.match(html, /Trova il software giusto per te\./i);
+  assert.match(html, /Kreluna Focus/i);
+  assert.match(html, /Kreluna CRM/i);
+  assert.match(html, /Magazzino Pro/i);
+  assert.match(html, /Kora AI/i);
+  assert.match(html, /Catalogo dimostrativo/i);
+  assert.match(html, /Schede trasparenti/i);
   assert.match(html, /In sviluppo/i);
   assert.match(html, /Controllo umano/i);
   assert.doesNotMatch(html, /1M\+|500\+|Rimborsi garantiti|Sicuro e verificato/i);
@@ -64,20 +69,14 @@ test("renders the Kreluna ecosystem homepage", async () => {
   assert.equal((html.match(/<meta name="description"/gi) ?? []).length, 1);
   assert.equal((html.match(/<h1\b/gi) ?? []).length, 1);
 
-  const jsonLdMatches = [...html.matchAll(
-    /<script id="kreluna-(?:site|home)-structured-data" type="application\/ld\+json">([^<]+)<\/script>/gi,
-  )];
-  assert.equal(jsonLdMatches.length, 2);
-  const jsonLdGraphs = jsonLdMatches.flatMap((match) => JSON.parse(match[1])["@graph"]);
-  const graphTypes = jsonLdGraphs.map((entry) => entry["@type"]);
-  assert.deepEqual(
-    graphTypes.toSorted(),
-    ["Organization", "WebSite", "WebPage", "FAQPage"].toSorted(),
+  const jsonLdMatch = html.match(
+    /<script id="kreluna-structured-data" type="application\/ld\+json">([^<]+)<\/script>/i,
   );
-  assert.equal(
-    jsonLdGraphs.find((entry) => entry["@type"] === "Organization")["@id"],
-    "https://www.kreluna.it/#organization",
-  );
+  assert.ok(jsonLdMatch);
+  const jsonLd = JSON.parse(jsonLdMatch[1]);
+  const graphTypes = jsonLd["@graph"].map((entry) => entry["@type"]);
+  assert.deepEqual(graphTypes, ["Organization", "WebSite", "WebPage", "FAQPage"]);
+  assert.equal(jsonLd["@graph"][0]["@id"], "https://www.kreluna.it/#organization");
 
   const ids = new Set(
     [...html.matchAll(/\sid="([^"]+)"/gi)].map((match) => match[1]),
@@ -87,38 +86,6 @@ test("renders the Kreluna ecosystem homepage", async () => {
   );
   for (const fragment of localFragments) assert.ok(ids.has(fragment), `Missing #${fragment}`);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape|react-loading-skeleton/i);
-});
-
-test("renders the dark Store presentation and opens the separate light catalog", async () => {
-  const response = await render("/store");
-  assert.equal(response.status, 200);
-  assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
-
-  const html = await response.text();
-  const catalogUrl = "https://kreluna-store.andreagadducci.chatgpt.site/store";
-  assert.match(html, /Kreluna Store — Presentazione \| Kreluna/i);
-  assert.match(html, /rel="canonical" href="https:\/\/www\.kreluna\.it\/store\/"/i);
-  assert.match(html, /property="og:image" content="https:\/\/www\.kreluna\.it\/store-og\.jpg"/i);
-  assert.match(html, /Kreluna Store · Presentazione/i);
-  assert.match(html, /Software e strumenti\./i);
-  assert.match(html, /Più semplici da scoprire\./i);
-  assert.match(html, /Questa è la presentazione dark di Kreluna Store/i);
-  assert.match(html, /Presentazione qui\.[\s\S]*Catalogo nello Store\./i);
-  assert.match(html, /Due spazi\.[\s\S]*Una scelta chiara\./i);
-  assert.match(html, /interfaccia chiara/i);
-  assert.match(html, new RegExp(`href="${catalogUrl.replaceAll(".", "\\.")}"`, "i"));
-  assert.match(html, /target="_blank" rel="noreferrer"/i);
-  assert.equal((html.match(/<h1\b/gi) ?? []).length, 1);
-  assert.equal((html.match(/rel="canonical"/gi) ?? []).length, 1);
-  assert.doesNotMatch(html, /Cerca app|Kreluna Focus|Kreluna CRM|Magazzino Pro|Kora AI/i);
-
-  const jsonLdMatch = html.match(
-    /<script id="kreluna-store-structured-data" type="application\/ld\+json">([^<]+)<\/script>/i,
-  );
-  assert.ok(jsonLdMatch);
-  const jsonLd = JSON.parse(jsonLdMatch[1]);
-  assert.deepEqual(jsonLd["@graph"].map((entry) => entry["@type"]), ["WebPage", "BreadcrumbList"]);
-  assert.equal(jsonLd["@graph"][0].url, "https://www.kreluna.it/store/");
 });
 
 test("renders the safe KRL Beta route", async () => {
@@ -154,10 +121,9 @@ test("publishes canonical localized URLs in the sitemap", async () => {
   assert.match(response.headers.get("content-type") ?? "", /(?:application|text)\/xml/i);
 
   const sitemap = await response.text();
-  assert.equal((sitemap.match(/<url>/gi) ?? []).length, 29);
+  assert.equal((sitemap.match(/<url>/gi) ?? []).length, 28);
   assert.match(sitemap, /<loc>https:\/\/www\.kreluna\.it\/<\/loc>/i);
   assert.match(sitemap, /<loc>https:\/\/www\.kreluna\.it\/en\/<\/loc>/i);
-  assert.match(sitemap, /<loc>https:\/\/www\.kreluna\.it\/store\/<\/loc>/i);
   assert.match(sitemap, /hreflang="it" href="https:\/\/www\.kreluna\.it\/"/i);
   assert.match(sitemap, /hreflang="en" href="https:\/\/www\.kreluna\.it\/en\/"/i);
   assert.match(sitemap, /hreflang="x-default" href="https:\/\/www\.kreluna\.it\/"/i);
@@ -175,6 +141,4 @@ test("ships lightweight, production-ready discovery assets", async () => {
 
   const socialImage = await stat("public/og-kreluna.jpg");
   assert.ok(socialImage.size < 250_000, `Social image is ${socialImage.size} bytes`);
-  const storeSocialImage = await stat("public/store-og.jpg");
-  assert.ok(storeSocialImage.size < 250_000, `Store social image is ${storeSocialImage.size} bytes`);
 });

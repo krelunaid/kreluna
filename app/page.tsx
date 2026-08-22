@@ -3,7 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 
 const assetBasePath = process.env.NEXT_PUBLIC_ARUBA_BASE_PATH ?? "";
-const storePresentationUrl = `${assetBasePath}/store/`;
+const storeUrl =
+  process.env.NEXT_PUBLIC_KRELUNA_STORE_URL ??
+  "https://kreluna-store.andreagadducci.chatgpt.site";
 
 const products = [
   {
@@ -74,61 +76,6 @@ const principles = [
   ["03", "Crescita naturale", "Un nuovo progetto si aggiunge all'ecosistema senza dover ripensare ogni volta l'intero sito."],
 ];
 
-const homeStructuredData = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebPage",
-      "@id": "https://www.kreluna.it/#webpage",
-      url: "https://www.kreluna.it/",
-      name: "Kreluna | AI, automazione e cybersecurity",
-      description:
-        "Kreluna progetta AI, automazione dei processi e cybersecurity intorno al lavoro reale, con controllo umano, dati protetti e limiti dichiarati.",
-      isPartOf: { "@id": "https://www.kreluna.it/#website" },
-      about: { "@id": "https://www.kreluna.it/#organization" },
-      inLanguage: "it-IT",
-    },
-    {
-      "@type": "FAQPage",
-      "@id": "https://www.kreluna.it/#faq",
-      mainEntity: [
-        {
-          "@type": "Question",
-          name: "Che cos’è Kreluna?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Kreluna è un progetto italiano in sviluppo dedicato ad AI, automazione e cybersecurity. I dati societari e fiscali saranno pubblicati quando disponibili.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "I prodotti Kreluna sono già acquistabili?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Non viene dichiarata una disponibilità generale. Accesso, funzioni, integrazioni e condizioni vengono confermati per ogni richiesta.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Kreluna sostituisce software o professionisti?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "No in modo automatico. Il ruolo proposto è preparare e collegare il lavoro mantenendo sistemi ufficiali, responsabilità e approvazioni sotto controllo umano.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Posso inviare documenti per una valutazione?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Nel primo contatto no. È sufficiente descrivere il contesto senza allegare dati personali, credenziali o documenti riservati.",
-          },
-        },
-      ],
-    },
-  ],
-};
-
 const ecosystemQuickCards = [
   {
     name: "Kreluna AI",
@@ -163,8 +110,74 @@ const ecosystemQuickCards = [
     description: "Concept di app e strumenti organizzati per bisogno.",
     symbol: "▢",
     tone: "rose",
-    href: storePresentationUrl,
+    href: storeUrl,
   },
+] as const;
+
+const storePreviewApps = [
+  {
+    name: "LikeCash",
+    category: "Denaro e risparmio",
+    description: "Entrate, spese e obiettivi in uno spazio leggibile.",
+    symbol: "€",
+    tone: "mint",
+    platforms: ["Web", "iPhone", "Android"],
+  },
+  {
+    name: "Kreluna Focus",
+    category: "Tempo e organizzazione",
+    description: "Priorità, routine e tempo protetto senza rumore.",
+    symbol: "F",
+    tone: "violet",
+    platforms: ["Web", "iPhone", "Mac"],
+  },
+  {
+    name: "Kreluna CRM",
+    category: "Clienti e vendite",
+    description: "Relazioni e prossime azioni in una vista ordinata.",
+    symbol: "C",
+    tone: "gold",
+    platforms: ["Web", "Windows", "Mac"],
+  },
+  {
+    name: "Magazzino Pro",
+    category: "Scorte e prodotti",
+    description: "Movimenti e livelli di scorta presentati con chiarezza.",
+    symbol: "M",
+    tone: "blue",
+    platforms: ["Web", "Windows", "Android"],
+  },
+  {
+    name: "Kora AI",
+    category: "Assistente personale",
+    description: "Ricerca, scrittura e sintesi con contesto controllabile.",
+    symbol: "✦",
+    tone: "cyan",
+    platforms: ["Web", "Mac", "iPhone"],
+  },
+] as const;
+
+const storeFilterChips = [
+  "Tutto",
+  "Per te",
+  "Aziende",
+  "AI & Agenti",
+  "Giochi",
+  "iPhone",
+  "Android",
+  "Windows",
+  "Mac",
+  "Web",
+  "Gratis",
+  "Premium",
+] as const;
+
+const storeTrustItems = [
+  ["◇", "Catalogo dimostrativo", "I concept sono presentati come tali.", "violet"],
+  ["≡", "Schede trasparenti", "Stato e formula sono sempre dichiarati.", "green"],
+  ["…", "In sviluppo", "La disponibilità non viene anticipata.", "orange"],
+  ["◎", "Controllo umano", "Le decisioni importanti restano alle persone.", "blue"],
+  ["i", "Informazioni essenziali", "Nessun prezzo o risultato promesso.", "rose"],
 ] as const;
 
 function ArrowIcon() {
@@ -201,7 +214,7 @@ function EcosystemShowcase() {
             semplificare attività quotidiane e far crescere il lavoro.
           </p>
           <div className="ecosystem-showcase-actions">
-            <a className="ecosystem-primary-action" href={storePresentationUrl}>Scopri Kreluna Store <span aria-hidden="true">→</span></a>
+            <a className="ecosystem-primary-action" href={storeUrl}>Scopri Kreluna Store <span aria-hidden="true">→</span></a>
             <a className="ecosystem-secondary-action" href="#products">Esplora l’ecosistema <span aria-hidden="true">▶</span></a>
           </div>
         </div>
@@ -215,11 +228,11 @@ function EcosystemShowcase() {
           </div>
         </div>
 
-        <a className="ecosystem-store-feature" href={storePresentationUrl} aria-label="Scopri la presentazione di Kreluna Store">
+        <a className="ecosystem-store-feature" href={storeUrl} aria-label="Entra in Kreluna Store">
           <span className="ecosystem-store-feature-copy">
             <strong>Kreluna Store</strong>
-            <span>Scopri la visione dello Store e raggiungi il catalogo completo.</span>
-            <b>Apri la presentazione <span aria-hidden="true">→</span></b>
+            <span>App, software e strumenti organizzati per te e per la tua azienda.</span>
+            <b>Entra nello Store <span aria-hidden="true">→</span></b>
           </span>
           <StoreBagMark />
         </a>
@@ -234,32 +247,59 @@ function EcosystemShowcase() {
             <b>Scopri di più <span aria-hidden="true">→</span></b>
           </a>
         ))}
-        <aside className="ecosystem-status-cell" aria-label="Percorso verso Kreluna Store">
-          <strong>Due spazi distinti</strong>
-          <span><i aria-hidden="true" /> Presentazione sul sito Kreluna</span>
-          <span><i aria-hidden="true" /> Catalogo chiaro separato</span>
-          <span><i aria-hidden="true" /> Passaggio sempre esplicito</span>
-          <span><i aria-hidden="true" /> Un unico percorso</span>
+        <aside className="ecosystem-status-cell" aria-label="Stato del catalogo Kreluna Store">
+          <strong>Stato del catalogo</strong>
+          <span><i aria-hidden="true" /> Concept dimostrativi</span>
+          <span><i aria-hidden="true" /> Disponibilità dichiarata</span>
+          <span><i aria-hidden="true" /> Nessuna promessa commerciale</span>
+          <span><i aria-hidden="true" /> Controllo umano</span>
         </aside>
       </div>
 
-      <div className="ecosystem-presentation-bridge">
-        <div>
-          <p className="ecosystem-kicker">Kreluna Store · Presentazione</p>
-          <h3>Scopri la visione. Poi apri il catalogo.</h3>
+      <div className="ecosystem-store-preview">
+        <div className="ecosystem-store-intro">
+          <p className="ecosystem-kicker">Kreluna Store</p>
+          <h3>Trova il software giusto per te.</h3>
           <p>
-            La presentazione dark vive nel sito Kreluna. Il catalogo completo,
-            con la sua interfaccia chiara, resta in uno spazio dedicato.
+            Esplora concept dimostrativi per la vita quotidiana, il lavoro e l’impresa.
+            Ogni scheda indica con chiarezza stato e formula.
           </p>
+          <a className="ecosystem-search-preview" href={storeUrl} aria-label="Cerca app nel Kreluna Store">
+            <span aria-hidden="true">⌕</span>
+            <span>Cerca app, software, strumenti…</span>
+          </a>
+          <div className="ecosystem-filter-chips" aria-label="Esplora i filtri nel Kreluna Store">
+            {storeFilterChips.map((chip, index) => (
+              <a className={index === 0 ? "active" : undefined} href={storeUrl} key={chip}>{chip}</a>
+            ))}
+          </div>
+          <a className="ecosystem-store-link" href={storeUrl}>Vai allo Store completo <span aria-hidden="true">→</span></a>
         </div>
-        <div className="ecosystem-presentation-route" aria-label="Percorso verso Kreluna Store">
-          <span><b>01</b><strong>Presentazione</strong><small>Qui, nel sito Kreluna</small></span>
-          <i aria-hidden="true">→</i>
-          <span><b>02</b><strong>Catalogo</strong><small>Nello Store chiaro dedicato</small></span>
+
+        <div className="ecosystem-app-grid" aria-label="Concept in evidenza nel Kreluna Store">
+          {storePreviewApps.map((app) => (
+            <a className="ecosystem-app-card" href={storeUrl} key={app.name}>
+              <span className={`ecosystem-app-icon ${app.tone}`} aria-hidden="true">{app.symbol}</span>
+              <span className="ecosystem-app-state">Catalogo dimostrativo</span>
+              <strong>{app.name}</strong>
+              <small>{app.category}</small>
+              <p>{app.description}</p>
+              <span className="ecosystem-platforms">
+                {app.platforms.map((platform) => <i key={platform}>{platform}</i>)}
+              </span>
+              <b>Scopri il concept</b>
+            </a>
+          ))}
         </div>
-        <a className="ecosystem-primary-action" href={storePresentationUrl}>
-          Apri la presentazione <span aria-hidden="true">→</span>
-        </a>
+      </div>
+
+      <div className="ecosystem-trust-strip" aria-label="Informazioni sullo stato del Kreluna Store">
+        {storeTrustItems.map(([symbol, title, description, tone]) => (
+          <div className={tone} key={title}>
+            <span aria-hidden="true">{symbol}</span>
+            <p><strong>{title}</strong><small>{description}</small></p>
+          </div>
+        ))}
       </div>
     </section>
   );
@@ -330,7 +370,7 @@ export default function Home() {
           <a href="https://www.kreluna.it/ai-studi-professionali.html">Office</a>
           <a href="https://cra24.kreluna.it/">Cyber</a>
           <a href="https://www.kreluna.it/contatti.html">Connect</a>
-          <a href={storePresentationUrl}>Store</a>
+          <a href={storeUrl}>Store</a>
         </nav>
         <div className="nav-actions">
           <a className="contact-link" href="https://www.kreluna.it/contatti.html">Contatti</a>
@@ -361,7 +401,7 @@ export default function Home() {
           <a href="https://www.kreluna.it/ai-studi-professionali.html" onClick={() => setMenuOpen(false)}>Office</a>
           <a href="https://cra24.kreluna.it/" onClick={() => setMenuOpen(false)}>Cyber</a>
           <a href="https://www.kreluna.it/contatti.html" onClick={() => setMenuOpen(false)}>Connect</a>
-          <a href={storePresentationUrl} onClick={() => setMenuOpen(false)}>Store</a>
+          <a href={storeUrl} onClick={() => setMenuOpen(false)}>Store</a>
           <a href="https://www.kreluna.it/contatti.html">Contatti</a>
         </div>
       )}
@@ -679,7 +719,7 @@ export default function Home() {
           </div>
           <div className="footer-column">
             <p className="footer-heading">Prodotti</p>
-            <a href={storePresentationUrl}>Kreluna Store</a>
+            <a href={storeUrl}>Kreluna Store</a>
             {products.map((product) => <a key={product.slug} href={product.href}>{product.name}</a>)}
           </div>
           <div className="footer-column">
@@ -711,11 +751,6 @@ export default function Home() {
           </div>
         </aside>
       )}
-      <script
-        id="kreluna-home-structured-data"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeStructuredData) }}
-      />
     </div>
   );
 }
