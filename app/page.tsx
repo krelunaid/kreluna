@@ -3,9 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 
 const assetBasePath = process.env.NEXT_PUBLIC_ARUBA_BASE_PATH ?? "";
-const storeUrl =
-  process.env.NEXT_PUBLIC_KRELUNA_STORE_URL ??
-  "https://kreluna-store.andreagadducci.chatgpt.site";
 
 const products = [
   {
@@ -153,7 +150,6 @@ export default function Home() {
         <Logo />
         <nav className="desktop-nav" aria-label="Navigazione principale">
           <a href="#products">Prodotti</a>
-          <a href={storeUrl}>Store</a>
           <a href="#vision">Visione</a>
           <a href="#likecash">LikeCash</a>
           <a href={`${assetBasePath}/krl/`}>KRL Beta</a>
@@ -185,7 +181,6 @@ export default function Home() {
             aria-label="Chiudi il menu"
           >×</button>
           <a href="#products" onClick={() => setMenuOpen(false)}>Prodotti</a>
-          <a href={storeUrl} onClick={() => setMenuOpen(false)}>Store</a>
           <a href="#vision" onClick={() => setMenuOpen(false)}>Visione</a>
           <a href="#likecash" onClick={() => setMenuOpen(false)}>LikeCash</a>
           <a href={`${assetBasePath}/krl/`} onClick={() => setMenuOpen(false)}>KRL Beta</a>
@@ -281,24 +276,6 @@ export default function Home() {
             </article>
           ))}
         </div>
-
-        <a className="store-gateway reveal" href={storeUrl} aria-label="Esplora Kreluna Store">
-          <span className="store-gateway-copy">
-            <span className="eyebrow"><i /> Kreluna Store</span>
-            <strong>Un catalogo ordinato. La home resta essenziale.</strong>
-            <small>
-              App, software e agenti AI per persone e aziende, organizzati per bisogno,
-              piattaforma e piano.
-            </small>
-          </span>
-          <span className="store-gateway-icons" aria-hidden="true">
-            <i className="store-icon store-icon-mint">€</i>
-            <i className="store-icon store-icon-cyan">AI</i>
-            <i className="store-icon store-icon-gold">O</i>
-            <i className="store-icon store-icon-coral">+</i>
-          </span>
-          <span className="store-gateway-action">Esplora lo Store <ArrowIcon /></span>
-        </a>
 
         <div className="future-card reveal">
           <div className="future-mark">＋</div>
@@ -521,7 +498,6 @@ export default function Home() {
           </div>
           <div className="footer-column">
             <p className="footer-heading">Prodotti</p>
-            <a href={storeUrl}>Kreluna Store</a>
             {products.map((product) => <a key={product.slug} href={product.href}>{product.name}</a>)}
           </div>
           <div className="footer-column">

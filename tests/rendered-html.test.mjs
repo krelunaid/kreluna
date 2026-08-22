@@ -46,17 +46,13 @@ test("renders the Kreluna ecosystem homepage", async () => {
   assert.match(html, /href="https:\/\/www\.kreluna\.it\/intelligenza-artificiale-aziende\.html"/i);
   assert.match(html, /href="https:\/\/www\.kreluna\.it\/ai-studi-professionali\.html"/i);
   assert.match(html, /href="https:\/\/cra24\.kreluna\.it\/"/i);
-  assert.match(
-    html,
-    /href="https:\/\/kreluna-store\.andreagadducci\.chatgpt\.site"/i,
-  );
-  assert.match(html, /Un catalogo ordinato\. La home resta essenziale\./i);
   assert.match(html, /class="skip-link" href="#main-content"/i);
   assert.match(html, /<main id="main-content">/i);
   assert.match(html, /AI Act — testo ufficiale/i);
   assert.equal((html.match(/<title>/gi) ?? []).length, 1);
   assert.equal((html.match(/<meta name="description"/gi) ?? []).length, 1);
   assert.equal((html.match(/<h1\b/gi) ?? []).length, 1);
+  assert.doesNotMatch(html, /andreagadducci\.chatgpt\.site/i);
 
   const jsonLdMatch = html.match(
     /<script id="kreluna-structured-data" type="application\/ld\+json">([^<]+)<\/script>/i,
