@@ -57,8 +57,6 @@ async function render(pathname, filename, accept = "text/html", extraHeaders = {
 
 await render("/", "index.html");
 await render("/?_rsc", "index.rsc", "text/x-component", { RSC: "1" });
-await render("/krl", "krl/index.html");
-await render("/krl?_rsc", "krl/index.rsc", "text/x-component", { RSC: "1" });
 await render("/robots.txt", "robots.txt", "text/plain");
 await render("/sitemap.xml", "sitemap.xml", "application/xml");
 

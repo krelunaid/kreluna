@@ -52,18 +52,6 @@ const products = [
     href: "#velvet-tablet",
     features: [],
   },
-  {
-    slug: "krl",
-    name: "Kreluna Token",
-    eyebrow: "Utility demo · KRL Beta",
-    tagline: "L’utilità si simula nella Beta.",
-    description:
-      "KRL Beta simula crediti AI e prepara il wallet per Base Sepolia. Nessun valore reale e nessuna vendita.",
-    color: "mint",
-    status: "Beta · Testnet",
-    href: `${assetBasePath}/krl/`,
-    features: ["Base Sepolia", "100M progettati", "Vendita disattivata"],
-  },
 ] as const;
 
 const principles = [
@@ -151,7 +139,6 @@ export default function Home() {
           <a href="#products">Prodotti</a>
           <a href="#vision">Visione</a>
           <a href="#velvet-tablet">Velvet Tablet</a>
-          <a href={`${assetBasePath}/krl/`}>KRL Beta</a>
           <a href="https://www.kreluna.it/azienda.html">Azienda</a>
         </nav>
         <div className="nav-actions">
@@ -182,7 +169,6 @@ export default function Home() {
           <a href="#products" onClick={() => setMenuOpen(false)}>Prodotti</a>
           <a href="#vision" onClick={() => setMenuOpen(false)}>Visione</a>
           <a href="#velvet-tablet" onClick={() => setMenuOpen(false)}>Velvet Tablet</a>
-          <a href={`${assetBasePath}/krl/`} onClick={() => setMenuOpen(false)}>KRL Beta</a>
           <a href="https://www.kreluna.it/azienda.html">Azienda</a>
           <a href="https://www.kreluna.it/contatti.html">Contatti</a>
         </div>
@@ -215,7 +201,6 @@ export default function Home() {
           <div className="orbit orbit-two"><i className="satellite gold" /></div>
           <div className="orbit orbit-three"><i className="satellite cyan" /></div>
           <div className="orbit orbit-four"><i className="satellite coral" /></div>
-          <div className="orbit orbit-five"><i className="satellite mint hero-mint" /></div>
           <div className="hero-sphere" />
         </div>
 
@@ -241,7 +226,7 @@ export default function Home() {
           </div>
           <p>
             Dall’intelligenza artificiale al lavoro professionale, dalla sicurezza
-            a Velvet Tablet e KRL. Questo spazio è pensato per crescere insieme a Kreluna.
+            fino a Velvet Tablet. Questo spazio è pensato per crescere insieme a Kreluna.
           </p>
         </div>
 
@@ -263,7 +248,7 @@ export default function Home() {
               <div className="card-copy">
                 {product.slug !== "velvet-tablet" && (
                   <p className="signature">
-                    {product.slug === "krl" ? "KRL · Kreluna ecosystem" : "Kreluna ecosystem"}
+                    Kreluna ecosystem
                   </p>
                 )}
                 <h3>{product.name}</h3>
@@ -294,43 +279,6 @@ export default function Home() {
             <p>Nome, identità e racconto: quando nasce una nuova idea Kreluna, il sito cresce senza ricominciare da zero.</p>
           </div>
         </div>
-      </section>
-
-      <section className="krl section-shell" id="krl">
-        <div className="krl-panel reveal">
-          <div className="krl-copy">
-            <div className="eyebrow mint-text"><i /> Kreluna Token · KRL</div>
-            <h2>La Beta è pronta.<br /><em>Provala senza valore reale.</em></h2>
-            <p>
-              KRL Beta simula l’aspetto nel wallet e un flusso locale di crediti AI.
-              La prova usa Base Sepolia: nessun acquisto, prezzo, rendimento o servizio reale.
-            </p>
-            <dl className="krl-facts">
-              <div><dt>Base Sepolia</dt><dd>Rete di prova</dd></div>
-              <div><dt>100 milioni</dt><dd>Fornitura progettata</dd></div>
-              <div><dt>Testnet</dt><dd>Nessun valore reale</dd></div>
-            </dl>
-            <div className="krl-notice">
-              <i />
-              <p><b>Stato: Beta pubblica.</b> Puoi provare interfaccia, wallet e simulatore AI. Il contratto testnet non è ancora pubblicato e la vendita resta disattivata.</p>
-            </div>
-            <a className="button button-primary krl-beta-link" href={`${assetBasePath}/krl/`}>Apri KRL Beta <ArrowIcon /></a>
-          </div>
-          <div className="krl-visual" aria-hidden="true">
-            <div className="ledger-grid" />
-            <div className="token-ring token-ring-a" />
-            <div className="token-ring token-ring-b" />
-            <div className="krl-token"><span>KRL</span><small>BY KRELUNA</small></div>
-            <span className="chain-label label-base">BASE</span>
-            <span className="chain-label label-supply">SUPPLY PROGETTATA</span>
-            <span className="chain-label label-dev">IN DEVELOPMENT</span>
-          </div>
-        </div>
-        <p className="krl-disclaimer reveal">
-          Solo testnet: KRL Beta non ha valore monetario, non è acquistabile e non attribuisce
-          rendimenti o diritti economici. Un eventuale deployment on-chain sarà indicato soltanto con un
-          indirizzo Base Sepolia pubblicamente verificabile.
-        </p>
       </section>
 
       <section className="editorial-home section-shell" id="come-lavoriamo">

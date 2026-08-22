@@ -27,8 +27,7 @@ test("renders the Kreluna ecosystem homepage", async () => {
   assert.match(html, /Kreluna Cyber/);
   assert.match(html, /Velvet Tablet/);
   assert.doesNotMatch(html, /LikeCash/i);
-  assert.match(html, /Kreluna Token/);
-  assert.match(html, /Vendita disattivata/);
+  assert.doesNotMatch(html, /Kreluna Token|KRL Beta|Vendita disattivata/i);
   assert.match(html, /rel="canonical" href="https:\/\/www\.kreluna\.it\/"/i);
   assert.match(html, /hreflang="it" href="https:\/\/www\.kreluna\.it\/"/i);
   assert.match(html, /hreflang="en" href="https:\/\/www\.kreluna\.it\/en\/"/i);
@@ -74,20 +73,9 @@ test("renders the Kreluna ecosystem homepage", async () => {
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape|react-loading-skeleton/i);
 });
 
-test("renders the safe KRL Beta route", async () => {
+test("keeps the retired KRL Beta route unavailable", async () => {
   const response = await render("/krl");
-  assert.equal(response.status, 200);
-  assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
-
-  const html = await response.text();
-  assert.match(html, /KRL Beta/);
-  assert.match(html, /Base Sepolia/);
-  assert.match(html, /100\.000\.000 KRL/);
-  assert.match(html, /Nessun valore reale/i);
-  assert.match(html, /Acquisto non disponibile/i);
-  assert.match(html, /Contratto.*Non ancora pubblicato/is);
-  assert.match(html, /name="robots" content="noindex, nofollow"/i);
-  assert.doesNotMatch(html, /Compra ora|Rendimento garantito|Prezzo di lancio/i);
+  assert.equal(response.status, 404);
 });
 
 test("publishes a crawlable robots policy", async () => {
