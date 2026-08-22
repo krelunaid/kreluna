@@ -87,7 +87,7 @@ test("renders the dedicated Velvet Table concept page", async () => {
   const html = await response.text();
   assert.match(html, /Prenota l’atmosfera/i);
   assert.match(html, /Velvet Table non è ancora un servizio attivo/i);
-  assert.match(html, /rel="canonical" href="https:\/\/www\.kreluna\.it\/velvet-table\/"/i);
+  assert.match(html, /rel="canonical" href="https:\/\/www\.kreluna\.it\/velvet-table"/i);
   assert.match(html, /"@type":"Service"/);
   assert.match(html, /"@type":"FAQPage"/);
   assert.doesNotMatch(html, /LikeCash|KRL Beta/i);
@@ -116,7 +116,7 @@ test("publishes canonical localized URLs in the sitemap", async () => {
   assert.equal((sitemap.match(/<url>/gi) ?? []).length, 29);
   assert.match(sitemap, /<loc>https:\/\/www\.kreluna\.it\/<\/loc>/i);
   assert.match(sitemap, /<loc>https:\/\/www\.kreluna\.it\/en\/<\/loc>/i);
-  assert.match(sitemap, /<loc>https:\/\/www\.kreluna\.it\/velvet-table\/<\/loc>/i);
+  assert.match(sitemap, /<loc>https:\/\/www\.kreluna\.it\/velvet-table<\/loc>/i);
   assert.match(sitemap, /hreflang="it" href="https:\/\/www\.kreluna\.it\/"/i);
   assert.match(sitemap, /hreflang="en" href="https:\/\/www\.kreluna\.it\/en\/"/i);
   assert.match(sitemap, /hreflang="x-default" href="https:\/\/www\.kreluna\.it\/"/i);

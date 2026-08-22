@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 const siteUrl = "https://www.kreluna.it";
-const pageUrl = `${siteUrl}/velvet-table/`;
+const pageUrl = `${siteUrl}/velvet-table`;
 const title = "Velvet Table | Prenota il ristorante partendo dall’atmosfera";
 const description =
   "Velvet Table è il concept Kreluna per trovare e prenotare un ristorante partendo dall’atmosfera desiderata, dall’occasione e dalla compagnia.";

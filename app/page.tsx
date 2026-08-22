@@ -50,7 +50,7 @@ const products = [
       "Un concept Kreluna per scegliere il locale partendo dal tipo di serata: intima, vivace, panoramica o rilassata. Poi si passa alla disponibilità e alla prenotazione.",
     color: "coral",
     status: "Concept in sviluppo",
-    href: "/velvet-table/",
+    href: "/velvet-table",
     features: ["Atmosfera desiderata", "Occasione e compagnia", "Prenotazione guidata"],
   },
 ] as const;
@@ -290,7 +290,7 @@ export default function Home() {
               <span>Panoramica</span>
               <span>Rilassata</span>
             </div>
-            <a className="button button-secondary velvet-cta" href="/velvet-table/">
+            <a className="button button-secondary velvet-cta" href="/velvet-table">
               Scopri il concept <ArrowIcon />
             </a>
           </div>

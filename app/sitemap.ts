@@ -137,14 +137,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...localizedPages,
     {
-      url: `${SITE_URL}/velvet-table/`,
+      url: `${SITE_URL}/velvet-table`,
       lastModified: "2026-08-23",
       changeFrequency: "monthly",
       priority: 0.8,
       alternates: {
         languages: {
-          it: `${SITE_URL}/velvet-table/`,
-          "x-default": `${SITE_URL}/velvet-table/`,
+          it: `${SITE_URL}/velvet-table`,
+          "x-default": `${SITE_URL}/velvet-table`,
         },
       },
     },
