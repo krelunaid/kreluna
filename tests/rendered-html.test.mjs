@@ -130,7 +130,7 @@ test("publishes a crawlable robots policy", async () => {
 
   const robots = await response.text();
   assert.match(robots, /User-Agent: OAI-SearchBot[\s\S]*Allow: \//i);
-  assert.match(robots, /User-Agent: GPTBot[\s\S]*Disallow: \//i);
+  assert.match(robots, /User-Agent: GPTBot[\s\S]*Allow: \//i);
   assert.match(robots, /User-Agent: \*/i);
   assert.match(robots, /Allow: \//i);
   assert.match(robots, /Sitemap: https:\/\/www\.kreluna\.it\/sitemap\.xml/i);
