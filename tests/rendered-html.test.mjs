@@ -52,6 +52,11 @@ test("renders the Kreluna ecosystem homepage", async () => {
   assert.match(html, /class="skip-link" href="#main-content"/i);
   assert.match(html, /<main id="main-content">/i);
   assert.match(html, /AI Act — testo ufficiale/i);
+  assert.match(html, /Gadducci Andrea/i);
+  assert.match(html, /02114130475/);
+  assert.match(html, /PT-622714/);
+  assert.match(html, /Chiesina Uzzanese \(PT\)/i);
+  assert.doesNotMatch(html, /Reine/i);
   assert.equal((html.match(/<title>/gi) ?? []).length, 1);
   assert.equal((html.match(/<meta name="description"/gi) ?? []).length, 1);
   assert.equal((html.match(/<h1\b/gi) ?? []).length, 1);
@@ -95,6 +100,8 @@ test("renders the dedicated Velvet Table concept page", async () => {
   assert.equal((html.match(/rel="canonical"/gi) ?? []).length, 1);
   assert.match(html, /"@type":"Service"/);
   assert.match(html, /"@type":"FAQPage"/);
+  assert.match(html, /name="created-with" content="Helix"/i);
+  assert.match(html, /"name":"Created with","value":"Helix"/i);
   assert.doesNotMatch(html, /kreluna-ecosistema\.andreagadducci\.chatgpt\.site/i);
   assert.doesNotMatch(html, /LikeCash|KRL Beta/i);
   assert.equal((html.match(/<h1\b/gi) ?? []).length, 1);

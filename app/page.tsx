@@ -12,6 +12,10 @@ const homeStructuredData = {
       "@id": `${homeSiteUrl}/#organization`,
       name: "Kreluna",
       alternateName: "Kreluna Ecosystem",
+      legalName: "Gadducci Andrea",
+      taxID: "02114130475",
+      identifier: { "@type": "PropertyValue", propertyID: "REA", value: "PT-622714" },
+      address: { "@type": "PostalAddress", addressLocality: "Chiesina Uzzanese", addressRegion: "PT", addressCountry: "IT" },
       url: `${homeSiteUrl}/`,
       logo: { "@type": "ImageObject", url: `${homeSiteUrl}/kreluna-logo.png`, width: 128, height: 128 },
     },
@@ -442,7 +446,7 @@ export default function Home() {
           </div>
           <div className="home-faq">
             <h3>Domande frequenti</h3>
-            <details><summary>Che cos’è Kreluna?</summary><p>Kreluna è un progetto italiano in sviluppo dedicato ad AI, automazione e cybersecurity. I dati societari e fiscali saranno pubblicati quando disponibili.</p></details>
+            <details><summary>Che cos’è Kreluna?</summary><p>Kreluna è il marchio digitale dell’impresa individuale Gadducci Andrea, dedicato ad AI, automazione, cybersecurity ed esperienze digitali.</p></details>
             <details><summary>I prodotti sono già acquistabili?</summary><p>Non viene dichiarata una disponibilità generale. Accesso, funzioni, integrazioni e condizioni vengono confermati per ogni richiesta.</p></details>
             <details><summary>Kreluna sostituisce software o professionisti?</summary><p>No in modo automatico. Il ruolo proposto è preparare e collegare il lavoro mantenendo sistemi ufficiali, responsabilità e approvazioni sotto controllo umano.</p></details>
             <details><summary>Posso inviare documenti per una valutazione?</summary><p>Nel primo contatto no: descrivi il contesto senza allegare dati personali, credenziali o documenti riservati. Un eventuale campione viene concordato dopo aver definito il perimetro.</p></details>
@@ -514,8 +518,8 @@ export default function Home() {
           </div>
         </div>
         <div className="footer-bottom">
-          <span>© 2026 Kreluna. Tutti i diritti riservati.</span>
-          <span>Un marchio. Un ecosistema.</span>
+          <span>© 2026 Kreluna · Gadducci Andrea · Impresa individuale</span>
+          <span>P. IVA 02114130475 · REA PT-622714 · Chiesina Uzzanese (PT) · <a href="mailto:andrea.gadducci@pec.it">PEC</a></span>
         </div>
       </footer>
 

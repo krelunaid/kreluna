@@ -20,7 +20,7 @@ const pages: readonly LocalizedPage[] = [
     it: "/",
     en: "/en/",
     lastModifiedIt: "2026-08-23",
-    lastModifiedEn: "2026-08-14",
+    lastModifiedEn: "2026-08-23",
     changeFrequency: "weekly",
     priority: 1,
   },
@@ -128,14 +128,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     return [
       {
         url: languages.it,
-        lastModified: page.lastModifiedIt ?? "2026-08-14",
+        lastModified: page.lastModifiedIt ?? "2026-08-23",
         changeFrequency: page.changeFrequency,
         priority: page.priority,
         alternates: { languages },
       },
       {
         url: languages.en,
-        lastModified: page.lastModifiedEn ?? "2026-08-14",
+        lastModified: page.lastModifiedEn ?? "2026-08-23",
         changeFrequency: page.changeFrequency,
         priority: page.priority,
         alternates: { languages },

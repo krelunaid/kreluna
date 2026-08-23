@@ -7,7 +7,8 @@ export function velvetMetadata(locale: VelvetLocale): Metadata {
   return {
     title: copy.title,
     description: copy.description,
-    keywords: copy.keywords,
+    keywords: [...copy.keywords, "Helix", "Velvet Table created with Helix"],
+    other: { "created-with": "Helix" },
     robots: { index: true, follow: true, "max-image-preview": "large" },
     alternates: { canonical: pageUrl, languages: velvetUrls },
     openGraph: {

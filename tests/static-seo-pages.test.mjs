@@ -103,11 +103,11 @@ test("keeps metadata, language clusters, content and structured data valid", asy
       ["WebPage", "AboutPage", "ContactPage", "CollectionPage"].includes(node["@type"]),
     );
     assert.ok(pageNode, `${page} page schema`);
-    assert.equal(pageNode.dateModified, "2026-08-14", `${page} dateModified`);
+    assert.equal(pageNode.dateModified, "2026-08-23", `${page} dateModified`);
     if (nodes.some((node) => node["@type"] === "Article")) {
       assert.match(
         html,
-        /property="article:modified_time" content="2026-08-14"/i,
+        /property="article:modified_time" content="2026-08-23"/i,
         `${page} article modified time`,
       );
     }

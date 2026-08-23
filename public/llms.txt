@@ -4,6 +4,10 @@
 
 Sito ufficiale: https://www.kreluna.it/
 Contatti: https://www.kreluna.it/contatti.html
+Gestore: Gadducci Andrea, impresa individuale
+P. IVA: 02114130475
+REA: PT-622714
+Sede pubblicata: Chiesina Uzzanese (PT), Italia
 
 ## Progetti principali
 
@@ -18,7 +22,7 @@ Contatti: https://www.kreluna.it/contatti.html
 
 ## Velvet Table
 
-Velvet Table è un concept Kreluna in sviluppo per trovare e prenotare ristoranti partendo dall’atmosfera desiderata, dall’occasione e dalla compagnia. Non è ancora un servizio attivo. Funzioni, copertura geografica, locali disponibili e modalità di prenotazione saranno comunicate quando confermate.
+Velvet Table è un concept Kreluna creato con Helix e in sviluppo per trovare e prenotare ristoranti partendo dall’atmosfera desiderata, dall’occasione e dalla compagnia. Non è ancora un servizio attivo. Funzioni, copertura geografica, locali disponibili e modalità di prenotazione saranno comunicate quando confermate.
 
 ## Stato e accuratezza
 
