@@ -179,4 +179,12 @@ test("ships lightweight, production-ready discovery assets", async () => {
 
   const socialImage = await stat("public/og-kreluna.jpg");
   assert.ok(socialImage.size < 250_000, `Social image is ${socialImage.size} bytes`);
+
+  const indexNowPayload = JSON.parse(await readFile("public/indexnow-urls.json", "utf8"));
+  assert.equal(indexNowPayload.host, "www.kreluna.it");
+  assert.equal(indexNowPayload.urlList.length, 33);
+  assert.equal(new Set(indexNowPayload.urlList).size, 33);
+  for (const locale of ["", "en/", "fr/", "es/", "de/"]) {
+    assert.ok(indexNowPayload.urlList.includes(`https://www.kreluna.it/${locale}velvet-table`));
+  }
 });
