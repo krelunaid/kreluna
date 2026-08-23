@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const SITE_URL = "https://kreluna-ecosistema.andreagadducci.chatgpt.site";
+const SITE_URL = "https://www.kreluna.it";
 
 export default function robots(): MetadataRoute.Robots {
   return {

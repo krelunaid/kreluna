@@ -1,7 +1,6 @@
 import type { MetadataRoute } from "next";
 
 const SITE_URL = "https://www.kreluna.it";
-const VELVET_SITE_URL = "https://kreluna-ecosistema.andreagadducci.chatgpt.site";
 
 type ChangeFrequency = NonNullable<
   MetadataRoute.Sitemap[number]["changeFrequency"]
@@ -110,12 +109,12 @@ function absoluteUrl(path: string): string {
 }
 
 const velvetLanguages = {
-  it: `${VELVET_SITE_URL}/velvet-table`,
-  en: `${VELVET_SITE_URL}/en/velvet-table`,
-  fr: `${VELVET_SITE_URL}/fr/velvet-table`,
-  es: `${VELVET_SITE_URL}/es/velvet-table`,
-  de: `${VELVET_SITE_URL}/de/velvet-table`,
-  "x-default": `${VELVET_SITE_URL}/velvet-table`,
+  it: `${SITE_URL}/velvet-table`,
+  en: `${SITE_URL}/en/velvet-table`,
+  fr: `${SITE_URL}/fr/velvet-table`,
+  es: `${SITE_URL}/es/velvet-table`,
+  de: `${SITE_URL}/de/velvet-table`,
+  "x-default": `${SITE_URL}/velvet-table`,
 };
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -154,10 +153,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
       images: [
-        `${VELVET_SITE_URL}/velvet-table/hero.jpg`,
-        `${VELVET_SITE_URL}/velvet-table/salon.jpg`,
-        `${VELVET_SITE_URL}/velvet-table/view-window.jpg`,
-        `${VELVET_SITE_URL}/velvet-table/garden-restaurant.jpg`,
+        `${SITE_URL}/velvet-table/hero.jpg`,
+        `${SITE_URL}/velvet-table/salon.jpg`,
+        `${SITE_URL}/velvet-table/view-window.jpg`,
+        `${SITE_URL}/velvet-table/garden-restaurant.jpg`,
       ],
       alternates: { languages: velvetLanguages },
     })),

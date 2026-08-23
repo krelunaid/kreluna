@@ -1,6 +1,6 @@
 export type VelvetLocale = "it" | "en" | "fr" | "es" | "de";
 
-export const siteUrl = "https://kreluna-ecosistema.andreagadducci.chatgpt.site";
+export const siteUrl = "https://www.kreluna.it";
 
 export const velvetUrls: Record<VelvetLocale | "x-default", string> = {
   it: `${siteUrl}/velvet-table`,
