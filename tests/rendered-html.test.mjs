@@ -100,10 +100,13 @@ test("renders the dedicated Velvet Table concept page", async () => {
   assert.match(html, /Primo appuntamento/i);
   assert.match(html, /Anniversario e occasioni speciali/i);
   assert.match(html, /Cena in giardino/i);
+  assert.match(html, /Criteri leggibili, non etichette decorative/i);
+  assert.match(html, /Disponibilità, caratteristiche del tavolo e condizioni di prenotazione/i);
   assert.match(html, /property="og:image" content="https:\/\/www\.kreluna\.it\/velvet-table\/og\.jpg"/i);
   assert.match(html, /rel="canonical" href="https:\/\/www\.kreluna\.it\/velvet-table"/i);
   assert.equal((html.match(/rel="canonical"/gi) ?? []).length, 1);
   assert.match(html, /"@type":"Service"/);
+  assert.match(html, /"@type":"WebSite"/);
   assert.match(html, /"@type":"ItemList"/);
   assert.match(html, /"@type":"FAQPage"/);
   assert.match(html, /"legalName":"Gadducci Andrea"/);
