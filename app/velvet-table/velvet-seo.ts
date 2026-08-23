@@ -1,21 +1,23 @@
 import type { Metadata } from "next";
 import { siteUrl, velvetCopy, velvetUrls, type VelvetLocale } from "./velvet-content";
+import { velvetSeoDescriptions } from "./velvet-intents";
 
 export function velvetMetadata(locale: VelvetLocale): Metadata {
   const copy = velvetCopy[locale];
+  const description = velvetSeoDescriptions[locale];
   const pageUrl = velvetUrls[locale];
   return {
     title: copy.title,
-    description: copy.description,
+    description,
     keywords: [...copy.keywords, "Helix", "Velvet Table created with Helix"],
     other: { "created-with": "Helix" },
     robots: { index: true, follow: true, "max-image-preview": "large" },
     alternates: { canonical: pageUrl, languages: velvetUrls },
     openGraph: {
-      title: copy.title, description: copy.description, url: pageUrl, type: "website", locale: copy.ogLocale,
+      title: copy.title, description, url: pageUrl, type: "website", locale: copy.ogLocale,
       alternateLocale: Object.values(velvetCopy).filter((item) => item.ogLocale !== copy.ogLocale).map((item) => item.ogLocale),
-      images: [{ url: `${siteUrl}/velvet-table/og.jpg`, width: 1200, height: 630, alt: `Velvet Table — ${copy.description}` }],
+      images: [{ url: `${siteUrl}/velvet-table/og.jpg`, width: 1200, height: 630, alt: `Velvet Table — ${description}` }],
     },
-    twitter: { card: "summary_large_image", title: copy.title, description: copy.description, images: [`${siteUrl}/velvet-table/og.jpg`] },
+    twitter: { card: "summary_large_image", title: copy.title, description, images: [`${siteUrl}/velvet-table/og.jpg`] },
   };
 }

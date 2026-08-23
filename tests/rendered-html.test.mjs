@@ -95,11 +95,18 @@ test("renders the dedicated Velvet Table concept page", async () => {
   assert.match(html, /src="\/velvet-table\/hero\.jpg"/i);
   assert.match(html, /src="\/velvet-table\/view-window\.jpg"/i);
   assert.match(html, /src="\/velvet-table\/garden-restaurant\.jpg"/i);
+  assert.match(html, /Il ristorante giusto per la serata che immagini/i);
+  assert.match(html, /Serata romantica/i);
+  assert.match(html, /Primo appuntamento/i);
+  assert.match(html, /Anniversario e occasioni speciali/i);
+  assert.match(html, /Cena in giardino/i);
   assert.match(html, /property="og:image" content="https:\/\/www\.kreluna\.it\/velvet-table\/og\.jpg"/i);
   assert.match(html, /rel="canonical" href="https:\/\/www\.kreluna\.it\/velvet-table"/i);
   assert.equal((html.match(/rel="canonical"/gi) ?? []).length, 1);
   assert.match(html, /"@type":"Service"/);
+  assert.match(html, /"@type":"ItemList"/);
   assert.match(html, /"@type":"FAQPage"/);
+  assert.match(html, /"legalName":"Gadducci Andrea"/);
   assert.match(html, /name="created-with" content="Helix"/i);
   assert.match(html, /"name":"Created with","value":"Helix"/i);
   assert.doesNotMatch(html, /kreluna-ecosistema\.andreagadducci\.chatgpt\.site/i);
@@ -109,10 +116,10 @@ test("renders the dedicated Velvet Table concept page", async () => {
 
 test("renders localized Velvet Table pages with reciprocal language signals", async () => {
   const pages = [
-    ["/en/velvet-table", "romantic evening", "en-GB"],
-    ["/fr/velvet-table", "soirée romantique", "fr-FR"],
-    ["/es/velvet-table", "noche romántica", "es-ES"],
-    ["/de/velvet-table", "romantischer Abend", "de-DE"],
+    ["/en/velvet-table", "First date", "en-GB"],
+    ["/fr/velvet-table", "Premier rendez-vous", "fr-FR"],
+    ["/es/velvet-table", "Primera cita", "es-ES"],
+    ["/de/velvet-table", "Erstes Date", "de-DE"],
   ];
   for (const [path, phrase, locale] of pages) {
     const response = await render(path);

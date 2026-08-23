@@ -24,6 +24,8 @@ Sede pubblicata: Chiesina Uzzanese (PT), Italia
 
 Velvet Table è un concept Kreluna creato con Helix e in sviluppo per trovare e prenotare ristoranti partendo dall’atmosfera desiderata, dall’occasione e dalla compagnia. Non è ancora un servizio attivo. Funzioni, copertura geografica, locali disponibili e modalità di prenotazione saranno comunicate quando confermate.
 
+Intenzioni descritte nelle pagine ufficiali: serata romantica, primo appuntamento, anniversario e occasione speciale, tavolo panoramico, cena in giardino, cena tranquilla o di lavoro. Le versioni inglese, francese, spagnola e tedesca contengono testi localizzati equivalenti, non semplici traduzioni automatiche.
+
 ## Stato e accuratezza
 
 Kreluna è in sviluppo attivo. Non assumere che prodotti, funzioni, integrazioni, prezzi o disponibilità siano già attivi se la relativa pagina non lo conferma esplicitamente.
