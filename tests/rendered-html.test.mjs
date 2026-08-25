@@ -151,11 +151,26 @@ test("renders the Velvet Table restaurant acquisition page", async () => {
   const html = await response.text();
   assert.match(html, /Coming soon · for restaurants/i);
   assert.match(html, /Let guests book normally/i);
-  assert.match(html, /Planned customer price: €15/i);
+  assert.match(html, /Planned U\.S\. customer price: \$15/i);
+  assert.match(html, /Keep the full \$15 for your first 12 months/i);
+  assert.match(html, /\$15 restaurant · \$0 Kreluna/i);
+  assert.match(html, /\$12 restaurant · \$3 Kreluna/i);
   assert.match(html, /No table-selection fee/i);
   assert.match(html, /Join restaurant early access/i);
   assert.match(html, /audienceType":"Restaurant owners and managers"/i);
   assert.match(html, /rel="canonical" href="https:\/\/www\.kreluna\.it\/en\/velvet-table\/restaurants"/i);
+  assert.equal((html.match(/<h1\b/gi) ?? []).length, 1);
+});
+
+test("publishes a noindex Founding 100 program summary", async () => {
+  const response = await render("/en/velvet-table/restaurants/founding-100");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /Velvet Table[\s\S]*Founding 100/i);
+  assert.match(html, /Twelve consecutive months/i);
+  assert.match(html, /\$15 restaurant/i);
+  assert.match(html, /\$0 Kreluna platform fee/i);
+  assert.match(html, /name="robots" content="noindex, follow"/i);
   assert.equal((html.match(/<h1\b/gi) ?? []).length, 1);
 });
 

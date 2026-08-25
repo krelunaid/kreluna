@@ -417,6 +417,19 @@ footer { border-top: 1px solid var(--line); padding: 64px max(5vw, 24px) 30px; }
 .restaurant-choice-grid h3 { max-width:550px; margin-top:65px; color:var(--vt-cream); font:500 clamp(1.8rem,3vw,3.1rem)/1.08 Georgia,'Times New Roman',serif; }
 .restaurant-choice-grid p { max-width:600px; margin-top:19px; color:var(--muted); line-height:1.7; }
 .restaurant-choice-grid strong { width:fit-content; margin-top:auto; padding-top:34px; color:var(--vt-champagne); font:.78rem var(--mono); }
+.founding-offer { max-width:1450px; margin:0 auto; padding-top:35px; padding-bottom:135px; display:grid; grid-template-columns:.34fr 1fr; gap:clamp(35px,7vw,100px); align-items:start; }
+.founding-offer-mark { aspect-ratio:1; display:grid; place-content:center; border:1px solid rgba(215,177,109,.28); border-radius:50%; text-align:center; background:radial-gradient(circle,rgba(215,177,109,.13),transparent 68%); box-shadow:0 0 90px rgba(215,177,109,.08); }
+.founding-offer-mark > span { color:var(--vt-cream); font:500 clamp(4.5rem,8vw,7.2rem)/.8 Georgia,'Times New Roman',serif; }
+.founding-offer-mark small { margin-top:16px; color:var(--vt-champagne); font:600 .61rem/1.5 var(--mono); letter-spacing:.13em; }
+.founding-offer-copy { padding-top:10px; }
+.founding-offer-copy h2 { max-width:850px; margin-top:19px; font:500 clamp(2.9rem,5vw,5.3rem)/1.01 Georgia,'Times New Roman',serif; letter-spacing:-.05em; }
+.founding-offer-copy > p { max-width:850px; margin-top:24px; color:var(--vt-mute); line-height:1.76; }
+.founding-offer-split { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-top:31px; }
+.founding-offer-split > span { min-height:105px; display:flex; flex-direction:column; justify-content:center; gap:10px; padding:20px; border:1px solid rgba(215,177,109,.18); border-radius:15px; background:rgba(255,255,255,.018); }
+.founding-offer-split small { color:#95877e; font:.62rem var(--mono); text-transform:uppercase; letter-spacing:.08em; }
+.founding-offer-split strong { color:var(--vt-cream); font-size:.93rem; }
+.founding-offer-copy .founding-offer-note { margin-top:20px; padding-left:16px; border-left:2px solid rgba(215,177,109,.55); color:#998b82; font-size:.76rem; line-height:1.65; }
+.founding-offer-copy > a { display:inline-block; margin-top:23px; color:var(--vt-champagne); font-size:.83rem; font-weight:700; }
 .restaurant-process { max-width:100%; background:linear-gradient(180deg,transparent,rgba(109,19,36,.07),transparent); }
 .restaurant-principles { border-top:1px solid rgba(215,177,109,.12); }
 .restaurant-principle-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
@@ -435,6 +448,18 @@ footer { border-top: 1px solid var(--line); padding: 64px max(5vw, 24px) 30px; }
 .restaurant-form-heading p { margin-top:15px; color:var(--muted); font-size:.82rem; line-height:1.65; }
 .restaurant-lead-form .velvet-field:first-of-type { margin-top:27px; }
 .restaurant-closing-actions { display:flex; flex-wrap:wrap; gap:11px; justify-content:flex-end; }
+.founding-terms-main { max-width:1120px; margin:0 auto; padding-top:160px; padding-bottom:120px; }
+.founding-terms-main h1 { margin-top:24px; font:500 clamp(4rem,8vw,7rem)/.92 Georgia,'Times New Roman',serif; letter-spacing:-.058em; }
+.founding-terms-main h1 em { color:var(--vt-champagne); }
+.founding-terms-lead { max-width:780px; margin-top:28px; color:var(--vt-mute); font-size:1.06rem; line-height:1.78; }
+.founding-terms-highlight { margin-top:45px; display:grid; grid-template-columns:.7fr 1fr 1fr; gap:12px; align-items:center; padding:25px; border:1px solid rgba(215,177,109,.25); border-radius:18px; background:rgba(215,177,109,.06); }
+.founding-terms-highlight span { color:var(--vt-champagne); font:.65rem var(--mono); letter-spacing:.1em; }.founding-terms-highlight strong { color:var(--vt-cream); font-size:1.05rem; }
+.founding-terms-list { margin-top:75px; }
+.founding-terms-list section { display:grid; grid-template-columns:55px .7fr; gap:35px; padding:30px 0; border-top:1px solid rgba(215,177,109,.14); }
+.founding-terms-list section > span { color:var(--vt-champagne); font:.68rem var(--mono); }
+.founding-terms-list h2 { color:var(--vt-cream); font:500 1.45rem Georgia,'Times New Roman',serif; }
+.founding-terms-list p { margin-top:11px; color:var(--muted); line-height:1.72; }
+.founding-terms-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:50px; }
 
 .reveal { opacity: 1; transform: none; }
 .js .reveal { opacity: 0; transform: translateY(25px); transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); }
@@ -468,6 +493,8 @@ footer { border-top: 1px solid var(--line); padding: 64px max(5vw, 24px) 30px; }
   .restaurant-choice-grid { grid-template-columns:1fr; }
   .restaurant-principle-grid { grid-template-columns:1fr; }
   .restaurant-principle-grid article { min-height:245px; }
+  .founding-offer { grid-template-columns:1fr; }
+  .founding-offer-mark { width:min(310px,72vw); }
   .velvet-process-grid { grid-template-columns: repeat(2,1fr); }
   .velvet-intent-grid { grid-template-columns: repeat(2,1fr); }
   .velvet-process-grid li:nth-child(2) { border-right: 0; }
@@ -547,6 +574,9 @@ footer { border-top: 1px solid var(--line); padding: 64px max(5vw, 24px) 30px; }
   .restaurant-choice-grid article { min-height:340px; }
   .restaurant-signup .velvet-restaurant-fields { grid-template-columns:1fr; gap:0; }
   .restaurant-closing-actions { justify-content:flex-start; }
+  .founding-offer-split { grid-template-columns:1fr; }
+  .founding-terms-highlight { grid-template-columns:1fr; }
+  .founding-terms-list section { grid-template-columns:36px 1fr; gap:18px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

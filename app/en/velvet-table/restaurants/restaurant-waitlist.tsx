@@ -43,7 +43,7 @@ export default function RestaurantWaitlist() {
 
       trackVelvetLead("restaurant");
       setState("success");
-      setMessage("You’re on the restaurant early-access list. We’ll share confirmed pilot updates by email.");
+      setMessage("You’re on the restaurant interest list. We’ll share confirmed Founding 100 and pilot updates by email.");
       formElement.reset();
     } catch (error) {
       setState("error");
@@ -56,7 +56,7 @@ export default function RestaurantWaitlist() {
       <div className="restaurant-form-heading">
         <span>Restaurant early access</span>
         <h2>Join the New York pilot list.</h2>
-        <p>No commitment. We will contact you only when pilot details and commercial terms are confirmed.</p>
+        <p>Register your interest in the Founding 100 program. Your place is confirmed only after eligibility verification, onboarding and acceptance of the pilot agreement.</p>
       </div>
       <label className="velvet-field">
         <span>Work email</span>
