@@ -92,6 +92,11 @@ test("renders the dedicated Velvet Table concept page", async () => {
   const html = await response.text();
   assert.match(html, /La sera, scelta/i);
   assert.match(html, /Velvet Table non è ancora un servizio attivo/i);
+  assert.match(html, /id="lista-attesa"/i);
+  assert.match(html, /Sono un cliente/i);
+  assert.match(html, /Sono un ristoratore/i);
+  assert.match(html, /Avvisami al lancio/i);
+  assert.match(html, /Informativa privacy/i);
   assert.match(html, /src="\/velvet-table\/hero\.jpg"/i);
   assert.match(html, /src="\/velvet-table\/view-window\.jpg"/i);
   assert.match(html, /src="\/velvet-table\/garden-restaurant\.jpg"/i);

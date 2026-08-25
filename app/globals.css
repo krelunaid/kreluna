@@ -305,7 +305,7 @@ footer { border-top: 1px solid var(--line); padding: 64px max(5vw, 24px) 30px; }
 .velvet-app-hero figcaption span { grid-row: 1 / 3; color: var(--vt-champagne); font: .7rem var(--mono); }
 .velvet-app-hero figcaption strong { color: var(--vt-cream); font-size: 1rem; }
 .velvet-app-hero figcaption small { color: var(--vt-mute); font-size: .7rem; }
-.velvet-definition,.velvet-process,.velvet-atmospheres,.velvet-intents,.velvet-methodology,.velvet-faq { max-width: 1450px; margin: 0 auto; padding-top: 130px; padding-bottom: 130px; }
+.velvet-definition,.velvet-process,.velvet-atmospheres,.velvet-intents,.velvet-methodology,.velvet-waitlist,.velvet-faq { max-width: 1450px; margin: 0 auto; padding-top: 130px; padding-bottom: 130px; }
 .velvet-definition { border-top: 1px solid rgba(215,177,109,.14); }
 .velvet-definition-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(45px,9vw,150px); margin-top: 35px; }
 .velvet-definition h2,.velvet-section-heading h2,.velvet-closing h2 { font-size: clamp(2.55rem,4.6vw,5rem); line-height: 1.03; letter-spacing: -.046em; }
@@ -339,6 +339,31 @@ footer { border-top: 1px solid var(--line); padding: 64px max(5vw, 24px) 30px; }
 .velvet-intent-grid p { margin-top: 13px; color: var(--muted); font-size: .87rem; line-height: 1.7; }
 .velvet-methodology { max-width: 100%; }
 .velvet-methodology-note { margin-top: 24px; padding-left: 18px; border-left: 2px solid var(--vt-champagne); color: var(--muted); line-height: 1.7; }
+.velvet-waitlist { display: grid; grid-template-columns: .92fr 1.08fr; gap: clamp(50px,8vw,130px); align-items: start; border-top: 1px solid rgba(215,177,109,.14); }
+.velvet-waitlist-copy h2 { margin-top: 18px; font: 500 clamp(2.7rem,4.6vw,5rem)/1.03 Georgia,'Times New Roman',serif; letter-spacing: -.046em; }
+.velvet-waitlist-copy p { max-width: 650px; margin-top: 26px; color: var(--vt-mute); line-height: 1.75; }
+.velvet-waitlist-form { padding: clamp(24px,4vw,42px); border: 1px solid rgba(215,177,109,.22); border-radius: 26px; background: linear-gradient(145deg,rgba(30,20,22,.95),rgba(15,11,12,.92)); box-shadow: 0 28px 80px rgba(0,0,0,.24); }
+.velvet-waitlist-form fieldset { margin: 0 0 26px; padding: 0; border: 0; }
+.velvet-waitlist-form legend,.velvet-field > span { display: block; margin-bottom: 10px; color: var(--vt-cream); font-size: .82rem; font-weight: 700; }
+.velvet-audience-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.velvet-audience-options label { display: flex; gap: 12px; min-height: 112px; padding: 18px; border: 1px solid rgba(215,177,109,.18); border-radius: 15px; background: rgba(255,255,255,.025); cursor: pointer; }
+.velvet-audience-options input { margin-top: 3px; accent-color: var(--vt-champagne); }
+.velvet-audience-options span { display: grid; gap: 7px; }
+.velvet-audience-options strong { color: var(--vt-cream); font-size: .91rem; }
+.velvet-audience-options small,.velvet-field small { color: #9f9188; font-size: .72rem; line-height: 1.45; }
+.velvet-field { display: block; margin-top: 18px; }
+.velvet-field input { width: 100%; min-height: 52px; padding: 0 15px; border: 1px solid rgba(215,177,109,.22); border-radius: 12px; outline: none; background: rgba(8,6,7,.68); color: var(--vt-cream); font: inherit; }
+.velvet-field input:focus { border-color: var(--vt-champagne); box-shadow: 0 0 0 3px rgba(215,177,109,.12); }
+.velvet-restaurant-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.velvet-consent { display: flex; gap: 11px; margin: 23px 0; color: #aa9c92; font-size: .75rem; line-height: 1.55; }
+.velvet-consent input { flex: 0 0 auto; margin-top: 3px; accent-color: var(--vt-champagne); }
+.velvet-consent a { color: var(--vt-champagne); text-decoration: underline; text-underline-offset: 3px; }
+.velvet-honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.velvet-waitlist-form .button { width: 100%; border: 0; cursor: pointer; }
+.velvet-waitlist-form .button:disabled { opacity: .65; cursor: wait; }
+.velvet-form-status { min-height: 24px; margin-top: 14px; font-size: .78rem; line-height: 1.5; }
+.velvet-form-status.success { color: #9de7b4; }
+.velvet-form-status.error { color: #ffb4b4; }
 .velvet-faq-list { display: grid; gap: 12px; }
 .velvet-faq-list article { display: grid; grid-template-columns: .8fr 1.2fr; gap: 60px; padding: 34px 0; border-top: 1px solid rgba(215,177,109,.15); }
 .velvet-faq-list h3 { font-size: 1.2rem; }
@@ -374,7 +399,7 @@ footer { border-top: 1px solid var(--line); padding: 64px max(5vw, 24px) 30px; }
   .velvet-page-header .velvet-section-nav { display: none; }
   .velvet-page-hero { grid-template-columns: 1fr; padding-top: 150px; }
   .velvet-app-hero { width: min(80vw,560px); }
-  .velvet-definition-grid { grid-template-columns: 1fr; }
+  .velvet-definition-grid,.velvet-waitlist { grid-template-columns: 1fr; }
   .velvet-process-grid { grid-template-columns: repeat(2,1fr); }
   .velvet-intent-grid { grid-template-columns: repeat(2,1fr); }
   .velvet-process-grid li:nth-child(2) { border-right: 0; }
@@ -428,7 +453,7 @@ footer { border-top: 1px solid var(--line); padding: 64px max(5vw, 24px) 30px; }
   .velvet-page-hero h1 { font-size: clamp(3rem,14vw,4.5rem); }
   .velvet-app-hero { width: 92vw; margin-top: 20px; border-radius: 160px 160px 20px 20px; }
   .velvet-app-hero img { height: 520px; }
-  .velvet-definition,.velvet-process,.velvet-atmospheres,.velvet-intents,.velvet-methodology,.velvet-faq { padding-top: 90px; padding-bottom: 90px; }
+  .velvet-definition,.velvet-process,.velvet-atmospheres,.velvet-intents,.velvet-methodology,.velvet-waitlist,.velvet-faq { padding-top: 90px; padding-bottom: 90px; }
   .velvet-process-grid,.velvet-atmosphere-grid { grid-template-columns: 1fr; }
   .velvet-process-grid li,.velvet-process-grid li:nth-child(2) { min-height: 250px; border-right: 0; border-bottom: 1px solid rgba(215,177,109,.15); }
   .velvet-process-grid li:last-child { border-bottom: 0; }
@@ -436,6 +461,7 @@ footer { border-top: 1px solid var(--line); padding: 64px max(5vw, 24px) 30px; }
   .velvet-atmosphere-grid article { height: 500px; }
   .velvet-intent-grid { grid-template-columns: 1fr; }
   .velvet-intent-grid article { min-height: 220px; }
+  .velvet-audience-options,.velvet-restaurant-fields { grid-template-columns: 1fr; }
   .velvet-faq-list article { grid-template-columns: 1fr; gap: 18px; }
   .velvet-closing { margin-inline: 18px; flex-direction: column; align-items: flex-start; }
   .velvet-page-footer { align-items: flex-start; flex-direction: column; }
