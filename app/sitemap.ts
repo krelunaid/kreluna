@@ -160,5 +160,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       ],
       alternates: { languages: velvetLanguages },
     })),
+    {
+      url: `${SITE_URL}/en/velvet-table/restaurants`,
+      lastModified: "2026-08-25",
+      changeFrequency: "weekly",
+      priority: 0.8,
+      images: [`${SITE_URL}/velvet-table/og.jpg`],
+    },
   ];
 }

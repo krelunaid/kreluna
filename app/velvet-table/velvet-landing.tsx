@@ -13,6 +13,8 @@ export default function VelvetLanding({ locale }: { locale: VelvetLocale }) {
   const description = velvetSeoDescriptions[locale];
   const faqs = [...copy.faqs, ...intentContent.faqs];
   const pageUrl = velvetUrls[locale];
+  const headerCtaHref = locale === "en" ? "/en/velvet-table/restaurants" : locale === "it" ? "#lista-attesa" : "mailto:krelunaid@gmail.com?subject=Velvet%20Table";
+  const headerCtaLabel = locale === "en" ? "For restaurants" : copy.follow;
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -35,7 +37,7 @@ export default function VelvetLanding({ locale }: { locale: VelvetLocale }) {
         <nav className="velvet-section-nav" aria-label={copy.navAria}><a href="#come-funziona">{copy.nav[0]}</a><a href="#atmosfere">{copy.nav[1]}</a><a href="#faq">{copy.nav[2]}</a></nav>
         <div className="velvet-header-actions">
           <nav className="velvet-language-nav" aria-label="Language selector">{(Object.keys(languageNames) as VelvetLocale[]).map((lang) => <a key={lang} href={velvetUrls[lang]} hrefLang={lang} lang={lang} aria-current={lang === locale ? "page" : undefined}>{languageNames[lang]}</a>)}</nav>
-          <a className="button button-small velvet-page-button" href={locale === "it" ? "#lista-attesa" : "mailto:krelunaid@gmail.com?subject=Velvet%20Table"}>{copy.follow}</a>
+          <a className="button button-small velvet-page-button" href={headerCtaHref}>{headerCtaLabel}</a>
         </div>
       </header>
       <main id="velvet-main">
