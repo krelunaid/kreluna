@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import type { FormEvent } from "react";
+import { trackVelvetLead } from "../meta-pixel";
 
 type Audience = "customer" | "restaurant";
 type FormState = "idle" | "submitting" | "success" | "error";
@@ -39,6 +40,7 @@ export default function VelvetWaitlist() {
       });
       const result = (await response.json()) as { error?: string };
       if (!response.ok) throw new Error(result.error || "Iscrizione non completata.");
+      trackVelvetLead(audience);
       setState("success");
       setMessage("Iscrizione completata. Ti avviseremo quando Velvet Table sarà disponibile.");
       formElement.reset();

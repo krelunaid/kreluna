@@ -122,20 +122,9 @@ function Logo() {
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [cookieVisible, setCookieVisible] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    let seen: string | null = null;
-    try {
-      seen = window.localStorage.getItem("kreluna-cookie-choice");
-    } catch {
-      // The page remains usable when browser storage is unavailable.
-    }
-    const cookieTimer = !seen
-      ? window.setTimeout(() => setCookieVisible(true), 0)
-      : undefined;
-
     const observer = new IntersectionObserver(
       (entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("visible")),
       { threshold: 0.12 },
@@ -143,7 +132,6 @@ export default function Home() {
     document.querySelectorAll(".reveal").forEach((node) => observer.observe(node));
     return () => {
       observer.disconnect();
-      if (cookieTimer !== undefined) window.clearTimeout(cookieTimer);
     };
   }, []);
 
@@ -162,15 +150,6 @@ export default function Home() {
       document.removeEventListener("keydown", closeOnEscape);
     };
   }, [menuOpen]);
-
-  const chooseCookies = (choice: string) => {
-    try {
-      window.localStorage.setItem("kreluna-cookie-choice", choice);
-    } catch {
-      // Closing the banner does not depend on local storage.
-    }
-    setCookieVisible(false);
-  };
 
   return (
     <div
@@ -523,15 +502,6 @@ export default function Home() {
         </div>
       </footer>
 
-      {cookieVisible && (
-        <aside className="cookie-banner" aria-label="Preferenze cookie">
-          <p>Questo sito usa solo memoria tecnica nel browser per ricordare questa scelta. <a href="https://www.kreluna.it/cookie.html">Scopri di più</a>.</p>
-          <div>
-            <button onClick={() => chooseCookies("technical")}>Solo tecnici</button>
-            <button className="accept" onClick={() => chooseCookies("accepted")}>Va bene</button>
-          </div>
-        </aside>
-      )}
     </div>
   );
 }

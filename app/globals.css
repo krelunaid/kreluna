@@ -274,6 +274,8 @@ footer { border-top: 1px solid var(--line); padding: 64px max(5vw, 24px) 30px; }
 .cookie-banner > div { display: flex; gap: 8px; flex-shrink: 0; }
 .cookie-banner button { padding: 9px 14px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--muted); cursor: pointer; font-size: .78rem; }
 .cookie-banner button.accept { border: 0; background: var(--violet); color: var(--bg); font-weight: 600; }
+.cookie-settings-trigger { position: fixed; z-index: 250; left: 16px; bottom: 14px; padding: 7px 11px; border: 1px solid var(--line); border-radius: 999px; background: rgba(18,18,28,.9); color: var(--muted); font: 600 .72rem/1 Inter, sans-serif; cursor: pointer; backdrop-filter: blur(12px); }
+.cookie-settings-trigger:hover, .cookie-settings-trigger:focus-visible { color: var(--text); border-color: rgba(139,124,255,.45); }
 
 /* Velvet Table — dedicated concept page */
 .velvet-page { --vt-ink:#0d090a; --vt-elev:#161011; --vt-burgundy:#6d1324; --vt-champagne:#d7b16d; --vt-cream:#f4e7da; --vt-mute:#c9b8a6; min-height: 100vh; overflow: hidden; background: var(--vt-ink); color: var(--vt-cream); }
