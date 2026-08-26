@@ -134,7 +134,7 @@ function ArrowIcon() {
 function MockupBar({ domain }: { domain: string }) {
   return (
     <div className="mockup-bar">
-      <i /><i /><i />
+      <i className="mockup-dots" />
       <span>{domain}</span>
     </div>
   );
@@ -314,7 +314,7 @@ export default function Home() {
         <div className="cosmic-grid" />
         <div className="spark spark-one" aria-hidden="true">✦</div>
         <div className="spark spark-two" aria-hidden="true">✦</div>
-        <div className="hero-copy reveal visible">
+        <div className="hero-copy">
           <div className="eyebrow"><i /> Kreluna · tecnologia che prende forma</div>
           <h1>Creiamo prodotti<br />{" "}per ciò che <em>viene dopo.</em></h1>
           <p>

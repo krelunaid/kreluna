@@ -1,4 +1,5 @@
 import Link from "next/link";
+import "./velvet.css";
 import { siteUrl, velvetCopy, velvetUrls, type VelvetLocale } from "./velvet-content";
 import { velvetIntentContent, velvetSeoDescriptions } from "./velvet-intents";
 import { velvetMethodology } from "./velvet-methodology";

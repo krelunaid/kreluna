@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import "../../../../velvet-table/velvet.css";
 
 const siteUrl = "https://www.kreluna.it";
 const pageUrl = `${siteUrl}/en/velvet-table/restaurants/founding-100`;
