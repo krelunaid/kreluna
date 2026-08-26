@@ -60,6 +60,8 @@ const products = [
     status: "In sviluppo",
     href: "https://www.kreluna.it/intelligenza-artificiale-aziende.html",
     features: ["Ragionamento adattivo", "Ricerca e analisi", "Scrittura e studio"],
+    mockup: "ai",
+    domain: "kreluna.ai",
   },
   {
     slug: "office",
@@ -72,6 +74,8 @@ const products = [
     status: "In sviluppo",
     href: "https://www.kreluna.it/ai-studi-professionali.html",
     features: ["Document intelligence", "Pratiche e scadenze", "Approval center"],
+    mockup: "office",
+    domain: "kreluna.it/office",
   },
   {
     slug: "cyber",
@@ -84,6 +88,8 @@ const products = [
     status: "In sviluppo",
     href: "https://cra24.kreluna.it/",
     features: ["Security assessment", "Vulnerability management", "Compliance tecnica"],
+    mockup: "cyber",
+    domain: "cra24.kreluna.it",
   },
   {
     slug: "helix",
@@ -96,6 +102,8 @@ const products = [
     status: "In sviluppo",
     href: "https://helix.kreluna.it/",
     features: ["Siti su misura", "App e software", "Costruito con l'AI"],
+    mockup: "helix",
+    domain: "helix.kreluna.it",
   },
   {
     slug: "velvet-table",
@@ -108,6 +116,8 @@ const products = [
     status: "Concept in sviluppo",
     href: "/velvet-table",
     features: ["Atmosfera desiderata", "Occasione e compagnia", "Prenotazione guidata"],
+    mockup: "velvet",
+    domain: "kreluna.it/velvet-table",
   },
 ] as const;
 
@@ -119,6 +129,91 @@ const principles = [
 
 function ArrowIcon() {
   return <span aria-hidden="true">↗</span>;
+}
+
+function MockupBar({ domain }: { domain: string }) {
+  return (
+    <div className="mockup-bar">
+      <i /><i /><i />
+      <span>{domain}</span>
+    </div>
+  );
+}
+
+function MockupScreen({ variant }: { variant: string }) {
+  if (variant === "ai") {
+    return (
+      <div className="mockup-body mockup-ai">
+        <div className="bubble"><span className="mline" /><span className="mline" /></div>
+        <div className="bubble user"><span className="mline" /></div>
+        <div className="bubble"><span className="mline" /><span className="typing"><i /><i /><i /></span></div>
+      </div>
+    );
+  }
+  if (variant === "office") {
+    return (
+      <div className="mockup-body mockup-office">
+        <div className="mrow"><span className="mdot filled" /><span className="mline" style={{ width: "72%" }} /></div>
+        <div className="mrow"><span className="mdot" /><span className="mline soft" style={{ width: "58%" }} /></div>
+        <div className="mrow"><span className="mdot filled" /><span className="mline" style={{ width: "80%" }} /></div>
+        <div className="mrow"><span className="mdot" /><span className="mline soft" style={{ width: "45%" }} /></div>
+      </div>
+    );
+  }
+  if (variant === "cyber") {
+    return (
+      <div className="mockup-body mockup-cyber">
+        <div className="radar"><span className="sweep" /></div>
+        <div className="chips"><span className="mchip">OK</span><span className="mchip">OK</span><span className="mchip">···</span></div>
+      </div>
+    );
+  }
+  if (variant === "helix") {
+    return (
+      <div className="mockup-body mockup-helix">
+        <div className="code">
+          <span className="mline" style={{ "--w": "40%" } as React.CSSProperties} />
+          <span className="mline" style={{ "--w": "72%" } as React.CSSProperties} />
+          <span className="mline" style={{ "--w": "55%" } as React.CSSProperties} />
+          <span className="mline" style={{ "--w": "65%" } as React.CSSProperties} />
+        </div>
+        <div className="preview"><div className="p-bar" /><div className="p-body"><span className="mline" /><span className="mline" style={{ width: "70%" }} /></div></div>
+      </div>
+    );
+  }
+  return (
+    <div className="mockup-body mockup-velvet" role="img" aria-label="Velvet Table, foto originale del progetto">
+      <span className="mchip">Tavolo confermato</span>
+    </div>
+  );
+}
+
+function ProductMockup({ variant, domain }: { variant: string; domain: string }) {
+  return (
+    <div className="mockup-window">
+      <MockupBar domain={domain} />
+      <MockupScreen variant={variant} />
+    </div>
+  );
+}
+
+function HeroDevices() {
+  return (
+    <div className="hero-devices" aria-hidden="true">
+      <div className="mockup-window hd-back">
+        <MockupBar domain="cra24.kreluna.it" />
+        <MockupScreen variant="cyber" />
+      </div>
+      <div className="mockup-window hd-mid">
+        <MockupBar domain="helix.kreluna.it" />
+        <MockupScreen variant="helix" />
+      </div>
+      <div className="mockup-window hd-front">
+        <MockupBar domain="kreluna.ai" />
+        <MockupScreen variant="ai" />
+      </div>
+    </div>
+  );
 }
 
 function Logo() {
@@ -231,15 +326,15 @@ export default function Home() {
             <a className="button button-primary" href="#products">Esplora i progetti <ArrowIcon /></a>
             <a className="button button-secondary" href="#vision">Conosci Kreluna</a>
           </div>
+          <div className="hero-capabilities">
+            <span>Siti</span>
+            <span>App</span>
+            <span>Software</span>
+            <span>Intelligenza artificiale</span>
+          </div>
         </div>
 
-        <div className="orbit-system" aria-hidden="true">
-          <div className="orbit orbit-one"><i className="satellite violet" /></div>
-          <div className="orbit orbit-two"><i className="satellite gold" /></div>
-          <div className="orbit orbit-three"><i className="satellite cyan" /></div>
-          <div className="orbit orbit-four"><i className="satellite coral" /></div>
-          <div className="hero-sphere" />
-        </div>
+        <HeroDevices />
 
         <a className="scroll-cue" href="#products">Scopri l’ecosistema <span>↓</span></a>
       </section>
@@ -270,16 +365,15 @@ export default function Home() {
 
         <div className="product-grid">
           {products.map((product, index) => (
-            <article id={product.slug} className={`product-card ${product.color} reveal`} key={product.slug} style={{ "--delay": `${index * 90}ms` } as React.CSSProperties}>
+            <article id={`product-${product.slug}`} className={`product-card ${product.color} reveal`} key={product.slug} style={{ "--delay": `${index * 90}ms` } as React.CSSProperties}>
               <div className="card-topline">
                 <span>{product.eyebrow}</span>
                 <span className="status"><i /> {product.status}</span>
               </div>
-              <div className="product-visual" aria-hidden="true">
-                <div className="mini-grid" />
-                <div className="product-orbit" />
-                <div className="product-orb" />
-                <span>{String(index + 1).padStart(2, "0")}</span>
+              <div className="product-visual">
+                <div className="mini-grid" aria-hidden="true" />
+                <span className="product-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                <ProductMockup variant={product.mockup} domain={product.domain} />
               </div>
               <div className="card-copy">
                 <p className="signature">Kreluna ecosystem</p>
