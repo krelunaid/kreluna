@@ -23,6 +23,13 @@ FileETag MTime Size
   RewriteRule ^in-arrivo\.html$ https://www.kreluna.it/ [R=301,L,NE]
   RewriteRule ^kreluna-ai(?:/index\.html)?/?$ https://www.kreluna.it/intelligenza-artificiale-aziende.html [R=301,L,NE]
 
+  # The restaurant partner program only exists in English; send the other
+  # locale paths to the real page instead of a 404.
+  RewriteRule ^velvet-table/restaurants/founding-100/?$ https://www.kreluna.it/en/velvet-table/restaurants/founding-100 [R=301,L,NE]
+  RewriteRule ^velvet-table/restaurants/?$ https://www.kreluna.it/en/velvet-table/restaurants [R=301,L,NE]
+  RewriteRule ^(fr|es|de)/velvet-table/restaurants/founding-100/?$ https://www.kreluna.it/en/velvet-table/restaurants/founding-100 [R=301,L,NE]
+  RewriteRule ^(fr|es|de)/velvet-table/restaurants/?$ https://www.kreluna.it/en/velvet-table/restaurants [R=301,L,NE]
+
   # Remove explicit index filenames before the general host redirect.
   RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.html(?:[?\s]) [NC]
   RewriteRule ^(.*/)?index\.html$ https://www.kreluna.it/$1 [R=301,L,NE]

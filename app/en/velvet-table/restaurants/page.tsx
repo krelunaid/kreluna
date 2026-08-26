@@ -56,7 +56,7 @@ export default function VelvetRestaurantsPage() {
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
-      { "@type": "Organization", "@id": `${siteUrl}/#organization`, name: "Kreluna", url: `${siteUrl}/` },
+      { "@type": "Organization", "@id": `${siteUrl}/#organization`, name: "Kreluna", legalName: "Gadducci Andrea", url: `${siteUrl}/`, taxID: "02114130475", identifier: { "@type": "PropertyValue", propertyID: "REA", value: "PT-622714" }, address: { "@type": "PostalAddress", addressLocality: "Chiesina Uzzanese", addressRegion: "PT", addressCountry: "IT" } },
       { "@type": "WebPage", "@id": `${pageUrl}#webpage`, url: pageUrl, name: title, description, inLanguage: "en-US", about: { "@id": `${pageUrl}#service` }, dateModified: "2026-08-25" },
       { "@type": "Service", "@id": `${pageUrl}#service`, name: "Velvet Table for Restaurants", serviceType: "Restaurant booking and table-selection concept", description, provider: { "@id": `${siteUrl}/#organization` }, areaServed: { "@type": "City", name: "New York" }, audience: { "@type": "BusinessAudience", audienceType: "Restaurant owners and managers" } },
       { "@type": "FAQPage", "@id": `${pageUrl}#faq`, inLanguage: "en-US", mainEntity: faqs.map(([question, answer]) => ({ "@type": "Question", name: question, acceptedAnswer: { "@type": "Answer", text: answer } })) },

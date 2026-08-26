@@ -86,6 +86,18 @@ const products = [
     features: ["Security assessment", "Vulnerability management", "Compliance tecnica"],
   },
   {
+    slug: "helix",
+    name: "Helix",
+    eyebrow: "Sviluppo con l'AI",
+    tagline: "Il modo in cui Kreluna costruisce prodotti.",
+    description:
+      "Helix crea siti, app e software su misura con l'intelligenza artificiale. Velvet Table nasce da Helix, e ogni prossimo progetto Kreluna parte dallo stesso strumento.",
+    color: "coral",
+    status: "In sviluppo",
+    href: "https://helix.kreluna.it/",
+    features: ["Siti su misura", "App e software", "Costruito con l'AI"],
+  },
+  {
     slug: "velvet-table",
     name: "Velvet Table",
     eyebrow: "Dining experience",
@@ -250,8 +262,9 @@ export default function Home() {
             <h2>Un’unica visione.<br />{" "}<em>Progetti diversi.</em></h2>
           </div>
           <p>
-            Dall’intelligenza artificiale al lavoro professionale, dalla sicurezza
-            fino a Velvet Table. Questo spazio è pensato per crescere insieme a Kreluna.
+            Dall’intelligenza artificiale al lavoro professionale, dalla sicurezza allo
+            sviluppo con Helix, fino a Velvet Table. Questo spazio è pensato per crescere
+            insieme a Kreluna.
           </p>
         </div>
 

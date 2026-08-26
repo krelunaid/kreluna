@@ -167,6 +167,7 @@ h1 em, h2 em { font-family: var(--serif); font-weight: 500; background: linear-g
 .section-heading h2, .closing h2 { margin-top: 19px; font-size: clamp(2.65rem,5vw,5.1rem); line-height: 1.02; letter-spacing: -.045em; }
 .section-heading > p { max-width: 520px; color: var(--muted); line-height: 1.7; }
 .product-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.product-grid > article:last-child:nth-child(odd) { grid-column: 1 / -1; }
 .product-card { --accent: var(--violet); position: relative; min-height: 650px; display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--line); border-radius: 24px; background: linear-gradient(160deg, color-mix(in srgb, var(--accent) 7%, var(--panel)), var(--panel) 55%); transition: transform .35s ease, border-color .35s ease; transition-delay: var(--delay); }
 .product-card:hover { transform: translateY(-7px); border-color: color-mix(in srgb, var(--accent) 48%, transparent); }
 .product-card.gold { --accent: var(--gold); }

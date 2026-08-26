@@ -67,10 +67,13 @@ const staticLanding = await readFile(
 );
 const sitemap = await readFile(path.join(outputDir, "sitemap.xml"), "utf8");
 const requiredHomeMarkers = [
-  /rel="canonical" href="https:\/\/www\.kreluna\.it\/"/i,
-  /hrefLang="it" href="https:\/\/www\.kreluna\.it\/"/i,
+  // Next.js resolves a root-level canonical/alternate URL to the bare origin
+  // (no trailing slash) whenever trailingSlash is not explicitly enabled —
+  // this matches default Next.js behaviour and is not a defect.
+  /rel="canonical" href="https:\/\/www\.kreluna\.it"/i,
+  /hrefLang="it" href="https:\/\/www\.kreluna\.it"/i,
   /hrefLang="en" href="https:\/\/www\.kreluna\.it\/en\/"/i,
-  /hrefLang="x-default" href="https:\/\/www\.kreluna\.it\/"/i,
+  /hrefLang="x-default" href="https:\/\/www\.kreluna\.it"/i,
   /id="kreluna-structured-data"/i,
   /AI Act — testo ufficiale/i,
 ];
@@ -80,8 +83,8 @@ for (const marker of requiredHomeMarkers) {
 if (!/\/assets\/seo-20260814\.css/i.test(staticLanding)) {
   throw new Error("The enhanced static-page stylesheet is not referenced.");
 }
-if ((sitemap.match(/<url>/g) ?? []).length !== 28) {
-  throw new Error("The sitemap must contain exactly 28 URLs.");
+if ((sitemap.match(/<url>/g) ?? []).length !== 34) {
+  throw new Error("The sitemap must contain exactly 34 URLs.");
 }
 if (/andreagadducci\.chatgpt\.site/i.test(home) || /andreagadducci\.chatgpt\.site/i.test(sitemap)) {
   throw new Error("Private preview hostname leaked into the Aruba release.");

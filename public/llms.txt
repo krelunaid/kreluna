@@ -14,11 +14,16 @@ Sede pubblicata: Chiesina Uzzanese (PT), Italia
 - Kreluna AI: https://www.kreluna.it/intelligenza-artificiale-aziende.html
 - Kreluna Office: https://www.kreluna.it/ai-studi-professionali.html
 - Kreluna Cyber: https://www.kreluna.it/cybersecurity-pmi-studi-professionali.html
+- Helix: https://helix.kreluna.it/
 - Velvet Table (Italiano): https://www.kreluna.it/velvet-table
 - Velvet Table (English): https://www.kreluna.it/en/velvet-table
 - Velvet Table (Français): https://www.kreluna.it/fr/velvet-table
 - Velvet Table (Español): https://www.kreluna.it/es/velvet-table
 - Velvet Table (Deutsch): https://www.kreluna.it/de/velvet-table
+
+## Helix
+
+Helix è lo strumento Kreluna che crea siti, app e software su misura con l’intelligenza artificiale. Velvet Table è il primo progetto costruito con Helix.
 
 ## Velvet Table
 

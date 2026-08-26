@@ -5,6 +5,13 @@ import { velvetMethodology } from "./velvet-methodology";
 import VelvetWaitlist from "./velvet-waitlist";
 
 const languageNames: Record<VelvetLocale, string> = { it: "IT", en: "EN", fr: "FR", es: "ES", de: "DE" };
+const helixCredit: Record<VelvetLocale, string> = {
+  it: "Creato con Helix",
+  en: "Built with Helix",
+  fr: "Créé avec Helix",
+  es: "Creado con Helix",
+  de: "Erstellt mit Helix",
+};
 
 export default function VelvetLanding({ locale }: { locale: VelvetLocale }) {
   const copy = velvetCopy[locale];
@@ -55,7 +62,7 @@ export default function VelvetLanding({ locale }: { locale: VelvetLocale }) {
         <section className="velvet-faq section-shell" id="faq"><div className="velvet-section-heading"><div className="eyebrow velvet-text"><i /> {copy.faqKicker}</div><h2>{copy.faqTitle}</h2></div><div className="velvet-faq-list">{faqs.map((faq) => <article key={faq.question}><h3>{faq.question}</h3><p>{faq.answer}</p></article>)}</div></section>
         <section className="velvet-closing section-shell"><div><div className="eyebrow velvet-text"><i /> Velvet Table by Kreluna</div><h2>{copy.closingTitle}</h2><p>{copy.closingBody}</p></div><a className="button velvet-page-button" href={locale === "it" ? "#lista-attesa" : "mailto:krelunaid@gmail.com?subject=Velvet%20Table%20project"}>{copy.closingCta}</a></section>
       </main>
-      <footer className="velvet-page-footer"><Link href="/">Kreluna</Link><span>{copy.footer}</span><a href="/privacy.html">Privacy</a></footer>
+      <footer className="velvet-page-footer"><Link href="/">Kreluna</Link><span>{copy.footer}</span><a href="https://helix.kreluna.it/">{helixCredit[locale]}</a><a href={locale === "it" ? "/velvet-table/privacy.html" : "/en/privacy.html"}>Privacy</a></footer>
       <script id="velvet-table-structured-data" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
     </div>
   );
