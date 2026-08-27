@@ -478,6 +478,15 @@ export async function loadRisonixCustomerOrders(customer: CustomerIdentity) {
   }));
 }
 
+export async function hasFulfilledRisonixOrder(customer: CustomerIdentity): Promise<boolean> {
+  const [order] = await getDb().select({ id: risonixOrders.id }).from(risonixOrders).where(and(
+    eq(risonixOrders.customerUserHash, await hashRisonixUserId(customer.userId)),
+    eq(risonixOrders.customerEmailHash, await hashRisonixCustomerEmail(customer.email)),
+    eq(risonixOrders.status, "fulfilled"),
+  )).limit(1);
+  return Boolean(order);
+}
+
 export async function loadRisonixConfirmation(sessionId: string, customer: CustomerIdentity) {
   if (!/^cs_(?:test_)?[A-Za-z0-9]+$/.test(sessionId)) return null;
   const [order] = await getDb().select().from(risonixOrders).where(and(
