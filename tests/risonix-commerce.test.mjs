@@ -51,12 +51,12 @@ test("ships D1 order/event persistence and an idempotent provider event index", 
 
 test("protects installer delivery behind authentication and a fulfilled order", async () => {
   const downloadRoute = await readFile("app/api/risonix/downloads/mac/route.ts", "utf8");
-  const uploadRoute = await readFile("app/api/risonix/internal/installers/mac/route.ts", "utf8");
+  const storage = await readFile("app/risonix/installer-storage.ts", "utf8");
   const hosting = JSON.parse(await readFile(".openai/hosting.json", "utf8"));
   assert.equal(hosting.r2, "FILES");
   assert.match(downloadRoute, /getChatGPTUser/);
   assert.match(downloadRoute, /hasFulfilledRisonixOrder/);
   assert.match(downloadRoute, /private, no-store/);
-  assert.match(uploadRoute, /authorizeInstallerUpload/);
-  assert.match(uploadRoute, /x-risonix-sha256/);
+  assert.match(storage, /Risonix-1\.0\.0-macOS-arm64\.dmg/);
+  assert.doesNotMatch(storage, /put\(/);
 });
