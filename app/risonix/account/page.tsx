@@ -1,7 +1,8 @@
 import { chatGPTSignOutPath, requireChatGPTUser } from "../../chatgpt-auth";
-import Link from "next/link";
 import { loadRisonixLicenses } from "../license-bridge";
 import "../risonix.css";
+
+/* eslint-disable @next/next/no-html-link-for-pages */
 
 export const dynamic = "force-dynamic";
 
@@ -22,7 +23,7 @@ export default async function RisonixAccountPage() {
 
   return (
     <main className="rx-account-page">
-      <header className="rx-nav"><Link className="rx-brand" href="/risonix"><span className="rx-mark">⌁</span><b>RISONIX</b></Link><nav><Link href="/risonix">Prodotto</Link><Link href={chatGPTSignOutPath("/risonix")}>Esci</Link></nav></header>
+      <header className="rx-nav"><a className="rx-brand" href="/risonix"><span className="rx-mark">⌁</span><b>RISONIX</b></a><nav><a href="/risonix">Prodotto</a><a href={chatGPTSignOutPath("/risonix")}>Esci</a></nav></header>
       <section className="rx-account-head"><p className="rx-kicker"><i /> Area cliente protetta</p><h1>La mia <em>licenza.</em></h1><p>Accesso: {user.email}</p></section>
       {unavailable ? (
         <section className="rx-account-message"><span>⌁</span><div><h2>Collegamento in preparazione</h2><p>L’area è pronta, ma il server licenze pubblico Kreluna non è ancora online. La preview locale continua a funzionare dal Mac autorizzato.</p></div></section>

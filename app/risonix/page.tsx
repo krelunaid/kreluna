@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { chatGPTSignInPath } from "../chatgpt-auth";
 import "./risonix.css";
+
+/* eslint-disable @next/next/no-html-link-for-pages */
 
 export const metadata: Metadata = {
   title: "Risonix — Riconoscimento musicale | Kreluna",
@@ -24,8 +25,8 @@ export default function RisonixPage() {
   return (
     <main className="rx-page">
       <header className="rx-nav">
-        <Link className="rx-brand" href="/"><span className="rx-mark">⌁</span><b>KRELUNA</b></Link>
-        <nav aria-label="Navigazione Risonix"><Link href="/">Ecosistema</Link><a href="#funzioni">Funzioni</a><Link href={accountUrl}>La mia licenza</Link></nav>
+        <a className="rx-brand" href="/"><span className="rx-mark">⌁</span><b>KRELUNA</b></a>
+        <nav aria-label="Navigazione Risonix"><a href="/">Ecosistema</a><a href="#funzioni">Funzioni</a><a href={accountUrl}>La mia licenza</a></nav>
       </header>
 
       <section className="rx-hero">
@@ -35,8 +36,8 @@ export default function RisonixPage() {
           <h1>La tua musica.<br /><em>Riconosciuta.</em></h1>
           <p>Collega una cartella, fai ascoltare un campione e Risonix confronta l’impronta acustica con il tuo database locale. Nome, punto e percentuale compaiono in pochi istanti.</p>
           <div className="rx-actions">
-            <Link className="rx-primary" href="/">Torna all’ecosistema <span>→</span></Link>
-            <Link className="rx-secondary" href={accountUrl}>Gestisci la licenza</Link>
+            <a className="rx-primary" href="/">Torna all’ecosistema <span>→</span></a>
+            <a className="rx-secondary" href={accountUrl}>Gestisci la licenza</a>
           </div>
           <small>Preview 1.7 · macOS e Windows · licenza online per un dispositivo</small>
         </div>
@@ -60,10 +61,10 @@ export default function RisonixPage() {
 
       <section className="rx-security">
         <div><p className="rx-kicker"><i /> Kreluna Control</p><h2>Acquisto, dispositivo e licenza.<br /><em>Un unico collegamento.</em></h2><p>La dashboard Kreluna vede attivazioni e heartbeat. L’area cliente permette di liberare il vecchio computer senza conoscere i segreti amministrativi.</p></div>
-        <Link className="rx-primary" href={accountUrl}>Apri la mia area <span>→</span></Link>
+        <a className="rx-primary" href={accountUrl}>Apri la mia area <span>→</span></a>
       </section>
 
-      <footer className="rx-footer"><span>© 2026 Kreluna · Risonix</span><Link href="/privacy.html">Privacy</Link><Link href="/termini.html">Termini</Link><span>P. IVA 02114130475 · REA PT-622714</span></footer>
+      <footer className="rx-footer"><span>© 2026 Kreluna · Risonix</span><a href="/privacy.html">Privacy</a><a href="/termini.html">Termini</a><span>P. IVA 02114130475 · REA PT-622714</span></footer>
     </main>
   );
 }
