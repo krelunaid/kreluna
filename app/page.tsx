@@ -202,7 +202,7 @@ export default function Home() {
       <header className="site-header">
         <Logo />
         <nav className="desktop-nav" aria-label="Navigazione principale">
-          <a href="/marketplace">Marketplace</a>
+          <a href="#products">Marketplace</a>
           <a href="#vision">Visione</a>
           <a href="#velvet-table">Velvet Table</a>
           <a href="https://www.kreluna.it/azienda.html">Azienda</a>
@@ -232,7 +232,7 @@ export default function Home() {
             }}
             aria-label="Chiudi il menu"
           >×</button>
-          <a href="/marketplace" onClick={() => setMenuOpen(false)}>Marketplace</a>
+          <a href="#products" onClick={() => setMenuOpen(false)}>Marketplace</a>
           <a href="#vision" onClick={() => setMenuOpen(false)}>Visione</a>
           <a href="#velvet-table" onClick={() => setMenuOpen(false)}>Velvet Table</a>
           <a href="https://www.kreluna.it/azienda.html">Azienda</a>
