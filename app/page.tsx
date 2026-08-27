@@ -48,6 +48,20 @@ const homeStructuredData = {
 
 const products = [
   {
+    slug: "risonix",
+    name: "Risonix",
+    eyebrow: "Riconoscimento musicale",
+    tagline: "La tua musica. Riconosciuta.",
+    description:
+      "Impronte acustiche locali, riconoscimento da file o microfono, percentuale di corrispondenza e licenza online per un solo dispositivo.",
+    color: "teal",
+    status: "Preview 1.7",
+    href: "/risonix",
+    features: ["Database locale", "File e microfono", "Licenza Mac + Windows"],
+    mockup: "risonix",
+    domain: "kreluna.it/risonix",
+  },
+  {
     slug: "kreluna-ai",
     name: "Kreluna AI",
     eyebrow: "Intelligenza artificiale",
@@ -104,20 +118,6 @@ const products = [
     domain: "helix.kreluna.it",
   },
   {
-    slug: "risonix",
-    name: "Risonix",
-    eyebrow: "Riconoscimento musicale",
-    tagline: "La tua musica. Riconosciuta.",
-    description:
-      "Impronte acustiche locali, riconoscimento da file o microfono, percentuale di corrispondenza e licenza online per un solo dispositivo.",
-    color: "teal",
-    status: "Preview 1.7",
-    href: "/risonix",
-    features: ["Database locale", "File e microfono", "Licenza Mac + Windows"],
-    mockup: "risonix",
-    domain: "kreluna.it/risonix",
-  },
-  {
     slug: "velvet-table",
     name: "Velvet Table",
     eyebrow: "Dining experience",
@@ -130,6 +130,21 @@ const products = [
     features: ["Atmosfera desiderata", "Occasione e compagnia", "Prenotazione guidata"],
     mockup: "velvet",
     domain: "kreluna.it/velvet-table",
+  },
+] as const;
+
+const marketplaceCategories = [
+  {
+    id: "music-audio",
+    name: "Musica e audio",
+    description: "Software Kreluna dedicati al riconoscimento, all’ascolto e alla gestione della musica.",
+    products: products.filter((product) => product.slug === "risonix"),
+  },
+  {
+    id: "digital-products",
+    name: "AI, lavoro ed esperienze",
+    description: "Intelligenza artificiale, strumenti professionali, sicurezza e nuovi servizi digitali.",
+    products: products.filter((product) => product.slug !== "risonix"),
   },
 ] as const;
 
@@ -373,41 +388,55 @@ export default function Home() {
       <section className="products section-shell" id="products">
         <div className="section-heading reveal">
           <div>
-            <div className="eyebrow"><i /> L’ecosistema Kreluna</div>
+            <div className="eyebrow"><i /> Marketplace Kreluna</div>
             <h2>Un’unica visione.<br />{" "}<em>Progetti diversi.</em></h2>
           </div>
           <p>
-            Dall’intelligenza artificiale al lavoro professionale, dalla sicurezza allo
-            sviluppo con Helix, fino a Velvet Table. Questo spazio è pensato per crescere
-            insieme a Kreluna.
+            Esplora i prodotti per categoria. Risonix apre il marketplace nella nuova area
+            Musica e audio, seguito dagli strumenti digitali dell’ecosistema Kreluna.
           </p>
         </div>
 
-        <div className="product-grid">
-          {products.map((product, index) => (
-            <article id={`product-${product.slug}`} className={`product-card ${product.color} reveal`} key={product.slug} style={{ "--delay": `${index * 90}ms` } as React.CSSProperties}>
-              <div className="card-topline">
-                <span>{product.eyebrow}</span>
-                <span className="status"><i /> {product.status}</span>
+        <nav className="marketplace-categories reveal" aria-label="Categorie del marketplace">
+          {marketplaceCategories.map((category, index) => <a href={`#category-${category.id}`} key={category.id}><span>{String(index + 1).padStart(2, "0")}</span>{category.name}</a>)}
+        </nav>
+
+        <div className="marketplace-groups">
+          {marketplaceCategories.map((category) => (
+            <section className="marketplace-group" id={`category-${category.id}`} key={category.id}>
+              <header className="marketplace-group-heading reveal">
+                <div><span>Categoria</span><h3>{category.name}</h3></div>
+                <p>{category.description}</p>
+              </header>
+              <div className={`product-grid ${category.id === "music-audio" ? "product-grid-featured" : ""}`}>
+                {category.products.map((product) => {
+                  const index = products.indexOf(product);
+                  return <article id={`product-${product.slug}`} className={`product-card ${product.color} reveal`} key={product.slug} style={{ "--delay": `${index * 90}ms` } as React.CSSProperties}>
+                    <div className="card-topline">
+                      <span>{product.eyebrow}</span>
+                      <span className="status"><i /> {product.status}</span>
+                    </div>
+                    <div className="product-visual">
+                      <div className="mini-grid" aria-hidden="true" />
+                      <span className="product-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                      <ProductMockup variant={product.mockup} domain={product.domain} />
+                    </div>
+                    <div className="card-copy">
+                      <p className="signature">Kreluna marketplace</p>
+                      <h3>{product.name}</h3>
+                      <h4>{product.tagline}</h4>
+                      <p>{product.description}</p>
+                      <div className="feature-list">
+                        {product.features.map((feature) => <span key={feature}>{feature}</span>)}
+                      </div>
+                    </div>
+                    <a href={product.href} className="card-link" aria-label={`Scopri ${product.name}`}>
+                      Scopri {product.name} <ArrowIcon />
+                    </a>
+                  </article>;
+                })}
               </div>
-              <div className="product-visual">
-                <div className="mini-grid" aria-hidden="true" />
-                <span className="product-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-                <ProductMockup variant={product.mockup} domain={product.domain} />
-              </div>
-              <div className="card-copy">
-                <p className="signature">Kreluna ecosystem</p>
-                <h3>{product.name}</h3>
-                <h4>{product.tagline}</h4>
-                <p>{product.description}</p>
-                <div className="feature-list">
-                  {product.features.map((feature) => <span key={feature}>{feature}</span>)}
-                </div>
-              </div>
-              <a href={product.href} className="card-link" aria-label={`Scopri ${product.name}`}>
-                Scopri {product.name} <ArrowIcon />
-              </a>
-            </article>
+            </section>
           ))}
         </div>
 
