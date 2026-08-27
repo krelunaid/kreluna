@@ -1,0 +1,50 @@
+"use client";
+
+import { FormEvent, useCallback, useEffect, useState } from "react";
+import "../risonix.css";
+import "./control.css";
+
+type License = { license_id: string; status: string; order_reference: string | null; created_at: string; activation: null | { device_label: string; platform: string; app_version: string; status: string; last_seen: string } };
+
+export default function RisonixControlPage() {
+  const [licenses, setLicenses] = useState<License[] | null>(null);
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [order, setOrder] = useState("");
+  const [message, setMessage] = useState("");
+  const load = useCallback(async () => { const response = await fetch("/api/risonix/v1/control/licenses", { cache: "no-store" }); setLicenses(response.ok ? await response.json() as License[] : null); }, []);
+  useEffect(() => {
+    // The initial server check decides whether the protected login or dashboard is shown.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    void load();
+  }, [load]);
+
+  async function login(event: FormEvent) {
+    event.preventDefault();
+    const response = await fetch("/api/risonix/v1/control/session", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ password }) });
+    setMessage(response.ok ? "Accesso riuscito." : "Password non valida.");
+    if (response.ok) { setPassword(""); await load(); }
+  }
+  async function create(event: FormEvent) {
+    event.preventDefault();
+    const response = await fetch("/api/risonix/v1/control/licenses", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ customer_email: email, order_reference: order }) });
+    const body = await response.json() as { license_key?: string; error?: string };
+    setMessage(response.ok ? `Nuova licenza (copiala ora): ${body.license_key}` : body.error ?? "Creazione non riuscita.");
+    if (response.ok) { setEmail(""); setOrder(""); await load(); }
+  }
+  async function mutate(id: string, action: "release-device" | "disable") {
+    if (action === "disable" && !window.confirm("Disattivare definitivamente questa licenza?")) return;
+    const response = await fetch(`/api/risonix/v1/control/licenses/${id}/${action}`, { method: "POST" });
+    setMessage(response.ok ? (action === "disable" ? "Licenza disattivata." : "Dispositivo liberato.") : "Operazione non riuscita.");
+    if (response.ok) await load();
+  }
+  return <main className="rx-page rx-control">
+    <header className="rx-nav"><a className="rx-brand" href="/risonix"><span className="rx-mark">⌁</span><b>RISONIX CONTROL</b></a><nav><a href="/risonix">Prodotto</a></nav></header>
+    <section className="rx-account-head"><p className="rx-kicker"><i /> Dashboard privata Kreluna</p><h1>Licenze sempre <em>sotto controllo.</em></h1><p>Attivazioni, dispositivi e ultima verifica online in un’unica schermata.</p></section>
+    {licenses === null ? <form className="rx-control-form" onSubmit={login}><h2>Accesso amministratore</h2><input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password dashboard" required /><button className="rx-primary">Entra</button></form> : <>
+      <form className="rx-control-form" onSubmit={create}><h2>Crea una licenza</h2><input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email cliente" required /><input value={order} onChange={(e) => setOrder(e.target.value)} placeholder="Riferimento ordine" /><button className="rx-primary">Genera codice</button></form>
+      <section className="rx-license-grid">{licenses.map((item) => <article className="rx-license-card" key={item.license_id}><div><span className={`rx-status ${item.status}`}>{item.status}</span><h2>{item.order_reference || "Licenza Risonix"}</h2><code>{item.license_id}</code></div><p>{item.activation ? `${item.activation.device_label} · ${item.activation.platform} · ${item.activation.app_version}` : "Nessun dispositivo attivo"}</p>{item.activation && <small>Ultimo controllo: {new Date(item.activation.last_seen).toLocaleString("it-IT")}</small>}<div className="rx-control-actions"><button onClick={() => void mutate(item.license_id, "release-device")}>Libera dispositivo</button><button className="danger" onClick={() => void mutate(item.license_id, "disable")}>Disattiva</button></div></article>)}</section>
+    </>}
+    {message && <aside className="rx-control-message">{message}</aside>}
+  </main>;
+}

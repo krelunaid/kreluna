@@ -1,5 +1,5 @@
 import { env } from "cloudflare:workers";
-import { and, eq } from "drizzle-orm";
+import { and, desc, eq } from "drizzle-orm";
 import { getDb } from "../../db";
 import { risonixActivations, risonixLicenseEvents, risonixLicenses } from "../../db/schema";
 
@@ -119,6 +119,37 @@ async function requireSite(request: Request) {
   if (!(await sameSecret(request.headers.get("x-kreluna-site-secret"), required("RISONIX_SITE_SECRET")))) throw apiError(403, "Collegamento Kreluna non autorizzato.");
 }
 
+async function controlToken() {
+  return hash(`control:${required("RISONIX_ADMIN_SECRET")}:${required("RISONIX_DASHBOARD_PASSWORD")}`);
+}
+
+async function requireControl(request: Request, mutation = false) {
+  const cookie = request.headers.get("cookie")?.match(/(?:^|;\s*)rx_admin=([^;]+)/)?.[1] ?? null;
+  if (!(await sameSecret(cookie, await controlToken()))) throw apiError(401, "Sessione amministratore non valida.");
+  if (mutation) {
+    const origin = request.headers.get("origin");
+    if (!origin || origin !== new URL(request.url).origin) throw apiError(403, "Origine richiesta non valida.");
+  }
+}
+
+async function controlLogin(request: Request) {
+  const body = await json(request);
+  if (!(await sameSecret(text(body, "password", 160), required("RISONIX_DASHBOARD_PASSWORD")))) throw apiError(403, "Password non valida.");
+  return Response.json({ ok: true }, { headers: { "set-cookie": `rx_admin=${await controlToken()}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=28800` } });
+}
+
+async function listLicenses(request: Request, control = false) {
+  if (control) await requireControl(request);
+  else await requireAdmin(request);
+  const db = getDb();
+  const licenses = await db.select().from(risonixLicenses).orderBy(desc(risonixLicenses.createdAt)).limit(250);
+  const result = await Promise.all(licenses.map(async (license) => {
+    const [activation] = await db.select().from(risonixActivations).where(eq(risonixActivations.licenseId, license.id)).limit(1);
+    return { license_id: license.id, status: license.status, order_reference: license.orderReference, created_at: new Date(license.createdAt * 1000).toISOString(), activation: activation ? { device_label: activation.deviceLabel, platform: activation.platform, app_version: activation.appVersion, status: activation.status, activated_at: new Date(activation.activatedAt * 1000).toISOString(), last_seen: new Date(activation.lastSeen * 1000).toISOString() } : null };
+  }));
+  return Response.json(result);
+}
+
 async function activate(request: Request) {
   const body = await json(request);
   const key = text(body, "license_key", 40).toUpperCase();
@@ -190,6 +221,25 @@ async function createLicense(request: Request) {
   return Response.json({ license_key: key, license_id: id }, { status: 201 });
 }
 
+async function createLicenseFromControl(request: Request) {
+  await requireControl(request, true);
+  const forwarded = new Request(request.url, { method: "POST", headers: { "content-type": "application/json", authorization: `Bearer ${required("RISONIX_ADMIN_SECRET")}` }, body: JSON.stringify(await json(request)) });
+  return createLicense(forwarded);
+}
+
+async function controlMutation(request: Request, licenseId: string, action: "release" | "disable") {
+  await requireControl(request, true);
+  if (action === "release") {
+    await getDb().update(risonixActivations).set({ status: "disabled" }).where(eq(risonixActivations.licenseId, licenseId));
+    await addEvent(licenseId, "device_released_by_control");
+  } else {
+    await getDb().update(risonixLicenses).set({ status: "disabled" }).where(eq(risonixLicenses.id, licenseId));
+    await getDb().update(risonixActivations).set({ status: "disabled" }).where(eq(risonixActivations.licenseId, licenseId));
+    await addEvent(licenseId, "license_disabled_by_control");
+  }
+  return new Response(null, { status: 204 });
+}
+
 async function customerLicenses(request: Request) {
   await requireSite(request);
   const email = text(await json(request), "email", 254);
@@ -229,6 +279,12 @@ export async function handleLicenseApi(request: Request, path: string[]) {
   try {
     const route = path.join("/");
     if (request.method === "GET" && route === "health") return Response.json({ service: "risonix-license-server", status: "ok", public_key: required("RISONIX_SIGNING_PUBLIC_KEY_B64") });
+    if (request.method === "GET" && route === "admin/licenses") return await listLicenses(request);
+    if (request.method === "GET" && route === "control/licenses") return await listLicenses(request, true);
+    if (request.method === "POST" && route === "control/session") return await controlLogin(request);
+    if (request.method === "POST" && route === "control/licenses") return await createLicenseFromControl(request);
+    const controlAction = route.match(/^control\/licenses\/([^/]+)\/(release-device|disable)$/);
+    if (request.method === "POST" && controlAction) return await controlMutation(request, controlAction[1], controlAction[2] === "disable" ? "disable" : "release");
     if (request.method !== "POST") return Response.json({ error: "Metodo non supportato." }, { status: 405 });
     if (route === "licenses/activate") return await activate(request);
     if (route === "licenses/heartbeat") return await heartbeat(request);
