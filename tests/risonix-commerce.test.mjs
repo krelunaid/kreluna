@@ -19,6 +19,8 @@ test("keeps checkout authority server-side and fulfillment webhook-only", async 
   const checkoutPage = await readFile("app/risonix/acquista/page.tsx", "utf8");
   const environmentExample = await readFile(".env.example", "utf8");
   assert.match(commerce, /RISONIX_STRIPE_PRICE_ID/);
+  assert.match(commerce, /RISONIX_SALES_ENABLED/);
+  assert.match(commerce, /requireSalesEnabled\(\)/);
   assert.match(commerce, /sk_live_/);
   assert.match(commerce, /sk_test_/);
   assert.match(commerce, /rk_live_/);
@@ -35,6 +37,7 @@ test("keeps checkout authority server-side and fulfillment webhook-only", async 
   assert.match(environmentExample, /RISONIX_STRIPE_CURRENCY=eur/);
   assert.match(environmentExample, /RISONIX_STRIPE_TAX_BEHAVIOR=inclusive/);
   assert.match(environmentExample, /RISONIX_STRIPE_MODE=test/);
+  assert.match(environmentExample, /RISONIX_SALES_ENABLED=false/);
 });
 
 test("ships D1 order/event persistence and an idempotent provider event index", async () => {

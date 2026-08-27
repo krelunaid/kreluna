@@ -40,6 +40,12 @@ const CHECKOUT_CONFIGURATION = [
   "RISONIX_REFUND_POLICY_URL",
 ] as const;
 
+function requireSalesEnabled(): void {
+  if (runtimeValue("RISONIX_SALES_ENABLED") !== "true") {
+    throw commerceError(503, "Vendite Risonix non ancora abilitate.");
+  }
+}
+
 function runtimeValue(name: string): string | undefined {
   const workerValue = (env as unknown as Record<string, unknown>)[name];
   const value = typeof workerValue === "string" ? workerValue : process.env[name];
@@ -189,6 +195,9 @@ async function recordOrderEvent(orderId: string, eventType: string, providerEven
 }
 
 export function commerceReadiness() {
+  if (runtimeValue("RISONIX_SALES_ENABLED") !== "true") {
+    return { ready: false, missing: [], reason: "Vendite Risonix non ancora abilitate." };
+  }
   const missing = CHECKOUT_CONFIGURATION.filter((name) => !runtimeValue(name));
   if (!missing.length) {
     try {
@@ -216,6 +225,7 @@ export function risonixPurchasePresentation() {
 }
 
 export async function createRisonixCheckout(request: Request, customer: CustomerIdentity): Promise<string> {
+  requireSalesEnabled();
   const form = await request.formData();
   if (form.get("accept_terms") !== "yes") throw commerceError(400, "Devi accettare termini e politica di rimborso.");
   const requestOrigin = request.headers.get("origin");
