@@ -21,5 +21,5 @@ export const metadata: Metadata = {
 };
 
 export default function MarketplacePage() {
-  redirect("https://kreluna-store-andrea.andreagadducci.chatgpt.site");
+  redirect(marketplaceUrl);
 }
