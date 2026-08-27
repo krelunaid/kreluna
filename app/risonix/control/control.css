@@ -14,6 +14,7 @@
 .rx-order-card h3 { margin: 1.2rem 0 .5rem; }
 .rx-order-card p,.rx-order-card small { color: #82919c; }
 .rx-order-card button { display: block; width: 100%; margin-top: 1rem; padding: .7rem; border: 1px solid #ff718944; border-radius: 10px; color: #ff91a4; background: #ff71890c; cursor: pointer; }
+.rx-order-card button.delete { color: #fff; border-color: #ff718966; background: #ff71891a; }
 .rx-license-card { padding: 1.3rem; border: 1px solid #ffffff14; border-radius: 20px; background: #111626c2; }
 .rx-license-card h2 { margin: .65rem 0 .25rem; }
 .rx-license-card code, .rx-license-card small { color: #82919c; }

@@ -89,3 +89,18 @@ test("allows permanent deletion only after a license is disabled", async () => {
   assert.match(controlPage, /item\.status === "disabled"/);
   assert.match(controlPage, /Elimina definitivamente/);
 });
+
+test("allows control to cancel and remove only unpaid Stripe orders", async () => {
+  const commerce = await readFile("app/risonix/commerce.ts", "utf8");
+  const controlPage = await readFile("app/risonix/control/page.tsx", "utf8");
+  const deleteRoute = await readFile("app/api/risonix/orders/[orderId]/delete/route.ts", "utf8");
+  assert.match(commerce, /deleteUnpaidRisonixOrder/);
+  assert.match(commerce, /\["created", "checkout_pending", "cancelled", "failed"\]/);
+  assert.match(commerce, /paymentStatus === "paid"/);
+  assert.match(commerce, /checkout\/sessions\/\$\{encodeURIComponent\(order\.stripeCheckoutSessionId\)\}/);
+  assert.match(commerce, /\$\{sessionPath\}\/expire/);
+  assert.match(commerce, /db\.delete\(risonixOrderEvents\)/);
+  assert.match(commerce, /db\.delete\(risonixOrders\)/);
+  assert.match(deleteRoute, /requireRisonixControl\(request, true\)/);
+  assert.match(controlPage, /Annulla ed elimina/);
+});

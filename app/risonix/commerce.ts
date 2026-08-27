@@ -448,6 +448,41 @@ export async function requestRisonixRefund(orderId: string) {
   await recordOrderEvent(order.id, "refund_requested_from_control");
 }
 
+export async function deleteUnpaidRisonixOrder(orderId: string) {
+  const db = getDb();
+  const [order] = await db.select().from(risonixOrders).where(eq(risonixOrders.id, orderId)).limit(1);
+  if (!order) throw commerceError(404, "Ordine non trovato.");
+
+  const removableStatuses = new Set(["created", "checkout_pending", "cancelled", "failed"]);
+  if (
+    !removableStatuses.has(order.status) ||
+    order.paidAt !== null ||
+    order.stripePaymentIntentId !== null ||
+    order.licenseId !== null
+  ) {
+    throw commerceError(409, "Un ordine pagato o associato a una licenza non può essere eliminato.");
+  }
+
+  if (order.status === "checkout_pending") {
+    if (!order.stripeCheckoutSessionId) throw commerceError(409, "Checkout Stripe incompleto: eliminazione bloccata.");
+    const sessionPath = `checkout/sessions/${encodeURIComponent(order.stripeCheckoutSessionId)}`;
+    const session = await stripeRequest(sessionPath, { method: "GET" });
+    const sessionStatus = stringField(session, "status");
+    const paymentStatus = stringField(session, "payment_status");
+    if (sessionStatus === "complete" || paymentStatus === "paid" || paymentStatus === "no_payment_required") {
+      throw commerceError(409, "Il checkout risulta completato su Stripe e non può essere eliminato.");
+    }
+    if (sessionStatus === "open") {
+      await stripeRequest(`${sessionPath}/expire`, { method: "POST" }, `risonix-expire-${order.id}`);
+    } else if (sessionStatus !== "expired") {
+      throw commerceError(409, "Stato del checkout Stripe non eliminabile.");
+    }
+  }
+
+  await db.delete(risonixOrderEvents).where(eq(risonixOrderEvents.orderId, order.id));
+  await db.delete(risonixOrders).where(eq(risonixOrders.id, order.id));
+}
+
 export async function loadRisonixCustomerOrders(customer: CustomerIdentity) {
   const userHash = await hashRisonixUserId(customer.userId);
   const emailHash = await hashRisonixCustomerEmail(customer.email);
