@@ -27,6 +27,10 @@ test("renders the Kreluna ecosystem homepage", async () => {
   assert.match(html, /Kreluna Cyber/);
   assert.match(html, /Velvet Table/);
   assert.match(html, /href="#products">Marketplace/);
+  assert.match(html, /Tutte le nostre app/);
+  assert.match(html, /Compatibilità chiara/);
+  assert.match(html, /Anteprima illustrativa/);
+  assert.match(html, /Apri il Marketplace/);
   assert.doesNotMatch(html, /Velvet Tablet/i);
   assert.match(html, /Prenota l’atmosfera, non solo il tavolo/i);
   assert.match(html, /Prima scegli l’atmosfera/i);

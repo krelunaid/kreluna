@@ -291,9 +291,68 @@ export default function Home() {
             <h2>Un’unica visione.<br />{" "}<em>Progetti diversi.</em></h2>
           </div>
           <p>
-            Esplora i prodotti per categoria. Risonix apre il marketplace nella nuova area
-            Musica e audio, seguito dagli strumenti digitali dell’ecosistema Kreluna.
+            Il Marketplace è la vetrina ufficiale delle app e dei software Kreluna:
+            un unico luogo per capire cosa fanno, dove funzionano e come ottenerli.
           </p>
+        </div>
+
+        <div className="marketplace-showcase reveal">
+          <div className="marketplace-showcase-copy">
+            <div className="eyebrow"><i /> Il catalogo Kreluna</div>
+            <h3>Tutte le nostre app.<br /><em>Un solo posto.</em></h3>
+            <p>
+              Scopri prodotti Kreluna realmente disponibili o in sviluppo, confronta le
+              funzioni e verifica subito la compatibilità con il tuo dispositivo.
+            </p>
+            <div className="marketplace-showcase-points" aria-label="Cosa trovi nel Marketplace">
+              <span>Prodotti ufficiali</span>
+              <span>Compatibilità chiara</span>
+              <span>Aggiornamenti Kreluna</span>
+            </div>
+            <a className="button button-primary" href="/marketplace">Apri il Marketplace <ArrowIcon /></a>
+          </div>
+
+          <div className="marketplace-showcase-ui" role="img" aria-label="Anteprima illustrativa del Marketplace Kreluna con ricerca, categorie e prodotti">
+            <div className="marketplace-ui-topbar">
+              <span className="marketplace-ui-brand"><i>K</i> KRELUNA <small>MARKETPLACE</small></span>
+              <span className="marketplace-ui-window-dots"><i /><i /><i /></span>
+            </div>
+            <div className="marketplace-ui-body">
+              <div className="marketplace-ui-search">
+                <span>⌕</span>
+                <p>Cerca app, software o funzioni</p>
+                <small>Catalogo</small>
+              </div>
+              <div className="marketplace-ui-filters">
+                <span className="active">Tutto</span>
+                <span>Musica e audio</span>
+                <span>AI e lavoro</span>
+                <span>Esperienze</span>
+              </div>
+              <div className="marketplace-ui-content">
+                <div className="marketplace-ui-featured">
+                  <div className="marketplace-ui-featured-copy">
+                    <small>IN EVIDENZA</small>
+                    <strong>Risonix</strong>
+                    <p>Riconoscimento musicale locale per Windows e Mac.</p>
+                    <span>Scopri il prodotto ↗</span>
+                  </div>
+                  <div className="marketplace-ui-wave" aria-hidden="true">
+                    <i /><i /><i /><i /><i /><i /><i /><i /><i />
+                  </div>
+                </div>
+                <div className="marketplace-ui-side">
+                  <div className="marketplace-ui-mini helix-mini"><small>SVILUPPO AI</small><strong>Helix</strong><span>Web</span></div>
+                  <div className="marketplace-ui-mini velvet-mini"><small>ESPERIENZE</small><strong>Velvet Table</strong><span>Web</span></div>
+                </div>
+              </div>
+              <div className="marketplace-ui-platforms">
+                <p>Disponibilità indicata per ogni prodotto</p>
+                <span>⊞ Windows</span><span>● macOS</span><span>◎ Web</span>
+              </div>
+            </div>
+            <p className="marketplace-ui-caption">Anteprima illustrativa · il catalogo reale si apre dal pulsante</p>
+          </div>
         </div>
 
         <nav className="marketplace-categories reveal" aria-label="Categorie del marketplace">
@@ -346,10 +405,6 @@ export default function Home() {
             <h3>Lo spazio è già pronto.</h3>
             <p>Nome, identità e racconto: quando nasce una nuova idea Kreluna, il sito cresce senza ricominciare da zero.</p>
           </div>
-        </div>
-        <div className="marketplace-home-cta reveal">
-          <p>Quando nasceranno nuove app, siti o software li troverai tutti nel catalogo completo.</p>
-          <a className="button button-primary" href="/marketplace">Vedi tutto il Marketplace <ArrowIcon /></a>
         </div>
       </section>
 
