@@ -31,6 +31,12 @@ const pages: readonly LocalizedPage[] = [
     priority: 0.9,
   },
   {
+    it: "/risonix/",
+    lastModifiedIt: "2026-08-27",
+    changeFrequency: "weekly",
+    priority: 0.9,
+  },
+  {
     it: "/intelligenza-artificiale-aziende.html",
     en: "/en/ai-for-business.html",
     changeFrequency: "monthly",

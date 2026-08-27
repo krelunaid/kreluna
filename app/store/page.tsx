@@ -294,6 +294,12 @@ export default function StorePresentationPage() {
           </div>
         </section>
 
+        <section className="sp-risonix sp-shell" aria-labelledby="risonix-store-title">
+          <div className="sp-risonix-mark" aria-hidden="true">⌁</div>
+          <div><p className="sp-eyebrow"><i /> Nuovo software · Kreluna</p><h2 id="risonix-store-title">Risonix riconosce<br /><span>la tua musica.</span></h2><p>Impronte acustiche locali, file o microfono, percentuale di corrispondenza e licenza online per un solo dispositivo.</p></div>
+          <a className="sp-button sp-button-primary" href={`${assetBasePath}/risonix`}>Scopri Risonix <ExternalArrow /></a>
+        </section>
+
         <section className="sp-closing sp-shell" aria-labelledby="closing-title">
           <div className="sp-closing-glow" aria-hidden="true" />
           <p className="sp-eyebrow"><i /> Catalogo Kreluna Store</p>

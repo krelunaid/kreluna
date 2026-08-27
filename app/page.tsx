@@ -43,6 +43,18 @@ const products = [
     features: ["Security assessment", "Vulnerability management", "Compliance tecnica"],
   },
   {
+    slug: "risonix",
+    name: "Risonix",
+    eyebrow: "Riconoscimento musicale",
+    tagline: "La tua musica. Riconosciuta.",
+    description:
+      "Confronta file e microfono con la tua raccolta locale tramite impronte acustiche, nome del brano e percentuale di corrispondenza.",
+    color: "teal",
+    status: "Preview 1.7",
+    href: `${assetBasePath}/risonix`,
+    features: ["Impronta acustica", "Mac + Windows", "Licenza online"],
+  },
+  {
     slug: "likecash",
     name: "LikeCash",
     eyebrow: "Nuovo progetto · by Kreluna",
@@ -150,6 +162,13 @@ const ecosystemQuickCards = [
     symbol: "◇",
     tone: "blue",
     href: "https://cra24.kreluna.it/",
+  },
+  {
+    name: "Risonix",
+    description: "Riconoscimento musicale locale con impronta acustica.",
+    symbol: "⌁",
+    tone: "green",
+    href: `${assetBasePath}/risonix`,
   },
   {
     name: "Kreluna Connect",

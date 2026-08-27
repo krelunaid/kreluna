@@ -176,6 +176,7 @@ h1 em, h2 em { font-family: var(--serif); font-weight: 500; background: linear-g
 .product-card.gold { --accent: var(--gold); }
 .product-card.cyan { --accent: var(--cyan); }
 .product-card.coral { --accent: var(--coral); }
+.product-card.teal { --accent: #3ce5d1; }
 .product-card.mint { --accent: var(--mint); grid-column: 1 / -1; min-height: 530px; display: grid; grid-template-columns: .9fr 1.1fr; grid-template-rows: auto 1fr auto; }
 .product-card.mint .card-topline { grid-column: 1 / -1; }
 .product-card.mint .product-visual { grid-column: 1; grid-row: 2 / 4; height: auto; min-height: 455px; border-right: 1px solid rgba(105,240,192,.16); border-bottom: 0; }
