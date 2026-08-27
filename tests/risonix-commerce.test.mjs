@@ -19,7 +19,9 @@ test("keeps checkout authority server-side and fulfillment webhook-only", async 
   const checkoutPage = await readFile("app/risonix/acquista/page.tsx", "utf8");
   const environmentExample = await readFile(".env.example", "utf8");
   assert.match(commerce, /RISONIX_STRIPE_PRICE_ID/);
+  assert.match(commerce, /sk_live_/);
   assert.match(commerce, /sk_test_/);
+  assert.match(commerce, /mode !== "test" && mode !== "live"/);
   assert.match(commerce, /verifiedCheckoutSession/);
   assert.match(commerce, /createPaidRisonixLicense/);
   assert.match(commerce, /payment_confirmed_and_license_fulfilled/);

@@ -1,0 +1,9 @@
+import type { Metadata } from "next";
+import "../risonix.css";
+import "../commerce.css";
+
+export const metadata: Metadata = { title: "Privacy Risonix | Kreluna", robots: { index: true, follow: true } };
+
+export default function RisonixPrivacyPage() {
+  return <main className="rx-account-page"><header className="rx-nav"><a className="rx-brand" href="/risonix"><span className="rx-mark">⌁</span><b>RISONIX</b></a></header><article className="rx-legal-card"><p className="rx-kicker"><i /> Informativa privacy</p><h1>I file audio restano sul dispositivo.</h1><p>Risonix crea e confronta localmente impronte acustiche della cartella scelta. I file audio e le impronte non vengono caricati sul server Kreluna.</p><h2>Dati della licenza</h2><p>Per attivazione, sicurezza e assistenza vengono trattati codice licenza in forma protetta, identificatore crittografico del dispositivo, sistema operativo, versione dell’app, stato e data delle verifiche online.</p><h2>Acquisto e account</h2><p>Per consegnare la licenza vengono trattati identificativo account, email, riferimenti ordine e stato del pagamento. I dati della carta sono gestiti da Stripe e non transitano nei sistemi Kreluna.</p><h2>Conservazione e sicurezza</h2><p>I dati sono conservati per il tempo necessario a erogare la licenza, gestire obblighi fiscali, assistenza, contestazioni e sicurezza. Email e chiavi di consegna archiviate negli ordini sono cifrate; il server licenze conserva l’email in forma non reversibile.</p><h2>Diritti</h2><p>Il cliente può chiedere accesso, rettifica, cancellazione o limitazione tramite i contatti pubblicati sul sito, nei limiti degli obblighi legali e contrattuali.</p><h2>Titolare</h2><p>Kreluna · P. IVA 02114130475 · REA PT-622714.</p><small>Versione del 27 agosto 2026. Il testo deve essere validato da un professionista prima dell’apertura delle vendite.</small></article></main>;
+}

@@ -29,7 +29,6 @@ const CHECKOUT_CONFIGURATION = [
   "RISONIX_PRICE_DISPLAY",
   "RISONIX_ORDER_ENCRYPTION_KEY_B64",
   "RISONIX_DOWNLOAD_MAC_URL",
-  "RISONIX_DOWNLOAD_WINDOWS_URL",
   "RISONIX_EMAIL_PROVIDER",
   "RISONIX_EMAIL_API_URL",
   "RISONIX_EMAIL_API_KEY",
@@ -91,12 +90,25 @@ function trustedHttpsUrl(name: (typeof CHECKOUT_CONFIGURATION)[number]): string 
   return url.toString().replace(/\/$/, "");
 }
 
-function stripeConfiguration() {
-  if (required("RISONIX_STRIPE_MODE") !== "test") {
-    throw commerceError(503, "Il checkout Risonix è abilitato soltanto in modalità Stripe test.");
+function optionalTrustedHttpsUrl(name: string): string | null {
+  const value = runtimeValue(name);
+  if (!value) return null;
+  let url: URL;
+  try {
+    url = new URL(value);
+  } catch {
+    throw commerceError(503, `Configurazione ${name} non valida.`);
   }
+  if (url.protocol !== "https:" && url.hostname !== "localhost") throw commerceError(503, `Configurazione ${name} deve usare HTTPS.`);
+  return url.toString().replace(/\/$/, "");
+}
+
+function stripeConfiguration() {
+  const mode = required("RISONIX_STRIPE_MODE");
+  if (mode !== "test" && mode !== "live") throw commerceError(503, "Modalità Stripe non valida.");
   const secretKey = required("STRIPE_SECRET_KEY");
-  if (!secretKey.startsWith("sk_test_")) throw commerceError(503, "È richiesta una chiave Stripe test.");
+  const expectedPrefix = mode === "live" ? "sk_live_" : "sk_test_";
+  if (!secretKey.startsWith(expectedPrefix)) throw commerceError(503, `È richiesta una chiave Stripe ${mode}.`);
   const priceId = required("RISONIX_STRIPE_PRICE_ID");
   if (!priceId.startsWith("price_")) throw commerceError(503, "Price ID Stripe non valido.");
   const expectedAmount = Number(required("RISONIX_STRIPE_EXPECTED_AMOUNT"));
@@ -105,7 +117,7 @@ function stripeConfiguration() {
   if (!/^[a-z]{3}$/.test(currency)) throw commerceError(503, "Valuta Stripe non valida.");
   const taxBehavior = required("RISONIX_STRIPE_TAX_BEHAVIOR");
   if (taxBehavior !== "inclusive") throw commerceError(503, "Il prezzo Risonix deve essere IVA inclusa.");
-  return { secretKey, priceId, expectedAmount, currency, taxBehavior };
+  return { mode, secretKey, priceId, expectedAmount, currency, taxBehavior };
 }
 
 function publicConfiguration() {
@@ -113,7 +125,7 @@ function publicConfiguration() {
     origin: trustedHttpsUrl("RISONIX_PUBLIC_ORIGIN"),
     priceDisplay: required("RISONIX_PRICE_DISPLAY"),
     macDownload: trustedHttpsUrl("RISONIX_DOWNLOAD_MAC_URL"),
-    windowsDownload: trustedHttpsUrl("RISONIX_DOWNLOAD_WINDOWS_URL"),
+    windowsDownload: optionalTrustedHttpsUrl("RISONIX_DOWNLOAD_WINDOWS_URL"),
     sellerName: required("RISONIX_SELLER_LEGAL_NAME"),
     sellerVatId: required("RISONIX_SELLER_VAT_ID"),
     termsUrl: trustedHttpsUrl("RISONIX_TERMS_URL"),
@@ -192,6 +204,7 @@ export function risonixPurchasePresentation() {
   const configured = readiness.ready ? publicConfiguration() : null;
   return {
     ready: readiness.ready,
+    stripeMode: runtimeValue("RISONIX_STRIPE_MODE") === "live" ? "live" : "test",
     priceDisplay: runtimeValue("RISONIX_PRICE_DISPLAY") ?? "Prezzo da configurare",
     sellerName: runtimeValue("RISONIX_SELLER_LEGAL_NAME") ?? "Venditore da configurare",
     termsUrl: configured?.termsUrl ?? null,
@@ -350,8 +363,8 @@ async function fulfillPaidCheckout(event: StripeObject, payloadHash: string) {
       await sendTransactionalEmail(
         email,
         "La tua licenza Risonix",
-        `Pagamento confermato. Licenza: ${licenseKey}\nMac: ${config.macDownload}\nWindows: ${config.windowsDownload}`,
-        `<h1>Risonix è pronta</h1><p>Pagamento confermato.</p><p><strong>Licenza:</strong> ${licenseKey}</p><p><a href="${config.macDownload}">Scarica per Mac</a> · <a href="${config.windowsDownload}">Scarica per Windows</a></p>`,
+        `Pagamento confermato. Licenza: ${licenseKey}\nMac: ${config.macDownload}${config.windowsDownload ? `\nWindows: ${config.windowsDownload}` : ""}`,
+        `<h1>Risonix è pronta</h1><p>Pagamento confermato.</p><p><strong>Licenza:</strong> ${licenseKey}</p><p><a href="${config.macDownload}">Scarica per Mac</a>${config.windowsDownload ? ` · <a href="${config.windowsDownload}">Scarica per Windows</a>` : ""}</p>`,
         `risonix-license-${order.id}`,
       );
       await db.update(risonixOrders).set({ emailStatus: "sent", updatedAt: Math.floor(Date.now() / 1000) }).where(eq(risonixOrders.id, order.id));

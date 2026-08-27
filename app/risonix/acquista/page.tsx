@@ -22,16 +22,16 @@ export default async function RisonixPurchasePage({ searchParams }: { searchPara
         <div className="rx-purchase-copy">
           <p className="rx-kicker"><i /> Acquisto una tantum</p>
           <h1>Risonix.<br /><em>Una licenza, un dispositivo.</em></h1>
-          <p>Riconoscimento musicale locale per Mac e Windows, con licenza online trasferibile dalla tua area cliente.</p>
-          <ul><li>Nessun abbonamento</li><li>Licenza personale per un solo dispositivo</li><li>Download Mac e Windows dopo il pagamento confermato</li></ul>
+          <p>Riconoscimento musicale locale per macOS, con licenza online trasferibile dalla tua area cliente. La versione Windows è in preparazione e non viene ancora venduta.</p>
+          <ul><li>Nessun abbonamento</li><li>Licenza personale per un solo dispositivo</li><li>Download Mac dopo il pagamento confermato</li></ul>
         </div>
         <section className="rx-checkout-card" aria-labelledby="checkout-title">
-          <span className="rx-test-badge">Stripe · modalità test</span>
-          <h2 id="checkout-title">Risonix v40</h2>
+          <span className="rx-test-badge">Stripe · {presentation.stripeMode === "live" ? "pagamento sicuro" : "modalità test"}</span>
+          <h2 id="checkout-title">Risonix 1.0</h2>
           <p className="rx-price">{presentation.priceDisplay}</p>
           <p>Pagamento unico. La licenza viene generata soltanto dopo la conferma firmata di Stripe.</p>
           {query.annullato ? <p className="rx-checkout-alert">Checkout annullato: non è stato effettuato alcun pagamento.</p> : null}
-          {query.errore ? <p className="rx-checkout-alert error">Il checkout non è disponibile. Riprova quando la configurazione test sarà completa.</p> : null}
+          {query.errore ? <p className="rx-checkout-alert error">Il checkout non è disponibile in questo momento. Non è stato effettuato alcun addebito.</p> : null}
           {!presentation.ready ? (
             <div className="rx-checkout-unavailable"><strong>Acquisto non ancora attivo</strong><span>Prezzo, Stripe, download, email e dati del venditore devono essere configurati lato server.</span></div>
           ) : !user ? (

@@ -41,7 +41,7 @@ export default function RisonixPage() {
             <a className="rx-primary" href="/risonix/acquista">Acquista Risonix <span>→</span></a>
             <a className="rx-secondary" href={accountUrl}>Gestisci la licenza</a>
           </div>
-          <small>Risonix v40 · {purchase.priceDisplay} · macOS e Windows · licenza online per un dispositivo</small>
+          <small>Risonix 1.0 · {purchase.priceDisplay} · macOS · Windows in preparazione · licenza online per un dispositivo</small>
         </div>
         <div className="rx-console" aria-label="Anteprima di Risonix">
           <div className="rx-console-top"><span><i /><i /><i /></span><b>RISONIX</b><small>ONLINE</small></div>
@@ -66,7 +66,7 @@ export default function RisonixPage() {
         <a className="rx-primary" href={accountUrl}>Apri la mia area <span>→</span></a>
       </section>
 
-      <footer className="rx-footer"><span>© 2026 Kreluna · Risonix</span><a href="/privacy.html">Privacy</a><a href="/termini.html">Termini</a><span>P. IVA 02114130475 · REA PT-622714</span></footer>
+      <footer className="rx-footer"><span>© 2026 Kreluna · Risonix</span><a href="/risonix/privacy">Privacy Risonix</a><a href="/risonix/termini">Licenza</a><a href="/risonix/rimborsi">Rimborsi</a><span>P. IVA 02114130475 · REA PT-622714</span></footer>
     </main>
   );
 }

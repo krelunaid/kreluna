@@ -38,7 +38,7 @@ export default async function RisonixAccountPage() {
         {orders.length === 0 ? <p className="rx-empty-order">Nessun ordine associato a questo account.</p> : orders.map((order) => <article key={order.id}><div><span className={`rx-order-status ${order.status}`}>{order.status}</span><strong>Ordine {order.id.slice(0, 8).toUpperCase()}</strong></div><dl><div><dt>Importo</dt><dd>{order.price ?? "In attesa"}</dd></div><div><dt>Licenza</dt><dd>{order.status === "fulfilled" ? "Generata" : order.status === "refunded" ? "Disattivata" : "In preparazione"}</dd></div><div><dt>Email</dt><dd>{order.emailStatus}</dd></div><div><dt>Data</dt><dd>{formatDate(order.createdAt)}</dd></div></dl></article>)}
       </section>
       {unavailable ? (
-        <section className="rx-account-message"><span>⌁</span><div><h2>Collegamento in preparazione</h2><p>L’area è pronta, ma il server licenze pubblico Kreluna non è ancora online. La preview locale continua a funzionare dal Mac autorizzato.</p></div></section>
+        <section className="rx-account-message"><span>⌁</span><div><h2>Servizio momentaneamente non disponibile</h2><p>Il server licenze Kreluna non ha risposto. Riprova tra poco o contatta l’assistenza.</p></div></section>
       ) : licenses.length === 0 ? (
         <section className="rx-account-message"><span>0</span><div><h2>Nessuna licenza associata</h2><p>Una licenza appare qui quando l’email usata nell’acquisto coincide con questo account.</p></div></section>
       ) : (
@@ -46,7 +46,7 @@ export default async function RisonixAccountPage() {
           {licenses.map((license) => (
             <article key={license.license_id}>
               <div className="rx-license-top"><span className={license.online ? "online" : "offline"}><i />{license.online ? "ONLINE" : license.device_label ? "OFFLINE" : "NON ATTIVATA"}</span><small>RIX-{license.license_id.slice(0, 8).toUpperCase()}</small></div>
-              <h2>Risonix v40</h2><dl><div><dt>Stato</dt><dd>{license.status}</dd></div><div><dt>Dispositivo</dt><dd>{license.device_label ?? "Nessun dispositivo"}</dd></div><div><dt>Versione</dt><dd>{license.app_version ?? "—"}</dd></div><div><dt>Ultimo contatto</dt><dd>{formatDate(license.last_seen)}</dd></div></dl>
+              <h2>Risonix 1.0</h2><dl><div><dt>Stato</dt><dd>{license.status}</dd></div><div><dt>Dispositivo</dt><dd>{license.device_label ?? "Nessun dispositivo"}</dd></div><div><dt>Versione</dt><dd>{license.app_version ?? "—"}</dd></div><div><dt>Ultimo contatto</dt><dd>{formatDate(license.last_seen)}</dd></div></dl>
               {license.device_label ? <form method="post" action={`/api/risonix/licenses/${license.license_id}/release`}><button type="submit">Libera questo dispositivo</button></form> : <p className="rx-ready">Pronta per una nuova attivazione.</p>}
             </article>
           ))}
