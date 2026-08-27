@@ -38,6 +38,7 @@ test("keeps checkout authority server-side and fulfillment webhook-only", async 
   assert.match(environmentExample, /RISONIX_STRIPE_TAX_BEHAVIOR=inclusive/);
   assert.match(environmentExample, /RISONIX_STRIPE_MODE=test/);
   assert.match(environmentExample, /RISONIX_SALES_ENABLED=false/);
+  assert.match(commerce, /trustedHttpsUrl\("RISONIX_DOWNLOAD_WINDOWS_URL"\)/);
 });
 
 test("ships D1 order/event persistence and an idempotent provider event index", async () => {
@@ -51,6 +52,7 @@ test("ships D1 order/event persistence and an idempotent provider event index", 
 
 test("protects installer delivery behind authentication and a fulfilled order", async () => {
   const downloadRoute = await readFile("app/api/risonix/downloads/mac/route.ts", "utf8");
+  const windowsDownloadRoute = await readFile("app/api/risonix/downloads/windows/route.ts", "utf8");
   const storage = await readFile("app/risonix/installer-storage.ts", "utf8");
   const hosting = JSON.parse(await readFile(".openai/hosting.json", "utf8"));
   assert.equal(hosting.r2, "FILES");
@@ -58,5 +60,9 @@ test("protects installer delivery behind authentication and a fulfilled order", 
   assert.match(downloadRoute, /hasFulfilledRisonixOrder/);
   assert.match(downloadRoute, /private, no-store/);
   assert.match(storage, /Risonix-1\.0\.0-macOS-arm64\.dmg/);
+  assert.match(windowsDownloadRoute, /getChatGPTUser/);
+  assert.match(windowsDownloadRoute, /hasFulfilledRisonixOrder/);
+  assert.match(windowsDownloadRoute, /private, no-store/);
+  assert.match(storage, /Risonix-1\.0\.0-Windows-x64\.msi/);
   assert.doesNotMatch(storage, /put\(/);
 });

@@ -41,7 +41,7 @@ export default function RisonixPage() {
             <a className="rx-primary" href="/risonix/acquista">Acquista Risonix <span>→</span></a>
             <a className="rx-secondary" href={accountUrl}>Gestisci la licenza</a>
           </div>
-          <small>Risonix 1.0 · {purchase.priceDisplay} · macOS · Windows in preparazione · licenza online per un dispositivo</small>
+          <small>Risonix 1.0 · {purchase.priceDisplay} · Windows 10/11 64 bit e Mac Apple Silicon · licenza online per un dispositivo</small>
         </div>
         <div className="rx-console" aria-label="Anteprima di Risonix">
           <div className="rx-console-top"><span><i /><i /><i /></span><b>RISONIX</b><small>ONLINE</small></div>

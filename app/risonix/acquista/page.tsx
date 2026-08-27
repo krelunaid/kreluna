@@ -22,8 +22,8 @@ export default async function RisonixPurchasePage({ searchParams }: { searchPara
         <div className="rx-purchase-copy">
           <p className="rx-kicker"><i /> Acquisto una tantum</p>
           <h1>Risonix.<br /><em>Una licenza, un dispositivo.</em></h1>
-          <p>Riconoscimento musicale locale per macOS, con licenza online trasferibile dalla tua area cliente. La versione Windows è in preparazione e non viene ancora venduta.</p>
-          <ul><li>Nessun abbonamento</li><li>Licenza personale per un solo dispositivo</li><li>Download Mac dopo il pagamento confermato</li></ul>
+          <p>Riconoscimento musicale locale per Windows 10/11 64 bit e Mac Apple Silicon, con licenza online trasferibile dalla tua area cliente.</p>
+          <ul><li>Nessun abbonamento</li><li>Licenza personale per un solo dispositivo</li><li>Download Mac e Windows dopo il pagamento confermato</li></ul>
         </div>
         <section className="rx-checkout-card" aria-labelledby="checkout-title">
           <span className="rx-test-badge">Stripe · {presentation.stripeMode === "live" ? "pagamento sicuro" : "modalità test"}</span>
