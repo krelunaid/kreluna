@@ -1,26 +1,25 @@
 import type { Metadata } from "next";
-import MarketplaceClient from "./marketplace-client";
-import "./marketplace.css";
+import { redirect } from "next/navigation";
 
-const marketplaceUrl = "https://www.kreluna.it/marketplace";
+const marketplaceUrl = "https://store.kreluna.it";
 
 export const metadata: Metadata = {
   title: "Marketplace Kreluna | App, software e prodotti digitali",
-  description: "Esplora tutte le app, i software e i prodotti digitali Kreluna per categoria. Scopri Risonix, Helix, Velvet Table e i nuovi progetti dell’ecosistema.",
+  description: "Scopri Risonix e il software Kreluna realmente disponibile nel marketplace ufficiale.",
   alternates: { canonical: marketplaceUrl },
   openGraph: {
     title: "Marketplace Kreluna",
-    description: "Tutte le app, i software e i prodotti digitali Kreluna in un unico catalogo.",
+    description: "Risonix e il software Kreluna disponibile nel marketplace ufficiale.",
     url: marketplaceUrl,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Marketplace Kreluna",
-    description: "Tutte le app, i software e i prodotti digitali Kreluna in un unico catalogo.",
+    description: "Risonix e il software Kreluna disponibile nel marketplace ufficiale.",
   },
 };
 
 export default function MarketplacePage() {
-  return <MarketplaceClient />;
+  redirect("https://kreluna-store-andrea.andreagadducci.chatgpt.site");
 }
