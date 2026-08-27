@@ -3,7 +3,48 @@
 import { useEffect, useRef, useState } from "react";
 
 const assetBasePath = process.env.NEXT_PUBLIC_ARUBA_BASE_PATH ?? "";
-const storePresentationUrl = `${assetBasePath}/store/`;
+const homeSiteUrl = "https://www.kreluna.it";
+const homeStructuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${homeSiteUrl}/#organization`,
+      name: "Kreluna",
+      alternateName: "Kreluna Ecosystem",
+      taxID: "02114130475",
+      identifier: { "@type": "PropertyValue", propertyID: "REA", value: "PT-622714" },
+      url: `${homeSiteUrl}/`,
+      logo: { "@type": "ImageObject", url: `${homeSiteUrl}/kreluna-logo.png`, width: 128, height: 128 },
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${homeSiteUrl}/#website`,
+      url: `${homeSiteUrl}/`,
+      name: "Kreluna",
+      publisher: { "@id": `${homeSiteUrl}/#organization` },
+      inLanguage: ["it-IT", "en-GB"],
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${homeSiteUrl}/#webpage`,
+      url: `${homeSiteUrl}/`,
+      name: "Kreluna | AI, automazione e cybersecurity",
+      isPartOf: { "@id": `${homeSiteUrl}/#website` },
+      about: { "@id": `${homeSiteUrl}/#organization` },
+      inLanguage: "it-IT",
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${homeSiteUrl}/#faq`,
+      mainEntity: [{
+        "@type": "Question",
+        name: "Che cos’è Kreluna?",
+        acceptedAnswer: { "@type": "Answer", text: "Kreluna è un progetto italiano in sviluppo dedicato ad AI, automazione e cybersecurity." },
+      }],
+    },
+  ],
+};
 
 const products = [
   {
@@ -17,6 +58,8 @@ const products = [
     status: "In sviluppo",
     href: "https://www.kreluna.it/intelligenza-artificiale-aziende.html",
     features: ["Ragionamento adattivo", "Ricerca e analisi", "Scrittura e studio"],
+    mockup: "ai",
+    domain: "kreluna.ai",
   },
   {
     slug: "office",
@@ -29,6 +72,8 @@ const products = [
     status: "In sviluppo",
     href: "https://www.kreluna.it/ai-studi-professionali.html",
     features: ["Document intelligence", "Pratiche e scadenze", "Approval center"],
+    mockup: "office",
+    domain: "kreluna.it/office",
   },
   {
     slug: "cyber",
@@ -41,6 +86,22 @@ const products = [
     status: "In sviluppo",
     href: "https://cra24.kreluna.it/",
     features: ["Security assessment", "Vulnerability management", "Compliance tecnica"],
+    mockup: "cyber",
+    domain: "cra24.kreluna.it",
+  },
+  {
+    slug: "helix",
+    name: "Helix",
+    eyebrow: "Sviluppo con l'AI",
+    tagline: "Il modo in cui Kreluna costruisce prodotti.",
+    description:
+      "Helix crea siti, app e software su misura con l'intelligenza artificiale. Velvet Table nasce da Helix, e ogni prossimo progetto Kreluna parte dallo stesso strumento.",
+    color: "coral",
+    status: "In sviluppo",
+    href: "https://helix.kreluna.it/",
+    features: ["Siti su misura", "App e software", "Costruito con l'AI"],
+    mockup: "helix",
+    domain: "helix.kreluna.it",
   },
   {
     slug: "risonix",
@@ -48,35 +109,27 @@ const products = [
     eyebrow: "Riconoscimento musicale",
     tagline: "La tua musica. Riconosciuta.",
     description:
-      "Confronta file e microfono con la tua raccolta locale tramite impronte acustiche, nome del brano e percentuale di corrispondenza.",
+      "Impronte acustiche locali, riconoscimento da file o microfono, percentuale di corrispondenza e licenza online per un solo dispositivo.",
     color: "teal",
     status: "Preview 1.7",
-    href: `${assetBasePath}/risonix`,
-    features: ["Impronta acustica", "Mac + Windows", "Licenza online"],
+    href: "/risonix",
+    features: ["Database locale", "File e microfono", "Licenza Mac + Windows"],
+    mockup: "risonix",
+    domain: "kreluna.it/risonix",
   },
   {
-    slug: "likecash",
-    name: "LikeCash",
-    eyebrow: "Nuovo progetto · by Kreluna",
-    tagline: "Un nuovo progetto sta prendendo forma.",
+    slug: "velvet-table",
+    name: "Velvet Table",
+    eyebrow: "Dining experience",
+    tagline: "Prenota l’atmosfera, non solo il tavolo.",
     description:
-      "LikeCash è il nuovo progetto firmato Kreluna. Identità, funzioni e disponibilità saranno raccontate qui, man mano che prendono forma.",
-    color: "coral",
-    status: "Dettagli in arrivo",
-    href: "#likecash",
-    features: ["by Kreluna", "In progettazione", "Aggiornamenti in arrivo"],
-  },
-  {
-    slug: "krl",
-    name: "Kreluna Token",
-    eyebrow: "Utility demo · KRL Beta",
-    tagline: "L’utilità si simula nella Beta.",
-    description:
-      "KRL Beta simula crediti AI e prepara il wallet per Base Sepolia. Nessun valore reale e nessuna vendita.",
-    color: "mint",
-    status: "Beta · Testnet",
-    href: `${assetBasePath}/krl/`,
-    features: ["Base Sepolia", "100M progettati", "Vendita disattivata"],
+      "Un concept Kreluna per scegliere il locale partendo dal tipo di serata: intima, vivace, panoramica o rilassata. Poi si passa alla disponibilità e alla prenotazione.",
+    color: "velvet",
+    status: "Concept in sviluppo",
+    href: "/velvet-table",
+    features: ["Atmosfera desiderata", "Occasione e compagnia", "Prenotazione guidata"],
+    mockup: "velvet",
+    domain: "kreluna.it/velvet-table",
   },
 ] as const;
 
@@ -86,108 +139,101 @@ const principles = [
   ["03", "Crescita naturale", "Un nuovo progetto si aggiunge all'ecosistema senza dover ripensare ogni volta l'intero sito."],
 ];
 
-const homeStructuredData = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebPage",
-      "@id": "https://www.kreluna.it/#webpage",
-      url: "https://www.kreluna.it/",
-      name: "Kreluna | AI, automazione e cybersecurity",
-      description:
-        "Kreluna progetta AI, automazione dei processi e cybersecurity intorno al lavoro reale, con controllo umano, dati protetti e limiti dichiarati.",
-      isPartOf: { "@id": "https://www.kreluna.it/#website" },
-      about: { "@id": "https://www.kreluna.it/#organization" },
-      inLanguage: "it-IT",
-    },
-    {
-      "@type": "FAQPage",
-      "@id": "https://www.kreluna.it/#faq",
-      mainEntity: [
-        {
-          "@type": "Question",
-          name: "Che cos’è Kreluna?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Kreluna è un progetto italiano in sviluppo dedicato ad AI, automazione e cybersecurity. I dati societari e fiscali saranno pubblicati quando disponibili.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "I prodotti Kreluna sono già acquistabili?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Non viene dichiarata una disponibilità generale. Accesso, funzioni, integrazioni e condizioni vengono confermati per ogni richiesta.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Kreluna sostituisce software o professionisti?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "No in modo automatico. Il ruolo proposto è preparare e collegare il lavoro mantenendo sistemi ufficiali, responsabilità e approvazioni sotto controllo umano.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Posso inviare documenti per una valutazione?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Nel primo contatto no. È sufficiente descrivere il contesto senza allegare dati personali, credenziali o documenti riservati.",
-          },
-        },
-      ],
-    },
-  ],
-};
-
-const ecosystemQuickCards = [
-  {
-    name: "Kreluna AI",
-    description: "Intelligenza artificiale progettata intorno al lavoro reale.",
-    symbol: "✦",
-    tone: "violet",
-    href: "https://www.kreluna.it/intelligenza-artificiale-aziende.html",
-  },
-  {
-    name: "Kreluna Office",
-    description: "Strumenti professionali per organizzare attività e documenti.",
-    symbol: "▰",
-    tone: "green",
-    href: "https://www.kreluna.it/ai-studi-professionali.html",
-  },
-  {
-    name: "Kreluna Cyber",
-    description: "Percorsi e strumenti dedicati alla sicurezza informatica.",
-    symbol: "◇",
-    tone: "blue",
-    href: "https://cra24.kreluna.it/",
-  },
-  {
-    name: "Risonix",
-    description: "Riconoscimento musicale locale con impronta acustica.",
-    symbol: "⌁",
-    tone: "green",
-    href: `${assetBasePath}/risonix`,
-  },
-  {
-    name: "Kreluna Connect",
-    description: "Un punto di contatto per collegare esigenze e progetti.",
-    symbol: "↗",
-    tone: "orange",
-    href: "https://www.kreluna.it/contatti.html",
-  },
-  {
-    name: "Kreluna Store",
-    description: "Concept di app e strumenti organizzati per bisogno.",
-    symbol: "▢",
-    tone: "rose",
-    href: storePresentationUrl,
-  },
-] as const;
-
 function ArrowIcon() {
   return <span aria-hidden="true">↗</span>;
+}
+
+function MockupBar({ domain }: { domain: string }) {
+  return (
+    <div className="mockup-bar">
+      <i /><i /><i />
+      <span>{domain}</span>
+    </div>
+  );
+}
+
+function MockupScreen({ variant }: { variant: string }) {
+  if (variant === "ai") {
+    return (
+      <div className="mockup-body mockup-ai">
+        <div className="bubble"><span className="mline" /><span className="mline" /></div>
+        <div className="bubble user"><span className="mline" /></div>
+        <div className="bubble"><span className="mline" /><span className="typing"><i /><i /><i /></span></div>
+      </div>
+    );
+  }
+  if (variant === "office") {
+    return (
+      <div className="mockup-body mockup-office">
+        <div className="mrow"><span className="mdot filled" /><span className="mline" style={{ width: "72%" }} /></div>
+        <div className="mrow"><span className="mdot" /><span className="mline soft" style={{ width: "58%" }} /></div>
+        <div className="mrow"><span className="mdot filled" /><span className="mline" style={{ width: "80%" }} /></div>
+        <div className="mrow"><span className="mdot" /><span className="mline soft" style={{ width: "45%" }} /></div>
+      </div>
+    );
+  }
+  if (variant === "cyber") {
+    return (
+      <div className="mockup-body mockup-cyber">
+        <div className="radar"><span className="sweep" /></div>
+        <div className="chips"><span className="mchip">OK</span><span className="mchip">OK</span><span className="mchip">···</span></div>
+      </div>
+    );
+  }
+  if (variant === "helix") {
+    return (
+      <div className="mockup-body mockup-helix">
+        <div className="code">
+          <span className="mline" style={{ "--w": "40%" } as React.CSSProperties} />
+          <span className="mline" style={{ "--w": "72%" } as React.CSSProperties} />
+          <span className="mline" style={{ "--w": "55%" } as React.CSSProperties} />
+          <span className="mline" style={{ "--w": "65%" } as React.CSSProperties} />
+        </div>
+        <div className="preview"><div className="p-bar" /><div className="p-body"><span className="mline" /><span className="mline" style={{ width: "70%" }} /></div></div>
+      </div>
+    );
+  }
+  if (variant === "risonix") {
+    return (
+      <div className="mockup-body mockup-risonix" role="img" aria-label="Risonix, riconoscimento musicale">
+        <div className="risonix-wave"><i /><i /><i /><i /><i /><i /><i /><i /><i /></div>
+        <div className="risonix-match"><strong>98</strong><span>% MATCH</span><small>CANZONE TROVATA</small></div>
+      </div>
+    );
+  }
+  return (
+    <div className="mockup-body mockup-velvet" role="img" aria-label="Velvet Table, foto originale del progetto">
+      <span className="mchip">Tavolo confermato</span>
+    </div>
+  );
+}
+
+function ProductMockup({ variant, domain }: { variant: string; domain: string }) {
+  return (
+    <div className="mockup-window">
+      <MockupBar domain={domain} />
+      <MockupScreen variant={variant} />
+    </div>
+  );
+}
+
+function HeroDevices() {
+  return (
+    <div className="hero-devices" aria-hidden="true">
+      <div className="mockup-window hd-back">
+        <MockupBar domain="cra24.kreluna.it" />
+        <MockupScreen variant="cyber" />
+      </div>
+      <div className="mockup-window hd-mid">
+        <MockupBar domain="helix.kreluna.it" />
+        <MockupScreen variant="helix" />
+      </div>
+      <div className="mockup-window hd-front">
+        <MockupBar domain="kreluna.ai" />
+        <MockupScreen variant="ai" />
+      </div>
+    </div>
+  );
 }
 
 function Logo() {
@@ -201,105 +247,11 @@ function Logo() {
   );
 }
 
-function StoreBagMark() {
-  return <span className="store-bag-mark" aria-hidden="true"><b>K</b></span>;
-}
-
-function EcosystemShowcase() {
-  return (
-    <section className="ecosystem-showcase reveal" aria-labelledby="ecosystem-showcase-title">
-      <div className="ecosystem-showcase-hero">
-        <div className="ecosystem-showcase-copy">
-          <p className="ecosystem-kicker">Kreluna · un unico ecosistema</p>
-          <h2 id="ecosystem-showcase-title">
-            Un ecosistema.<br />
-            <span>Tutto quello che ti serve.</span>
-          </h2>
-          <p>
-            Kreluna riunisce app, software, servizi e intelligenza artificiale per
-            semplificare attività quotidiane e far crescere il lavoro.
-          </p>
-          <div className="ecosystem-showcase-actions">
-            <a className="ecosystem-primary-action" href={storePresentationUrl}>Scopri Kreluna Store <span aria-hidden="true">→</span></a>
-            <a className="ecosystem-secondary-action" href="#products">Esplora l’ecosistema <span aria-hidden="true">▶</span></a>
-          </div>
-        </div>
-
-        <div className="ecosystem-universe" aria-hidden="true">
-          <div className="ecosystem-planet" />
-          <div className="ecosystem-planet-glow" />
-          <div className="ecosystem-universe-label">
-            <strong>K R E L U N A</strong>
-            <small>Tutto. In un unico universo.</small>
-          </div>
-        </div>
-
-        <a className="ecosystem-store-feature" href={storePresentationUrl} aria-label="Scopri la presentazione di Kreluna Store">
-          <span className="ecosystem-store-feature-copy">
-            <strong>Kreluna Store</strong>
-            <span>Scopri la visione dello Store e raggiungi il catalogo completo.</span>
-            <b>Apri la presentazione <span aria-hidden="true">→</span></b>
-          </span>
-          <StoreBagMark />
-        </a>
-      </div>
-
-      <div className="ecosystem-quick-grid" aria-label="Prodotti dell’ecosistema Kreluna">
-        {ecosystemQuickCards.map((item) => (
-          <a className={`ecosystem-quick-card ${item.tone}`} href={item.href} key={item.name}>
-            <span className="ecosystem-quick-icon" aria-hidden="true">{item.symbol}</span>
-            <strong>{item.name}</strong>
-            <span>{item.description}</span>
-            <b>Scopri di più <span aria-hidden="true">→</span></b>
-          </a>
-        ))}
-        <aside className="ecosystem-status-cell" aria-label="Percorso verso Kreluna Store">
-          <strong>Due spazi distinti</strong>
-          <span><i aria-hidden="true" /> Presentazione sul sito Kreluna</span>
-          <span><i aria-hidden="true" /> Catalogo chiaro separato</span>
-          <span><i aria-hidden="true" /> Passaggio sempre esplicito</span>
-          <span><i aria-hidden="true" /> Un unico percorso</span>
-        </aside>
-      </div>
-
-      <div className="ecosystem-presentation-bridge">
-        <div>
-          <p className="ecosystem-kicker">Kreluna Store · Presentazione</p>
-          <h3>Scopri la visione. Poi apri il catalogo.</h3>
-          <p>
-            La presentazione dark vive nel sito Kreluna. Il catalogo completo,
-            con la sua interfaccia chiara, resta in uno spazio dedicato.
-          </p>
-        </div>
-        <div className="ecosystem-presentation-route" aria-label="Percorso verso Kreluna Store">
-          <span><b>01</b><strong>Presentazione</strong><small>Qui, nel sito Kreluna</small></span>
-          <i aria-hidden="true">→</i>
-          <span><b>02</b><strong>Catalogo</strong><small>Nello Store chiaro dedicato</small></span>
-        </div>
-        <a className="ecosystem-primary-action" href={storePresentationUrl}>
-          Apri la presentazione <span aria-hidden="true">→</span>
-        </a>
-      </div>
-    </section>
-  );
-}
-
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [cookieVisible, setCookieVisible] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    let seen: string | null = null;
-    try {
-      seen = window.localStorage.getItem("kreluna-cookie-choice");
-    } catch {
-      // The page remains usable when browser storage is unavailable.
-    }
-    const cookieTimer = !seen
-      ? window.setTimeout(() => setCookieVisible(true), 0)
-      : undefined;
-
     const observer = new IntersectionObserver(
       (entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("visible")),
       { threshold: 0.12 },
@@ -307,7 +259,6 @@ export default function Home() {
     document.querySelectorAll(".reveal").forEach((node) => observer.observe(node));
     return () => {
       observer.disconnect();
-      if (cookieTimer !== undefined) window.clearTimeout(cookieTimer);
     };
   }, []);
 
@@ -327,29 +278,20 @@ export default function Home() {
     };
   }, [menuOpen]);
 
-  const chooseCookies = (choice: string) => {
-    try {
-      window.localStorage.setItem("kreluna-cookie-choice", choice);
-    } catch {
-      // Closing the banner does not depend on local storage.
-    }
-    setCookieVisible(false);
-  };
-
   return (
     <div
       id="top"
       style={{ "--sphere-image": `url('${assetBasePath}/kreluna-sphere.jpg')` } as React.CSSProperties}
     >
+      <script id="kreluna-structured-data" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(homeStructuredData) }} />
       <a className="skip-link" href="#main-content">Vai al contenuto</a>
       <header className="site-header">
         <Logo />
         <nav className="desktop-nav" aria-label="Navigazione principale">
-          <a href="https://www.kreluna.it/intelligenza-artificiale-aziende.html">AI</a>
-          <a href="https://www.kreluna.it/ai-studi-professionali.html">Office</a>
-          <a href="https://cra24.kreluna.it/">Cyber</a>
-          <a href="https://www.kreluna.it/contatti.html">Connect</a>
-          <a href={storePresentationUrl}>Store</a>
+          <a href="#products">Prodotti</a>
+          <a href="#vision">Visione</a>
+          <a href="#velvet-table">Velvet Table</a>
+          <a href="https://www.kreluna.it/azienda.html">Azienda</a>
         </nav>
         <div className="nav-actions">
           <a className="contact-link" href="https://www.kreluna.it/contatti.html">Contatti</a>
@@ -376,11 +318,10 @@ export default function Home() {
             }}
             aria-label="Chiudi il menu"
           >×</button>
-          <a href="https://www.kreluna.it/intelligenza-artificiale-aziende.html" onClick={() => setMenuOpen(false)}>AI</a>
-          <a href="https://www.kreluna.it/ai-studi-professionali.html" onClick={() => setMenuOpen(false)}>Office</a>
-          <a href="https://cra24.kreluna.it/" onClick={() => setMenuOpen(false)}>Cyber</a>
-          <a href="https://www.kreluna.it/contatti.html" onClick={() => setMenuOpen(false)}>Connect</a>
-          <a href={storePresentationUrl} onClick={() => setMenuOpen(false)}>Store</a>
+          <a href="#products" onClick={() => setMenuOpen(false)}>Prodotti</a>
+          <a href="#vision" onClick={() => setMenuOpen(false)}>Visione</a>
+          <a href="#velvet-table" onClick={() => setMenuOpen(false)}>Velvet Table</a>
+          <a href="https://www.kreluna.it/azienda.html">Azienda</a>
           <a href="https://www.kreluna.it/contatti.html">Contatti</a>
         </div>
       )}
@@ -405,16 +346,15 @@ export default function Home() {
             <a className="button button-primary" href="#products">Esplora i progetti <ArrowIcon /></a>
             <a className="button button-secondary" href="#vision">Conosci Kreluna</a>
           </div>
+          <div className="hero-capabilities">
+            <span>Siti</span>
+            <span>App</span>
+            <span>Software</span>
+            <span>Intelligenza artificiale</span>
+          </div>
         </div>
 
-        <div className="orbit-system" aria-hidden="true">
-          <div className="orbit orbit-one"><i className="satellite violet" /></div>
-          <div className="orbit orbit-two"><i className="satellite gold" /></div>
-          <div className="orbit orbit-three"><i className="satellite cyan" /></div>
-          <div className="orbit orbit-four"><i className="satellite coral" /></div>
-          <div className="orbit orbit-five"><i className="satellite mint hero-mint" /></div>
-          <div className="hero-sphere" />
-        </div>
+        <HeroDevices />
 
         <a className="scroll-cue" href="#products">Scopri l’ecosistema <span>↓</span></a>
       </section>
@@ -430,10 +370,6 @@ export default function Home() {
         </p>
       </section>
 
-      <div className="section-shell">
-        <EcosystemShowcase />
-      </div>
-
       <section className="products section-shell" id="products">
         <div className="section-heading reveal">
           <div>
@@ -441,28 +377,26 @@ export default function Home() {
             <h2>Un’unica visione.<br />{" "}<em>Progetti diversi.</em></h2>
           </div>
           <p>
-            Dall’intelligenza artificiale al lavoro professionale, dalla sicurezza
-            a LikeCash e KRL. Questo spazio è pensato per crescere insieme a Kreluna.
+            Dall’intelligenza artificiale al lavoro professionale, dalla sicurezza allo
+            sviluppo con Helix, fino a Velvet Table. Questo spazio è pensato per crescere
+            insieme a Kreluna.
           </p>
         </div>
 
         <div className="product-grid">
           {products.map((product, index) => (
-            <article className={`product-card ${product.color} reveal`} key={product.slug} style={{ "--delay": `${index * 90}ms` } as React.CSSProperties}>
+            <article id={`product-${product.slug}`} className={`product-card ${product.color} reveal`} key={product.slug} style={{ "--delay": `${index * 90}ms` } as React.CSSProperties}>
               <div className="card-topline">
                 <span>{product.eyebrow}</span>
                 <span className="status"><i /> {product.status}</span>
               </div>
-              <div className="product-visual" aria-hidden="true">
-                <div className="mini-grid" />
-                <div className="product-orbit" />
-                <div className="product-orb" />
-                <span>{String(index + 1).padStart(2, "0")}</span>
+              <div className="product-visual">
+                <div className="mini-grid" aria-hidden="true" />
+                <span className="product-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                <ProductMockup variant={product.mockup} domain={product.domain} />
               </div>
               <div className="card-copy">
-                <p className="signature">
-                  {product.slug === "likecash" ? "by Kreluna" : product.slug === "krl" ? "KRL · Kreluna ecosystem" : "Kreluna ecosystem"}
-                </p>
+                <p className="signature">Kreluna ecosystem</p>
                 <h3>{product.name}</h3>
                 <h4>{product.tagline}</h4>
                 <p>{product.description}</p>
@@ -487,61 +421,36 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="likecash section-shell" id="likecash">
-        <div className="likecash-panel reveal">
-          <div className="likecash-copy">
-            <div className="eyebrow coral-text"><i /> LikeCash · by Kreluna</div>
-            <h2>Un nuovo progetto<br />{" "}sta prendendo <em>forma.</em></h2>
+      <section className="velvet-table section-shell" id="velvet-table">
+        <div className="velvet-panel reveal">
+          <div className="velvet-copy">
+            <div className="eyebrow velvet-text"><i /> Velvet Table · concept in sviluppo</div>
+            <h2>Prima scegli l’atmosfera.<br /><em>Poi il tavolo.</em></h2>
             <p>
-              LikeCash è un progetto Kreluna in sviluppo. Stiamo definendo esperienza,
-              funzionalità e lancio; condivideremo qui informazioni confermate, un passo alla volta.
+              Velvet Table nasce per trasformare la prenotazione in una scelta di esperienza.
+              L’idea è descrivere come vuoi vivere la serata — intima, vivace, elegante,
+              panoramica o rilassata — e trovare locali coerenti con quel momento.
             </p>
-            <span className="development-pill"><i /> In sviluppo · Dettagli in arrivo</span>
-          </div>
-          <div className="likecash-visual" aria-hidden="true">
-            <div className="cash-ring ring-a" />
-            <div className="cash-ring ring-b" />
-            <div className="cash-orb"><span>LIKE<br />CASH</span></div>
-            <div className="cash-glint">✦</div>
-          </div>
-        </div>
-      </section>
-
-      <section className="krl section-shell" id="krl">
-        <div className="krl-panel reveal">
-          <div className="krl-copy">
-            <div className="eyebrow mint-text"><i /> Kreluna Token · KRL</div>
-            <h2>La Beta è pronta.<br /><em>Provala senza valore reale.</em></h2>
             <p>
-              KRL Beta simula l’aspetto nel wallet e un flusso locale di crediti AI.
-              La prova usa Base Sepolia: nessun acquisto, prezzo, rendimento o servizio reale.
+              Cucina, zona, budget, orario e disponibilità restano importanti, ma arrivano
+              dentro un contesto più umano: con chi sei, che occasione è e quale atmosfera cerchi.
             </p>
-            <dl className="krl-facts">
-              <div><dt>Base Sepolia</dt><dd>Rete di prova</dd></div>
-              <div><dt>100 milioni</dt><dd>Fornitura progettata</dd></div>
-              <div><dt>Testnet</dt><dd>Nessun valore reale</dd></div>
-            </dl>
-            <div className="krl-notice">
-              <i />
-              <p><b>Stato: Beta pubblica.</b> Puoi provare interfaccia, wallet e simulatore AI. Il contratto testnet non è ancora pubblicato e la vendita resta disattivata.</p>
+            <div className="velvet-moods" aria-label="Esempi di atmosfera">
+              <span>Intima</span>
+              <span>Vivace</span>
+              <span>Panoramica</span>
+              <span>Rilassata</span>
             </div>
-            <a className="button button-primary krl-beta-link" href={`${assetBasePath}/krl/`}>Apri KRL Beta <ArrowIcon /></a>
+            <a className="button button-secondary velvet-cta" href="/velvet-table">
+              Scopri il concept <ArrowIcon />
+            </a>
           </div>
-          <div className="krl-visual" aria-hidden="true">
-            <div className="ledger-grid" />
-            <div className="token-ring token-ring-a" />
-            <div className="token-ring token-ring-b" />
-            <div className="krl-token"><span>KRL</span><small>BY KRELUNA</small></div>
-            <span className="chain-label label-base">BASE</span>
-            <span className="chain-label label-supply">SUPPLY PROGETTATA</span>
-            <span className="chain-label label-dev">IN DEVELOPMENT</span>
-          </div>
+          <ol className="velvet-journey" aria-label="Come funzionerebbe Velvet Table">
+            <li><span>01</span><div><strong>Racconta la serata</strong><p>Atmosfera, occasione, compagnia e preferenze essenziali.</p></div></li>
+            <li><span>02</span><div><strong>Scopri i locali in sintonia</strong><p>Una selezione breve, con il motivo per cui ogni proposta è adatta.</p></div></li>
+            <li><span>03</span><div><strong>Passa alla prenotazione</strong><p>Disponibilità e conferma del tavolo dopo aver scelto l’esperienza.</p></div></li>
+          </ol>
         </div>
-        <p className="krl-disclaimer reveal">
-          Solo testnet: KRL Beta non ha valore monetario, non è acquistabile e non attribuisce
-          rendimenti o diritti economici. Un eventuale deployment on-chain sarà indicato soltanto con un
-          indirizzo Base Sepolia pubblicamente verificabile.
-        </p>
       </section>
 
       <section className="editorial-home section-shell" id="come-lavoriamo">
@@ -643,7 +552,7 @@ export default function Home() {
           </div>
           <div className="home-faq">
             <h3>Domande frequenti</h3>
-            <details><summary>Che cos’è Kreluna?</summary><p>Kreluna è un progetto italiano in sviluppo dedicato ad AI, automazione e cybersecurity. I dati societari e fiscali saranno pubblicati quando disponibili.</p></details>
+            <details><summary>Che cos’è Kreluna?</summary><p>Kreluna è un ecosistema digitale italiano dedicato ad AI, automazione, cybersecurity ed esperienze digitali.</p></details>
             <details><summary>I prodotti sono già acquistabili?</summary><p>Non viene dichiarata una disponibilità generale. Accesso, funzioni, integrazioni e condizioni vengono confermati per ogni richiesta.</p></details>
             <details><summary>Kreluna sostituisce software o professionisti?</summary><p>No in modo automatico. Il ruolo proposto è preparare e collegare il lavoro mantenendo sistemi ufficiali, responsabilità e approvazioni sotto controllo umano.</p></details>
             <details><summary>Posso inviare documenti per una valutazione?</summary><p>Nel primo contatto no: descrivi il contesto senza allegare dati personali, credenziali o documenti riservati. Un eventuale campione viene concordato dopo aver definito il perimetro.</p></details>
@@ -698,7 +607,6 @@ export default function Home() {
           </div>
           <div className="footer-column">
             <p className="footer-heading">Prodotti</p>
-            <a href={storePresentationUrl}>Kreluna Store</a>
             {products.map((product) => <a key={product.slug} href={product.href}>{product.name}</a>)}
           </div>
           <div className="footer-column">
@@ -716,25 +624,11 @@ export default function Home() {
           </div>
         </div>
         <div className="footer-bottom">
-          <span>© 2026 Kreluna. Tutti i diritti riservati.</span>
-          <span>Un marchio. Un ecosistema.</span>
+          <span>© 2026 Kreluna</span>
+          <span>P. IVA 02114130475 · REA PT-622714</span>
         </div>
       </footer>
 
-      {cookieVisible && (
-        <aside className="cookie-banner" aria-label="Preferenze cookie">
-          <p>Questo sito usa solo memoria tecnica nel browser per ricordare questa scelta. <a href="https://www.kreluna.it/cookie.html">Scopri di più</a>.</p>
-          <div>
-            <button onClick={() => chooseCookies("technical")}>Solo tecnici</button>
-            <button className="accept" onClick={() => chooseCookies("accepted")}>Va bene</button>
-          </div>
-        </aside>
-      )}
-      <script
-        id="kreluna-home-structured-data"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeStructuredData) }}
-      />
     </div>
   );
 }

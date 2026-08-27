@@ -1,4 +1,6 @@
 import type { Metadata, Viewport } from "next";
+import CookieConsent from "./cookie-consent";
+import MetaPixel from "./meta-pixel";
 import "./globals.css";
 
 const assetBasePath = process.env.NEXT_PUBLIC_ARUBA_BASE_PATH ?? "";
@@ -17,11 +19,11 @@ export const metadata: Metadata = {
   publisher: "Kreluna",
   category: "technology",
   alternates: {
-    canonical: "/",
+    canonical: `${siteUrl}/`,
     languages: {
-      it: "/",
-      en: "/en/",
-      "x-default": "/",
+      it: `${siteUrl}/`,
+      en: `${siteUrl}/en/`,
+      "x-default": `${siteUrl}/`,
     },
   },
   robots: isArubaPreview
@@ -52,7 +54,7 @@ export const metadata: Metadata = {
     locale: "it_IT",
     alternateLocale: ["en_GB"],
     type: "website",
-    url: "/",
+    url: `${siteUrl}/`,
     images: [
       {
         url: `${assetBasePath}/og-kreluna.jpg`,
@@ -76,51 +78,9 @@ export const viewport: Viewport = {
   themeColor: "#0a0a10",
 };
 
-const siteStructuredData = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      "@id": `${siteUrl}/#organization`,
-      name: "Kreluna",
-      alternateName: "Kreluna Ecosystem",
-      url: `${siteUrl}/`,
-      description: siteDescription,
-      logo: {
-        "@type": "ImageObject",
-        url: `${siteUrl}/kreluna-logo.png`,
-        width: 128,
-        height: 128,
-      },
-      contactPoint: {
-        "@type": "ContactPoint",
-        contactType: "customer support",
-        url: `${siteUrl}/contatti.html`,
-        availableLanguage: ["Italian", "English"],
-      },
-      knowsAbout: [
-        "Artificial intelligence",
-        "Business process automation",
-        "Cybersecurity",
-        "Professional services workflows",
-      ],
-    },
-    {
-      "@type": "WebSite",
-      "@id": `${siteUrl}/#website`,
-      url: `${siteUrl}/`,
-      name: "Kreluna",
-      alternateName: "Kreluna Ecosystem",
-      description: siteDescription,
-      publisher: { "@id": `${siteUrl}/#organization` },
-      inLanguage: ["it-IT", "en-GB"],
-    },
-  ],
-};
-
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="it-IT">
+    <html lang="it-IT" suppressHydrationWarning>
       <head>
         <link rel="preload" href={`${assetBasePath}/fonts/inter-latin.woff2`} as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href={`${assetBasePath}/fonts/space-grotesk-latin.woff2`} as="font" type="font/woff2" crossOrigin="anonymous" />
@@ -129,11 +89,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       </head>
       <body>
         {children}
-        <script
-          id="kreluna-site-structured-data"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteStructuredData) }}
-        />
+        <MetaPixel />
+        <CookieConsent />
       </body>
     </html>
   );

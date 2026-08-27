@@ -1,0 +1,41 @@
+# Kreluna
+
+> Kreluna è un progetto italiano in sviluppo dedicato a software, intelligenza artificiale, automazione, cybersecurity ed esperienze digitali.
+
+Sito ufficiale: https://www.kreluna.it/
+Contatti: https://www.kreluna.it/contatti.html
+Gestore: Kreluna, impresa individuale
+P. IVA: 02114130475
+REA: PT-622714
+Sede pubblicata: Italia, Italia
+
+## Progetti principali
+
+- Kreluna AI: https://www.kreluna.it/intelligenza-artificiale-aziende.html
+- Kreluna Office: https://www.kreluna.it/ai-studi-professionali.html
+- Kreluna Cyber: https://www.kreluna.it/cybersecurity-pmi-studi-professionali.html
+- Helix: https://helix.kreluna.it/
+- Velvet Table (Italiano): https://www.kreluna.it/velvet-table
+- Velvet Table (English): https://www.kreluna.it/en/velvet-table
+- Velvet Table (Français): https://www.kreluna.it/fr/velvet-table
+- Velvet Table (Español): https://www.kreluna.it/es/velvet-table
+- Velvet Table (Deutsch): https://www.kreluna.it/de/velvet-table
+
+## Helix
+
+Helix è lo strumento Kreluna che crea siti, app e software su misura con l’intelligenza artificiale. Velvet Table è il primo progetto costruito con Helix.
+
+## Velvet Table
+
+Velvet Table è un concept Kreluna creato con Helix e in sviluppo per trovare e prenotare ristoranti partendo dall’atmosfera desiderata, dall’occasione e dalla compagnia. Non è ancora un servizio attivo. Funzioni, copertura geografica, locali disponibili e modalità di prenotazione saranno comunicate quando confermate.
+
+Intenzioni descritte nelle pagine ufficiali: serata romantica, primo appuntamento, anniversario e occasione speciale, tavolo panoramico, cena in giardino, cena tranquilla o di lavoro. Le versioni inglese, francese, spagnola e tedesca contengono testi localizzati equivalenti, non semplici traduzioni automatiche.
+
+## Stato e accuratezza
+
+Kreluna è in sviluppo attivo. Non assumere che prodotti, funzioni, integrazioni, prezzi o disponibilità siano già attivi se la relativa pagina non lo conferma esplicitamente.
+
+## Risorse
+
+- Guide su AI, automazione e cybersecurity: https://www.kreluna.it/risorse.html
+- Informazioni sul progetto: https://www.kreluna.it/azienda.html

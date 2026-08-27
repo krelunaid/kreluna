@@ -8,7 +8,7 @@ type ChangeFrequency = NonNullable<
 
 type LocalizedPage = {
   it: string;
-  en?: string;
+  en: string;
   lastModifiedIt?: string;
   lastModifiedEn?: string;
   changeFrequency: ChangeFrequency;
@@ -19,22 +19,10 @@ const pages: readonly LocalizedPage[] = [
   {
     it: "/",
     en: "/en/",
-    lastModifiedIt: "2026-08-14",
-    lastModifiedEn: "2026-08-14",
+    lastModifiedIt: "2026-08-23",
+    lastModifiedEn: "2026-08-23",
     changeFrequency: "weekly",
     priority: 1,
-  },
-  {
-    it: "/store/",
-    lastModifiedIt: "2026-08-14",
-    changeFrequency: "weekly",
-    priority: 0.9,
-  },
-  {
-    it: "/risonix/",
-    lastModifiedIt: "2026-08-27",
-    changeFrequency: "weekly",
-    priority: 0.9,
   },
   {
     it: "/intelligenza-artificiale-aziende.html",
@@ -120,24 +108,17 @@ function absoluteUrl(path: string): string {
   return new URL(path, SITE_URL).toString();
 }
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  return pages.flatMap((page) => {
-    if (!page.en) {
-      const url = absoluteUrl(page.it);
-      return [{
-        url,
-        lastModified: page.lastModifiedIt ?? "2026-08-14",
-        changeFrequency: page.changeFrequency,
-        priority: page.priority,
-        alternates: {
-          languages: {
-            it: url,
-            "x-default": url,
-          },
-        },
-      }];
-    }
+const velvetLanguages = {
+  it: `${SITE_URL}/velvet-table`,
+  en: `${SITE_URL}/en/velvet-table`,
+  fr: `${SITE_URL}/fr/velvet-table`,
+  es: `${SITE_URL}/es/velvet-table`,
+  de: `${SITE_URL}/de/velvet-table`,
+  "x-default": `${SITE_URL}/velvet-table`,
+};
 
+export default function sitemap(): MetadataRoute.Sitemap {
+  const localizedPages = pages.flatMap((page) => {
     const languages = {
       it: absoluteUrl(page.it),
       en: absoluteUrl(page.en),
@@ -147,18 +128,51 @@ export default function sitemap(): MetadataRoute.Sitemap {
     return [
       {
         url: languages.it,
-        lastModified: page.lastModifiedIt ?? "2026-08-14",
+        lastModified: page.lastModifiedIt ?? "2026-08-23",
         changeFrequency: page.changeFrequency,
         priority: page.priority,
         alternates: { languages },
       },
       {
         url: languages.en,
-        lastModified: page.lastModifiedEn ?? "2026-08-14",
+        lastModified: page.lastModifiedEn ?? "2026-08-23",
         changeFrequency: page.changeFrequency,
         priority: page.priority,
         alternates: { languages },
       },
     ];
   });
+
+  return [
+    ...localizedPages,
+    {
+      url: `${SITE_URL}/risonix`,
+      lastModified: "2026-08-27",
+      changeFrequency: "weekly",
+      priority: 0.9,
+      alternates: { languages: { it: `${SITE_URL}/risonix`, "x-default": `${SITE_URL}/risonix` } },
+    },
+    ...Object.entries(velvetLanguages)
+      .filter(([language]) => language !== "x-default")
+      .map(([, url]) => ({
+      url,
+      lastModified: "2026-08-23",
+      changeFrequency: "monthly",
+      priority: 0.8,
+      images: [
+        `${SITE_URL}/velvet-table/hero.jpg`,
+        `${SITE_URL}/velvet-table/salon.jpg`,
+        `${SITE_URL}/velvet-table/view-window.jpg`,
+        `${SITE_URL}/velvet-table/garden-restaurant.jpg`,
+      ],
+      alternates: { languages: velvetLanguages },
+    })),
+    {
+      url: `${SITE_URL}/en/velvet-table/restaurants`,
+      lastModified: "2026-08-25",
+      changeFrequency: "weekly",
+      priority: 0.8,
+      images: [`${SITE_URL}/velvet-table/og.jpg`],
+    },
+  ];
 }

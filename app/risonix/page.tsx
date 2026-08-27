@@ -25,7 +25,7 @@ export default function RisonixPage() {
     <main className="rx-page">
       <header className="rx-nav">
         <Link className="rx-brand" href="/"><span className="rx-mark">⌁</span><b>KRELUNA</b></Link>
-        <nav aria-label="Navigazione Risonix"><Link href="/store">Store</Link><a href="#funzioni">Funzioni</a><Link href={accountUrl}>La mia licenza</Link></nav>
+        <nav aria-label="Navigazione Risonix"><Link href="/">Ecosistema</Link><a href="#funzioni">Funzioni</a><Link href={accountUrl}>La mia licenza</Link></nav>
       </header>
 
       <section className="rx-hero">
@@ -35,7 +35,7 @@ export default function RisonixPage() {
           <h1>La tua musica.<br /><em>Riconosciuta.</em></h1>
           <p>Collega una cartella, fai ascoltare un campione e Risonix confronta l’impronta acustica con il tuo database locale. Nome, punto e percentuale compaiono in pochi istanti.</p>
           <div className="rx-actions">
-            <Link className="rx-primary" href="/store">Scopri nello Store <span>→</span></Link>
+            <Link className="rx-primary" href="/">Torna all’ecosistema <span>→</span></Link>
             <Link className="rx-secondary" href={accountUrl}>Gestisci la licenza</Link>
           </div>
           <small>Preview 1.7 · macOS e Windows · licenza online per un dispositivo</small>
