@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { marketplaceCategories, products, productsForCategory } from "./marketplace-data";
 
 const assetBasePath = process.env.NEXT_PUBLIC_ARUBA_BASE_PATH ?? "";
 const homeSiteUrl = "https://www.kreluna.it";
@@ -45,108 +46,6 @@ const homeStructuredData = {
     },
   ],
 };
-
-const products = [
-  {
-    slug: "risonix",
-    name: "Risonix",
-    eyebrow: "Riconoscimento musicale",
-    tagline: "La tua musica. Riconosciuta.",
-    description:
-      "Impronte acustiche locali, riconoscimento da file o microfono, percentuale di corrispondenza e licenza online per un solo dispositivo.",
-    color: "teal",
-    status: "Preview 1.7",
-    href: "/risonix",
-    features: ["Database locale", "File e microfono", "Licenza Mac + Windows"],
-    mockup: "risonix",
-    domain: "kreluna.it/risonix",
-  },
-  {
-    slug: "kreluna-ai",
-    name: "Kreluna AI",
-    eyebrow: "Intelligenza artificiale",
-    tagline: "Pensa con te, ogni giorno.",
-    description:
-      "Non solo risposte. Ragionamento adattivo, ricerca, scrittura e pianificazione in un'esperienza naturale.",
-    color: "violet",
-    status: "In sviluppo",
-    href: "https://www.kreluna.it/intelligenza-artificiale-aziende.html",
-    features: ["Ragionamento adattivo", "Ricerca e analisi", "Scrittura e studio"],
-    mockup: "ai",
-    domain: "kreluna.ai",
-  },
-  {
-    slug: "office",
-    name: "Kreluna Office",
-    eyebrow: "Per professionisti",
-    tagline: "Il dipendente digitale del tuo studio.",
-    description:
-      "Organizza documenti, clienti, pratiche e scadenze. Prepara il lavoro e lascia a te il controllo delle azioni importanti.",
-    color: "gold",
-    status: "In sviluppo",
-    href: "https://www.kreluna.it/ai-studi-professionali.html",
-    features: ["Document intelligence", "Pratiche e scadenze", "Approval center"],
-    mockup: "office",
-    domain: "kreluna.it/office",
-  },
-  {
-    slug: "cyber",
-    name: "Kreluna Cyber",
-    eyebrow: "Sicurezza informatica",
-    tagline: "Intelligence that protects.",
-    description:
-      "Strumenti dedicati a security assessment, gestione delle vulnerabilità, workflow degli incidenti e conformità tecnica.",
-    color: "cyan",
-    status: "In sviluppo",
-    href: "https://cra24.kreluna.it/",
-    features: ["Security assessment", "Vulnerability management", "Compliance tecnica"],
-    mockup: "cyber",
-    domain: "cra24.kreluna.it",
-  },
-  {
-    slug: "helix",
-    name: "Helix",
-    eyebrow: "Sviluppo con l'AI",
-    tagline: "Il modo in cui Kreluna costruisce prodotti.",
-    description:
-      "Helix crea siti, app e software su misura con l'intelligenza artificiale. Velvet Table nasce da Helix, e ogni prossimo progetto Kreluna parte dallo stesso strumento.",
-    color: "coral",
-    status: "In sviluppo",
-    href: "https://helix.kreluna.it/",
-    features: ["Siti su misura", "App e software", "Costruito con l'AI"],
-    mockup: "helix",
-    domain: "helix.kreluna.it",
-  },
-  {
-    slug: "velvet-table",
-    name: "Velvet Table",
-    eyebrow: "Dining experience",
-    tagline: "Prenota l’atmosfera, non solo il tavolo.",
-    description:
-      "Un concept Kreluna per scegliere il locale partendo dal tipo di serata: intima, vivace, panoramica o rilassata. Poi si passa alla disponibilità e alla prenotazione.",
-    color: "velvet",
-    status: "Concept in sviluppo",
-    href: "/velvet-table",
-    features: ["Atmosfera desiderata", "Occasione e compagnia", "Prenotazione guidata"],
-    mockup: "velvet",
-    domain: "kreluna.it/velvet-table",
-  },
-] as const;
-
-const marketplaceCategories = [
-  {
-    id: "music-audio",
-    name: "Musica e audio",
-    description: "Software Kreluna dedicati al riconoscimento, all’ascolto e alla gestione della musica.",
-    products: products.filter((product) => product.slug === "risonix"),
-  },
-  {
-    id: "digital-products",
-    name: "AI, lavoro ed esperienze",
-    description: "Intelligenza artificiale, strumenti professionali, sicurezza e nuovi servizi digitali.",
-    products: products.filter((product) => product.slug !== "risonix"),
-  },
-] as const;
 
 const principles = [
   ["01", "Una visione comune", "Ogni prodotto nasce per risolvere un problema reale e condivide la stessa cura Kreluna."],
@@ -303,14 +202,14 @@ export default function Home() {
       <header className="site-header">
         <Logo />
         <nav className="desktop-nav" aria-label="Navigazione principale">
-          <a href="#products">Prodotti</a>
+          <a href="/marketplace">Marketplace</a>
           <a href="#vision">Visione</a>
           <a href="#velvet-table">Velvet Table</a>
           <a href="https://www.kreluna.it/azienda.html">Azienda</a>
         </nav>
         <div className="nav-actions">
           <a className="contact-link" href="https://www.kreluna.it/contatti.html">Contatti</a>
-          <a className="button button-small button-primary" href="#products">Esplora</a>
+          <a className="button button-small button-primary" href="/marketplace">Apri il Marketplace</a>
           <button
             ref={menuButtonRef}
             className="menu-button"
@@ -333,7 +232,7 @@ export default function Home() {
             }}
             aria-label="Chiudi il menu"
           >×</button>
-          <a href="#products" onClick={() => setMenuOpen(false)}>Prodotti</a>
+          <a href="/marketplace" onClick={() => setMenuOpen(false)}>Marketplace</a>
           <a href="#vision" onClick={() => setMenuOpen(false)}>Visione</a>
           <a href="#velvet-table" onClick={() => setMenuOpen(false)}>Velvet Table</a>
           <a href="https://www.kreluna.it/azienda.html">Azienda</a>
@@ -358,7 +257,7 @@ export default function Home() {
             Tutti condividono la stessa visione.
           </p>
           <div className="hero-actions">
-            <a className="button button-primary" href="#products">Esplora i progetti <ArrowIcon /></a>
+            <a className="button button-primary" href="/marketplace">Apri il Marketplace <ArrowIcon /></a>
             <a className="button button-secondary" href="#vision">Conosci Kreluna</a>
           </div>
           <div className="hero-capabilities">
@@ -409,7 +308,7 @@ export default function Home() {
                 <p>{category.description}</p>
               </header>
               <div className={`product-grid ${category.id === "music-audio" ? "product-grid-featured" : ""}`}>
-                {category.products.map((product) => {
+                {productsForCategory(category.id).map((product) => {
                   const index = products.indexOf(product);
                   return <article id={`product-${product.slug}`} className={`product-card ${product.color} reveal`} key={product.slug} style={{ "--delay": `${index * 90}ms` } as React.CSSProperties}>
                     <div className="card-topline">
@@ -447,6 +346,10 @@ export default function Home() {
             <h3>Lo spazio è già pronto.</h3>
             <p>Nome, identità e racconto: quando nasce una nuova idea Kreluna, il sito cresce senza ricominciare da zero.</p>
           </div>
+        </div>
+        <div className="marketplace-home-cta reveal">
+          <p>Quando nasceranno nuove app, siti o software li troverai tutti nel catalogo completo.</p>
+          <a className="button button-primary" href="/marketplace">Vedi tutto il Marketplace <ArrowIcon /></a>
         </div>
       </section>
 
@@ -624,7 +527,7 @@ export default function Home() {
         <div className="eyebrow"><i /> Kreluna</div>
         <h2>Questo è solo<br />{" "}<em>l’inizio.</em></h2>
         <p>Scopri ciò che stiamo costruendo e segui l’evoluzione dell’ecosistema.</p>
-        <a className="button button-primary" href="#products">Esplora i progetti <ArrowIcon /></a>
+        <a className="button button-primary" href="/marketplace">Apri il Marketplace <ArrowIcon /></a>
       </section>
       </main>
 
@@ -635,8 +538,9 @@ export default function Home() {
             <p>Tecnologia e intelligenza artificiale per ciò che viene dopo.</p>
           </div>
           <div className="footer-column">
-            <p className="footer-heading">Prodotti</p>
-            {products.map((product) => <a key={product.slug} href={product.href}>{product.name}</a>)}
+            <p className="footer-heading">Marketplace</p>
+            <a href="/marketplace">Tutti i prodotti</a>
+            {products.slice(0, 4).map((product) => <a key={product.slug} href={product.href}>{product.name}</a>)}
           </div>
           <div className="footer-column">
             <p className="footer-heading">Kreluna</p>

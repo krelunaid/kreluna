@@ -146,6 +146,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...localizedPages,
     {
+      url: `${SITE_URL}/marketplace`,
+      lastModified: "2026-08-27",
+      changeFrequency: "weekly",
+      priority: 0.9,
+      alternates: { languages: { it: `${SITE_URL}/marketplace`, "x-default": `${SITE_URL}/marketplace` } },
+    },
+    {
       url: `${SITE_URL}/risonix`,
       lastModified: "2026-08-27",
       changeFrequency: "weekly",
