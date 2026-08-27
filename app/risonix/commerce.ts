@@ -107,8 +107,10 @@ function stripeConfiguration() {
   const mode = required("RISONIX_STRIPE_MODE");
   if (mode !== "test" && mode !== "live") throw commerceError(503, "Modalità Stripe non valida.");
   const secretKey = required("STRIPE_SECRET_KEY");
-  const expectedPrefix = mode === "live" ? "sk_live_" : "sk_test_";
-  if (!secretKey.startsWith(expectedPrefix)) throw commerceError(503, `È richiesta una chiave Stripe ${mode}.`);
+  const allowedPrefixes = mode === "live" ? ["sk_live_", "rk_live_"] : ["sk_test_", "rk_test_"];
+  if (!allowedPrefixes.some((prefix) => secretKey.startsWith(prefix))) {
+    throw commerceError(503, `È richiesta una chiave Stripe ${mode}, standard o con limitazioni.`);
+  }
   const priceId = required("RISONIX_STRIPE_PRICE_ID");
   if (!priceId.startsWith("price_")) throw commerceError(503, "Price ID Stripe non valido.");
   const expectedAmount = Number(required("RISONIX_STRIPE_EXPECTED_AMOUNT"));
