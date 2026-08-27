@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { chatGPTSignInPath } from "../chatgpt-auth";
+import { risonixPurchasePresentation } from "./commerce";
 import "./risonix.css";
 
 /* eslint-disable @next/next/no-html-link-for-pages */
@@ -22,6 +23,7 @@ export const metadata: Metadata = {
 const accountUrl = chatGPTSignInPath("/risonix/account");
 
 export default function RisonixPage() {
+  const purchase = risonixPurchasePresentation();
   return (
     <main className="rx-page">
       <header className="rx-nav">
@@ -36,10 +38,10 @@ export default function RisonixPage() {
           <h1>La tua musica.<br /><em>Riconosciuta.</em></h1>
           <p>Collega una cartella, fai ascoltare un campione e Risonix confronta l’impronta acustica con il tuo database locale. Nome, punto e percentuale compaiono in pochi istanti.</p>
           <div className="rx-actions">
-            <a className="rx-primary" href="/">Torna all’ecosistema <span>→</span></a>
+            <a className="rx-primary" href="/risonix/acquista">Acquista Risonix <span>→</span></a>
             <a className="rx-secondary" href={accountUrl}>Gestisci la licenza</a>
           </div>
-          <small>Preview 1.7 · macOS e Windows · licenza online per un dispositivo</small>
+          <small>Risonix v40 · {purchase.priceDisplay} · macOS e Windows · licenza online per un dispositivo</small>
         </div>
         <div className="rx-console" aria-label="Anteprima di Risonix">
           <div className="rx-console-top"><span><i /><i /><i /></span><b>RISONIX</b><small>ONLINE</small></div>

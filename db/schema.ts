@@ -16,6 +16,53 @@ export const velvetWaitlist = sqliteTable(
   (table) => [uniqueIndex("idx_velvet_waitlist_email_audience").on(table.email, table.audience)],
 );
 
+export const risonixOrders = sqliteTable(
+  "risonix_orders",
+  {
+    id: text("id").primaryKey(),
+    customerUserHash: text("customer_user_hash").notNull(),
+    customerEmailHash: text("customer_email_hash").notNull(),
+    customerEmailEncrypted: text("customer_email_encrypted").notNull(),
+    status: text("status", {
+      enum: ["created", "checkout_pending", "paid", "fulfilled", "refunded", "cancelled", "failed"],
+    }).notNull().default("created"),
+    stripeCheckoutSessionId: text("stripe_checkout_session_id"),
+    stripePaymentIntentId: text("stripe_payment_intent_id"),
+    currency: text("currency"),
+    amountTotal: integer("amount_total"),
+    licenseId: text("license_id"),
+    licenseKeyEncrypted: text("license_key_encrypted"),
+    emailStatus: text("email_status", { enum: ["pending", "sent", "failed"] }).notNull().default("pending"),
+    createdAt: integer("created_at").notNull(),
+    updatedAt: integer("updated_at").notNull(),
+    paidAt: integer("paid_at"),
+    fulfilledAt: integer("fulfilled_at"),
+    refundedAt: integer("refunded_at"),
+  },
+  (table) => [
+    index("idx_risonix_orders_customer_user").on(table.customerUserHash),
+    index("idx_risonix_orders_customer_email").on(table.customerEmailHash),
+    uniqueIndex("idx_risonix_orders_stripe_session").on(table.stripeCheckoutSessionId),
+    uniqueIndex("idx_risonix_orders_payment_intent").on(table.stripePaymentIntentId),
+  ],
+);
+
+export const risonixOrderEvents = sqliteTable(
+  "risonix_order_events",
+  {
+    id: text("id").primaryKey(),
+    orderId: text("order_id").notNull().references(() => risonixOrders.id),
+    providerEventId: text("provider_event_id"),
+    eventType: text("event_type").notNull(),
+    payloadHash: text("payload_hash"),
+    createdAt: integer("created_at").notNull(),
+  },
+  (table) => [
+    index("idx_risonix_order_events_order").on(table.orderId),
+    uniqueIndex("idx_risonix_order_events_provider").on(table.providerEventId),
+  ],
+);
+
 export const risonixLicenses = sqliteTable(
   "risonix_licenses",
   {
@@ -23,11 +70,13 @@ export const risonixLicenses = sqliteTable(
     keyHash: text("key_hash").notNull(),
     status: text("status", { enum: ["active", "disabled"] }).notNull().default("active"),
     orderReference: text("order_reference"),
+    purchaseOrderId: text("purchase_order_id").references(() => risonixOrders.id),
     customerEmailHash: text("customer_email_hash"),
     createdAt: integer("created_at").notNull(),
   },
   (table) => [
     uniqueIndex("idx_risonix_license_key").on(table.keyHash),
+    uniqueIndex("idx_risonix_license_purchase_order").on(table.purchaseOrderId),
     index("idx_risonix_customer_email").on(table.customerEmailHash),
   ],
 );

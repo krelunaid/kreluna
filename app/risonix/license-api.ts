@@ -40,6 +40,16 @@ async function customerHash(email: string) {
   return hash(`${required("RISONIX_LICENSE_PEPPER")}:customer:${normalized}`);
 }
 
+export async function hashRisonixCustomerEmail(email: string) {
+  return customerHash(email);
+}
+
+export async function hashRisonixUserId(userId: string) {
+  const normalized = userId.trim();
+  if (!normalized || normalized.length > 200) throw apiError(400, "Identità cliente non valida.");
+  return hash(`${required("RISONIX_LICENSE_PEPPER")}:user:${normalized}`);
+}
+
 async function sameSecret(left: string | null, right: string): Promise<boolean> {
   if (!left) return false;
   const [a, b] = await Promise.all([crypto.subtle.digest("SHA-256", encoder.encode(left)), crypto.subtle.digest("SHA-256", encoder.encode(right))]);
@@ -132,6 +142,10 @@ async function requireControl(request: Request, mutation = false) {
   }
 }
 
+export async function requireRisonixControl(request: Request, mutation = false) {
+  return requireControl(request, mutation);
+}
+
 async function controlLogin(request: Request) {
   const body = await json(request);
   if (!(await sameSecret(text(body, "password", 160), required("RISONIX_DASHBOARD_PASSWORD")))) throw apiError(403, "Password non valida.");
@@ -219,6 +233,39 @@ async function createLicense(request: Request) {
     createdAt: Math.floor(Date.now() / 1000),
   });
   return Response.json({ license_key: key, license_id: id }, { status: 201 });
+}
+
+export async function createPaidRisonixLicense(orderId: string, customerEmail: string) {
+  const db = getDb();
+  const [existing] = await db
+    .select({ id: risonixLicenses.id })
+    .from(risonixLicenses)
+    .where(eq(risonixLicenses.purchaseOrderId, orderId))
+    .limit(1);
+  if (existing) return { created: false as const, licenseId: existing.id, licenseKey: null };
+
+  const key = licenseKey();
+  const id = crypto.randomUUID();
+  await db.insert(risonixLicenses).values({
+    id,
+    keyHash: await licenseHash(key),
+    status: "active",
+    orderReference: orderId,
+    purchaseOrderId: orderId,
+    customerEmailHash: await customerHash(customerEmail),
+    createdAt: Math.floor(Date.now() / 1000),
+  });
+  await addEvent(id, "license_created_after_confirmed_payment");
+  return { created: true as const, licenseId: id, licenseKey: key };
+}
+
+export async function disableRisonixLicenseForRefund(licenseId: string) {
+  const db = getDb();
+  const [license] = await db.select().from(risonixLicenses).where(eq(risonixLicenses.id, licenseId)).limit(1);
+  if (!license || license.status === "disabled") return;
+  await db.update(risonixLicenses).set({ status: "disabled" }).where(eq(risonixLicenses.id, licenseId));
+  await db.update(risonixActivations).set({ status: "disabled" }).where(eq(risonixActivations.licenseId, licenseId));
+  await addEvent(licenseId, "license_disabled_after_refund");
 }
 
 async function createLicenseFromControl(request: Request) {
