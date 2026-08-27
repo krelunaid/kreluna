@@ -1,7 +1,7 @@
 import { env } from "cloudflare:workers";
 import { and, desc, eq } from "drizzle-orm";
 import { getDb } from "../../db";
-import { risonixActivations, risonixLicenseEvents, risonixLicenses } from "../../db/schema";
+import { risonixActivations, risonixLicenseEvents, risonixLicenses, risonixOrders } from "../../db/schema";
 
 type JsonObject = Record<string, unknown>;
 
@@ -274,14 +274,27 @@ async function createLicenseFromControl(request: Request) {
   return createLicense(forwarded);
 }
 
-async function controlMutation(request: Request, licenseId: string, action: "release" | "disable") {
+async function controlMutation(request: Request, licenseId: string, action: "release" | "disable" | "delete") {
   await requireControl(request, true);
+  const db = getDb();
+  const [license] = await db.select().from(risonixLicenses).where(eq(risonixLicenses.id, licenseId)).limit(1);
+  if (!license) throw apiError(404, "Licenza inesistente.");
+  if (action === "delete") {
+    if (license.status !== "disabled") throw apiError(409, "Disattiva la licenza prima di eliminarla.");
+    await db.batch([
+      db.update(risonixOrders).set({ licenseId: null, licenseKeyEncrypted: null }).where(eq(risonixOrders.licenseId, licenseId)),
+      db.delete(risonixActivations).where(eq(risonixActivations.licenseId, licenseId)),
+      db.delete(risonixLicenseEvents).where(eq(risonixLicenseEvents.licenseId, licenseId)),
+      db.delete(risonixLicenses).where(and(eq(risonixLicenses.id, licenseId), eq(risonixLicenses.status, "disabled"))),
+    ]);
+    return new Response(null, { status: 204 });
+  }
   if (action === "release") {
-    await getDb().update(risonixActivations).set({ status: "disabled" }).where(eq(risonixActivations.licenseId, licenseId));
+    await db.update(risonixActivations).set({ status: "disabled" }).where(eq(risonixActivations.licenseId, licenseId));
     await addEvent(licenseId, "device_released_by_control");
   } else {
-    await getDb().update(risonixLicenses).set({ status: "disabled" }).where(eq(risonixLicenses.id, licenseId));
-    await getDb().update(risonixActivations).set({ status: "disabled" }).where(eq(risonixActivations.licenseId, licenseId));
+    await db.update(risonixLicenses).set({ status: "disabled" }).where(eq(risonixLicenses.id, licenseId));
+    await db.update(risonixActivations).set({ status: "disabled" }).where(eq(risonixActivations.licenseId, licenseId));
     await addEvent(licenseId, "license_disabled_by_control");
   }
   return new Response(null, { status: 204 });
@@ -330,8 +343,11 @@ export async function handleLicenseApi(request: Request, path: string[]) {
     if (request.method === "GET" && route === "control/licenses") return await listLicenses(request, true);
     if (request.method === "POST" && route === "control/session") return await controlLogin(request);
     if (request.method === "POST" && route === "control/licenses") return await createLicenseFromControl(request);
-    const controlAction = route.match(/^control\/licenses\/([^/]+)\/(release-device|disable)$/);
-    if (request.method === "POST" && controlAction) return await controlMutation(request, controlAction[1], controlAction[2] === "disable" ? "disable" : "release");
+    const controlAction = route.match(/^control\/licenses\/([^/]+)\/(release-device|disable|delete)$/);
+    if (request.method === "POST" && controlAction) {
+      const action = controlAction[2] === "delete" ? "delete" : controlAction[2] === "disable" ? "disable" : "release";
+      return await controlMutation(request, controlAction[1], action);
+    }
     if (request.method !== "POST") return Response.json({ error: "Metodo non supportato." }, { status: 405 });
     if (route === "licenses/activate") return await activate(request);
     if (route === "licenses/heartbeat") return await heartbeat(request);

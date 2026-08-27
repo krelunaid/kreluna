@@ -22,5 +22,6 @@
 .rx-control-actions { display: flex; gap: .6rem; margin-top: 1rem; }
 .rx-control-actions button { padding: .65rem .8rem; color: #fff; border: 1px solid #ffffff14; border-radius: 10px; background: transparent; cursor: pointer; }
 .rx-control-actions .danger { color: #ff91a4; }
+.rx-control-actions .delete { color: #fff; border-color: #ff718966; background: #ff71891a; }
 .rx-control-message { position: fixed; left: 50%; bottom: 1.2rem; transform: translateX(-50%); max-width: 90vw; padding: .9rem 1.2rem; border: 1px solid #49efd7; border-radius: 14px; background: #101827; color: #fff; box-shadow: 0 16px 40px #0008; }
 @media (max-width: 760px) { .rx-control-form { flex-direction: column; align-items: stretch; } .rx-control-form input { min-width: 0; } }

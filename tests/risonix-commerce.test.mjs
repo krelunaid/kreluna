@@ -77,3 +77,15 @@ test("binds each license to its first device and blocks customer transfer", asyn
   assert.doesNotMatch(accountPage, /Libera questo dispositivo/);
   assert.match(customerReleaseRoute, /status: 403/);
 });
+
+test("allows permanent deletion only after a license is disabled", async () => {
+  const licenseApi = await readFile("app/risonix/license-api.ts", "utf8");
+  const controlPage = await readFile("app/risonix/control/page.tsx", "utf8");
+  assert.match(licenseApi, /if \(license\.status !== "disabled"\) throw apiError\(409/);
+  assert.match(licenseApi, /db\.delete\(risonixActivations\)/);
+  assert.match(licenseApi, /db\.delete\(risonixLicenseEvents\)/);
+  assert.match(licenseApi, /db\.delete\(risonixLicenses\)/);
+  assert.match(licenseApi, /set\(\{ licenseId: null, licenseKeyEncrypted: null \}\)/);
+  assert.match(controlPage, /item\.status === "disabled"/);
+  assert.match(controlPage, /Elimina definitivamente/);
+});
