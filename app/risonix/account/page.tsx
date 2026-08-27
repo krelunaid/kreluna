@@ -47,12 +47,12 @@ export default async function RisonixAccountPage() {
             <article key={license.license_id}>
               <div className="rx-license-top"><span className={license.online ? "online" : "offline"}><i />{license.online ? "ONLINE" : license.device_label ? "OFFLINE" : "NON ATTIVATA"}</span><small>RIX-{license.license_id.slice(0, 8).toUpperCase()}</small></div>
               <h2>Risonix 1.0</h2><dl><div><dt>Stato</dt><dd>{license.status}</dd></div><div><dt>Dispositivo</dt><dd>{license.device_label ?? "Nessun dispositivo"}</dd></div><div><dt>Versione</dt><dd>{license.app_version ?? "—"}</dd></div><div><dt>Ultimo contatto</dt><dd>{formatDate(license.last_seen)}</dd></div></dl>
-              {license.device_label ? <form method="post" action={`/api/risonix/licenses/${license.license_id}/release`}><button type="submit">Libera questo dispositivo</button></form> : <p className="rx-ready">Pronta per una nuova attivazione.</p>}
+              {license.device_label ? <p className="rx-ready">Licenza vincolata a questo dispositivo.</p> : <p className="rx-ready">Pronta per la prima attivazione.</p>}
             </article>
           ))}
         </section>
       )}
-      <p className="rx-account-note">Liberare il dispositivo disattiva subito l’installazione corrente. Il codice potrà poi essere usato sul nuovo Mac o PC.</p>
+      <p className="rx-account-note">Dopo la prima attivazione il codice resta vincolato a quel dispositivo. Per problemi hardware o sostituzioni è necessario contattare l’assistenza Kreluna.</p>
     </main>
   );
 }

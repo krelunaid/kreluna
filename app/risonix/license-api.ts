@@ -181,8 +181,8 @@ async function activate(request: Request) {
   const [existing] = await db.select().from(risonixActivations).where(eq(risonixActivations.licenseId, license.id)).limit(1);
   const now = Math.floor(Date.now() / 1000);
   let activation: typeof risonixActivations.$inferSelect;
-  if (existing?.status === "active" && (existing.deviceId !== deviceId || existing.devicePublicKey !== publicKey)) {
-    throw apiError(409, "Licenza già associata a un altro dispositivo. Liberalo dall’area Kreluna prima del trasferimento.");
+  if (existing && (existing.deviceId !== deviceId || existing.devicePublicKey !== publicKey)) {
+    throw apiError(409, "Licenza vincolata al primo dispositivo. Per assistenza contatta Kreluna.");
   }
   if (existing) {
     const id = existing.status === "active" ? existing.id : crypto.randomUUID();
@@ -339,8 +339,6 @@ export async function handleLicenseApi(request: Request, path: string[]) {
     if (route === "customer/licenses") return await customerLicenses(request);
     const adminRelease = route.match(/^admin\/licenses\/([^/]+)\/release-device$/);
     if (adminRelease) return await release(request, adminRelease[1], false);
-    const customerRelease = route.match(/^customer\/licenses\/([^/]+)\/release-device$/);
-    if (customerRelease) return await release(request, customerRelease[1], true);
     const adminDisable = route.match(/^admin\/licenses\/([^/]+)\/disable$/);
     if (adminDisable) return await disable(request, adminDisable[1]);
     return Response.json({ error: "Endpoint inesistente." }, { status: 404 });

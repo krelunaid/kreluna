@@ -57,12 +57,12 @@ export default function RisonixPage() {
           <article><span>01</span><h3>Database locale</h3><p>Le impronte e i file musicali non vengono caricati sul server Kreluna.</p></article>
           <article><span>02</span><h3>File o microfono</h3><p>Apri MP3, WAV, FLAC e AAC oppure ascolta dieci secondi dal microfono.</p></article>
           <article><span>03</span><h3>Risultato leggibile</h3><p>Risonix mostra nome, percentuale, punto riconosciuto e riproduzione.</p></article>
-          <article><span>04</span><h3>Licenza controllata</h3><p>Una sola attivazione online; il dispositivo può essere trasferito dall’area cliente.</p></article>
+          <article><span>04</span><h3>Licenza controllata</h3><p>Una sola attivazione, vincolata al primo dispositivo e verificata online durante l’uso.</p></article>
         </div>
       </section>
 
       <section className="rx-security">
-        <div><p className="rx-kicker"><i /> Kreluna Control</p><h2>Acquisto, dispositivo e licenza.<br /><em>Un unico collegamento.</em></h2><p>La dashboard Kreluna vede attivazioni e heartbeat. L’area cliente permette di liberare il vecchio computer senza conoscere i segreti amministrativi.</p></div>
+        <div><p className="rx-kicker"><i /> Kreluna Control</p><h2>Acquisto, dispositivo e licenza.<br /><em>Un unico collegamento.</em></h2><p>La dashboard Kreluna vede attivazioni e verifiche online. Il codice resta legato al primo computer e un secondo dispositivo viene rifiutato.</p></div>
         <a className="rx-primary" href={accountUrl}>Apri la mia area <span>→</span></a>
       </section>
 

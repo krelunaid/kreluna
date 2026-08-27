@@ -66,3 +66,14 @@ test("protects installer delivery behind authentication and a fulfilled order", 
   assert.match(storage, /Risonix-1\.0\.0-Windows-x64\.msi/);
   assert.doesNotMatch(storage, /put\(/);
 });
+
+test("binds each license to its first device and blocks customer transfer", async () => {
+  const licenseApi = await readFile("app/risonix/license-api.ts", "utf8");
+  const accountPage = await readFile("app/risonix/account/page.tsx", "utf8");
+  const customerReleaseRoute = await readFile("app/api/risonix/licenses/[licenseId]/release/route.ts", "utf8");
+  assert.match(licenseApi, /if \(existing && \(existing\.deviceId !== deviceId \|\| existing\.devicePublicKey !== publicKey\)\)/);
+  assert.match(licenseApi, /Licenza vincolata al primo dispositivo/);
+  assert.doesNotMatch(licenseApi, /customerRelease/);
+  assert.doesNotMatch(accountPage, /Libera questo dispositivo/);
+  assert.match(customerReleaseRoute, /status: 403/);
+});
