@@ -200,3 +200,5 @@ footer{border-top:1px solid var(--line);padding:56px 24px 30px;color:var(--muted
   .editorial-steps li{grid-template-columns:38px 1fr;padding:20px}
   .editorial-sources{padding-top:44px;padding-bottom:44px}
 }
+
+.article-cover{margin:0 0 2rem;border:1px solid var(--line,#30303d);border-radius:22px;overflow:hidden;background:#111119}.article-cover img{display:block;width:100%;height:auto}.article-cover figcaption{padding:.75rem 1rem;color:var(--muted,#aaa4bb);font-size:.86rem}.article-languages{display:inline-flex;gap:.55rem;align-items:center}.article-languages a[aria-current="page"]{color:#fff;text-decoration:underline;text-underline-offset:.25rem}@media(max-width:760px){.article-languages{display:flex;flex-wrap:wrap}.article-cover{border-radius:14px}}

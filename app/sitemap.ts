@@ -117,6 +117,15 @@ const velvetLanguages = {
   "x-default": `${SITE_URL}/velvet-table`,
 };
 
+const webProfessionalGuideLanguages = {
+  it: `${SITE_URL}/it/guide/come-scegliere-professionista-sito-web/`,
+  en: `${SITE_URL}/en/guides/how-to-choose-a-website-professional/`,
+  es: `${SITE_URL}/es/guias/como-elegir-profesional-pagina-web/`,
+  fr: `${SITE_URL}/fr/guides/choisir-professionnel-creation-site-internet/`,
+  de: `${SITE_URL}/de/ratgeber/zuverlaessigen-webentwickler-auswaehlen/`,
+  "x-default": `${SITE_URL}/it/guide/come-scegliere-professionista-sito-web/`,
+};
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const localizedPages = pages.flatMap((page) => {
     const languages = {
@@ -145,6 +154,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     ...localizedPages,
+    ...Object.entries(webProfessionalGuideLanguages)
+      .filter(([language]) => language !== "x-default")
+      .map(([, url]) => ({
+        url,
+        lastModified: "2026-08-28",
+        changeFrequency: "monthly" as const,
+        priority: 0.75,
+        images: [`${SITE_URL}/assets/guide-scegliere-professionista-web.png`],
+        alternates: { languages: webProfessionalGuideLanguages },
+      })),
     {
       url: `${SITE_URL}/risonix`,
       lastModified: "2026-08-27",

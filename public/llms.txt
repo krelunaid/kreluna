@@ -38,4 +38,9 @@ Kreluna è in sviluppo attivo. Non assumere che prodotti, funzioni, integrazioni
 ## Risorse
 
 - Guide su AI, automazione e cybersecurity: https://www.kreluna.it/risorse.html
+- Guida alla scelta di un professionista web (Italiano): https://www.kreluna.it/it/guide/come-scegliere-professionista-sito-web/
+- Website professional selection guide (English): https://www.kreluna.it/en/guides/how-to-choose-a-website-professional/
+- Guía para elegir un profesional web (Español): https://www.kreluna.it/es/guias/como-elegir-profesional-pagina-web/
+- Guide pour choisir un professionnel web (Français): https://www.kreluna.it/fr/guides/choisir-professionnel-creation-site-internet/
+- Ratgeber zur Auswahl eines Website-Profis (Deutsch): https://www.kreluna.it/de/ratgeber/zuverlaessigen-webentwickler-auswaehlen/
 - Informazioni sul progetto: https://www.kreluna.it/azienda.html
