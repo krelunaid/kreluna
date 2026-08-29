@@ -126,6 +126,15 @@ const webProfessionalGuideLanguages = {
   "x-default": `${SITE_URL}/it/guide/come-scegliere-professionista-sito-web/`,
 };
 
+const businessSoftwareGuideLanguages = {
+  it: `${SITE_URL}/it/guide/come-scegliere-software-gestionale-piccola-impresa/`,
+  en: `${SITE_URL}/en/guides/how-to-choose-small-business-software/`,
+  es: `${SITE_URL}/es/guias/como-elegir-software-gestion-pequena-empresa/`,
+  fr: `${SITE_URL}/fr/guides/choisir-logiciel-gestion-petite-entreprise/`,
+  de: `${SITE_URL}/de/ratgeber/software-kleine-unternehmen-auswaehlen/`,
+  "x-default": `${SITE_URL}/it/guide/come-scegliere-software-gestionale-piccola-impresa/`,
+};
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const localizedPages = pages.flatMap((page) => {
     const languages = {
@@ -163,6 +172,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.75,
         images: [`${SITE_URL}/assets/guide-scegliere-professionista-web.png`],
         alternates: { languages: webProfessionalGuideLanguages },
+      })),
+    ...Object.entries(businessSoftwareGuideLanguages)
+      .filter(([language]) => language !== "x-default")
+      .map(([, url]) => ({
+        url,
+        lastModified: "2026-08-29",
+        changeFrequency: "monthly" as const,
+        priority: 0.75,
+        images: [`${SITE_URL}/assets/guide-scegliere-software-gestionale.png`],
+        alternates: { languages: businessSoftwareGuideLanguages },
       })),
     {
       url: `${SITE_URL}/risonix`,

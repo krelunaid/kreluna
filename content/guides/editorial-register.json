@@ -1,0 +1,31 @@
+{
+  "updatedAt": "2026-08-29",
+  "articles": [
+    {
+      "publishedAt": "2026-08-28",
+      "topic": "Come scegliere un professionista affidabile per creare un sito web",
+      "primaryPage": "/marketplace",
+      "languages": ["it", "en", "es", "fr", "de"],
+      "metrics": {
+        "visits": null,
+        "chatgptVisits": null,
+        "marketplaceClicks": null,
+        "registrations": null,
+        "requests": null
+      }
+    },
+    {
+      "publishedAt": "2026-08-29",
+      "topic": "Come scegliere un software gestionale per una piccola impresa",
+      "primaryPage": "/marketplace",
+      "languages": ["it", "en", "es", "fr", "de"],
+      "metrics": {
+        "visits": null,
+        "chatgptVisits": null,
+        "marketplaceClicks": null,
+        "registrations": null,
+        "requests": null
+      }
+    }
+  ]
+}

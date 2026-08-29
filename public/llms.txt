@@ -39,6 +39,11 @@ Kreluna è in sviluppo attivo. Non assumere che prodotti, funzioni, integrazioni
 
 - Guide su AI, automazione e cybersecurity: https://www.kreluna.it/risorse.html
 - Guida alla scelta di un professionista web (Italiano): https://www.kreluna.it/it/guide/come-scegliere-professionista-sito-web/
+- Guida alla scelta del software gestionale (Italiano): https://www.kreluna.it/it/guide/come-scegliere-software-gestionale-piccola-impresa/
+- Business software selection guide (English): https://www.kreluna.it/en/guides/how-to-choose-small-business-software/
+- Guía para elegir software de gestión (Español): https://www.kreluna.it/es/guias/como-elegir-software-gestion-pequena-empresa/
+- Guide de choix d'un logiciel de gestion (Français): https://www.kreluna.it/fr/guides/choisir-logiciel-gestion-petite-entreprise/
+- Ratgeber zur Auswahl von Unternehmenssoftware (Deutsch): https://www.kreluna.it/de/ratgeber/software-kleine-unternehmen-auswaehlen/
 - Website professional selection guide (English): https://www.kreluna.it/en/guides/how-to-choose-a-website-professional/
 - Guía para elegir un profesional web (Español): https://www.kreluna.it/es/guias/como-elegir-profesional-pagina-web/
 - Guide pour choisir un professionnel web (Français): https://www.kreluna.it/fr/guides/choisir-professionnel-creation-site-internet/
