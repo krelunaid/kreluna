@@ -173,11 +173,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     {
-      url: `${SITE_URL}/`,
+      url: SITE_URL,
       lastModified: "2026-09-01",
       changeFrequency: "weekly" as const,
       priority: 1,
-      alternates: { languages: { it: `${SITE_URL}/`, "x-default": `${SITE_URL}/` } },
+      alternates: { languages: { it: SITE_URL, "x-default": SITE_URL } },
     },
     ...localizedPages,
     ...Object.entries(webProfessionalGuideLanguages)
