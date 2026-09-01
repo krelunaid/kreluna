@@ -13,6 +13,14 @@ const localePath: Record<CityBeamLocale, string> = {
   de: "/de/citybeam",
 };
 
+const openGraphLocale: Record<CityBeamLocale, string> = {
+  it: "it_IT",
+  en: "en_GB",
+  fr: "fr_FR",
+  es: "es_ES",
+  de: "de_DE",
+};
+
 const translations = {
   it: {
     lang: "it-IT", title: "CityBeam | Il tuo momento sui grandi schermi del mondo",
@@ -108,14 +116,97 @@ export function cityBeamMetadata(locale: CityBeamLocale): Metadata {
   return {
     title: t.title,
     description: t.description,
+    applicationName: "CityBeam by Kreluna",
+    creator: "Kreluna",
+    publisher: "Kreluna",
+    category: "digital out-of-home advertising",
     alternates: { canonical, languages: { ...languages, "x-default": `${siteUrl}/citybeam` } },
-    openGraph: { title: t.title, description: t.description, url: canonical, type: "website", images: [{ url: `${siteUrl}/citybeam-hero.png`, width: 1807, height: 870, alt: t.title }] },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+        "max-video-preview": -1,
+      },
+    },
+    openGraph: {
+      title: t.title,
+      description: t.description,
+      url: canonical,
+      siteName: "Kreluna",
+      locale: openGraphLocale[locale],
+      alternateLocale: Object.entries(openGraphLocale)
+        .filter(([language]) => language !== locale)
+        .map(([, value]) => value),
+      type: "website",
+      images: [{ url: `${siteUrl}/citybeam-hero.png`, width: 1807, height: 870, alt: t.title }],
+    },
     twitter: { card: "summary_large_image", title: t.title, description: t.description, images: [`${siteUrl}/citybeam-hero.png`] },
   };
 }
 
 export default function CityBeamLanding({ locale }: { locale: CityBeamLocale }) {
   const t = translations[locale];
+  const canonical = `${siteUrl}${localePath[locale]}`;
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": `${siteUrl}/#organization`,
+        name: "Kreluna",
+        url: `${siteUrl}/`,
+        logo: { "@type": "ImageObject", url: `${siteUrl}/kreluna-logo.png`, width: 128, height: 128 },
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${siteUrl}/#website`,
+        url: `${siteUrl}/`,
+        name: "Kreluna",
+        publisher: { "@id": `${siteUrl}/#organization` },
+        inLanguage: Object.values(translations).map((item) => item.lang),
+      },
+      {
+        "@type": "WebPage",
+        "@id": `${canonical}#webpage`,
+        url: canonical,
+        name: t.title,
+        description: t.description,
+        inLanguage: t.lang,
+        isPartOf: { "@id": `${siteUrl}/#website` },
+        about: { "@id": `${canonical}#project` },
+        primaryImageOfPage: {
+          "@type": "ImageObject",
+          url: `${siteUrl}/citybeam-hero.png`,
+          width: 1807,
+          height: 870,
+        },
+        dateModified: "2026-09-01",
+      },
+      {
+        "@type": "Service",
+        "@id": `${canonical}#project`,
+        name: "CityBeam",
+        alternateName: "CityBeam by Kreluna",
+        description: t.description,
+        provider: { "@id": `${siteUrl}/#organization` },
+        url: canonical,
+        areaServed: "Worldwide",
+        availableLanguage: Object.values(translations).map((item) => item.lang),
+        serviceType: "Digital out-of-home advertising marketplace project",
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Kreluna", item: `${siteUrl}/` },
+          { "@type": "ListItem", position: 2, name: "CityBeam", item: canonical },
+        ],
+      },
+    ],
+  };
   return (
     <div className="citybeam-page" lang={t.lang}>
       <header className="citybeam-header">
@@ -137,6 +228,7 @@ export default function CityBeamLanding({ locale }: { locale: CityBeamLocale }) 
         <section className="citybeam-status"><span className="citybeam-kicker">{t.statusKicker}</span><h2>{t.statusTitle}</h2><p>{t.statusText}</p><a className="button citybeam-primary" href="/contatti.html">{t.talk} <span aria-hidden="true">↗</span></a></section>
       </main>
       <footer className="citybeam-footer"><span>© 2026 Kreluna · {t.provisional}</span><span>P. IVA 02114130475 · REA PT-622714</span></footer>
+      <script id="citybeam-structured-data" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
     </div>
   );
 }

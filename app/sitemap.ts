@@ -193,13 +193,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         alternates: { languages: businessSoftwareGuideLanguages },
       })),
     {
-      url: `${SITE_URL}/risonix`,
-      lastModified: "2026-08-27",
-      changeFrequency: "weekly",
-      priority: 0.9,
-      alternates: { languages: { it: `${SITE_URL}/risonix`, "x-default": `${SITE_URL}/risonix` } },
-    },
-    {
       url: `${SITE_URL}/progetti`,
       lastModified: "2026-09-01",
       changeFrequency: "weekly",

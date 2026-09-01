@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { headers } from "next/headers";
 import CookieConsent from "./cookie-consent";
 import MetaPixel from "./meta-pixel";
 import "./globals.css";
@@ -78,9 +79,20 @@ export const viewport: Viewport = {
   themeColor: "#0a0a10",
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+function documentLanguage(pathname: string): string {
+  if (/^\/en(?:\/|$)/.test(pathname)) return "en-GB";
+  if (/^\/fr(?:\/|$)/.test(pathname)) return "fr-FR";
+  if (/^\/es(?:\/|$)/.test(pathname)) return "es-ES";
+  if (/^\/de(?:\/|$)/.test(pathname)) return "de-DE";
+  return "it-IT";
+}
+
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const requestHeaders = await headers();
+  const pathname = requestHeaders.get("x-kreluna-pathname") ?? "/";
+
   return (
-    <html lang="it-IT" suppressHydrationWarning>
+    <html lang={documentLanguage(pathname)} suppressHydrationWarning>
       <head>
         <link rel="preload" href={`${assetBasePath}/fonts/inter-latin.woff2`} as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href={`${assetBasePath}/fonts/space-grotesk-latin.woff2`} as="font" type="font/woff2" crossOrigin="anonymous" />

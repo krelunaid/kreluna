@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   description:
     "Risonix riconosce i brani della tua raccolta con impronte acustiche locali, percentuale di corrispondenza, microfono e licenza online per un solo dispositivo.",
   alternates: { canonical: "/risonix" },
+  robots: { index: false, follow: false },
   openGraph: {
     title: "Risonix — La tua musica si riconosce",
     description: "Impronte acustiche locali, riconoscimento musicale e controllo licenze Kreluna.",

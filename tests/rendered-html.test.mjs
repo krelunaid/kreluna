@@ -21,19 +21,14 @@ test("renders the Kreluna ecosystem homepage", async () => {
 
   const html = await response.text();
   assert.match(html, /<html lang="it-IT"/i);
-  assert.match(html, /Kreluna \| AI, automazione e cybersecurity/);
-  assert.match(html, /Kreluna AI/);
-  assert.match(html, /Kreluna Office/);
-  assert.match(html, /Kreluna Cyber/);
+  assert.match(html, /Kreluna \| Software, automazione e progetti digitali/);
+  assert.match(html, /Tecnologia utile/);
+  assert.match(html, /Progetti che prendono forma/);
+  assert.match(html, /CityBeam/);
   assert.match(html, /Velvet Table/);
-  assert.match(html, /href="#products">Marketplace/);
-  assert.match(html, /Tutte le nostre app/);
-  assert.match(html, /Compatibilità chiara/);
-  assert.match(html, /Anteprima illustrativa/);
-  assert.match(html, /Apri il Marketplace/);
+  assert.match(html, /href="\/progetti"/);
+  assert.doesNotMatch(html, /Kreluna AI|Kreluna Office|Kreluna Cyber|Risonix/i);
   assert.doesNotMatch(html, /Velvet Tablet/i);
-  assert.match(html, /Prenota l’atmosfera, non solo il tavolo/i);
-  assert.match(html, /Prima scegli l’atmosfera/i);
   assert.doesNotMatch(html, /LikeCash/i);
   assert.doesNotMatch(html, /Kreluna Token|KRL Beta|Vendita disattivata/i);
   assert.match(html, /rel="canonical" href="https:\/\/www\.kreluna\.it"/i);
@@ -50,13 +45,8 @@ test("renders the Kreluna ecosystem homepage", async () => {
   assert.match(html, /"@type":"WebPage"/);
   assert.match(html, /"@type":"FAQPage"/);
   assert.match(html, /<img src="\/kreluna-logo\.png" alt="" width="128" height="128"/i);
-  assert.match(html, /href="https:\/\/www\.kreluna\.it\/en\/" hreflang="en" lang="en"/i);
-  assert.match(html, /href="https:\/\/www\.kreluna\.it\/intelligenza-artificiale-aziende\.html"/i);
-  assert.match(html, /href="https:\/\/www\.kreluna\.it\/ai-studi-professionali\.html"/i);
-  assert.match(html, /href="https:\/\/cra24\.kreluna\.it\/"/i);
   assert.match(html, /class="skip-link" href="#main-content"/i);
   assert.match(html, /<main id="main-content">/i);
-  assert.match(html, /AI Act — testo ufficiale/i);
   assert.match(html, /Kreluna/i);
   assert.match(html, /02114130475/);
   assert.match(html, /PT-622714/);
@@ -150,6 +140,33 @@ test("renders localized Velvet Table pages with reciprocal language signals", as
   }
 });
 
+test("renders CityBeam in five languages with complete reciprocal SEO signals", async () => {
+  const pages = [
+    ["/citybeam", "Il tuo momento sui grandi schermi", "it-IT", "it_IT"],
+    ["/en/citybeam", "Your moment on the world’s biggest screens", "en-GB", "en_GB"],
+    ["/fr/citybeam", "Votre moment sur les plus grands écrans", "fr-FR", "fr_FR"],
+    ["/es/citybeam", "Tu momento en las pantallas más grandes", "es-ES", "es_ES"],
+    ["/de/citybeam", "Dein Moment auf den größten Bildschirmen", "de-DE", "de_DE"],
+  ];
+
+  for (const [path, phrase, language, ogLocale] of pages) {
+    const response = await render(path);
+    assert.equal(response.status, 200, path);
+    const html = await response.text();
+    assert.match(html, new RegExp(`<html lang="${language}"`, "i"));
+    assert.match(html, new RegExp(phrase, "i"));
+    assert.match(html, new RegExp(`rel="canonical" href="https://www\\.kreluna\\.it${path}"`, "i"));
+    assert.match(html, new RegExp(`property="og:locale" content="${ogLocale}"`, "i"));
+    assert.match(html, /name="robots" content="index, follow"/i);
+    for (const locale of ["it", "en", "fr", "es", "de", "x-default"]) {
+      assert.match(html, new RegExp(`hreflang="${locale}"`, "i"));
+    }
+    assert.match(html, /<script id="citybeam-structured-data" type="application\/ld\+json">/i);
+    assert.match(html, /"@type":"Service"/);
+    assert.equal((html.match(/<h1\b/gi) ?? []).length, 1);
+  }
+});
+
 test("renders the Velvet Table restaurant acquisition page", async () => {
   const response = await render("/en/velvet-table/restaurants");
   assert.equal(response.status, 200);
@@ -205,13 +222,16 @@ test("publishes canonical localized URLs in the sitemap", async () => {
   assert.match(response.headers.get("content-type") ?? "", /(?:application|text)\/xml/i);
 
   const sitemap = await response.text();
-  assert.equal((sitemap.match(/<url>/gi) ?? []).length, 35);
+  assert.equal((sitemap.match(/<url>/gi) ?? []).length, 50);
   assert.match(sitemap, /<loc>https:\/\/www\.kreluna\.it\/<\/loc>/i);
   assert.match(sitemap, /<loc>https:\/\/www\.kreluna\.it\/en\/<\/loc>/i);
   assert.match(sitemap, /<loc>https:\/\/www\.kreluna\.it\/velvet-table<\/loc>/i);
   assert.match(sitemap, /<loc>https:\/\/www\.kreluna\.it\/fr\/velvet-table<\/loc>/i);
   assert.match(sitemap, /<loc>https:\/\/www\.kreluna\.it\/en\/velvet-table\/restaurants<\/loc>/i);
-  assert.match(sitemap, /<loc>https:\/\/www\.kreluna\.it\/risonix<\/loc>/i);
+  assert.match(sitemap, /<loc>https:\/\/www\.kreluna\.it\/progetti<\/loc>/i);
+  assert.match(sitemap, /<loc>https:\/\/www\.kreluna\.it\/citybeam<\/loc>/i);
+  assert.match(sitemap, /<loc>https:\/\/www\.kreluna\.it\/de\/citybeam<\/loc>/i);
+  assert.doesNotMatch(sitemap, /<loc>https:\/\/www\.kreluna\.it\/risonix<\/loc>/i);
   assert.match(sitemap, /hreflang="de" href="https:\/\/www\.kreluna\.it\/de\/velvet-table"/i);
   assert.match(sitemap, /hreflang="it" href="https:\/\/www\.kreluna\.it\/"/i);
   assert.match(sitemap, /hreflang="en" href="https:\/\/www\.kreluna\.it\/en\/"/i);
@@ -233,11 +253,15 @@ test("ships lightweight, production-ready discovery assets", async () => {
 
   const indexNowPayload = JSON.parse(await readFile("public/indexnow-urls.json", "utf8"));
   assert.equal(indexNowPayload.host, "www.kreluna.it");
-  assert.equal(indexNowPayload.urlList.length, 35);
-  assert.equal(new Set(indexNowPayload.urlList).size, 35);
+  assert.equal(indexNowPayload.urlList.length, 50);
+  assert.equal(new Set(indexNowPayload.urlList).size, 50);
   for (const locale of ["", "en/", "fr/", "es/", "de/"]) {
     assert.ok(indexNowPayload.urlList.includes(`https://www.kreluna.it/${locale}velvet-table`));
   }
   assert.ok(indexNowPayload.urlList.includes("https://www.kreluna.it/en/velvet-table/restaurants"));
-  assert.ok(indexNowPayload.urlList.includes("https://www.kreluna.it/risonix"));
+  for (const locale of ["", "en/", "fr/", "es/", "de/"]) {
+    assert.ok(indexNowPayload.urlList.includes(`https://www.kreluna.it/${locale}citybeam`));
+  }
+  assert.ok(indexNowPayload.urlList.includes("https://www.kreluna.it/progetti"));
+  assert.ok(!indexNowPayload.urlList.includes("https://www.kreluna.it/risonix"));
 });

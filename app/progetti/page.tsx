@@ -7,6 +7,22 @@ export const metadata: Metadata = {
   title: "Progetti Kreluna | Prodotti e concept in sviluppo",
   description: "Scopri i progetti pubblici di Kreluna, il loro stato e le pagine dedicate.",
   alternates: { canonical: "https://www.kreluna.it/progetti" },
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large" } },
+  openGraph: {
+    title: "Progetti Kreluna | Prodotti e concept in sviluppo",
+    description: "Scopri i progetti pubblici di Kreluna, il loro stato e le pagine dedicate.",
+    url: "https://www.kreluna.it/progetti",
+    siteName: "Kreluna",
+    locale: "it_IT",
+    type: "website",
+    images: [{ url: "https://www.kreluna.it/og-kreluna.jpg", width: 1200, height: 630, alt: "Progetti Kreluna" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Progetti Kreluna | Prodotti e concept in sviluppo",
+    description: "Scopri i progetti pubblici di Kreluna, il loro stato e le pagine dedicate.",
+    images: ["https://www.kreluna.it/og-kreluna.jpg"],
+  },
 };
 
 const publicProjects = products.filter((product) =>
