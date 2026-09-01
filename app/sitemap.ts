@@ -117,6 +117,15 @@ const velvetLanguages = {
   "x-default": `${SITE_URL}/velvet-table`,
 };
 
+const citybeamLanguages = {
+  it: `${SITE_URL}/citybeam`,
+  en: `${SITE_URL}/en/citybeam`,
+  fr: `${SITE_URL}/fr/citybeam`,
+  es: `${SITE_URL}/es/citybeam`,
+  de: `${SITE_URL}/de/citybeam`,
+  "x-default": `${SITE_URL}/citybeam`,
+};
+
 const webProfessionalGuideLanguages = {
   it: `${SITE_URL}/it/guide/come-scegliere-professionista-sito-web/`,
   en: `${SITE_URL}/en/guides/how-to-choose-a-website-professional/`,
@@ -190,6 +199,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
       alternates: { languages: { it: `${SITE_URL}/risonix`, "x-default": `${SITE_URL}/risonix` } },
     },
+    ...Object.entries(citybeamLanguages)
+      .filter(([language]) => language !== "x-default")
+      .map(([, url]) => ({
+        url,
+        lastModified: "2026-09-01",
+        changeFrequency: "weekly" as const,
+        priority: 0.8,
+        images: [`${SITE_URL}/citybeam-hero.png`],
+        alternates: { languages: citybeamLanguages },
+      })),
     ...Object.entries(velvetLanguages)
       .filter(([language]) => language !== "x-default")
       .map(([, url]) => ({

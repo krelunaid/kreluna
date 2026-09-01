@@ -115,6 +115,13 @@ function MockupScreen({ variant }: { variant: string }) {
       </div>
     );
   }
+  if (variant === "citybeam") {
+    return (
+      <div className="mockup-body mockup-citybeam" role="img" aria-label="CityBeam, anteprima concettuale di maxi-schermi urbani">
+        <span className="mchip">PRE-LANCIO</span>
+      </div>
+    );
+  }
   return (
     <div className="mockup-body mockup-velvet" role="img" aria-label="Velvet Table, foto originale del progetto">
       <span className="mchip">Tavolo confermato</span>
@@ -205,6 +212,7 @@ export default function Home() {
           <a href="#products">Marketplace</a>
           <a href="#vision">Visione</a>
           <a href="#velvet-table">Velvet Table</a>
+          <a href="/citybeam">CityBeam</a>
           <a href="https://www.kreluna.it/azienda.html">Azienda</a>
         </nav>
         <div className="nav-actions">
@@ -235,6 +243,7 @@ export default function Home() {
           <a href="#products" onClick={() => setMenuOpen(false)}>Marketplace</a>
           <a href="#vision" onClick={() => setMenuOpen(false)}>Visione</a>
           <a href="#velvet-table" onClick={() => setMenuOpen(false)}>Velvet Table</a>
+          <a href="/citybeam" onClick={() => setMenuOpen(false)}>CityBeam</a>
           <a href="https://www.kreluna.it/azienda.html">Azienda</a>
           <a href="https://www.kreluna.it/contatti.html">Contatti</a>
         </div>

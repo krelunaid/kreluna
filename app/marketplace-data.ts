@@ -4,7 +4,7 @@ export type MarketplaceProduct = {
   eyebrow: string;
   tagline: string;
   description: string;
-  color: "teal" | "violet" | "gold" | "cyan" | "coral" | "velvet";
+  color: "teal" | "violet" | "gold" | "cyan" | "coral" | "velvet" | "electric";
   status: string;
   href: string;
   features: readonly string[];
@@ -96,6 +96,20 @@ export const products: readonly MarketplaceProduct[] = [
     features: ["Atmosfera desiderata", "Occasione e compagnia", "Prenotazione guidata"],
     mockup: "velvet",
     domain: "kreluna.it/velvet-table",
+    category: "digital-products",
+  },
+  {
+    slug: "citybeam",
+    name: "CityBeam",
+    eyebrow: "Digital out of home",
+    tagline: "Il tuo momento sui grandi schermi del mondo.",
+    description: "Un marketplace europeo in preparazione per richiedere e prenotare spot su maxi-schermi iconici, con Times Square come prima destinazione prevista.",
+    color: "electric",
+    status: "Pre-lancio",
+    href: "/citybeam",
+    features: ["Times Square", "Contenuti approvati", "Prova di pubblicazione"],
+    mockup: "citybeam",
+    domain: "kreluna.it/citybeam",
     category: "digital-products",
   },
 ] as const;
