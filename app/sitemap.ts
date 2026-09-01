@@ -199,6 +199,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
       alternates: { languages: { it: `${SITE_URL}/risonix`, "x-default": `${SITE_URL}/risonix` } },
     },
+    {
+      url: `${SITE_URL}/progetti`,
+      lastModified: "2026-09-01",
+      changeFrequency: "weekly",
+      priority: 0.8,
+      alternates: { languages: { it: `${SITE_URL}/progetti`, "x-default": `${SITE_URL}/progetti` } },
+    },
     ...Object.entries(citybeamLanguages)
       .filter(([language]) => language !== "x-default")
       .map(([, url]) => ({

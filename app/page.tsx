@@ -1,14 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { marketplaceCategories, products } from "./marketplace-data";
+import { products } from "./marketplace-data";
 
 const visibleProducts = products.filter((product) =>
   ["velvet-table", "citybeam"].includes(product.slug),
-);
-
-const visibleCategories = marketplaceCategories.filter((category) =>
-  visibleProducts.some((product) => product.category === category.id),
 );
 
 const assetBasePath = process.env.NEXT_PUBLIC_ARUBA_BASE_PATH ?? "";
@@ -217,9 +213,8 @@ export default function Home() {
       <header className="site-header">
         <Logo />
         <nav className="desktop-nav" aria-label="Navigazione principale">
-          <a href="#products">Progetti</a>
-          <a href="#vision">Visione</a>
-          <a href="#velvet-table">Velvet Table</a>
+          <a href="#come-lavoriamo">Cosa facciamo</a>
+          <a href="/progetti">Progetti</a>
           <a href="/citybeam">CityBeam</a>
           <a href="https://www.kreluna.it/azienda.html">Azienda</a>
         </nav>
@@ -248,9 +243,8 @@ export default function Home() {
             }}
             aria-label="Chiudi il menu"
           >×</button>
-          <a href="#products" onClick={() => setMenuOpen(false)}>Progetti</a>
-          <a href="#vision" onClick={() => setMenuOpen(false)}>Visione</a>
-          <a href="#velvet-table" onClick={() => setMenuOpen(false)}>Velvet Table</a>
+          <a href="#come-lavoriamo" onClick={() => setMenuOpen(false)}>Cosa facciamo</a>
+          <a href="/progetti" onClick={() => setMenuOpen(false)}>Progetti</a>
           <a href="/citybeam" onClick={() => setMenuOpen(false)}>CityBeam</a>
           <a href="https://www.kreluna.it/azienda.html">Azienda</a>
           <a href="https://www.kreluna.it/contatti.html">Contatti</a>
@@ -266,16 +260,15 @@ export default function Home() {
         <div className="spark spark-one" aria-hidden="true">✦</div>
         <div className="spark spark-two" aria-hidden="true">✦</div>
         <div className="hero-copy reveal visible">
-          <div className="eyebrow"><i /> Kreluna · tecnologia che prende forma</div>
-          <h1>Creiamo prodotti<br />{" "}per ciò che <em>viene dopo.</em></h1>
+          <div className="eyebrow"><i /> Kreluna · software, automazione e AI</div>
+          <h1>Tecnologia utile.<br />{" "}<em>Progetti che prendono forma.</em></h1>
           <p>
-            Kreluna progetta software e intelligenza artificiale per persone,
-            professionisti e imprese. Ogni progetto ha una propria identità.
-            Tutti condividono la stessa visione.
+            Aiutiamo imprese e professionisti a trasformare processi e idee in strumenti
+            digitali concreti. In parallelo sviluppiamo prodotti originali, come CityBeam.
           </p>
           <div className="hero-actions">
-            <a className="button button-primary" href="#products">Scopri i progetti <ArrowIcon /></a>
-            <a className="button button-secondary" href="#vision">Conosci Kreluna</a>
+            <a className="button button-primary" href="/citybeam">Scopri CityBeam <ArrowIcon /></a>
+            <a className="button button-secondary" href="#come-lavoriamo">Cosa facciamo</a>
           </div>
           <div className="hero-capabilities">
             <span>Siti</span>
@@ -287,114 +280,59 @@ export default function Home() {
 
         <HeroDevices />
 
-        <a className="scroll-cue" href="#products">Scopri l’ecosistema <span>↓</span></a>
+        <a className="scroll-cue" href="#products">Il progetto del momento <span>↓</span></a>
       </section>
 
       <section className="statement section-shell" id="vision">
         <h2 className="statement-line reveal">
-          <span>Un marchio.</span>
-          <strong>Più possibilità.</strong>
+          <span>Un partner tecnologico.</span>
+          <strong>Più chiarezza, meno complessità.</strong>
         </h2>
         <p className="reveal">
-          Kreluna non è soltanto un prodotto. È la casa in cui idee diverse diventano
-          esperienze utili, coerenti e riconoscibili.
+          Partiamo da un bisogno reale, definiamo cosa deve funzionare e costruiamo
+          soltanto ciò che serve. Ogni progetto resta comprensibile, verificabile e umano.
         </p>
       </section>
 
-      <section className="products section-shell" id="products">
+      <section className="featured-projects section-shell" id="products">
         <div className="section-heading reveal">
           <div>
-            <div className="eyebrow"><i /> Progetti Kreluna</div>
-            <h2>Un’unica visione.<br />{" "}<em>Progetti diversi.</em></h2>
+            <div className="eyebrow"><i /> Il progetto del momento</div>
+            <h2>CityBeam.<br /><em>Dal mondo allo schermo.</em></h2>
           </div>
           <p>
-            Due idee in costruzione, raccontate con chiarezza. Non sono ancora servizi
-            acquistabili: stiamo sviluppando il prodotto e verificando le partnership necessarie.
+            Stiamo costruendo un accesso europeo agli schermi digitali più iconici,
+            partendo da Times Square e da relazioni dirette con operatori autorizzati.
           </p>
         </div>
 
-        <nav className="marketplace-categories reveal" aria-label="Categorie dei progetti">
-          {visibleCategories.map((category, index) => <a href={`#category-${category.id}`} key={category.id}><span>{String(index + 1).padStart(2, "0")}</span>{category.name}</a>)}
-        </nav>
-
-        <div className="marketplace-groups">
-          {visibleCategories.map((category) => (
-            <section className="marketplace-group" id={`category-${category.id}`} key={category.id}>
-              <header className="marketplace-group-heading reveal">
-                <div><span>Categoria</span><h3>{category.name}</h3></div>
-                <p>{category.description}</p>
-              </header>
-              <div className={`product-grid ${category.id === "music-audio" ? "product-grid-featured" : ""}`}>
-                {visibleProducts.filter((product) => product.category === category.id).map((product) => {
-                  const index = visibleProducts.indexOf(product);
-                  return <article id={`product-${product.slug}`} className={`product-card ${product.color} reveal`} key={product.slug} style={{ "--delay": `${index * 90}ms` } as React.CSSProperties}>
-                    <div className="card-topline">
-                      <span>{product.eyebrow}</span>
-                      <span className="status"><i /> {product.status}</span>
-                    </div>
-                    <div className="product-visual">
-                      <div className="mini-grid" aria-hidden="true" />
-                      <span className="product-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-                      <ProductMockup variant={product.mockup} domain={product.domain} />
-                    </div>
-                    <div className="card-copy">
-                      <p className="signature">Progetto Kreluna</p>
-                      <h3>{product.name}</h3>
-                      <h4>{product.tagline}</h4>
-                      <p>{product.description}</p>
-                      <div className="feature-list">
-                        {product.features.map((feature) => <span key={feature}>{feature}</span>)}
-                      </div>
-                    </div>
-                    <a href={product.href} className="card-link" aria-label={`Scopri ${product.name}`}>
-                      Scopri {product.name} <ArrowIcon />
-                    </a>
-                  </article>;
-                })}
-              </div>
-            </section>
-          ))}
-        </div>
-
-        <div className="future-card reveal">
-          <div className="future-mark">＋</div>
-          <div>
-            <div className="eyebrow"><i /> Il prossimo progetto</div>
-            <h3>Lo spazio è già pronto.</h3>
-            <p>Nome, identità e racconto: quando nasce una nuova idea Kreluna, il sito cresce senza ricominciare da zero.</p>
-          </div>
-        </div>
-      </section>
-
-      <section className="velvet-table section-shell" id="velvet-table">
-        <div className="velvet-panel reveal">
-          <div className="velvet-copy">
-            <div className="eyebrow velvet-text"><i /> Velvet Table · concept in sviluppo</div>
-            <h2>Prima scegli l’atmosfera.<br /><em>Poi il tavolo.</em></h2>
+        <article className="citybeam-feature reveal">
+          <div className="citybeam-feature-copy">
+            <span className="project-state"><i /> Pre-lancio</span>
+            <h3>Il tuo momento sui grandi schermi del mondo.</h3>
             <p>
-              Velvet Table nasce per trasformare la prenotazione in una scelta di esperienza.
-              L’idea è descrivere come vuoi vivere la serata — intima, vivace, elegante,
-              panoramica o rilassata — e trovare locali coerenti con quel momento.
+              Un percorso più semplice per aziende, creator e persone: richiesta,
+              approvazione del contenuto, pubblicazione e prova della messa in onda.
             </p>
-            <p>
-              Cucina, zona, budget, orario e disponibilità restano importanti, ma arrivano
-              dentro un contesto più umano: con chi sei, che occasione è e quale atmosfera cerchi.
-            </p>
-            <div className="velvet-moods" aria-label="Esempi di atmosfera">
-              <span>Intima</span>
-              <span>Vivace</span>
-              <span>Panoramica</span>
-              <span>Rilassata</span>
+            <div className="citybeam-feature-actions">
+              <a className="button button-primary" href="/citybeam">Scopri CityBeam <ArrowIcon /></a>
+              <a className="button button-secondary" href="https://www.kreluna.it/contatti.html">Parla con noi</a>
             </div>
-            <a className="button button-secondary velvet-cta" href="/velvet-table">
-              Scopri il concept <ArrowIcon />
-            </a>
           </div>
-          <ol className="velvet-journey" aria-label="Come funzionerebbe Velvet Table">
-            <li><span>01</span><div><strong>Racconta la serata</strong><p>Atmosfera, occasione, compagnia e preferenze essenziali.</p></div></li>
-            <li><span>02</span><div><strong>Scopri i locali in sintonia</strong><p>Una selezione breve, con il motivo per cui ogni proposta è adatta.</p></div></li>
-            <li><span>03</span><div><strong>Passa alla prenotazione</strong><p>Disponibilità e conferma del tavolo dopo aver scelto l’esperienza.</p></div></li>
-          </ol>
+          <div className="citybeam-feature-place"><span>Prima destinazione prevista</span><strong>Times Square · New York</strong></div>
+        </article>
+
+        <div className="projects-secondary reveal">
+          <article className="velvet-project-card">
+            <div><span className="project-state"><i /> Concept in sviluppo</span><h3>Velvet Table</h3><p>Prenota l’atmosfera, non soltanto il tavolo.</p></div>
+            <a href="/velvet-table">Scopri il concept <ArrowIcon /></a>
+          </article>
+          <div className="projects-index-card">
+            <span>Archivio in crescita</span>
+            <h3>Ogni progetto ha il suo spazio.</h3>
+            <p>La homepage mostra solo ciò che conta adesso. La pagina Progetti è pronta a crescere senza diventare confusa.</p>
+            <a href="/progetti">Vedi tutti i progetti <ArrowIcon /></a>
+          </div>
         </div>
       </section>
 
@@ -552,6 +490,7 @@ export default function Home() {
           </div>
           <div className="footer-column">
             <p className="footer-heading">Progetti</p>
+            <a href="/progetti">Tutti i progetti</a>
             {visibleProducts.map((product) => <a key={product.slug} href={product.href}>{product.name}</a>)}
           </div>
           <div className="footer-column">
