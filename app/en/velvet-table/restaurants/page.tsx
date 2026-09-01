@@ -10,14 +10,7 @@ const description = "Velvet Table is a restaurant booking concept that lets gues
 export const metadata: Metadata = {
   title,
   description,
-  keywords: [
-    "restaurant reservation technology",
-    "restaurant table selection",
-    "restaurant revenue ideas",
-    "New York restaurant pilot",
-    "Velvet Table for restaurants",
-  ],
-  robots: { index: true, follow: true, "max-image-preview": "large" },
+  robots: { index: false, follow: true },
   alternates: { canonical: pageUrl },
   openGraph: {
     title,

@@ -63,9 +63,9 @@ function languageForPath(pathname: string) {
   return match?.[1] ?? "it";
 }
 
-export default function CookieConsent() {
+export default function CookieConsent({ initialLanguage = "it" }: { initialLanguage?: string }) {
   const [visible, setVisible] = useState(false);
-  const [language, setLanguage] = useState("it");
+  const [language, setLanguage] = useState(initialLanguage);
 
   useEffect(() => {
     const timer = window.setTimeout(() => {

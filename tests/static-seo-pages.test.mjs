@@ -5,7 +5,6 @@ import test from "node:test";
 
 const clientDir = path.resolve("dist/client");
 const pages = [
-  "en/index.html",
   "intelligenza-artificiale-aziende.html",
   "en/ai-for-business.html",
   "ai-studi-professionali.html",
@@ -51,7 +50,7 @@ function visibleWordCount(html) {
 }
 
 test("ships every bilingual SEO page from versioned source", async () => {
-  assert.equal(pages.length, 27);
+  assert.equal(pages.length, 26);
   await Promise.all(pages.map((page) => access(path.join(clientDir, page))));
   await access(path.join(clientDir, "assets/seo-20260814.css"));
   await access(path.join(clientDir, ".htaccess"));

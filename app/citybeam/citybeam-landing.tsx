@@ -13,6 +13,15 @@ const localePath: Record<CityBeamLocale, string> = {
   de: "/de/citybeam",
 };
 
+const projectHubPath: Record<CityBeamLocale, string> = { it: "/progetti", en: "/en/", fr: "/fr/", es: "/es/", de: "/de/" };
+const contactPath: Record<CityBeamLocale, string> = {
+  it: "/contatti.html",
+  en: "/en/contact.html",
+  fr: "mailto:andrea@kreluna.it?subject=CityBeam%20France",
+  es: "mailto:andrea@kreluna.it?subject=CityBeam%20Espana",
+  de: "mailto:andrea@kreluna.it?subject=CityBeam%20Deutschland",
+};
+
 const openGraphLocale: Record<CityBeamLocale, string> = {
   it: "it_IT",
   en: "en_GB",
@@ -142,9 +151,9 @@ export function cityBeamMetadata(locale: CityBeamLocale): Metadata {
         .filter(([language]) => language !== locale)
         .map(([, value]) => value),
       type: "website",
-      images: [{ url: `${siteUrl}/citybeam-hero.png`, width: 1807, height: 870, alt: t.title }],
+      images: [{ url: `${siteUrl}/citybeam-og.png`, width: 1200, height: 630, type: "image/png", alt: t.title }],
     },
-    twitter: { card: "summary_large_image", title: t.title, description: t.description, images: [`${siteUrl}/citybeam-hero.png`] },
+    twitter: { card: "summary_large_image", title: t.title, description: t.description, images: [`${siteUrl}/citybeam-og.png`] },
   };
 }
 
@@ -210,8 +219,8 @@ export default function CityBeamLanding({ locale }: { locale: CityBeamLocale }) 
   return (
     <div className="citybeam-page" lang={t.lang}>
       <header className="citybeam-header">
-        <Link className="citybeam-brand" href="/" aria-label="Kreluna home"><img src="/kreluna-logo.png" alt="" width="31" height="31" /><span>KRELUNA · CITYBEAM</span></Link>
-        <nav aria-label="CityBeam"><a href="#come-funziona">{t.navHow}</a><a href="#per-chi">{t.navFor}</a><a href="/contatti.html">{t.navContact}</a></nav>
+        <Link className="citybeam-brand" href={projectHubPath[locale]} aria-label="Kreluna projects"><img src="/kreluna-logo.png" alt="" width="31" height="31" /><span>KRELUNA · CITYBEAM</span></Link>
+        <nav aria-label="CityBeam"><a href="#come-funziona">{t.navHow}</a><a href="#per-chi">{t.navFor}</a><a href={contactPath[locale]}>{t.navContact}</a></nav>
         <nav className="citybeam-language" aria-label="Language">
           {(Object.keys(localePath) as CityBeamLocale[]).map((code) => <a key={code} href={localePath[code]} aria-current={code === locale ? "page" : undefined} hrefLang={code}>{code.toUpperCase()}</a>)}
         </nav>
@@ -219,13 +228,13 @@ export default function CityBeamLanding({ locale }: { locale: CityBeamLocale }) 
       <main>
         <section className="citybeam-hero">
           <div className="citybeam-copy"><span className="citybeam-kicker">{t.kicker}</span><h1>{t.h1a} <em>{t.h1b}</em>{t.h1c}</h1><p>{t.intro}</p>
-            <div className="citybeam-actions"><a className="button citybeam-primary" href="/contatti.html">{t.info} <span aria-hidden="true">↗</span></a><a className="button button-secondary" href="#come-funziona">{t.discover}</a></div><p className="citybeam-note">{t.disclosure}</p></div>
+            <div className="citybeam-actions"><a className="button citybeam-primary" href={contactPath[locale]}>{t.info} <span aria-hidden="true">↗</span></a><a className="button button-secondary" href="#come-funziona">{t.discover}</a></div><p className="citybeam-note">{t.disclosure}</p></div>
           <figure className="citybeam-visual"><img src="/citybeam-hero.png" alt={t.title} width="1807" height="870" /><figcaption><span>{t.destination}</span><strong>Times Square · New York</strong></figcaption></figure>
         </section>
         <section className="citybeam-section" id="come-funziona"><div className="citybeam-section-heading"><span className="citybeam-kicker">{t.howKicker}</span><h2>{t.howTitle}</h2><p>{t.howIntro}</p></div>
           <ol className="citybeam-steps">{t.steps.map(([title, text], index) => <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><h3>{title}</h3><p>{text}</p></li>)}</ol></section>
         <section className="citybeam-section citybeam-use-cases" id="per-chi"><article className="citybeam-case"><span>{t.business}</span><h3>{t.businessTitle}</h3><p>{t.businessText}</p></article><article className="citybeam-case"><span>{t.personal}</span><h3>{t.personalTitle}</h3><p>{t.personalText}</p></article></section>
-        <section className="citybeam-status"><span className="citybeam-kicker">{t.statusKicker}</span><h2>{t.statusTitle}</h2><p>{t.statusText}</p><a className="button citybeam-primary" href="/contatti.html">{t.talk} <span aria-hidden="true">↗</span></a></section>
+        <section className="citybeam-status"><span className="citybeam-kicker">{t.statusKicker}</span><h2>{t.statusTitle}</h2><p>{t.statusText}</p><a className="button citybeam-primary" href={contactPath[locale]}>{t.talk} <span aria-hidden="true">↗</span></a></section>
       </main>
       <footer className="citybeam-footer"><span>© 2026 Kreluna · {t.provisional}</span><span>P. IVA 02114130475 · REA PT-622714</span></footer>
       <script id="citybeam-structured-data" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />

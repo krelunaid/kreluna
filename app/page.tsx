@@ -136,7 +136,7 @@ function MockupScreen({ variant }: { variant: string }) {
   }
   return (
     <div className="mockup-body mockup-velvet" role="img" aria-label="Velvet Table, foto originale del progetto">
-      <span className="mchip">Tavolo confermato</span>
+      <span className="mchip">Concept in sviluppo</span>
     </div>
   );
 }
@@ -301,7 +301,7 @@ export default function Home() {
           </div>
           <p>
             Stiamo costruendo un accesso europeo agli schermi digitali più iconici,
-            partendo da Times Square e da relazioni dirette con operatori autorizzati.
+            partendo da Times Square e da relazioni in corso di verifica con operatori autorizzati.
           </p>
         </div>
 

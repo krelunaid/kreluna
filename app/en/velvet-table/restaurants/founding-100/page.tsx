@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   description: "Summary of the proposed Velvet Table Founding 100 introductory program for eligible New York restaurants.",
   robots: { index: false, follow: true },
   alternates: { canonical: pageUrl },
+  openGraph: { title: "Velvet Table Founding 100 | Restaurant program summary", description: "Summary of the proposed Velvet Table Founding 100 introductory program for eligible New York restaurants.", url: pageUrl, siteName: "Kreluna", locale: "en_US", type: "website", images: [{ url: `${siteUrl}/velvet-table/og.jpg`, width: 1200, height: 630, alt: "Velvet Table Founding 100" }] },
+  twitter: { card: "summary_large_image", title: "Velvet Table Founding 100 | Restaurant program summary", description: "Summary of the proposed Velvet Table Founding 100 introductory program for eligible New York restaurants.", images: [`${siteUrl}/velvet-table/og.jpg`] },
 };
 
 const terms = [

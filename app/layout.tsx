@@ -23,7 +23,6 @@ export const metadata: Metadata = {
     canonical: `${siteUrl}/`,
     languages: {
       it: `${siteUrl}/`,
-      en: `${siteUrl}/en/`,
       "x-default": `${siteUrl}/`,
     },
   },
@@ -53,7 +52,6 @@ export const metadata: Metadata = {
     description: siteDescription,
     siteName: "Kreluna",
     locale: "it_IT",
-    alternateLocale: ["en_GB"],
     type: "website",
     url: `${siteUrl}/`,
     images: [
@@ -102,7 +100,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
       <body>
         {children}
         <MetaPixel />
-        <CookieConsent />
+        <CookieConsent initialLanguage={documentLanguage(pathname).slice(0, 2)} />
       </body>
     </html>
   );

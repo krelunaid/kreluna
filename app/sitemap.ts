@@ -17,14 +17,6 @@ type LocalizedPage = {
 
 const pages: readonly LocalizedPage[] = [
   {
-    it: "/",
-    en: "/en/",
-    lastModifiedIt: "2026-08-23",
-    lastModifiedEn: "2026-08-23",
-    changeFrequency: "weekly",
-    priority: 1,
-  },
-  {
     it: "/intelligenza-artificiale-aziende.html",
     en: "/en/ai-for-business.html",
     changeFrequency: "monthly",
@@ -126,6 +118,15 @@ const citybeamLanguages = {
   "x-default": `${SITE_URL}/citybeam`,
 };
 
+const projectHubLanguages = {
+  it: `${SITE_URL}/progetti`,
+  en: `${SITE_URL}/en`,
+  fr: `${SITE_URL}/fr`,
+  es: `${SITE_URL}/es`,
+  de: `${SITE_URL}/de`,
+  "x-default": `${SITE_URL}/progetti`,
+};
+
 const webProfessionalGuideLanguages = {
   it: `${SITE_URL}/it/guide/come-scegliere-professionista-sito-web/`,
   en: `${SITE_URL}/en/guides/how-to-choose-a-website-professional/`,
@@ -171,6 +172,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
   });
 
   return [
+    {
+      url: `${SITE_URL}/`,
+      lastModified: "2026-09-01",
+      changeFrequency: "weekly" as const,
+      priority: 1,
+      alternates: { languages: { it: `${SITE_URL}/`, "x-default": `${SITE_URL}/` } },
+    },
     ...localizedPages,
     ...Object.entries(webProfessionalGuideLanguages)
       .filter(([language]) => language !== "x-default")
@@ -192,13 +200,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
         images: [`${SITE_URL}/assets/guide-scegliere-software-gestionale.png`],
         alternates: { languages: businessSoftwareGuideLanguages },
       })),
-    {
-      url: `${SITE_URL}/progetti`,
-      lastModified: "2026-09-01",
-      changeFrequency: "weekly",
-      priority: 0.8,
-      alternates: { languages: { it: `${SITE_URL}/progetti`, "x-default": `${SITE_URL}/progetti` } },
-    },
+    ...Object.entries(projectHubLanguages)
+      .filter(([language]) => language !== "x-default")
+      .map(([, url]) => ({
+        url,
+        lastModified: "2026-09-01",
+        changeFrequency: "weekly" as const,
+        priority: 0.8,
+        images: [`${SITE_URL}/og-kreluna.jpg`],
+        alternates: { languages: projectHubLanguages },
+      })),
     ...Object.entries(citybeamLanguages)
       .filter(([language]) => language !== "x-default")
       .map(([, url]) => ({
@@ -224,12 +235,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
       ],
       alternates: { languages: velvetLanguages },
     })),
-    {
-      url: `${SITE_URL}/en/velvet-table/restaurants`,
-      lastModified: "2026-08-25",
-      changeFrequency: "weekly",
-      priority: 0.8,
-      images: [`${SITE_URL}/velvet-table/og.jpg`],
-    },
   ];
 }
