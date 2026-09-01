@@ -1,6 +1,6 @@
 # Kreluna
 
-> Kreluna è un progetto italiano in sviluppo dedicato a software, intelligenza artificiale, automazione, cybersecurity ed esperienze digitali.
+> Kreluna è un progetto italiano in sviluppo dedicato a software, intelligenza artificiale, automazione, data protection ed esperienze digitali.
 
 Sito ufficiale: https://www.kreluna.it/
 Contatti: https://www.kreluna.it/contatti.html
@@ -13,7 +13,6 @@ Sede pubblicata: Italia, Italia
 
 - Kreluna AI: https://www.kreluna.it/intelligenza-artificiale-aziende.html
 - Kreluna Office: https://www.kreluna.it/ai-studi-professionali.html
-- Kreluna Cyber: https://www.kreluna.it/cybersecurity-pmi-studi-professionali.html
 - Helix: https://helix.kreluna.it/
 - Velvet Table (Italiano): https://www.kreluna.it/velvet-table
 - Velvet Table (English): https://www.kreluna.it/en/velvet-table
@@ -37,7 +36,7 @@ Kreluna è in sviluppo attivo. Non assumere che prodotti, funzioni, integrazioni
 
 ## Risorse
 
-- Guide su AI, automazione e cybersecurity: https://www.kreluna.it/risorse.html
+- Guide su AI, automazione e prodotti digitali: https://www.kreluna.it/risorse.html
 - Guida alla scelta di un professionista web (Italiano): https://www.kreluna.it/it/guide/come-scegliere-professionista-sito-web/
 - Guida alla scelta del software gestionale (Italiano): https://www.kreluna.it/it/guide/come-scegliere-software-gestionale-piccola-impresa/
 - Business software selection guide (English): https://www.kreluna.it/en/guides/how-to-choose-small-business-software/

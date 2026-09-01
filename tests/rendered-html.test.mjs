@@ -241,7 +241,7 @@ test("publishes canonical localized URLs in the sitemap", async () => {
   assert.match(response.headers.get("content-type") ?? "", /(?:application|text)\/xml/i);
 
   const sitemap = await response.text();
-  assert.equal((sitemap.match(/<url>/gi) ?? []).length, 52);
+  assert.equal((sitemap.match(/<url>/gi) ?? []).length, 48);
   assert.match(sitemap, /<loc>https:\/\/www\.kreluna\.it<\/loc>/i);
   assert.match(sitemap, /<loc>https:\/\/www\.kreluna\.it\/en<\/loc>/i);
   assert.match(sitemap, /<loc>https:\/\/www\.kreluna\.it\/fr<\/loc>/i);
@@ -254,6 +254,7 @@ test("publishes canonical localized URLs in the sitemap", async () => {
   assert.match(sitemap, /<loc>https:\/\/www\.kreluna\.it\/citybeam<\/loc>/i);
   assert.match(sitemap, /<loc>https:\/\/www\.kreluna\.it\/de\/citybeam<\/loc>/i);
   assert.doesNotMatch(sitemap, /<loc>https:\/\/www\.kreluna\.it\/risonix<\/loc>/i);
+  assert.doesNotMatch(sitemap, /cybersecurity|sme-cybersecurity/i);
   assert.match(sitemap, /hreflang="de" href="https:\/\/www\.kreluna\.it\/de\/velvet-table"/i);
   assert.match(sitemap, /hreflang="it" href="https:\/\/www\.kreluna\.it"/i);
   assert.match(sitemap, /hreflang="en" href="https:\/\/www\.kreluna\.it\/en"/i);
@@ -275,8 +276,8 @@ test("ships lightweight, production-ready discovery assets", async () => {
 
   const indexNowPayload = JSON.parse(await readFile("public/indexnow-urls.json", "utf8"));
   assert.equal(indexNowPayload.host, "www.kreluna.it");
-  assert.equal(indexNowPayload.urlList.length, 52);
-  assert.equal(new Set(indexNowPayload.urlList).size, 52);
+  assert.equal(indexNowPayload.urlList.length, 48);
+  assert.equal(new Set(indexNowPayload.urlList).size, 48);
   assert.ok(indexNowPayload.urlList.includes("https://www.kreluna.it"));
   for (const locale of ["", "en/", "fr/", "es/", "de/"]) {
     assert.ok(indexNowPayload.urlList.includes(`https://www.kreluna.it/${locale}velvet-table`));
@@ -290,4 +291,5 @@ test("ships lightweight, production-ready discovery assets", async () => {
   }
   assert.ok(indexNowPayload.urlList.includes("https://www.kreluna.it/progetti"));
   assert.ok(!indexNowPayload.urlList.includes("https://www.kreluna.it/risonix"));
+  assert.ok(indexNowPayload.urlList.every((url) => !/cybersecurity/i.test(url)));
 });

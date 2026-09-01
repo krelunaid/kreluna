@@ -35,12 +35,6 @@ const pages: readonly LocalizedPage[] = [
     priority: 0.9,
   },
   {
-    it: "/cybersecurity-pmi-studi-professionali.html",
-    en: "/en/cybersecurity-smes-professional-firms.html",
-    changeFrequency: "monthly",
-    priority: 0.9,
-  },
-  {
     it: "/azienda.html",
     en: "/en/about.html",
     changeFrequency: "monthly",
@@ -85,12 +79,6 @@ const pages: readonly LocalizedPage[] = [
   {
     it: "/processi-aziendali-da-automatizzare.html",
     en: "/en/which-business-processes-to-automate-first.html",
-    changeFrequency: "monthly",
-    priority: 0.7,
-  },
-  {
-    it: "/cybersecurity-pmi-phishing-ransomware-backup.html",
-    en: "/en/sme-cybersecurity-essentials.html",
     changeFrequency: "monthly",
     priority: 0.7,
   },

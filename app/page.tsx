@@ -90,14 +90,6 @@ function MockupScreen({ variant }: { variant: string }) {
       </div>
     );
   }
-  if (variant === "cyber") {
-    return (
-      <div className="mockup-body mockup-cyber">
-        <div className="radar"><span className="sweep" /></div>
-        <div className="chips"><span className="mchip">OK</span><span className="mchip">OK</span><span className="mchip">···</span></div>
-      </div>
-    );
-  }
   if (variant === "helix") {
     return (
       <div className="mockup-body mockup-helix">
@@ -378,16 +370,6 @@ export default function Home() {
             </p>
             <a href="https://www.kreluna.it/automazione-processi-aziendali.html">Automazione dei processi <ArrowIcon /></a>
           </article>
-          <article className="editorial-home-card reveal">
-            <span>Cybersecurity</span>
-            <h3>Rischi comprensibili e priorità pratiche</h3>
-            <p>
-              Identità, vulnerabilità, email, backup e risposta agli incidenti richiedono un
-              perimetro autorizzato. Un rapporto tecnico aiuta a decidere, ma non viene presentato
-              come certificazione o monitoraggio continuo se non espressamente concordato.
-            </p>
-            <a href="https://www.kreluna.it/cybersecurity-pmi-studi-professionali.html">Cybersecurity per PMI <ArrowIcon /></a>
-          </article>
         </div>
       </section>
 
@@ -434,7 +416,7 @@ export default function Home() {
           </div>
           <div className="home-faq">
             <h3>Domande frequenti</h3>
-            <details><summary>Che cos’è Kreluna?</summary><p>Kreluna è un ecosistema digitale italiano dedicato ad AI, automazione, cybersecurity ed esperienze digitali.</p></details>
+            <details><summary>Che cos’è Kreluna?</summary><p>Kreluna è un ecosistema digitale italiano dedicato ad AI, automazione ed esperienze digitali.</p></details>
             <details><summary>I prodotti sono già acquistabili?</summary><p>Non viene dichiarata una disponibilità generale. Accesso, funzioni, integrazioni e condizioni vengono confermati per ogni richiesta.</p></details>
             <details><summary>Kreluna sostituisce software o professionisti?</summary><p>No in modo automatico. Il ruolo proposto è preparare e collegare il lavoro mantenendo sistemi ufficiali, responsabilità e approvazioni sotto controllo umano.</p></details>
             <details><summary>Posso inviare documenti per una valutazione?</summary><p>Nel primo contatto no: descrivi il contesto senza allegare dati personali, credenziali o documenti riservati. Un eventuale campione viene concordato dopo aver definito il perimetro.</p></details>
@@ -447,8 +429,8 @@ export default function Home() {
           <div className="eyebrow"><i /> Kreluna Risorse</div>
           <h2>Guide per decidere prima di acquistare.</h2>
           <p>
-            Protezione dei dati riservati, scelta del primo processo da automatizzare e controlli
-            essenziali contro phishing e ransomware: contenuti pratici con fonti istituzionali.
+            Protezione dei dati riservati, scelta del primo processo da automatizzare e valutazione
+            degli strumenti digitali: contenuti pratici con fonti istituzionali.
           </p>
         </div>
         <a className="button button-secondary" href="https://www.kreluna.it/risorse.html">Esplora le guide <ArrowIcon /></a>

@@ -171,13 +171,6 @@ h1 em, h2 em { font-family: var(--serif); font-weight: 500; background: linear-g
 .mockup-office .mrow { border-bottom: 1px solid rgba(255,255,255,.05); }
 .mockup-office .mrow .mline { flex: 1; }
 
-.mockup-cyber { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 13px; }
-.mockup-cyber .radar { position: relative; width: 84px; height: 84px; border-radius: 50%; border: 1px solid color-mix(in srgb, var(--accent) 32%, transparent); overflow: hidden; }
-.mockup-cyber .radar::before, .mockup-cyber .radar::after { content: ''; position: absolute; inset: 14px; border-radius: 50%; border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent); }
-.mockup-cyber .radar::after { inset: 28px; }
-.mockup-cyber .sweep { position: absolute; inset: 0; background: conic-gradient(from 0deg, color-mix(in srgb, var(--accent) 60%, transparent), transparent 28%); animation: sweep-spin 3s linear infinite; }
-@keyframes sweep-spin { to { transform: rotate(360deg); } }
-.mockup-cyber .chips { display: flex; gap: 6px; }
 
 .mockup-helix { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; height: 100%; }
 .mockup-helix .code { display: flex; flex-direction: column; gap: 7px; justify-content: center; }

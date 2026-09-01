@@ -11,8 +11,6 @@ const pages = [
   "en/ai-for-professional-services.html",
   "automazione-processi-aziendali.html",
   "en/business-process-automation.html",
-  "cybersecurity-pmi-studi-professionali.html",
-  "en/cybersecurity-smes-professional-firms.html",
   "azienda.html",
   "en/about.html",
   "contatti.html",
@@ -29,8 +27,6 @@ const pages = [
   "en/ai-professional-services-confidential-data.html",
   "processi-aziendali-da-automatizzare.html",
   "en/which-business-processes-to-automate-first.html",
-  "cybersecurity-pmi-phishing-ransomware-backup.html",
-  "en/sme-cybersecurity-essentials.html",
 ];
 
 function matchOne(html, expression, label) {
@@ -50,7 +46,7 @@ function visibleWordCount(html) {
 }
 
 test("ships every bilingual SEO page from versioned source", async () => {
-  assert.equal(pages.length, 26);
+  assert.equal(pages.length, 22);
   await Promise.all(pages.map((page) => access(path.join(clientDir, page))));
   await access(path.join(clientDir, "assets/seo-20260814.css"));
   await access(path.join(clientDir, ".htaccess"));
