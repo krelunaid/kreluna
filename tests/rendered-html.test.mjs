@@ -161,6 +161,7 @@ test("renders CityBeam in five languages with complete reciprocal SEO signals", 
     }
     assert.match(html, /<script id="citybeam-structured-data" type="application\/ld\+json">/i);
     assert.match(html, /"@type":"Service"/);
+    assert.match(html, /href="\/" class="citybeam-brand"/i);
     assert.equal((html.match(/<h1\b/gi) ?? []).length, 1);
   }
 });

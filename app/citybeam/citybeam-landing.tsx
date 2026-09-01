@@ -13,7 +13,6 @@ const localePath: Record<CityBeamLocale, string> = {
   de: "/de/citybeam",
 };
 
-const projectHubPath: Record<CityBeamLocale, string> = { it: "/progetti", en: "/en/", fr: "/fr/", es: "/es/", de: "/de/" };
 const contactPath: Record<CityBeamLocale, string> = {
   it: "/contatti.html",
   en: "/en/contact.html",
@@ -34,7 +33,7 @@ const translations = {
   it: {
     lang: "it-IT", title: "CityBeam | Il tuo momento sui grandi schermi del mondo",
     description: "CityBeam è il progetto Kreluna in pre-lancio per rendere più semplice la richiesta di spot su maxi-schermi iconici, iniziando da Times Square.",
-    navHow: "Come funziona", navFor: "Per chi", navContact: "Contatti", kicker: "CityBeam · progetto in fase di lancio",
+    navHome: "Home", navHow: "Come funziona", navFor: "Per chi", navContact: "Contatti", kicker: "CityBeam · progetto in fase di lancio",
     h1a: "Il tuo momento sui", h1b: "grandi schermi", h1c: " del mondo.",
     intro: "Kreluna sta sviluppando un marketplace europeo per rendere più semplice la richiesta di spot sui maxi-schermi delle destinazioni più iconiche. La prima destinazione prevista è Times Square, a New York.",
     info: "Richiedi informazioni", discover: "Scopri il progetto",
@@ -51,7 +50,7 @@ const translations = {
   en: {
     lang: "en-GB", title: "CityBeam | Your moment on the world’s biggest screens",
     description: "CityBeam is Kreluna’s pre-launch project designed to simplify access to iconic digital billboards, starting with Times Square.",
-    navHow: "How it works", navFor: "Who it’s for", navContact: "Contact", kicker: "CityBeam · pre-launch project",
+    navHome: "Home", navHow: "How it works", navFor: "Who it’s for", navContact: "Contact", kicker: "CityBeam · pre-launch project",
     h1a: "Your moment on the", h1b: "world’s biggest screens", h1c: ".",
     intro: "Kreluna is developing a European marketplace designed to simplify requests for placements on iconic digital billboards. Times Square in New York is the first planned destination.",
     info: "Request information", discover: "Explore the project",
@@ -68,7 +67,7 @@ const translations = {
   fr: {
     lang: "fr-FR", title: "CityBeam | Votre moment sur les plus grands écrans du monde",
     description: "CityBeam est le projet Kreluna en pré-lancement pour simplifier l’accès aux écrans numériques iconiques, en commençant par Times Square.",
-    navHow: "Fonctionnement", navFor: "Pour qui", navContact: "Contact", kicker: "CityBeam · projet en pré-lancement",
+    navHome: "Accueil", navHow: "Fonctionnement", navFor: "Pour qui", navContact: "Contact", kicker: "CityBeam · projet en pré-lancement",
     h1a: "Votre moment sur les", h1b: "plus grands écrans", h1c: " du monde.",
     intro: "Kreluna développe une marketplace européenne pour simplifier les demandes de diffusion sur les écrans numériques des destinations les plus iconiques. Times Square, à New York, est la première destination prévue.",
     info: "Demander des informations", discover: "Découvrir le projet",
@@ -85,7 +84,7 @@ const translations = {
   es: {
     lang: "es-ES", title: "CityBeam | Tu momento en las pantallas más grandes del mundo",
     description: "CityBeam es el proyecto de Kreluna en prelanzamiento para simplificar el acceso a pantallas digitales icónicas, empezando por Times Square.",
-    navHow: "Cómo funciona", navFor: "Para quién", navContact: "Contacto", kicker: "CityBeam · proyecto en prelanzamiento",
+    navHome: "Inicio", navHow: "Cómo funciona", navFor: "Para quién", navContact: "Contacto", kicker: "CityBeam · proyecto en prelanzamiento",
     h1a: "Tu momento en las", h1b: "pantallas más grandes", h1c: " del mundo.",
     intro: "Kreluna está desarrollando un marketplace europeo para simplificar las solicitudes de anuncios en las pantallas digitales de los destinos más icónicos. Times Square, en Nueva York, es el primer destino previsto.",
     info: "Solicitar información", discover: "Descubrir el proyecto",
@@ -102,7 +101,7 @@ const translations = {
   de: {
     lang: "de-DE", title: "CityBeam | Dein Moment auf den größten Bildschirmen der Welt",
     description: "CityBeam ist Krelunas Pre-Launch-Projekt für einen einfacheren Zugang zu ikonischen Digitalflächen – beginnend am Times Square.",
-    navHow: "So funktioniert es", navFor: "Für wen", navContact: "Kontakt", kicker: "CityBeam · Projekt vor dem Start",
+    navHome: "Startseite", navHow: "So funktioniert es", navFor: "Für wen", navContact: "Kontakt", kicker: "CityBeam · Projekt vor dem Start",
     h1a: "Dein Moment auf den", h1b: "größten Bildschirmen", h1c: " der Welt.",
     intro: "Kreluna entwickelt einen europäischen Marktplatz, der Anfragen für Werbeplätze auf ikonischen digitalen Großbildschirmen vereinfacht. Der Times Square in New York ist das erste geplante Ziel.",
     info: "Informationen anfordern", discover: "Projekt entdecken",
@@ -219,8 +218,8 @@ export default function CityBeamLanding({ locale }: { locale: CityBeamLocale }) 
   return (
     <div className="citybeam-page" lang={t.lang}>
       <header className="citybeam-header">
-        <Link className="citybeam-brand" href={projectHubPath[locale]} aria-label="Kreluna projects"><img src="/kreluna-logo.png" alt="" width="31" height="31" /><span>KRELUNA · CITYBEAM</span></Link>
-        <nav aria-label="CityBeam"><a href="#come-funziona">{t.navHow}</a><a href="#per-chi">{t.navFor}</a><a href={contactPath[locale]}>{t.navContact}</a></nav>
+        <Link className="citybeam-brand" href="/" aria-label={t.navHome}><img src="/kreluna-logo.png" alt="" width="31" height="31" /><span>KRELUNA · CITYBEAM</span></Link>
+        <nav aria-label="CityBeam"><Link href="/">{t.navHome}</Link><a href="#come-funziona">{t.navHow}</a><a href="#per-chi">{t.navFor}</a><a href={contactPath[locale]}>{t.navContact}</a></nav>
         <nav className="citybeam-language" aria-label="Language">
           {(Object.keys(localePath) as CityBeamLocale[]).map((code) => <a key={code} href={localePath[code]} aria-current={code === locale ? "page" : undefined} hrefLang={code}>{code.toUpperCase()}</a>)}
         </nav>
