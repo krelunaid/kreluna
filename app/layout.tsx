@@ -99,6 +99,13 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
       </head>
       <body>
         {children}
+        {/* Cloudflare's official module beacon is deferred by the browser. */}
+        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
+        <script
+          type="module"
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon='{"token":"563650c804544d489377014a00cc36f7"}'
+        />
         <MetaPixel />
         <CookieConsent initialLanguage={documentLanguage(pathname).slice(0, 2)} />
       </body>

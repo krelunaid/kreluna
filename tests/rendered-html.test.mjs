@@ -38,6 +38,8 @@ test("renders the Kreluna ecosystem homepage", async () => {
   assert.match(html, /property="og:image" content="https:\/\/www\.kreluna\.it\/og-kreluna\.jpg"/i);
   assert.doesNotMatch(html, /fonts\.googleapis\.com|fonts\.gstatic\.com/i);
   assert.match(html, /rel="preload" href="\/fonts\/space-grotesk-latin\.woff2" as="font"/i);
+  assert.match(html, /static\.cloudflareinsights\.com\/beacon\.min\.js/i);
+  assert.match(html, /data-cf-beacon=.*563650c804544d489377014a00cc36f7/i);
   assert.match(html, /<script id="kreluna-structured-data" type="application\/ld\+json">/i);
   assert.match(html, /"@type":"Organization"/);
   assert.match(html, /"@type":"WebSite"/);
