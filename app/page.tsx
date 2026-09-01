@@ -1,7 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { marketplaceCategories, products, productsForCategory } from "./marketplace-data";
+import { marketplaceCategories, products } from "./marketplace-data";
+
+const visibleProducts = products.filter((product) =>
+  ["risonix", "velvet-table", "citybeam"].includes(product.slug),
+);
 
 const assetBasePath = process.env.NEXT_PUBLIC_ARUBA_BASE_PATH ?? "";
 const homeSiteUrl = "https://www.kreluna.it";
@@ -317,8 +321,8 @@ export default function Home() {
                 <p>{category.description}</p>
               </header>
               <div className={`product-grid ${category.id === "music-audio" ? "product-grid-featured" : ""}`}>
-                {productsForCategory(category.id).map((product) => {
-                  const index = products.indexOf(product);
+                {visibleProducts.filter((product) => product.category === category.id).map((product) => {
+                  const index = visibleProducts.indexOf(product);
                   return <article id={`product-${product.slug}`} className={`product-card ${product.color} reveal`} key={product.slug} style={{ "--delay": `${index * 90}ms` } as React.CSSProperties}>
                     <div className="card-topline">
                       <span>{product.eyebrow}</span>
@@ -544,7 +548,7 @@ export default function Home() {
           </div>
           <div className="footer-column">
             <p className="footer-heading">Progetti</p>
-            {products.slice(0, 4).map((product) => <a key={product.slug} href={product.href}>{product.name}</a>)}
+            {visibleProducts.map((product) => <a key={product.slug} href={product.href}>{product.name}</a>)}
           </div>
           <div className="footer-column">
             <p className="footer-heading">Kreluna</p>

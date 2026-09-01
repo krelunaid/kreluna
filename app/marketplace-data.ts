@@ -122,8 +122,8 @@ export const marketplaceCategories = [
   },
   {
     id: "digital-products",
-    name: "AI, lavoro ed esperienze",
-    description: "Intelligenza artificiale, strumenti professionali, sicurezza e nuovi servizi digitali.",
+    name: "Esperienze e nuovi servizi",
+    description: "Progetti Kreluna dedicati a nuove esperienze e servizi digitali in fase di sviluppo.",
   },
 ] as const;
 
