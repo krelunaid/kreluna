@@ -353,6 +353,10 @@ h1 em, h2 em { font-family: var(--serif); font-weight: 500; background: linear-g
 .mockup-citybeam { position: relative; overflow: hidden; background: linear-gradient(90deg,rgba(4,6,18,.5),rgba(4,6,18,.05)), url('/citybeam-hero.png') center/cover; }
 .mockup-citybeam::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg,transparent 45%,rgba(5,7,18,.75)); }
 .mockup-citybeam .mchip { position: absolute; z-index: 2; left: 15px; bottom: 14px; color: #d9ecff; border-color: rgba(89,168,255,.45); background: rgba(6,17,42,.78); }
+.mockup-projects { display:flex; flex-direction:column; gap:10px; justify-content:center; padding:22px; background:radial-gradient(circle at 80% 10%,rgba(89,168,255,.16),transparent 42%),#111426; }
+.mockup-projects > div { display:flex; align-items:center; justify-content:space-between; gap:15px; padding:13px 14px; border:1px solid rgba(255,255,255,.09); border-radius:10px; background:rgba(255,255,255,.035); }
+.mockup-projects span { color:#e7eaff; font-size:.7rem; font-weight:600; }
+.mockup-projects i { color:#9fb3df; font:500 .48rem var(--mono); letter-spacing:.08em; }
 
 /* CityBeam — multilingual pre-launch landing */
 .citybeam-page { --cb-blue:#59a8ff; --cb-violet:#927cff; --cb-gold:#f0c46c; min-height:100vh; overflow:hidden; background:#050711; color:var(--ink); }

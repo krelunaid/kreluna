@@ -1,4 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
 import type { Metadata } from "next";
+import Link from "next/link";
 import { products } from "../marketplace-data";
 
 export const metadata: Metadata = {
@@ -20,12 +22,12 @@ export default function ProjectsPage() {
   return (
     <div className="projects-page">
       <header className="projects-page-header">
-        <a className="projects-page-brand" href="/" aria-label="Kreluna home">
+        <Link className="projects-page-brand" href="/" aria-label="Kreluna home">
           <img src="/kreluna-logo.png" alt="" width="34" height="34" />
           <span>KRELUNA</span>
-        </a>
+        </Link>
         <nav aria-label="Navigazione progetti">
-          <a href="/">Home</a>
+          <Link href="/">Home</Link>
           <a href="/citybeam">CityBeam</a>
           <a className="button button-small button-primary" href="/contatti.html">Parliamone</a>
         </nav>
@@ -43,7 +45,7 @@ export default function ProjectsPage() {
 
         <section className="projects-page-grid" aria-label="Progetti pubblici">
           {publicProjects.map((project, index) => (
-            <article className={`projects-page-card ${project.slug}`} key={project.slug}>
+            <article className={`projects-page-card project-${project.slug}`} key={project.slug}>
               <img src={projectImage[project.slug]} alt="" width="1200" height="760" />
               <div className="projects-page-card-overlay" />
               <div className="projects-page-card-copy">

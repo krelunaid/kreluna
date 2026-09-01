@@ -34,7 +34,7 @@ const homeStructuredData = {
       "@type": "WebPage",
       "@id": `${homeSiteUrl}/#webpage`,
       url: `${homeSiteUrl}/`,
-      name: "Kreluna | AI, automazione e cybersecurity",
+      name: "Kreluna | Software, automazione e progetti digitali",
       isPartOf: { "@id": `${homeSiteUrl}/#website` },
       about: { "@id": `${homeSiteUrl}/#organization` },
       inLanguage: "it-IT",
@@ -45,7 +45,7 @@ const homeStructuredData = {
       mainEntity: [{
         "@type": "Question",
         name: "Che cos’è Kreluna?",
-        acceptedAnswer: { "@type": "Answer", text: "Kreluna è un progetto italiano in sviluppo dedicato ad AI, automazione e cybersecurity." },
+        acceptedAnswer: { "@type": "Answer", text: "Kreluna è uno studio tecnologico italiano che realizza software, automazioni e progetti digitali, con attenzione al controllo umano e alla chiarezza." },
       }],
     },
   ],
@@ -126,18 +126,17 @@ function MockupScreen({ variant }: { variant: string }) {
       </div>
     );
   }
+  if (variant === "projects") {
+    return (
+      <div className="mockup-body mockup-projects" role="img" aria-label="Progetti pubblici Kreluna">
+        <div><span>CityBeam</span><i>PRE-LANCIO</i></div>
+        <div><span>Velvet Table</span><i>CONCEPT</i></div>
+      </div>
+    );
+  }
   return (
     <div className="mockup-body mockup-velvet" role="img" aria-label="Velvet Table, foto originale del progetto">
       <span className="mchip">Tavolo confermato</span>
-    </div>
-  );
-}
-
-function ProductMockup({ variant, domain }: { variant: string; domain: string }) {
-  return (
-    <div className="mockup-window">
-      <MockupBar domain={domain} />
-      <MockupScreen variant={variant} />
     </div>
   );
 }
@@ -146,16 +145,16 @@ function HeroDevices() {
   return (
     <div className="hero-devices" aria-hidden="true">
       <div className="mockup-window hd-back">
-        <MockupBar domain="cra24.kreluna.it" />
-        <MockupScreen variant="cyber" />
+        <MockupBar domain="kreluna.it/citybeam" />
+        <MockupScreen variant="citybeam" />
       </div>
       <div className="mockup-window hd-mid">
-        <MockupBar domain="helix.kreluna.it" />
-        <MockupScreen variant="helix" />
+        <MockupBar domain="kreluna.it/velvet-table" />
+        <MockupScreen variant="velvet" />
       </div>
       <div className="mockup-window hd-front">
-        <MockupBar domain="kreluna.ai" />
-        <MockupScreen variant="ai" />
+        <MockupBar domain="kreluna.it/progetti" />
+        <MockupScreen variant="projects" />
       </div>
     </div>
   );
@@ -486,7 +485,7 @@ export default function Home() {
         <div className="footer-main">
           <div className="footer-brand">
             <Logo />
-            <p>Tecnologia e intelligenza artificiale per ciò che viene dopo.</p>
+            <p>Software, automazione e progetti digitali costruiti con chiarezza.</p>
           </div>
           <div className="footer-column">
             <p className="footer-heading">Progetti</p>

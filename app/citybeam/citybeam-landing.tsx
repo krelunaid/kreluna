@@ -1,4 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export type CityBeamLocale = "it" | "en" | "fr" | "es" | "de";
 
@@ -16,7 +18,7 @@ const translations = {
     lang: "it-IT", title: "CityBeam | Il tuo momento sui grandi schermi del mondo",
     description: "CityBeam è il progetto Kreluna in pre-lancio per rendere più semplice la richiesta di spot su maxi-schermi iconici, iniziando da Times Square.",
     navHow: "Come funziona", navFor: "Per chi", navContact: "Contatti", kicker: "CityBeam · progetto in fase di lancio",
-    h1a: "Il tuo momento sui", h1b: "grandi schermi", h1c: "del mondo.",
+    h1a: "Il tuo momento sui", h1b: "grandi schermi", h1c: " del mondo.",
     intro: "Kreluna sta sviluppando un marketplace europeo per rendere più semplice la richiesta di spot sui maxi-schermi delle destinazioni più iconiche. La prima destinazione prevista è Times Square, a New York.",
     info: "Richiedi informazioni", discover: "Scopri il progetto",
     disclosure: "CityBeam è in pre-lancio. Schermi, disponibilità, immagini, prezzi e prenotazioni saranno pubblicati esclusivamente dopo la conferma degli operatori autorizzati.",
@@ -50,7 +52,7 @@ const translations = {
     lang: "fr-FR", title: "CityBeam | Votre moment sur les plus grands écrans du monde",
     description: "CityBeam est le projet Kreluna en pré-lancement pour simplifier l’accès aux écrans numériques iconiques, en commençant par Times Square.",
     navHow: "Fonctionnement", navFor: "Pour qui", navContact: "Contact", kicker: "CityBeam · projet en pré-lancement",
-    h1a: "Votre moment sur les", h1b: "plus grands écrans", h1c: "du monde.",
+    h1a: "Votre moment sur les", h1b: "plus grands écrans", h1c: " du monde.",
     intro: "Kreluna développe une marketplace européenne pour simplifier les demandes de diffusion sur les écrans numériques des destinations les plus iconiques. Times Square, à New York, est la première destination prévue.",
     info: "Demander des informations", discover: "Découvrir le projet",
     disclosure: "CityBeam est en pré-lancement. Les écrans, disponibilités, images, tarifs et réservations seront publiés uniquement après confirmation des opérateurs autorisés.",
@@ -67,7 +69,7 @@ const translations = {
     lang: "es-ES", title: "CityBeam | Tu momento en las pantallas más grandes del mundo",
     description: "CityBeam es el proyecto de Kreluna en prelanzamiento para simplificar el acceso a pantallas digitales icónicas, empezando por Times Square.",
     navHow: "Cómo funciona", navFor: "Para quién", navContact: "Contacto", kicker: "CityBeam · proyecto en prelanzamiento",
-    h1a: "Tu momento en las", h1b: "pantallas más grandes", h1c: "del mundo.",
+    h1a: "Tu momento en las", h1b: "pantallas más grandes", h1c: " del mundo.",
     intro: "Kreluna está desarrollando un marketplace europeo para simplificar las solicitudes de anuncios en las pantallas digitales de los destinos más icónicos. Times Square, en Nueva York, es el primer destino previsto.",
     info: "Solicitar información", discover: "Descubrir el proyecto",
     disclosure: "CityBeam está en prelanzamiento. Las pantallas, disponibilidad, imágenes, precios y reservas se publicarán únicamente tras la confirmación de los operadores autorizados.",
@@ -84,7 +86,7 @@ const translations = {
     lang: "de-DE", title: "CityBeam | Dein Moment auf den größten Bildschirmen der Welt",
     description: "CityBeam ist Krelunas Pre-Launch-Projekt für einen einfacheren Zugang zu ikonischen Digitalflächen – beginnend am Times Square.",
     navHow: "So funktioniert es", navFor: "Für wen", navContact: "Kontakt", kicker: "CityBeam · Projekt vor dem Start",
-    h1a: "Dein Moment auf den", h1b: "größten Bildschirmen", h1c: "der Welt.",
+    h1a: "Dein Moment auf den", h1b: "größten Bildschirmen", h1c: " der Welt.",
     intro: "Kreluna entwickelt einen europäischen Marktplatz, der Anfragen für Werbeplätze auf ikonischen digitalen Großbildschirmen vereinfacht. Der Times Square in New York ist das erste geplante Ziel.",
     info: "Informationen anfordern", discover: "Projekt entdecken",
     disclosure: "CityBeam befindet sich vor dem Start. Bildschirme, Verfügbarkeit, Bilder, Preise und Buchungen werden erst nach Bestätigung durch autorisierte Betreiber veröffentlicht.",
@@ -117,7 +119,7 @@ export default function CityBeamLanding({ locale }: { locale: CityBeamLocale }) 
   return (
     <div className="citybeam-page" lang={t.lang}>
       <header className="citybeam-header">
-        <a className="citybeam-brand" href="/" aria-label="Kreluna home"><img src="/kreluna-logo.png" alt="" width="31" height="31" /><span>KRELUNA · CITYBEAM</span></a>
+        <Link className="citybeam-brand" href="/" aria-label="Kreluna home"><img src="/kreluna-logo.png" alt="" width="31" height="31" /><span>KRELUNA · CITYBEAM</span></Link>
         <nav aria-label="CityBeam"><a href="#come-funziona">{t.navHow}</a><a href="#per-chi">{t.navFor}</a><a href="/contatti.html">{t.navContact}</a></nav>
         <nav className="citybeam-language" aria-label="Language">
           {(Object.keys(localePath) as CityBeamLocale[]).map((code) => <a key={code} href={localePath[code]} aria-current={code === locale ? "page" : undefined} hrefLang={code}>{code.toUpperCase()}</a>)}

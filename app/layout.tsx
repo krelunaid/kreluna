@@ -6,9 +6,9 @@ import "./globals.css";
 const assetBasePath = process.env.NEXT_PUBLIC_ARUBA_BASE_PATH ?? "";
 const isArubaPreview = assetBasePath.length > 0;
 const siteUrl = "https://www.kreluna.it";
-const siteTitle = "Kreluna | AI, automazione e cybersecurity";
+const siteTitle = "Kreluna | Software, automazione e progetti digitali";
 const siteDescription =
-  "Kreluna progetta AI, automazione dei processi e cybersecurity intorno al lavoro reale, con controllo umano, dati protetti e limiti dichiarati.";
+  "Kreluna trasforma processi e idee in software, automazioni e progetti digitali concreti, con controllo umano e obiettivi chiari.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   manifest: `${assetBasePath}/site.webmanifest`,
   openGraph: {
     title: siteTitle,
-    description: "AI, automazione e cybersecurity progettate intorno a lavoro reale, responsabilità umana e limiti verificabili.",
+    description: siteDescription,
     siteName: "Kreluna",
     locale: "it_IT",
     alternateLocale: ["en_GB"],
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: siteTitle,
-    description: "AI, automazione e cybersecurity progettate intorno a lavoro reale, responsabilità umana e limiti verificabili.",
+    description: siteDescription,
     images: [`${assetBasePath}/og-kreluna.jpg`],
   },
 };
