@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import type { Metadata } from "next";
-import Link from "next/link";
 
 export type CityBeamLocale = "it" | "en" | "fr" | "es" | "de";
 
@@ -218,8 +217,8 @@ export default function CityBeamLanding({ locale }: { locale: CityBeamLocale }) 
   return (
     <div className="citybeam-page" lang={t.lang}>
       <header className="citybeam-header">
-        <Link className="citybeam-brand" href="/" aria-label={t.navHome}><img src="/kreluna-logo.png" alt="" width="31" height="31" /><span>KRELUNA · CITYBEAM</span></Link>
-        <nav aria-label="CityBeam"><Link href="/">{t.navHome}</Link><a href="#come-funziona">{t.navHow}</a><a href="#per-chi">{t.navFor}</a><a href={contactPath[locale]}>{t.navContact}</a></nav>
+        <a className="citybeam-brand" href="https://www.kreluna.it/" aria-label={t.navHome}><img src="/kreluna-logo.png" alt="" width="31" height="31" /><span>KRELUNA · CITYBEAM</span></a>
+        <nav aria-label="CityBeam"><a href="https://www.kreluna.it/">{t.navHome}</a><a href="#come-funziona">{t.navHow}</a><a href="#per-chi">{t.navFor}</a><a href={contactPath[locale]}>{t.navContact}</a></nav>
         <nav className="citybeam-language" aria-label="Language">
           {(Object.keys(localePath) as CityBeamLocale[]).map((code) => <a key={code} href={localePath[code]} aria-current={code === locale ? "page" : undefined} hrefLang={code}>{code.toUpperCase()}</a>)}
         </nav>
