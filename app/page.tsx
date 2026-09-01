@@ -209,7 +209,7 @@ export default function Home() {
       <header className="site-header">
         <Logo />
         <nav className="desktop-nav" aria-label="Navigazione principale">
-          <a href="#products">Marketplace</a>
+          <a href="#products">Progetti</a>
           <a href="#vision">Visione</a>
           <a href="#velvet-table">Velvet Table</a>
           <a href="/citybeam">CityBeam</a>
@@ -217,7 +217,7 @@ export default function Home() {
         </nav>
         <div className="nav-actions">
           <a className="contact-link" href="https://www.kreluna.it/contatti.html">Contatti</a>
-          <a className="button button-small button-primary" href="/marketplace">Apri il Marketplace</a>
+          <a className="button button-small button-primary" href="https://www.kreluna.it/contatti.html">Parliamone</a>
           <button
             ref={menuButtonRef}
             className="menu-button"
@@ -240,7 +240,7 @@ export default function Home() {
             }}
             aria-label="Chiudi il menu"
           >×</button>
-          <a href="#products" onClick={() => setMenuOpen(false)}>Marketplace</a>
+          <a href="#products" onClick={() => setMenuOpen(false)}>Progetti</a>
           <a href="#vision" onClick={() => setMenuOpen(false)}>Visione</a>
           <a href="#velvet-table" onClick={() => setMenuOpen(false)}>Velvet Table</a>
           <a href="/citybeam" onClick={() => setMenuOpen(false)}>CityBeam</a>
@@ -266,7 +266,7 @@ export default function Home() {
             Tutti condividono la stessa visione.
           </p>
           <div className="hero-actions">
-            <a className="button button-primary" href="/marketplace">Apri il Marketplace <ArrowIcon /></a>
+            <a className="button button-primary" href="#products">Scopri i progetti <ArrowIcon /></a>
             <a className="button button-secondary" href="#vision">Conosci Kreluna</a>
           </div>
           <div className="hero-capabilities">
@@ -296,75 +296,16 @@ export default function Home() {
       <section className="products section-shell" id="products">
         <div className="section-heading reveal">
           <div>
-            <div className="eyebrow"><i /> Marketplace Kreluna</div>
+            <div className="eyebrow"><i /> Progetti Kreluna</div>
             <h2>Un’unica visione.<br />{" "}<em>Progetti diversi.</em></h2>
           </div>
           <p>
-            Il Marketplace è la vetrina ufficiale delle app e dei software Kreluna:
-            un unico luogo per capire cosa fanno, dove funzionano e come ottenerli.
+            Qui trovi i prodotti disponibili e i progetti che stiamo sviluppando,
+            con indicazioni chiare sul loro stato e sul pubblico a cui sono rivolti.
           </p>
         </div>
 
-        <div className="marketplace-showcase reveal">
-          <div className="marketplace-showcase-copy">
-            <div className="eyebrow"><i /> Il catalogo Kreluna</div>
-            <h3>Tutte le nostre app.<br /><em>Un solo posto.</em></h3>
-            <p>
-              Scopri prodotti Kreluna realmente disponibili o in sviluppo, confronta le
-              funzioni e verifica subito la compatibilità con il tuo dispositivo.
-            </p>
-            <div className="marketplace-showcase-points" aria-label="Cosa trovi nel Marketplace">
-              <span>Prodotti ufficiali</span>
-              <span>Compatibilità chiara</span>
-              <span>Aggiornamenti Kreluna</span>
-            </div>
-            <a className="button button-primary" href="/marketplace">Apri il Marketplace <ArrowIcon /></a>
-          </div>
-
-          <div className="marketplace-showcase-ui" role="img" aria-label="Anteprima illustrativa del Marketplace Kreluna con ricerca, categorie e prodotti">
-            <div className="marketplace-ui-topbar">
-              <span className="marketplace-ui-brand"><i>K</i> KRELUNA <small>MARKETPLACE</small></span>
-              <span className="marketplace-ui-window-dots"><i /><i /><i /></span>
-            </div>
-            <div className="marketplace-ui-body">
-              <div className="marketplace-ui-search">
-                <span>⌕</span>
-                <p>Cerca app, software o funzioni</p>
-                <small>Catalogo</small>
-              </div>
-              <div className="marketplace-ui-filters">
-                <span className="active">Tutto</span>
-                <span>Musica e audio</span>
-                <span>AI e lavoro</span>
-                <span>Esperienze</span>
-              </div>
-              <div className="marketplace-ui-content">
-                <div className="marketplace-ui-featured">
-                  <div className="marketplace-ui-featured-copy">
-                    <small>IN EVIDENZA</small>
-                    <strong>Risonix</strong>
-                    <p>Riconoscimento musicale locale per Windows e Mac.</p>
-                    <span>Scopri il prodotto ↗</span>
-                  </div>
-                  <div className="marketplace-ui-wave" aria-hidden="true">
-                    <i /><i /><i /><i /><i /><i /><i /><i /><i />
-                  </div>
-                </div>
-                <div className="marketplace-ui-side">
-                  <div className="marketplace-ui-mini helix-mini"><small>SVILUPPO AI</small><strong>Helix</strong><span>Web</span></div>
-                  <div className="marketplace-ui-mini velvet-mini"><small>ESPERIENZE</small><strong>Velvet Table</strong><span>Web</span></div>
-                </div>
-              </div>
-              <div className="marketplace-ui-platforms">
-                <p>Disponibilità indicata per ogni prodotto</p>
-                <span>⊞ Windows</span><span>● macOS</span><span>◎ Web</span>
-              </div>
-            </div>
-            <p className="marketplace-ui-caption">Anteprima illustrativa · il catalogo reale si apre dal pulsante</p>
-          </div>
-        </div>
-
-        <nav className="marketplace-categories reveal" aria-label="Categorie del marketplace">
+        <nav className="marketplace-categories reveal" aria-label="Categorie dei progetti">
           {marketplaceCategories.map((category, index) => <a href={`#category-${category.id}`} key={category.id}><span>{String(index + 1).padStart(2, "0")}</span>{category.name}</a>)}
         </nav>
 
@@ -389,7 +330,7 @@ export default function Home() {
                       <ProductMockup variant={product.mockup} domain={product.domain} />
                     </div>
                     <div className="card-copy">
-                      <p className="signature">Kreluna marketplace</p>
+                      <p className="signature">Progetto Kreluna</p>
                       <h3>{product.name}</h3>
                       <h4>{product.tagline}</h4>
                       <p>{product.description}</p>
@@ -591,7 +532,7 @@ export default function Home() {
         <div className="eyebrow"><i /> Kreluna</div>
         <h2>Questo è solo<br />{" "}<em>l’inizio.</em></h2>
         <p>Scopri ciò che stiamo costruendo e segui l’evoluzione dell’ecosistema.</p>
-        <a className="button button-primary" href="/marketplace">Apri il Marketplace <ArrowIcon /></a>
+        <a className="button button-primary" href="https://www.kreluna.it/contatti.html">Parliamone <ArrowIcon /></a>
       </section>
       </main>
 
@@ -602,8 +543,7 @@ export default function Home() {
             <p>Tecnologia e intelligenza artificiale per ciò che viene dopo.</p>
           </div>
           <div className="footer-column">
-            <p className="footer-heading">Marketplace</p>
-            <a href="/marketplace">Tutti i prodotti</a>
+            <p className="footer-heading">Progetti</p>
             {products.slice(0, 4).map((product) => <a key={product.slug} href={product.href}>{product.name}</a>)}
           </div>
           <div className="footer-column">
