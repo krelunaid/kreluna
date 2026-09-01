@@ -4,7 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import { marketplaceCategories, products } from "./marketplace-data";
 
 const visibleProducts = products.filter((product) =>
-  ["risonix", "velvet-table", "citybeam"].includes(product.slug),
+  ["velvet-table", "citybeam"].includes(product.slug),
+);
+
+const visibleCategories = marketplaceCategories.filter((category) =>
+  visibleProducts.some((product) => product.category === category.id),
 );
 
 const assetBasePath = process.env.NEXT_PUBLIC_ARUBA_BASE_PATH ?? "";
@@ -304,17 +308,17 @@ export default function Home() {
             <h2>Un’unica visione.<br />{" "}<em>Progetti diversi.</em></h2>
           </div>
           <p>
-            Qui trovi i prodotti disponibili e i progetti che stiamo sviluppando,
-            con indicazioni chiare sul loro stato e sul pubblico a cui sono rivolti.
+            Due idee in costruzione, raccontate con chiarezza. Non sono ancora servizi
+            acquistabili: stiamo sviluppando il prodotto e verificando le partnership necessarie.
           </p>
         </div>
 
         <nav className="marketplace-categories reveal" aria-label="Categorie dei progetti">
-          {marketplaceCategories.map((category, index) => <a href={`#category-${category.id}`} key={category.id}><span>{String(index + 1).padStart(2, "0")}</span>{category.name}</a>)}
+          {visibleCategories.map((category, index) => <a href={`#category-${category.id}`} key={category.id}><span>{String(index + 1).padStart(2, "0")}</span>{category.name}</a>)}
         </nav>
 
         <div className="marketplace-groups">
-          {marketplaceCategories.map((category) => (
+          {visibleCategories.map((category) => (
             <section className="marketplace-group" id={`category-${category.id}`} key={category.id}>
               <header className="marketplace-group-heading reveal">
                 <div><span>Categoria</span><h3>{category.name}</h3></div>
