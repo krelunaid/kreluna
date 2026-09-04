@@ -1,0 +1,193 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CityBeam | Times Square and digital billboard advertising</title><meta name="description" content="CityBeam is Kreluna’s pre-launch project designed to simplify access to iconic digital billboards, starting with Times Square."><meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="https://www.kreluna.it/en/citybeam"><link rel="alternate" hreflang="it" href="https://www.kreluna.it/citybeam"><link rel="alternate" hreflang="en" href="https://www.kreluna.it/en/citybeam"><link rel="alternate" hreflang="fr" href="https://www.kreluna.it/fr/citybeam"><link rel="alternate" hreflang="es" href="https://www.kreluna.it/es/citybeam"><link rel="alternate" hreflang="de" href="https://www.kreluna.it/de/citybeam"><link rel="alternate" hreflang="x-default" href="https://www.kreluna.it/citybeam"><meta property="og:title" content="CityBeam | Times Square and digital billboard advertising"><meta property="og:description" content="CityBeam is Kreluna’s pre-launch project designed to simplify access to iconic digital billboards, starting with Times Square."><meta property="og:url" content="https://www.kreluna.it/en/citybeam"><meta property="og:site_name" content="Kreluna"><meta property="og:type" content="website"><meta property="og:locale" content="en_GB"><meta property="og:image" content="https://www.kreluna.it/citybeam-og.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="CityBeam | Times Square and digital billboard advertising"><meta name="twitter:description" content="CityBeam is Kreluna’s pre-launch project designed to simplify access to iconic digital billboards, starting with Times Square."><meta name="twitter:image" content="https://www.kreluna.it/citybeam-og.png"><link rel="icon" href="/favicon-32.png"><meta name="theme-color" content="#050711"><link rel="preload" href="/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/fonts/newsreader-500-italic.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin><style>@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('/fonts/inter-latin.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 500 700;
+  font-display: swap;
+  src: url('/fonts/space-grotesk-latin.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Newsreader';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/newsreader-500-italic.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/ibm-plex-mono-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/ibm-plex-mono-500.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/ibm-plex-mono-600.woff2') format('woff2');
+}
+
+:root {
+  --bg: #0a0a10;
+  --panel: #12121c;
+  --ink: #f4f2ff;
+  --muted: #a79fc9;
+  --violet: #8b7cff;
+  --gold: #f0a93e;
+  --cyan: #4fb8ee;
+  --coral: #ff718c;
+  --line: rgba(139, 124, 255, 0.16);
+  --mono: 'IBM Plex Mono', monospace;
+  --serif: 'Newsreader', serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; background: var(--bg); }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 20;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
+}
+::selection { background: var(--violet); color: var(--bg); }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; }
+:focus-visible { outline: 3px solid var(--cyan); outline-offset: 4px; }
+.skip-link { position: fixed; z-index: 500; top: -80px; left: 18px; padding: 11px 15px; border-radius: 10px; background: #fff; color: #090910; font-weight: 700; }
+.skip-link:focus { top: 14px; }
+h1, h2, h3, h4, p { margin: 0; }
+h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; }
+.button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; border: 1px solid var(--line); border-radius: 999px; padding: 14px 25px; font-weight: 600; font-size: .9rem; transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease, background .25s ease; }
+.button:hover { transform: translateY(-2px); }
+.button-secondary { color: var(--muted); background: rgba(255,255,255,.02); }
+.button-secondary:hover { color: var(--ink); border-color: rgba(139,124,255,.4); }
+h1 em, h2 em { font-family: var(--serif); font-weight: 500; background: linear-gradient(180deg, #e0dbff, var(--violet) 130%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.citybeam-page { --cb-blue:#59a8ff; --cb-violet:#927cff; --cb-gold:#f0c46c; min-height:100vh; overflow:hidden; background:#050711; color:var(--ink); }
+.citybeam-header { position:absolute; z-index:10; top:0; left:0; right:0; min-height:82px; display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:22px; padding:0 max(5vw,24px); border-bottom:1px solid rgba(255,255,255,.09); background:rgba(5,7,17,.42); backdrop-filter:blur(18px); }
+.citybeam-brand { display:flex; align-items:center; gap:12px; font:600 .78rem var(--mono); letter-spacing:.16em; }
+.citybeam-brand img { width:31px; height:31px; border-radius:50%; box-shadow:0 0 24px rgba(146,124,255,.45); }
+.citybeam-header nav { display:flex; align-items:center; gap:25px; }
+.citybeam-header nav a { color:#b6bdd5; font-size:.82rem; }
+.citybeam-header nav a:hover { color:white; }
+.citybeam-language { justify-self:end; gap:4px !important; }
+.citybeam-language a { min-width:29px; padding:6px 7px; border:1px solid transparent; border-radius:8px; text-align:center; font:600 .61rem var(--mono) !important; letter-spacing:.06em; }
+.citybeam-language a[aria-current="page"] { color:white; border-color:rgba(89,168,255,.34); background:rgba(89,168,255,.14); }
+.citybeam-hero { position:relative; min-height:100svh; display:grid; grid-template-columns:minmax(0,.88fr) minmax(420px,1.12fr); align-items:center; gap:clamp(40px,6vw,100px); padding:150px max(5vw,24px) 80px; }
+.citybeam-hero::before { content:''; position:absolute; inset:0; pointer-events:none; opacity:.3; background-image:linear-gradient(rgba(89,168,255,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(89,168,255,.1) 1px,transparent 1px); background-size:56px 56px; mask-image:radial-gradient(circle at 70% 48%,black,transparent 67%); }
+.citybeam-copy,.citybeam-visual { position:relative; z-index:1; }
+.citybeam-kicker { display:inline-flex; align-items:center; gap:9px; color:#9ed0ff; text-transform:uppercase; font:500 .68rem var(--mono); letter-spacing:.12em; }
+.citybeam-kicker::before { content:''; width:7px; height:7px; border-radius:50%; background:var(--cb-blue); box-shadow:0 0 16px var(--cb-blue); }
+.citybeam-copy h1 { margin-top:24px; max-width:760px; font-size:clamp(3.6rem,6.5vw,7.1rem); line-height:.93; letter-spacing:-.06em; }
+.citybeam-copy h1 em { color:transparent; background:linear-gradient(135deg,#e9f5ff,var(--cb-blue) 46%,var(--cb-violet)); -webkit-background-clip:text; background-clip:text; font-family:var(--serif); font-weight:500; }
+.citybeam-copy > p { max-width:680px; margin-top:27px; color:#aeb7d0; font-size:clamp(1rem,1.3vw,1.14rem); line-height:1.75; }
+.citybeam-actions { display:flex; flex-wrap:wrap; gap:11px; margin-top:30px; }
+.citybeam-primary { color:#061020; background:linear-gradient(135deg,#dceeff,#78baff 52%,#a58cff); border:0; box-shadow:0 18px 45px -22px var(--cb-blue); }
+.citybeam-note { margin-top:25px; padding-left:15px; border-left:2px solid rgba(89,168,255,.46); color:#7f8aa8; font-size:.76rem; line-height:1.65; }
+.citybeam-visual { margin:0; overflow:hidden; border:1px solid rgba(108,165,255,.28); border-radius:28px; background:#0b1024; box-shadow:0 38px 120px -48px rgba(64,116,255,.75); transform:perspective(1400px) rotateY(-3deg); }
+.citybeam-visual img { width:100%; min-height:590px; display:block; object-fit:cover; }
+.citybeam-visual figcaption { position:absolute; left:22px; right:22px; bottom:20px; display:flex; justify-content:space-between; gap:20px; padding:13px 15px; border:1px solid rgba(255,255,255,.12); border-radius:13px; color:#d9e6ff; background:rgba(5,9,23,.76); backdrop-filter:blur(14px); font:.62rem var(--mono); }
+.citybeam-section { max-width:1450px; margin:0 auto; padding:120px max(5vw,24px); }
+.citybeam-section { content-visibility:auto; contain-intrinsic-size:auto 700px; }
+.citybeam-section-heading { max-width:840px; }
+.citybeam-section-heading h2 { margin-top:18px; font-size:clamp(2.5rem,4.8vw,5rem); line-height:1.02; letter-spacing:-.05em; }
+.citybeam-section-heading p { margin-top:22px; color:#9fa8c1; line-height:1.75; }
+.citybeam-steps { list-style:none; margin:55px 0 0; padding:0; display:grid; grid-template-columns:repeat(3,1fr); border:1px solid rgba(89,168,255,.17); border-radius:24px; overflow:hidden; }
+.citybeam-steps li { min-height:305px; padding:31px 28px; border-right:1px solid rgba(89,168,255,.17); background:linear-gradient(150deg,rgba(25,43,84,.5),rgba(8,11,26,.88)); }
+.citybeam-steps li:last-child { border-right:0; }
+.citybeam-steps span { color:var(--cb-blue); font:.7rem var(--mono); }
+.citybeam-steps h3 { margin-top:85px; font-size:1.35rem; }
+.citybeam-steps p { margin-top:14px; color:#98a3be; font-size:.88rem; line-height:1.7; }
+.citybeam-use-cases { display:grid; grid-template-columns:1fr 1fr; gap:15px; }
+.citybeam-case { min-height:390px; display:flex; flex-direction:column; justify-content:flex-end; overflow:hidden; position:relative; padding:38px; border:1px solid rgba(255,255,255,.1); border-radius:24px; background:radial-gradient(circle at 85% 15%,rgba(89,168,255,.18),transparent 43%),#0b0e1c; }
+.citybeam-case:last-child { background:radial-gradient(circle at 85% 15%,rgba(240,196,108,.16),transparent 43%),#100d18; }
+.citybeam-case span { color:var(--cb-blue); font:.68rem var(--mono); text-transform:uppercase; letter-spacing:.1em; }
+.citybeam-case:last-child span { color:var(--cb-gold); }
+.citybeam-case h3 { margin-top:15px; max-width:560px; font-size:clamp(2rem,3.4vw,3.4rem); letter-spacing:-.04em; }
+.citybeam-case p { max-width:620px; margin-top:16px; color:#99a3bc; line-height:1.72; }
+.citybeam-status { max-width:1450px; margin:0 auto 90px; padding:clamp(38px,6vw,78px); border:1px solid rgba(146,124,255,.2); border-radius:30px; text-align:center; background:radial-gradient(circle at 50% 10%,rgba(89,168,255,.13),transparent 46%),#090b17; }
+.citybeam-status h2 { margin-top:18px; font-size:clamp(2.5rem,4.6vw,4.8rem); letter-spacing:-.05em; }
+.citybeam-status p { max-width:760px; margin:22px auto 29px; color:#a5aec6; line-height:1.75; }
+.citybeam-footer { padding:34px max(5vw,24px); border-top:1px solid rgba(255,255,255,.09); display:flex; justify-content:space-between; gap:20px; color:#78839f; font:.7rem var(--mono); }
+
+@media (max-width: 980px) {
+  .citybeam-header { grid-template-columns:1fr auto; }
+  .citybeam-header > nav:not(.citybeam-language) { display:none; }
+  .citybeam-hero { grid-template-columns:1fr; padding-top:135px; }
+  .citybeam-copy { max-width:850px; }
+  .citybeam-visual { transform:none; }
+  .citybeam-visual img { min-height:480px; }
+  .citybeam-steps { grid-template-columns:1fr; }
+  .citybeam-steps li { min-height:230px; border-right:0; border-bottom:1px solid rgba(89,168,255,.17); }
+  .citybeam-steps li:last-child { border-bottom:0; }
+  .citybeam-steps h3 { margin-top:50px; }
+}
+
+@media (max-width: 700px) {
+  .citybeam-header { gap:10px; padding-inline:16px; }
+  .citybeam-brand { font-size:.62rem; letter-spacing:.08em; }
+  .citybeam-brand img { width:27px; height:27px; }
+  .citybeam-language { gap:1px !important; }
+  .citybeam-language a { min-width:24px; padding:5px 4px; font-size:.54rem !important; }
+  .citybeam-copy h1 { font-size:clamp(3.15rem,15vw,5.2rem); }
+  .citybeam-visual { border-radius:20px; }
+  .citybeam-visual img { min-height:380px; object-position:62% center; }
+  .citybeam-visual figcaption { align-items:flex-start; flex-direction:column; }
+  .citybeam-section { padding-top:88px; padding-bottom:88px; }
+  .citybeam-use-cases { grid-template-columns:1fr; }
+  .citybeam-case { min-height:330px; padding:28px; }
+  .citybeam-status { margin-inline:20px; padding:46px 24px; }
+  .citybeam-footer { flex-direction:column; }
+}
+.home-faq { align-self: center; }
+.home-faq > h3 { margin-bottom: 17px; font-size: 1.45rem; }
+.home-faq details { border-top: 1px solid var(--line); }
+.home-faq details:last-child { border-bottom: 1px solid var(--line); }
+.home-faq summary { padding: 17px 2px; cursor: pointer; color: var(--ink); font-weight: 600; }
+.home-faq details p { margin: 0; padding: 0 2px 18px; font-size: .88rem; line-height: 1.65; }
+
+footer { border-top: 1px solid var(--line); padding: 64px max(5vw, 24px) 30px; }
+
+.cookie-banner { position: fixed; z-index: 300; left: 20px; right: 20px; bottom: 20px; max-width: 780px; margin: auto; padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; gap: 24px; border: 1px solid var(--line); border-radius: 16px; background: rgba(18,18,28,.97); box-shadow: 0 24px 70px rgba(0,0,0,.55); }
+.cookie-banner p { color: var(--muted); font-size: .8rem; line-height: 1.55; }
+.cookie-banner p a { color: var(--violet); text-decoration: underline; }
+.cookie-banner > div { display: flex; gap: 8px; flex-shrink: 0; }
+.cookie-banner button { padding: 9px 14px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--muted); cursor: pointer; font-size: .78rem; }
+.cookie-banner button.accept { border: 0; background: var(--violet); color: var(--bg); font-weight: 600; }
+.cookie-settings-trigger { position: fixed; z-index: 250; left: 16px; bottom: 14px; padding: 7px 11px; border: 1px solid var(--line); border-radius: 999px; background: rgba(18,18,28,.9); color: var(--muted); font: 600 .72rem/1 Inter, sans-serif; cursor: pointer; backdrop-filter: blur(12px); }
+.cookie-settings-trigger:hover, .cookie-settings-trigger:focus-visible { color: var(--text); border-color: rgba(139,124,255,.45); }
+
+@media (max-width: 720px) {
+  .cookie-banner { align-items: stretch; flex-direction: column; gap: 13px; }
+  .cookie-banner > div, .cookie-banner button { flex: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+}
+
+[hidden]{display:none!important}</style></head><body><link rel="preload" as="image" href="/kreluna-logo-64.webp"/><div class="citybeam-page" lang="en-GB"><header class="citybeam-header"><a class="citybeam-brand" href="/en" aria-label="Home"><img src="/kreluna-logo-64.webp" alt="" width="31" height="31"/><span>KRELUNA · CITYBEAM</span></a><nav aria-label="CityBeam"><a href="/en">Home</a><a href="#come-funziona">How it works</a><a href="#per-chi">Who it’s for</a><a href="/en/contact">Contact</a></nav><nav class="citybeam-language" aria-label="Language"><a href="/citybeam" hrefLang="it">IT</a><a href="/en/citybeam" aria-current="page" hrefLang="en">EN</a><a href="/fr/citybeam" hrefLang="fr">FR</a><a href="/es/citybeam" hrefLang="es">ES</a><a href="/de/citybeam" hrefLang="de">DE</a></nav></header><main><section class="citybeam-hero"><div class="citybeam-copy"><span class="citybeam-kicker">CityBeam · pre-launch project</span><h1>Your moment on the <em>world’s biggest screens</em>.</h1><p>Kreluna is developing a European marketplace designed to simplify requests for placements on iconic digital billboards. Times Square in New York is the first planned destination.</p><div class="citybeam-actions"><a class="button citybeam-primary" href="/en/contact">Request information <span aria-hidden="true">↗</span></a><a class="button button-secondary" href="#come-funziona">Explore the project</a></div><p class="citybeam-note">CityBeam is in pre-launch. Screens, availability, images, pricing and bookings will be published only after confirmation from authorised operators.</p></div><figure class="citybeam-visual"><picture><source type="image/avif" srcSet="/citybeam-hero-640.avif 640w, /citybeam-hero-1200.avif 1200w" sizes="(max-width: 980px) 90vw, 52vw"/><img src="/citybeam-hero-1200.webp" srcSet="/citybeam-hero-640.webp 640w, /citybeam-hero-1200.webp 1200w" sizes="(max-width: 980px) 90vw, 52vw" alt="CityBeam | Times Square and digital billboard advertising" width="1807" height="870" decoding="async"/></picture><figcaption><span>First planned destination</span><strong>Times Square · New York</strong></figcaption></figure></section><section class="citybeam-section" id="come-funziona"><div class="citybeam-section-heading"><span class="citybeam-kicker">A simpler journey</span><h2>From idea to display.</h2><p>CityBeam is designed to turn a complex media purchase into a clear journey while preserving the operators’ final approval and content policies.</p></div><ol class="citybeam-steps"><li><span>01</span><h3>Choose the moment</h3><p>Select the destination, timing, occasion and visibility you are looking for.</p></li><li><span>02</span><h3>Prepare the content</h3><p>Upload a photo or video that follows confirmed technical and editorial requirements.</p></li><li><span>03</span><h3>Receive confirmation</h3><p>After approval and display, receive the available proof of play.</p></li></ol></section><section class="citybeam-section citybeam-use-cases" id="per-chi"><article class="citybeam-case"><span>Brands and creators</span><h3>Launch where the world is watching.</h3><p>Campaigns, events, creative content and brand moments on high-visibility screens.</p></article><article class="citybeam-case"><span>Personal moments</span><h3>Turn a message into a memory.</h3><p>Greetings, dedications and celebrations, always subject to the applicable policies.</p></article></section><section class="citybeam-section" id="faq"><div class="citybeam-section-heading"><h2>Advertising in Times Square: before you book</h2></div><div class="home-faq"><details><summary>How much does a Times Square ad cost?</summary><p>CityBeam does not yet have confirmed rates. A quote should identify the screen, spot length, number of plays, dates, time bands and included services. We will publish prices and terms only after operator confirmation.</p></details><details><summary>Can I book or pay now?</summary><p>Not yet. You can request information with your destination, dates, occasion and content type. An enquiry is not a booking and does not guarantee availability.</p></details><details><summary>What photos or videos can I use?</summary><p>Formats, resolution, duration and content rules depend on the screen. Wait for confirmed specifications before producing your final file. You need the necessary rights for images, music and people depicted.</p></details><details><summary>How will I know the ad was shown?</summary><p>We are checking which operators offer proof-of-play, photography or video, including costs and turnaround. A technical playback log and an HD video are different services: the quote should state exactly what is included.</p></details><details><summary>Does CityBeam own the screens?</summary><p>No. CityBeam is a Kreluna project to facilitate enquiries with authorised operators. Partnership and resale terms are being verified; we do not claim unconfirmed agreements.</p></details></div></section><section class="citybeam-status"><span class="citybeam-kicker">The network is being built</span><h2>We are speaking with operators.</h2><p>CityBeam is not yet selling advertising space. We are verifying availability, resale terms, technical specifications and proof-of-play options with qualified operators.</p><a class="button citybeam-primary" href="/en/contact">Talk to Kreluna <span aria-hidden="true">↗</span></a></section></main><footer class="citybeam-footer"><span>© 2026 Kreluna · CityBeam is a working name</span><span>P. IVA 02114130475 · REA PT-622714</span></footer><script id="citybeam-structured-data" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"FAQPage","@id":"https://www.kreluna.it/en/citybeam#faq","inLanguage":"en","mainEntity":[{"@type":"Question","name":"How much does a Times Square ad cost?","acceptedAnswer":{"@type":"Answer","text":"CityBeam does not yet have confirmed rates. A quote should identify the screen, spot length, number of plays, dates, time bands and included services. We will publish prices and terms only after operator confirmation."}},{"@type":"Question","name":"Can I book or pay now?","acceptedAnswer":{"@type":"Answer","text":"Not yet. You can request information with your destination, dates, occasion and content type. An enquiry is not a booking and does not guarantee availability."}},{"@type":"Question","name":"What photos or videos can I use?","acceptedAnswer":{"@type":"Answer","text":"Formats, resolution, duration and content rules depend on the screen. Wait for confirmed specifications before producing your final file. You need the necessary rights for images, music and people depicted."}},{"@type":"Question","name":"How will I know the ad was shown?","acceptedAnswer":{"@type":"Answer","text":"We are checking which operators offer proof-of-play, photography or video, including costs and turnaround. A technical playback log and an HD video are different services: the quote should state exactly what is included."}},{"@type":"Question","name":"Does CityBeam own the screens?","acceptedAnswer":{"@type":"Answer","text":"No. CityBeam is a Kreluna project to facilitate enquiries with authorised operators. Partnership and resale terms are being verified; we do not claim unconfirmed agreements."}}]},{"@type":"Organization","@id":"https://www.kreluna.it/#organization","name":"Kreluna","url":"https://www.kreluna.it/","logo":{"@type":"ImageObject","url":"https://www.kreluna.it/kreluna-logo.png","width":128,"height":128}},{"@type":"WebSite","@id":"https://www.kreluna.it/#website","url":"https://www.kreluna.it/","name":"Kreluna","publisher":{"@id":"https://www.kreluna.it/#organization"},"inLanguage":["it-IT","en-GB","fr-FR","es-ES","de-DE"]},{"@type":"WebPage","@id":"https://www.kreluna.it/en/citybeam#webpage","url":"https://www.kreluna.it/en/citybeam","name":"CityBeam | Times Square and digital billboard advertising","description":"CityBeam is Kreluna’s pre-launch project designed to simplify access to iconic digital billboards, starting with Times Square.","inLanguage":"en-GB","isPartOf":{"@id":"https://www.kreluna.it/#website"},"about":{"@id":"https://www.kreluna.it/en/citybeam#project"},"primaryImageOfPage":{"@type":"ImageObject","url":"https://www.kreluna.it/citybeam-hero.png","width":1807,"height":870},"dateModified":"2026-09-01"},{"@type":"Service","@id":"https://www.kreluna.it/en/citybeam#project","name":"CityBeam","alternateName":"CityBeam by Kreluna","description":"CityBeam is Kreluna’s pre-launch project designed to simplify access to iconic digital billboards, starting with Times Square.","provider":{"@id":"https://www.kreluna.it/#organization"},"url":"https://www.kreluna.it/en/citybeam","areaServed":"Worldwide","availableLanguage":["it-IT","en-GB","fr-FR","es-ES","de-DE"],"serviceType":"Digital out-of-home advertising marketplace project"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Kreluna","item":"https://www.kreluna.it/"},{"@type":"ListItem","position":2,"name":"CityBeam","item":"https://www.kreluna.it/en/citybeam"}]}]}</script></div><button class="cookie-settings-trigger" id="cookie-settings" type="button">Cookie settings</button><aside class="cookie-banner" id="cookie-banner" aria-label="Cookie preferences" hidden><p>With your consent, we use the Meta Pixel to measure visits and sign-ups from campaigns. The website also works without marketing cookies. <a href="/en/cookies">Cookie policy</a>.</p><div><button type="button" data-choice="technical">Necessary only</button><button type="button" class="accept" data-choice="accepted">Accept measurement</button></div></aside><script defer src="/assets/citybeam-consent.js"></script><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"563650c804544d489377014a00cc36f7"}'></script></body></html>
