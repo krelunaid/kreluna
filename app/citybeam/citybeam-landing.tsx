@@ -13,8 +13,8 @@ const localePath: Record<CityBeamLocale, string> = {
 };
 
 const contactPath: Record<CityBeamLocale, string> = {
-  it: "/contatti.html",
-  en: "/en/contact.html",
+  it: "/contatti",
+  en: "/en/contact",
   fr: "mailto:andrea@kreluna.it?subject=CityBeam%20France",
   es: "mailto:andrea@kreluna.it?subject=CityBeam%20Espana",
   de: "mailto:andrea@kreluna.it?subject=CityBeam%20Deutschland",
@@ -217,8 +217,8 @@ export default function CityBeamLanding({ locale }: { locale: CityBeamLocale }) 
   return (
     <div className="citybeam-page" lang={t.lang}>
       <header className="citybeam-header">
-        <a className="citybeam-brand" href="https://www.kreluna.it/" aria-label={t.navHome}><img src="/kreluna-logo.png" alt="" width="31" height="31" /><span>KRELUNA · CITYBEAM</span></a>
-        <nav aria-label="CityBeam"><a href="https://www.kreluna.it/">{t.navHome}</a><a href="#come-funziona">{t.navHow}</a><a href="#per-chi">{t.navFor}</a><a href={contactPath[locale]}>{t.navContact}</a></nav>
+        <a className="citybeam-brand" href={locale === "it" ? "/" : `/${locale}`} aria-label={t.navHome}><img src="/kreluna-logo.png" alt="" width="31" height="31" /><span>KRELUNA · CITYBEAM</span></a>
+        <nav aria-label="CityBeam"><a href={locale === "it" ? "/" : `/${locale}`}>{t.navHome}</a><a href="#come-funziona">{t.navHow}</a><a href="#per-chi">{t.navFor}</a><a href={contactPath[locale]}>{t.navContact}</a></nav>
         <nav className="citybeam-language" aria-label="Language">
           {(Object.keys(localePath) as CityBeamLocale[]).map((code) => <a key={code} href={localePath[code]} aria-current={code === locale ? "page" : undefined} hrefLang={code}>{code.toUpperCase()}</a>)}
         </nav>

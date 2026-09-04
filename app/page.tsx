@@ -45,7 +45,7 @@ const homeStructuredData = {
       mainEntity: [{
         "@type": "Question",
         name: "Che cos’è Kreluna?",
-        acceptedAnswer: { "@type": "Answer", text: "Kreluna è uno studio tecnologico italiano che realizza software, automazioni e progetti digitali, con attenzione al controllo umano e alla chiarezza." },
+        acceptedAnswer: { "@type": "Answer", text: "Kreluna è un ecosistema digitale italiano dedicato ad AI, automazione ed esperienze digitali." },
       }],
     },
   ],
@@ -207,11 +207,11 @@ export default function Home() {
           <a href="#come-lavoriamo">Cosa facciamo</a>
           <a href="/progetti">Progetti</a>
           <a href="/citybeam">CityBeam</a>
-          <a href="https://www.kreluna.it/azienda.html">Azienda</a>
+          <a href="https://www.kreluna.it/azienda">Azienda</a>
         </nav>
         <div className="nav-actions">
-          <a className="contact-link" href="https://www.kreluna.it/contatti.html">Contatti</a>
-          <a className="button button-small button-primary" href="https://www.kreluna.it/contatti.html">Parliamone</a>
+          <a className="contact-link" href="https://www.kreluna.it/contatti">Contatti</a>
+          <a className="button button-small button-primary" href="https://www.kreluna.it/contatti">Parliamone</a>
           <button
             ref={menuButtonRef}
             className="menu-button"
@@ -237,8 +237,8 @@ export default function Home() {
           <a href="#come-lavoriamo" onClick={() => setMenuOpen(false)}>Cosa facciamo</a>
           <a href="/progetti" onClick={() => setMenuOpen(false)}>Progetti</a>
           <a href="/citybeam" onClick={() => setMenuOpen(false)}>CityBeam</a>
-          <a href="https://www.kreluna.it/azienda.html">Azienda</a>
-          <a href="https://www.kreluna.it/contatti.html">Contatti</a>
+          <a href="https://www.kreluna.it/azienda">Azienda</a>
+          <a href="https://www.kreluna.it/contatti">Contatti</a>
         </div>
       )}
 
@@ -307,7 +307,7 @@ export default function Home() {
             </p>
             <div className="citybeam-feature-actions">
               <a className="button button-primary" href="/citybeam">Scopri CityBeam <ArrowIcon /></a>
-              <a className="button button-secondary" href="https://www.kreluna.it/contatti.html">Parla con noi</a>
+              <a className="button button-secondary" href="https://www.kreluna.it/contatti">Parla con noi</a>
             </div>
           </div>
           <div className="citybeam-feature-place"><span>Prima destinazione prevista</span><strong>Times Square · New York</strong></div>
@@ -348,7 +348,7 @@ export default function Home() {
               e supporto alle richieste interne. Fonti, permessi ed escalation devono essere
               definiti prima di collegare CRM, ERP, posta o archivi.
             </p>
-            <a href="https://www.kreluna.it/intelligenza-artificiale-aziende.html">AI per aziende <ArrowIcon /></a>
+            <a href="https://www.kreluna.it/intelligenza-artificiale-aziende">AI per aziende <ArrowIcon /></a>
           </article>
           <article className="editorial-home-card reveal">
             <span>AI · Professionisti</span>
@@ -358,7 +358,7 @@ export default function Home() {
               Pareri, atti, comunicazioni e decisioni restano al professionista, con separazione
               tra clienti e fonti verificabili.
             </p>
-            <a href="https://www.kreluna.it/ai-studi-professionali.html">AI per studi professionali <ArrowIcon /></a>
+            <a href="https://www.kreluna.it/ai-studi-professionali">AI per studi professionali <ArrowIcon /></a>
           </article>
           <article className="editorial-home-card reveal">
             <span>Workflow</span>
@@ -368,7 +368,7 @@ export default function Home() {
               standard. Prima del pilota vengono definiti baseline, arresto sicuro, approvazioni
               e costo di gestione, non soltanto il tempo che si spera di risparmiare.
             </p>
-            <a href="https://www.kreluna.it/automazione-processi-aziendali.html">Automazione dei processi <ArrowIcon /></a>
+            <a href="https://www.kreluna.it/automazione-processi-aziendali">Automazione dei processi <ArrowIcon /></a>
           </article>
         </div>
       </section>
@@ -433,7 +433,7 @@ export default function Home() {
             degli strumenti digitali: contenuti pratici con fonti istituzionali.
           </p>
         </div>
-        <a className="button button-secondary" href="https://www.kreluna.it/risorse.html">Esplora le guide <ArrowIcon /></a>
+        <a className="button button-secondary" href="https://www.kreluna.it/risorse">Esplora le guide <ArrowIcon /></a>
       </section>
 
       <section className="principles section-shell">
@@ -459,7 +459,7 @@ export default function Home() {
         <div className="eyebrow"><i /> Kreluna</div>
         <h2>Questo è solo<br />{" "}<em>l’inizio.</em></h2>
         <p>Scopri ciò che stiamo costruendo e segui l’evoluzione dell’ecosistema.</p>
-        <a className="button button-primary" href="https://www.kreluna.it/contatti.html">Parliamone <ArrowIcon /></a>
+        <a className="button button-primary" href="https://www.kreluna.it/contatti">Parliamone <ArrowIcon /></a>
       </section>
       </main>
 
@@ -476,16 +476,19 @@ export default function Home() {
           </div>
           <div className="footer-column">
             <p className="footer-heading">Kreluna</p>
-            <a href="https://www.kreluna.it/azienda.html">Azienda</a>
-            <a href="https://www.kreluna.it/risorse.html">Risorse</a>
-            <a href="https://www.kreluna.it/contatti.html">Contatti</a>
-            <a href="https://www.kreluna.it/en/" hrefLang="en" lang="en">English</a>
+            <a href="https://www.kreluna.it/azienda">Azienda</a>
+            <a href="https://www.kreluna.it/risorse">Risorse</a>
+            <a href="https://www.kreluna.it/contatti">Contatti</a>
+            <a href="/en" hrefLang="en" lang="en">English</a>
+            <a href="/fr" hrefLang="fr" lang="fr">Français</a>
+            <a href="/es" hrefLang="es" lang="es">Español</a>
+            <a href="/de" hrefLang="de" lang="de">Deutsch</a>
           </div>
           <div className="footer-column">
             <p className="footer-heading">Legale</p>
-            <a href="https://www.kreluna.it/privacy.html">Privacy</a>
-            <a href="https://www.kreluna.it/termini.html">Termini</a>
-            <a href="https://www.kreluna.it/cookie.html">Cookie</a>
+            <a href="https://www.kreluna.it/privacy">Privacy</a>
+            <a href="https://www.kreluna.it/termini">Termini</a>
+            <a href="https://www.kreluna.it/cookie">Cookie</a>
           </div>
         </div>
         <div className="footer-bottom">

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
 import CookieConsent from "./cookie-consent";
 import MetaPixel from "./meta-pixel";
+import { homeLanguages } from "./home-localized";
 import "./globals.css";
 
 const assetBasePath = process.env.NEXT_PUBLIC_ARUBA_BASE_PATH ?? "";
@@ -21,10 +22,7 @@ export const metadata: Metadata = {
   category: "technology",
   alternates: {
     canonical: `${siteUrl}/`,
-    languages: {
-      it: `${siteUrl}/`,
-      "x-default": `${siteUrl}/`,
-    },
+    languages: homeLanguages,
   },
   robots: isArubaPreview
     ? { index: false, follow: false }

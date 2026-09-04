@@ -1,3 +1,3 @@
-import ProjectHub, { projectHubMetadata } from "../project-hub";
-export const metadata = projectHubMetadata("fr");
-export default function Page() { return <ProjectHub locale="fr" />; }
+import Home, { homeMetadata } from "../home-localized";
+export const metadata = homeMetadata("fr");
+export default function Page() { return <Home locale="fr" />; }
