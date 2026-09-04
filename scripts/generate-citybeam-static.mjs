@@ -37,7 +37,8 @@ css.walkRules(rule => {
 });
 css.walkAtRules(rule => { if (rule.name.endsWith('keyframes') || (rule.nodes && !rule.nodes.length)) rule.remove(); });
 css.walkComments(comment => comment.remove());
-const styles = css.toString() + '\n[hidden]{display:none!important}';
+const styles = css.toString() + '\n[hidden]{display:none!important}.cookie-banner{font-family:Arial,sans-serif}';
+const consentScript = await readFile('public/assets/citybeam-consent.js', 'utf8');
 await mkdir('public/assets', { recursive: true });
 for (const locale of locales) {
   const m = landing.cityBeamMetadata(locale), c = copies[locale];
@@ -45,6 +46,7 @@ for (const locale of locales) {
   const policy = locale === 'en' ? '/en/cookies' : '/cookie';
   const html = `<!doctype html><html lang="${locale}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(m.title)}</title><meta name="description" content="${esc(m.description)}"><meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="${m.alternates.canonical}">${Object.entries(m.alternates.languages).map(([lang,url])=>`<link rel="alternate" hreflang="${lang}" href="${url}">`).join('')}<meta property="og:title" content="${esc(m.title)}"><meta property="og:description" content="${esc(m.description)}"><meta property="og:url" content="${m.alternates.canonical}"><meta property="og:site_name" content="Kreluna"><meta property="og:type" content="website"><meta property="og:locale" content="${m.openGraph.locale}"><meta property="og:image" content="${m.openGraph.images[0].url}"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(m.title)}"><meta name="twitter:description" content="${esc(m.description)}"><meta name="twitter:image" content="${m.openGraph.images[0].url}"><link rel="icon" href="/favicon-32.png"><meta name="theme-color" content="#050711"><link rel="preload" href="/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/fonts/newsreader-500-italic.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin><style>${styles}</style></head><body>${bodies[locale]}<button class="cookie-settings-trigger" id="cookie-settings" type="button">${esc(c.settings)}</button><aside class="cookie-banner" id="cookie-banner" aria-label="${esc(c.label)}" hidden><p>${esc(c.text)} <a href="${policy}">${esc(c.policy)}</a>.</p><div><button type="button" data-choice="technical">${esc(c.necessary)}</button><button type="button" class="accept" data-choice="accepted">${esc(c.accept)}</button></div></aside><script defer src="/assets/citybeam-consent.js"></script><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"563650c804544d489377014a00cc36f7"}'></script></body></html>`;
   await mkdir(`public${locale === 'it' ? '' : '/' + locale}`, { recursive: true });
-  await writeFile(`public${path}.html`, html);
+  // Resolve stored consent before first paint, not after an extra network round trip.
+  await writeFile(`public${path}.html`, html.replace('<script defer src="/assets/citybeam-consent.js"></script>', `<script id="citybeam-consent">${consentScript}</script>`));
 }
 console.log(`Generated five static CityBeam pages; CSS ${styles.length} bytes, no framework scripts.`);

@@ -13,6 +13,8 @@ test('all CityBeam locales retain content, SEO and navigation without hydration'
     assert.equal((html.match(/hreflang=/g) || []).length, 6);
     assert.ok(!html.includes('/_next/static'));
     assert.ok(!html.includes('vinext.navigationRuntime'));
+    assert.match(html, /<script id="citybeam-consent">/);
+    assert.ok(!html.includes('defer src="/assets/citybeam-consent.js"'));
     assert.match(html, /image\/avif/);
     assert.match(html, /id="cookie-banner"[^>]* hidden/);
     assert.match(html, /@media \(max-width: 700px\)/);
