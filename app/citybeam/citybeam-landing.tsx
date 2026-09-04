@@ -220,7 +220,7 @@ export default function CityBeamLanding({ locale }: { locale: CityBeamLocale }) 
   return (
     <div className="citybeam-page" lang={t.lang}>
       <header className="citybeam-header">
-        <a className="citybeam-brand" href={locale === "it" ? "/" : `/${locale}`} aria-label={t.navHome}><img src="/kreluna-logo.png" alt="" width="31" height="31" /><span>KRELUNA · CITYBEAM</span></a>
+        <a className="citybeam-brand" href={locale === "it" ? "/" : `/${locale}`} aria-label={t.navHome}><img src="/kreluna-logo-64.webp" alt="" width="31" height="31" /><span>KRELUNA · CITYBEAM</span></a>
         <nav aria-label="CityBeam"><a href={locale === "it" ? "/" : `/${locale}`}>{t.navHome}</a><a href="#come-funziona">{t.navHow}</a><a href="#per-chi">{t.navFor}</a><a href={contactPath[locale]}>{t.navContact}</a></nav>
         <nav className="citybeam-language" aria-label="Language">
           {(Object.keys(localePath) as CityBeamLocale[]).map((code) => <a key={code} href={localePath[code]} aria-current={code === locale ? "page" : undefined} hrefLang={code}>{code.toUpperCase()}</a>)}
@@ -230,7 +230,7 @@ export default function CityBeamLanding({ locale }: { locale: CityBeamLocale }) 
         <section className="citybeam-hero">
           <div className="citybeam-copy"><span className="citybeam-kicker">{t.kicker}</span><h1>{t.h1a} <em>{t.h1b}</em>{t.h1c}</h1><p>{t.intro}</p>
             <div className="citybeam-actions"><a className="button citybeam-primary" href={contactPath[locale]}>{t.info} <span aria-hidden="true">↗</span></a><a className="button button-secondary" href="#come-funziona">{t.discover}</a></div><p className="citybeam-note">{t.disclosure}</p></div>
-          <figure className="citybeam-visual"><img src="/citybeam-hero-1200.webp" srcSet="/citybeam-hero-640.webp 640w, /citybeam-hero-1200.webp 1200w" sizes="(max-width: 900px) 90vw, 52vw" alt={t.title} width="1807" height="870" fetchPriority="high" decoding="async" /><figcaption><span>{t.destination}</span><strong>Times Square · New York</strong></figcaption></figure>
+          <figure className="citybeam-visual"><picture><source type="image/avif" srcSet="/citybeam-hero-640.avif 640w, /citybeam-hero-1200.avif 1200w" sizes="(max-width: 980px) 90vw, 52vw" /><img src="/citybeam-hero-1200.webp" srcSet="/citybeam-hero-640.webp 640w, /citybeam-hero-1200.webp 1200w" sizes="(max-width: 980px) 90vw, 52vw" alt={t.title} width="1807" height="870" decoding="async" /></picture><figcaption><span>{t.destination}</span><strong>Times Square · New York</strong></figcaption></figure>
         </section>
         <section className="citybeam-section" id="come-funziona"><div className="citybeam-section-heading"><span className="citybeam-kicker">{t.howKicker}</span><h2>{t.howTitle}</h2><p>{t.howIntro}</p></div>
           <ol className="citybeam-steps">{t.steps.map(([title, text], index) => <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><h3>{title}</h3><p>{text}</p></li>)}</ol></section>

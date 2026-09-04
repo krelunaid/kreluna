@@ -377,6 +377,8 @@ h1 em, h2 em { font-family: var(--serif); font-weight: 500; background: linear-g
 .citybeam-visual img { width:100%; min-height:590px; display:block; object-fit:cover; }
 .citybeam-visual figcaption { position:absolute; left:22px; right:22px; bottom:20px; display:flex; justify-content:space-between; gap:20px; padding:13px 15px; border:1px solid rgba(255,255,255,.12); border-radius:13px; color:#d9e6ff; background:rgba(5,9,23,.76); backdrop-filter:blur(14px); font:.62rem var(--mono); }
 .citybeam-section { max-width:1450px; margin:0 auto; padding:120px max(5vw,24px); }
+/* Keep off-screen sections searchable while deferring their layout and paint. */
+.citybeam-section { content-visibility:auto; contain-intrinsic-size:auto 700px; }
 .citybeam-section-heading { max-width:840px; }
 .citybeam-section-heading h2 { margin-top:18px; font-size:clamp(2.5rem,4.8vw,5rem); line-height:1.02; letter-spacing:-.05em; }
 .citybeam-section-heading p { margin-top:22px; color:#9fa8c1; line-height:1.75; }
