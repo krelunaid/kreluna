@@ -1,0 +1,112 @@
+[
+  {
+    "id": "business",
+    "paths": {
+      "it": "/intelligenza-artificiale-aziende",
+      "en": "/en/ai-for-business",
+      "fr": "/fr/ia-entreprises",
+      "es": "/es/ia-empresas",
+      "de": "/de/ki-unternehmen"
+    }
+  },
+  {
+    "id": "professional",
+    "paths": {
+      "it": "/ai-studi-professionali",
+      "en": "/en/ai-for-professional-services",
+      "fr": "/fr/ia-professions-liberales",
+      "es": "/es/ia-profesionales",
+      "de": "/de/ki-freiberufler"
+    }
+  },
+  {
+    "id": "automation",
+    "paths": {
+      "it": "/automazione-processi-aziendali",
+      "en": "/en/business-process-automation",
+      "fr": "/fr/automatisation-processus",
+      "es": "/es/automatizacion-procesos",
+      "de": "/de/prozessautomatisierung"
+    }
+  },
+  {
+    "id": "about",
+    "paths": {
+      "it": "/azienda",
+      "en": "/en/about",
+      "fr": "/fr/a-propos",
+      "es": "/es/empresa",
+      "de": "/de/ueber-uns"
+    }
+  },
+  {
+    "id": "contact",
+    "paths": {
+      "it": "/contatti",
+      "en": "/en/contact",
+      "fr": "/fr/contact",
+      "es": "/es/contacto",
+      "de": "/de/kontakt"
+    }
+  },
+  {
+    "id": "accounting",
+    "paths": {
+      "it": "/ai-per-commercialisti",
+      "en": "/en/ai-for-accounting-firms",
+      "fr": "/fr/ia-cabinets-comptables",
+      "es": "/es/ia-asesorias-contables",
+      "de": "/de/ki-steuerkanzleien"
+    }
+  },
+  {
+    "id": "legal",
+    "paths": {
+      "it": "/ai-per-studi-legali",
+      "en": "/en/ai-for-law-firms",
+      "fr": "/fr/ia-cabinets-avocats",
+      "es": "/es/ia-despachos-abogados",
+      "de": "/de/ki-anwaltskanzleien"
+    }
+  },
+  {
+    "id": "payroll",
+    "paths": {
+      "it": "/ai-consulenti-del-lavoro",
+      "en": "/en/ai-for-payroll-hr-consultancies",
+      "fr": "/fr/ia-paie-rh",
+      "es": "/es/ia-nominas-rrhh",
+      "de": "/de/ki-lohn-personalberatung"
+    }
+  },
+  {
+    "id": "resources",
+    "paths": {
+      "it": "/risorse",
+      "en": "/en/resources",
+      "fr": "/fr/ressources",
+      "es": "/es/recursos",
+      "de": "/de/ratgeber"
+    }
+  },
+  {
+    "id": "confidential",
+    "paths": {
+      "it": "/ai-studi-professionali-dati-riservati",
+      "en": "/en/ai-professional-services-confidential-data",
+      "fr": "/fr/ia-donnees-confidentielles",
+      "es": "/es/ia-datos-confidenciales",
+      "de": "/de/ki-vertrauliche-daten"
+    }
+  },
+  {
+    "id": "priorities",
+    "paths": {
+      "it": "/processi-aziendali-da-automatizzare",
+      "en": "/en/which-business-processes-to-automate-first",
+      "fr": "/fr/quels-processus-automatiser",
+      "es": "/es/que-procesos-automatizar",
+      "de": "/de/welche-prozesse-automatisieren"
+    }
+  }
+]

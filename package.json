@@ -6,7 +6,7 @@
     "node": ">=22.13.0"
   },
   "scripts": {
-    "prebuild": "node scripts/generate-editorial-guide.mjs && node scripts/generate-business-software-guide.mjs && node scripts/normalize-seo-urls.mjs",
+    "prebuild": "node scripts/generate-editorial-guide.mjs && node scripts/generate-business-software-guide.mjs && node scripts/generate-international-pages.mjs && node scripts/normalize-seo-urls.mjs",
     "dev": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext dev",
     "build": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext build",
     "build:aruba": "KRELUNA_ARUBA_EXPORT=1 KRELUNA_ARUBA_BASE_PATH=/anteprima NEXT_PUBLIC_ARUBA_BASE_PATH=/anteprima WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext build",

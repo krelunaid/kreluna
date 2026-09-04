@@ -41,10 +41,10 @@ export function projectHubMetadata(locale: ProjectHubLocale): Metadata {
 export default function ProjectHub({ locale }: { locale: ProjectHubLocale }) {
   const t = copy[locale];
   const canonical = `${siteUrl}${projectHubPaths[locale]}`;
-  const contactHref = locale === "it" ? "/contatti" : locale === "en" ? "/en/contact" : `mailto:andrea@kreluna.it?subject=${encodeURIComponent(`Kreluna ${locale.toUpperCase()}`)}`;
+  const contactHref = {it:"/contatti",en:"/en/contact",fr:"/fr/contact",es:"/es/contacto",de:"/de/kontakt"}[locale];
   const projects = [
-    { name: "CityBeam", status: t.cityStatus, category: t.cityCategory, tagline: t.cityTagline, href: cityBeamPaths[locale], image: "/citybeam-hero.png", slug: "citybeam" },
-    { name: "Velvet Table", status: t.velvetStatus, category: t.velvetCategory, tagline: t.velvetTagline, href: velvetPaths[locale], image: "/velvet-table/hero.jpg", slug: "velvet-table" },
+    { name: "CityBeam", status: t.cityStatus, category: t.cityCategory, tagline: t.cityTagline, href: cityBeamPaths[locale], image: "/citybeam-hero-1200.webp", slug: "citybeam" },
+    { name: "Velvet Table", status: t.velvetStatus, category: t.velvetCategory, tagline: t.velvetTagline, href: velvetPaths[locale], image: "/velvet-table/hero-1200.webp", slug: "velvet-table" },
   ];
   const structuredData = { "@context": "https://schema.org", "@graph": [
     { "@type": "Organization", "@id": `${siteUrl}/#organization`, name: "Kreluna", url: `${siteUrl}/`, logo: `${siteUrl}/kreluna-logo.png` },

@@ -58,7 +58,7 @@ export function homeMetadata(locale: Locale): Metadata {
 export default function LocalizedHome({ locale }: { locale: Locale }) {
   const t = copy[locale];
   const prefix = `/${locale}`;
-  const contact = locale === 'en' ? '/en/contact' : 'mailto:andrea@kreluna.it';
+  const contact = {en:'/en/contact',fr:'/fr/contact',es:'/es/contacto',de:'/de/kontakt'}[locale];
   const data = {'@context':'https://schema.org','@graph':[
     {'@type':'Organization','@id':'https://www.kreluna.it/#organization',name:'Kreluna',url:'https://www.kreluna.it/',logo:'https://www.kreluna.it/kreluna-logo.png'},
     {'@type':'WebPage','@id':`${homeLanguages[locale]}#webpage`,url:homeLanguages[locale],name:t.title,description:t.description,inLanguage:locale,about:{'@id':'https://www.kreluna.it/#organization'}},

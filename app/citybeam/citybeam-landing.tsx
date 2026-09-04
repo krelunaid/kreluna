@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import type { Metadata } from "next";
+import { cityBeamFaq } from "./citybeam-faq";
 
 export type CityBeamLocale = "it" | "en" | "fr" | "es" | "de";
 
@@ -15,9 +16,9 @@ const localePath: Record<CityBeamLocale, string> = {
 const contactPath: Record<CityBeamLocale, string> = {
   it: "/contatti",
   en: "/en/contact",
-  fr: "mailto:andrea@kreluna.it?subject=CityBeam%20France",
-  es: "mailto:andrea@kreluna.it?subject=CityBeam%20Espana",
-  de: "mailto:andrea@kreluna.it?subject=CityBeam%20Deutschland",
+  fr: "/fr/contact",
+  es: "/es/contacto",
+  de: "/de/kontakt",
 };
 
 const openGraphLocale: Record<CityBeamLocale, string> = {
@@ -30,7 +31,7 @@ const openGraphLocale: Record<CityBeamLocale, string> = {
 
 const translations = {
   it: {
-    lang: "it-IT", title: "CityBeam | Il tuo momento sui grandi schermi del mondo",
+    lang: "it-IT", title: "CityBeam | Pubblicità a Times Square e sui maxi-schermi",
     description: "CityBeam è il progetto Kreluna in pre-lancio per rendere più semplice la richiesta di spot su maxi-schermi iconici, iniziando da Times Square.",
     navHome: "Home", navHow: "Come funziona", navFor: "Per chi", navContact: "Contatti", kicker: "CityBeam · progetto in fase di lancio",
     h1a: "Il tuo momento sui", h1b: "grandi schermi", h1c: " del mondo.",
@@ -47,7 +48,7 @@ const translations = {
     talk: "Parla con Kreluna", provisional: "CityBeam è un nome provvisorio",
   },
   en: {
-    lang: "en-GB", title: "CityBeam | Your moment on the world’s biggest screens",
+    lang: "en-GB", title: "CityBeam | Times Square and digital billboard advertising",
     description: "CityBeam is Kreluna’s pre-launch project designed to simplify access to iconic digital billboards, starting with Times Square.",
     navHome: "Home", navHow: "How it works", navFor: "Who it’s for", navContact: "Contact", kicker: "CityBeam · pre-launch project",
     h1a: "Your moment on the", h1b: "world’s biggest screens", h1c: ".",
@@ -64,7 +65,7 @@ const translations = {
     talk: "Talk to Kreluna", provisional: "CityBeam is a working name",
   },
   fr: {
-    lang: "fr-FR", title: "CityBeam | Votre moment sur les plus grands écrans du monde",
+    lang: "fr-FR", title: "CityBeam | Publicité à Times Square et écrans géants",
     description: "CityBeam est le projet Kreluna en pré-lancement pour simplifier l’accès aux écrans numériques iconiques, en commençant par Times Square.",
     navHome: "Accueil", navHow: "Fonctionnement", navFor: "Pour qui", navContact: "Contact", kicker: "CityBeam · projet en pré-lancement",
     h1a: "Votre moment sur les", h1b: "plus grands écrans", h1c: " du monde.",
@@ -81,7 +82,7 @@ const translations = {
     talk: "Parler à Kreluna", provisional: "CityBeam est un nom provisoire",
   },
   es: {
-    lang: "es-ES", title: "CityBeam | Tu momento en las pantallas más grandes del mundo",
+    lang: "es-ES", title: "CityBeam | Publicidad en Times Square y pantallas gigantes",
     description: "CityBeam es el proyecto de Kreluna en prelanzamiento para simplificar el acceso a pantallas digitales icónicas, empezando por Times Square.",
     navHome: "Inicio", navHow: "Cómo funciona", navFor: "Para quién", navContact: "Contacto", kicker: "CityBeam · proyecto en prelanzamiento",
     h1a: "Tu momento en las", h1b: "pantallas más grandes", h1c: " del mundo.",
@@ -98,7 +99,7 @@ const translations = {
     talk: "Habla con Kreluna", provisional: "CityBeam es un nombre provisional",
   },
   de: {
-    lang: "de-DE", title: "CityBeam | Dein Moment auf den größten Bildschirmen der Welt",
+    lang: "de-DE", title: "CityBeam | Werbung am Times Square und auf Großbildschirmen",
     description: "CityBeam ist Krelunas Pre-Launch-Projekt für einen einfacheren Zugang zu ikonischen Digitalflächen – beginnend am Times Square.",
     navHome: "Startseite", navHow: "So funktioniert es", navFor: "Für wen", navContact: "Kontakt", kicker: "CityBeam · Projekt vor dem Start",
     h1a: "Dein Moment auf den", h1b: "größten Bildschirmen", h1c: " der Welt.",
@@ -157,10 +158,12 @@ export function cityBeamMetadata(locale: CityBeamLocale): Metadata {
 
 export default function CityBeamLanding({ locale }: { locale: CityBeamLocale }) {
   const t = translations[locale];
+  const faq = cityBeamFaq[locale];
   const canonical = `${siteUrl}${localePath[locale]}`;
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
+      { "@type": "FAQPage", "@id": `${canonical}#faq`, inLanguage: locale, mainEntity: faq.questions.map(([question, answer]) => ({ "@type": "Question", name: question, acceptedAnswer: { "@type": "Answer", text: answer } })) },
       {
         "@type": "Organization",
         "@id": `${siteUrl}/#organization`,
@@ -227,11 +230,12 @@ export default function CityBeamLanding({ locale }: { locale: CityBeamLocale }) 
         <section className="citybeam-hero">
           <div className="citybeam-copy"><span className="citybeam-kicker">{t.kicker}</span><h1>{t.h1a} <em>{t.h1b}</em>{t.h1c}</h1><p>{t.intro}</p>
             <div className="citybeam-actions"><a className="button citybeam-primary" href={contactPath[locale]}>{t.info} <span aria-hidden="true">↗</span></a><a className="button button-secondary" href="#come-funziona">{t.discover}</a></div><p className="citybeam-note">{t.disclosure}</p></div>
-          <figure className="citybeam-visual"><img src="/citybeam-hero.png" alt={t.title} width="1807" height="870" /><figcaption><span>{t.destination}</span><strong>Times Square · New York</strong></figcaption></figure>
+          <figure className="citybeam-visual"><img src="/citybeam-hero-1200.webp" srcSet="/citybeam-hero-640.webp 640w, /citybeam-hero-1200.webp 1200w" sizes="(max-width: 900px) 90vw, 52vw" alt={t.title} width="1807" height="870" fetchPriority="high" decoding="async" /><figcaption><span>{t.destination}</span><strong>Times Square · New York</strong></figcaption></figure>
         </section>
         <section className="citybeam-section" id="come-funziona"><div className="citybeam-section-heading"><span className="citybeam-kicker">{t.howKicker}</span><h2>{t.howTitle}</h2><p>{t.howIntro}</p></div>
           <ol className="citybeam-steps">{t.steps.map(([title, text], index) => <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><h3>{title}</h3><p>{text}</p></li>)}</ol></section>
         <section className="citybeam-section citybeam-use-cases" id="per-chi"><article className="citybeam-case"><span>{t.business}</span><h3>{t.businessTitle}</h3><p>{t.businessText}</p></article><article className="citybeam-case"><span>{t.personal}</span><h3>{t.personalTitle}</h3><p>{t.personalText}</p></article></section>
+        <section className="citybeam-section" id="faq"><div className="citybeam-section-heading"><h2>{faq.title}</h2></div><div className="home-faq">{faq.questions.map(([question, answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}</div></section>
         <section className="citybeam-status"><span className="citybeam-kicker">{t.statusKicker}</span><h2>{t.statusTitle}</h2><p>{t.statusText}</p><a className="button citybeam-primary" href={contactPath[locale]}>{t.talk} <span aria-hidden="true">↗</span></a></section>
       </main>
       <footer className="citybeam-footer"><span>© 2026 Kreluna · {t.provisional}</span><span>P. IVA 02114130475 · REA PT-622714</span></footer>

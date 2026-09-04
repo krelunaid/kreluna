@@ -1,34 +1,30 @@
 # Kreluna
 
-> Kreluna è un progetto italiano in sviluppo dedicato a software, intelligenza artificiale, automazione, data protection ed esperienze digitali.
+> Kreluna è un progetto italiano dedicato a software, intelligenza artificiale, automazione ed esperienze digitali. CityBeam è in pre-lancio; Velvet Table è un concept in sviluppo.
 
 Sito ufficiale: https://www.kreluna.it/
-Contatti: https://www.kreluna.it/contatti.html
+Contatti: https://www.kreluna.it/contatti
 Gestore: Kreluna, impresa individuale
 P. IVA: 02114130475
 REA: PT-622714
-Sede pubblicata: Italia, Italia
+Paese: Italia
 
 ## Progetti principali
 
-- Kreluna AI: https://www.kreluna.it/intelligenza-artificiale-aziende.html
-- Kreluna Office: https://www.kreluna.it/ai-studi-professionali.html
-- Helix: https://helix.kreluna.it/
-- Velvet Table (Italiano): https://www.kreluna.it/velvet-table
-- Velvet Table (English): https://www.kreluna.it/en/velvet-table
-- Velvet Table (Français): https://www.kreluna.it/fr/velvet-table
-- Velvet Table (Español): https://www.kreluna.it/es/velvet-table
-- Velvet Table (Deutsch): https://www.kreluna.it/de/velvet-table
-
-## Helix
-
-Helix è lo strumento Kreluna che crea siti, app e software su misura con l’intelligenza artificiale. Velvet Table è il primo progetto costruito con Helix.
+- [CityBeam](https://www.kreluna.it/citybeam): richieste di pubblicità su maxi-schermi, con Times Square come prima destinazione prevista. Prezzi, disponibilità e accordi con gli operatori sono ancora in verifica.
+- [CityBeam in English](https://www.kreluna.it/en/citybeam): project status, content requirements and proof-of-play enquiries.
+- [Progetti pubblici](https://www.kreluna.it/progetti): stato dei progetti Kreluna.
+- [Velvet Table (Italiano)](https://www.kreluna.it/velvet-table)
+- [Velvet Table (English)](https://www.kreluna.it/en/velvet-table)
+- [Velvet Table (Français)](https://www.kreluna.it/fr/velvet-table)
+- [Velvet Table (Español)](https://www.kreluna.it/es/velvet-table)
+- [Velvet Table (Deutsch)](https://www.kreluna.it/de/velvet-table)
 
 ## Velvet Table
 
 Velvet Table è un concept Kreluna creato con Helix e in sviluppo per trovare e prenotare ristoranti partendo dall’atmosfera desiderata, dall’occasione e dalla compagnia. Non è ancora un servizio attivo. Funzioni, copertura geografica, locali disponibili e modalità di prenotazione saranno comunicate quando confermate.
 
-Intenzioni descritte nelle pagine ufficiali: serata romantica, primo appuntamento, anniversario e occasione speciale, tavolo panoramico, cena in giardino, cena tranquilla o di lavoro. Le versioni inglese, francese, spagnola e tedesca contengono testi localizzati equivalenti, non semplici traduzioni automatiche.
+Intenzioni descritte nelle pagine ufficiali: serata romantica, primo appuntamento, anniversario e occasione speciale, tavolo panoramico, cena in giardino, cena tranquilla o di lavoro.
 
 ## Stato e accuratezza
 
@@ -36,15 +32,15 @@ Kreluna è in sviluppo attivo. Non assumere che prodotti, funzioni, integrazioni
 
 ## Risorse
 
-- Guide su AI, automazione e prodotti digitali: https://www.kreluna.it/risorse.html
-- Guida alla scelta di un professionista web (Italiano): https://www.kreluna.it/it/guide/come-scegliere-professionista-sito-web/
-- Guida alla scelta del software gestionale (Italiano): https://www.kreluna.it/it/guide/come-scegliere-software-gestionale-piccola-impresa/
-- Business software selection guide (English): https://www.kreluna.it/en/guides/how-to-choose-small-business-software/
-- Guía para elegir software de gestión (Español): https://www.kreluna.it/es/guias/como-elegir-software-gestion-pequena-empresa/
-- Guide de choix d'un logiciel de gestion (Français): https://www.kreluna.it/fr/guides/choisir-logiciel-gestion-petite-entreprise/
-- Ratgeber zur Auswahl von Unternehmenssoftware (Deutsch): https://www.kreluna.it/de/ratgeber/software-kleine-unternehmen-auswaehlen/
-- Website professional selection guide (English): https://www.kreluna.it/en/guides/how-to-choose-a-website-professional/
-- Guía para elegir un profesional web (Español): https://www.kreluna.it/es/guias/como-elegir-profesional-pagina-web/
-- Guide pour choisir un professionnel web (Français): https://www.kreluna.it/fr/guides/choisir-professionnel-creation-site-internet/
-- Ratgeber zur Auswahl eines Website-Profis (Deutsch): https://www.kreluna.it/de/ratgeber/zuverlaessigen-webentwickler-auswaehlen/
-- Informazioni sul progetto: https://www.kreluna.it/azienda.html
+- [Guide su AI, automazione e prodotti digitali](https://www.kreluna.it/risorse)
+- [Guida alla scelta di un professionista web (Italiano)](https://www.kreluna.it/it/guide/come-scegliere-professionista-sito-web/)
+- [Guida alla scelta del software gestionale (Italiano)](https://www.kreluna.it/it/guide/come-scegliere-software-gestionale-piccola-impresa/)
+- [Business software selection guide (English)](https://www.kreluna.it/en/guides/how-to-choose-small-business-software/)
+- [Guía para elegir software de gestión (Español)](https://www.kreluna.it/es/guias/como-elegir-software-gestion-pequena-empresa/)
+- [Guide de choix d'un logiciel de gestion (Français)](https://www.kreluna.it/fr/guides/choisir-logiciel-gestion-petite-entreprise/)
+- [Ratgeber zur Auswahl von Unternehmenssoftware (Deutsch)](https://www.kreluna.it/de/ratgeber/software-kleine-unternehmen-auswaehlen/)
+- [Website professional selection guide (English)](https://www.kreluna.it/en/guides/how-to-choose-a-website-professional/)
+- [Guía para elegir un profesional web (Español)](https://www.kreluna.it/es/guias/como-elegir-profesional-pagina-web/)
+- [Guide pour choisir un professionnel web (Français)](https://www.kreluna.it/fr/guides/choisir-professionnel-creation-site-internet/)
+- [Ratgeber zur Auswahl eines Website-Profis (Deutsch)](https://www.kreluna.it/de/ratgeber/zuverlaessigen-webentwickler-auswaehlen/)
+- [Informazioni sul progetto](https://www.kreluna.it/azienda)

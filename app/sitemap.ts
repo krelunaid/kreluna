@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { homeLanguages } from "./home-localized";
+import internationalRoutes from "../content/international-routes.json";
 
 const SITE_URL = "https://www.kreluna.it";
 
@@ -136,28 +137,21 @@ const businessSoftwareGuideLanguages = {
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const localizedPages = pages.flatMap((page) => {
+    const cluster = internationalRoutes.find((entry) => entry.paths.it === page.it);
     const languages = {
       it: absoluteUrl(page.it),
       en: absoluteUrl(page.en),
+      ...Object.fromEntries(Object.entries(cluster?.paths ?? {}).map(([lang, path]) => [lang, absoluteUrl(path)])),
       "x-default": absoluteUrl(page.it),
     };
 
-    return [
-      {
-        url: languages.it,
-        lastModified: page.lastModifiedIt ?? "2026-08-23",
+    return Object.entries(languages).filter(([lang]) => lang !== "x-default").map(([, url]) => ({
+        url,
+        lastModified: "2026-09-05",
         changeFrequency: page.changeFrequency,
         priority: page.priority,
         alternates: { languages },
-      },
-      {
-        url: languages.en,
-        lastModified: page.lastModifiedEn ?? "2026-08-23",
-        changeFrequency: page.changeFrequency,
-        priority: page.priority,
-        alternates: { languages },
-      },
-    ];
+    }));
   });
 
   return [
