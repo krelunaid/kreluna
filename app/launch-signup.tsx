@@ -8,7 +8,7 @@ export const launchCopy = {
 };
 export default function LaunchSignup({project, locale}:{project:'citybeam'|'velvet-table';locale:ProjectLocale}) {
   const t=launchCopy[locale], name=project==='citybeam'?'CityBeam':'Velvet Table';
-  return <section className={`launch-signup ${project}`} id="avvisami" aria-labelledby="launch-title">
+  return <section className={`launch-signup launch-signup--${project}`} id="avvisami" aria-labelledby="launch-title">
     <div><span className="launch-state">{name} · {t.state}</span><h2 id="launch-title">{t.title}</h2><p>{t.intro} {name}.</p></div>
     <form data-launch-signup data-busy={t.busy} data-success={t.success} data-error={t.error} action="/api/launch-waitlist" method="post">
       <input type="hidden" name="project" value={project}/><input type="hidden" name="locale" value={locale}/>

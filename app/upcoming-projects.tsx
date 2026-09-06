@@ -12,7 +12,7 @@ export default function UpcomingProjects({ locale = 'it' }: { locale?: ProjectLo
   return <section className="upcoming-projects section-shell" id="products" aria-labelledby="upcoming-title">
     <header><h2 id="upcoming-title">{t[0]}</h2><p>{t[1]}</p></header>
     <div className="upcoming-grid">
-      {[{ name: 'CityBeam', slug: 'citybeam', image: '/citybeam-hero-640.webp', status: t[2], text: t[4] }, { name: 'Velvet Table', slug: 'velvet-table', image: '/velvet-table/hero-640.webp', status: t[3], text: t[5] }].map(project => <article className={`upcoming-card ${project.slug}`} key={project.slug}>
+      {[{ name: 'CityBeam', slug: 'citybeam', image: '/citybeam-hero-640.webp', status: t[2], text: t[4] }, { name: 'Velvet Table', slug: 'velvet-table', image: '/velvet-table/hero-640.webp', status: t[3], text: t[5] }].map(project => <article className={`upcoming-card upcoming-card--${project.slug}`} key={project.slug}>
         <img src={project.image} alt="" width="640" height="360" loading="lazy" decoding="async" />
         <div className="upcoming-card-body"><div className="upcoming-card-heading"><h3>{project.name}</h3><span>{project.status}</span></div><p>{project.text}</p><a href={`${prefix}/${project.slug}`}>{t[6]} <span aria-hidden="true">↗</span><span className="sr-only"> — {project.name}</span></a></div>
       </article>)}

@@ -93,9 +93,9 @@ test("renders the dedicated Velvet Table concept page", async () => {
   assert.match(html, /Sono un ristoratore/i);
   assert.match(html, /Avvisami al lancio/i);
   assert.match(html, /Informativa privacy/i);
-  assert.match(html, /src="\/velvet-table\/hero\.jpg"/i);
-  assert.match(html, /src="\/velvet-table\/view-window\.jpg"/i);
-  assert.match(html, /src="\/velvet-table\/garden-restaurant\.jpg"/i);
+  assert.match(html, /src="\/velvet-table\/hero-1200\.webp"/i);
+  assert.match(html, /src="\/velvet-table\/view-window-1200\.webp"/i);
+  assert.match(html, /src="\/velvet-table\/garden-restaurant-1200\.webp"/i);
   assert.match(html, /Il ristorante giusto per la serata che immagini/i);
   assert.match(html, /Serata romantica/i);
   assert.match(html, /Primo appuntamento/i);
@@ -128,7 +128,7 @@ test("renders localized Velvet Table pages with reciprocal language signals", as
     const response = await render(path);
     assert.equal(response.status, 200, path);
     const html = await response.text();
-    assert.match(html, new RegExp(phrase, "i"));
+    assert.match(html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " "), new RegExp(phrase, "i"));
     assert.match(html, new RegExp(`lang="${locale}"`, "i"));
     assert.match(html, /hreflang="it"/i);
     assert.match(html, /hreflang="en"/i);
@@ -154,7 +154,7 @@ test("renders CityBeam in five languages with complete reciprocal SEO signals", 
     assert.equal(response.status, 200, path);
     const html = await response.text();
     assert.match(html, new RegExp(`<html lang="${language}"`, "i"));
-    assert.match(html, new RegExp(phrase, "i"));
+    assert.match(html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " "), new RegExp(phrase, "i"));
     assert.match(html, new RegExp(`rel="canonical" href="https://www\\.kreluna\\.it${path}"`, "i"));
     assert.match(html, new RegExp(`property="og:locale" content="${ogLocale}"`, "i"));
     assert.match(html, /name="robots" content="index, follow"/i);
@@ -163,7 +163,8 @@ test("renders CityBeam in five languages with complete reciprocal SEO signals", 
     }
     assert.match(html, /<script id="citybeam-structured-data" type="application\/ld\+json">/i);
     assert.match(html, /"@type":"Service"/);
-  assert.match(html, /class="citybeam-brand" href="https:\/\/www\.kreluna\.it\/"/i);
+    const home = path === '/citybeam' ? '/' : path.replace('/citybeam', '');
+    assert.ok(html.includes(`class="citybeam-brand" href="${home}"`));
     assert.equal((html.match(/<h1\b/gi) ?? []).length, 1);
   }
 });
@@ -244,7 +245,7 @@ test("publishes canonical localized URLs in the sitemap", async () => {
   assert.match(response.headers.get("content-type") ?? "", /(?:application|text)\/xml/i);
 
   const sitemap = await response.text();
-  assert.equal((sitemap.match(/<url>/gi) ?? []).length, 48);
+  assert.equal((sitemap.match(/<url>/gi) ?? []).length, 85);
   assert.match(sitemap, /<loc>https:\/\/www\.kreluna\.it<\/loc>/i);
   assert.match(sitemap, /<loc>https:\/\/www\.kreluna\.it\/en<\/loc>/i);
   assert.match(sitemap, /<loc>https:\/\/www\.kreluna\.it\/fr<\/loc>/i);
@@ -259,9 +260,9 @@ test("publishes canonical localized URLs in the sitemap", async () => {
   assert.doesNotMatch(sitemap, /<loc>https:\/\/www\.kreluna\.it\/risonix<\/loc>/i);
   assert.doesNotMatch(sitemap, /cybersecurity|sme-cybersecurity/i);
   assert.match(sitemap, /hreflang="de" href="https:\/\/www\.kreluna\.it\/de\/velvet-table"/i);
-  assert.match(sitemap, /hreflang="it" href="https:\/\/www\.kreluna\.it"/i);
+  assert.match(sitemap, /hreflang="it" href="https:\/\/www\.kreluna\.it\/"/i);
   assert.match(sitemap, /hreflang="en" href="https:\/\/www\.kreluna\.it\/en"/i);
-  assert.match(sitemap, /hreflang="x-default" href="https:\/\/www\.kreluna\.it"/i);
+  assert.match(sitemap, /hreflang="x-default" href="https:\/\/www\.kreluna\.it\/"/i);
   assert.doesNotMatch(sitemap, /kreluna-ai/i);
   assert.doesNotMatch(sitemap, /privacy|termini|cookie/i);
   assert.doesNotMatch(sitemap, /<loc>[^<]*#/i);
