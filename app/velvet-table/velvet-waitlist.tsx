@@ -8,7 +8,7 @@ type Audience = "customer" | "restaurant";
 type FormState = "idle" | "submitting" | "success" | "error";
 
 export default function VelvetWaitlist() {
-  const [audience, setAudience] = useState<Audience>("customer");
+  const [audience, setAudience] = useState<Audience>("restaurant");
   const [state, setState] = useState<FormState>("idle");
   const [message, setMessage] = useState("");
   const source = useMemo(() => {
@@ -68,7 +68,7 @@ export default function VelvetWaitlist() {
         <label className="velvet-field"><span>Email</span><input type="email" name="email" autoComplete="email" required maxLength={254} placeholder="nome@esempio.it" /></label>
         {audience === "restaurant" && <div className="velvet-restaurant-fields"><label className="velvet-field"><span>Nome del locale <small>(facoltativo)</small></span><input type="text" name="restaurantName" autoComplete="organization" maxLength={120} /></label><label className="velvet-field"><span>Città <small>(facoltativa)</small></span><input type="text" name="city" autoComplete="address-level2" maxLength={100} /></label></div>}
         <label className="velvet-honeypot" aria-hidden="true">Sito web<input type="text" name="website" tabIndex={-1} autoComplete="off" /></label>
-        <label className="velvet-consent"><input type="checkbox" name="consent" required /> <span>Accetto che Kreluna utilizzi questa email esclusivamente per aggiornamenti e avvisi sul lancio di Velvet Table. Posso chiedere la cancellazione in qualsiasi momento. <a href="/privacy.html">Informativa privacy</a>.</span></label>
+        <label className="velvet-consent"><input type="checkbox" name="consent" required /> <span>Accetto che Kreluna utilizzi questa email esclusivamente per aggiornamenti e avvisi sul lancio di Velvet Table. Posso chiedere la cancellazione in qualsiasi momento. <a href="/privacy">Informativa privacy</a>.</span></label>
         <button className="button velvet-page-button" type="submit" disabled={state === "submitting"}>{state === "submitting" ? "Iscrizione in corso…" : audience === "restaurant" ? "Partecipa come ristoratore" : "Avvisami al lancio"}</button>
         <p className={`velvet-form-status ${state}`} aria-live="polite">{message}</p>
       </form>

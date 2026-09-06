@@ -1,6 +1,15 @@
 import { sql } from "drizzle-orm";
 import { index, integer, sqliteTable, text, uniqueIndex } from "drizzle-orm/sqlite-core";
 
+export const appLaunchWaitlist = sqliteTable('app_launch_waitlist', {
+  id: integer('id').primaryKey({autoIncrement:true}),
+  project: text('project').notNull(),
+  email: text('email').notNull(),
+  locale: text('locale').notNull(),
+  consentVersion: text('consent_version').notNull(),
+  createdAt: text('created_at').notNull().default(sql`CURRENT_TIMESTAMP`),
+}, table => [uniqueIndex('idx_app_launch_project_email').on(table.project, table.email)]);
+
 export const velvetWaitlist = sqliteTable(
   "velvet_waitlist",
   {

@@ -15,7 +15,8 @@ function compile(source, dependencies = {}) {
   return exports;
 }
 const faq = compile(await readFile('app/citybeam/citybeam-faq.ts', 'utf8'));
-const landing = compile(await readFile('app/citybeam/citybeam-landing.tsx', 'utf8'), { './citybeam-faq': faq });
+const launchSignup = compile(await readFile('app/launch-signup.tsx', 'utf8'));
+const landing = compile(await readFile('app/citybeam/citybeam-landing.tsx', 'utf8'), { './citybeam-faq': faq, '../launch-signup': launchSignup });
 const cookieSource = ts.createSourceFile('cookie.tsx', await readFile('app/cookie-consent.tsx', 'utf8'), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
 let cookieInitializer;
 cookieSource.forEachChild(node => {

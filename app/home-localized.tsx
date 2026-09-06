@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import type { Metadata } from 'next';
+import UpcomingProjects from "./upcoming-projects";
 
 export const homeLanguages = { it: 'https://www.kreluna.it/', en: 'https://www.kreluna.it/en', fr: 'https://www.kreluna.it/fr', es: 'https://www.kreluna.it/es', de: 'https://www.kreluna.it/de', 'x-default': 'https://www.kreluna.it/' };
 type Locale = 'en' | 'fr' | 'es' | 'de';
@@ -70,7 +71,7 @@ export default function LocalizedHome({ locale }: { locale: Locale }) {
       <section className="hero section-shell"><div className="hero-copy"><div className="eyebrow">Kreluna · software · AI</div><h1>{t.heading}<br /> <em>{t.subheading}</em></h1><p>{t.intro}</p><div className="hero-actions"><a className="button button-primary" href={`${prefix}/citybeam`}>{t.discover} ↗</a><a className="button button-secondary" href="#services">{t.services}</a></div><nav className="hero-actions" aria-label="Language">{Object.entries(homeLanguages).filter(([l])=>l!=='x-default').map(([l,url])=><a key={l} href={url} hrefLang={l} lang={l} aria-current={l===locale?'page':undefined}>{l.toUpperCase()}</a>)}</nav></div></section>
       <section className="editorial-home section-shell" id="services"><h2>{t.services}</h2><div className="editorial-home-grid">{t.cards.map(([title,text])=><article className="editorial-home-card" key={title}><h3>{title}</h3><p>{text}</p></article>)}</div></section>
       <section className="statement section-shell"><h2>{t.methodTitle}</h2><p>{t.method}</p></section>
-      <section className="featured-projects section-shell"><article className="citybeam-feature"><div className="citybeam-feature-copy"><span className="project-state">{t.launch}</span><h2>CityBeam</h2><h3>{t.city}</h3><p>{t.cityText}</p><a className="button button-primary" href={`${prefix}/citybeam`}>{t.discover} ↗</a></div><div className="citybeam-feature-place"><strong>Times Square · New York</strong></div></article><div className="projects-secondary"><article className="velvet-project-card"><div><span className="project-state">{t.concept}</span><h2>Velvet Table</h2><p>{t.velvet}</p></div><a href={`${prefix}/velvet-table`}>{t.explore} ↗</a></article><a className="button button-secondary" href={`${prefix}/projects`}>{t.projects} ↗</a></div></section>
+      <UpcomingProjects locale={locale} />
       <section className="editorial-trust section-shell"><h2>{t.trust}</h2><p>{t.trustText}</p><details><summary>{t.faq}</summary><p>{t.answer}</p></details></section>
       <section className="resources-home section-shell"><div><h2>{t.resources}</h2><p><a href={t.guidePath}>{t.guide} ↗</a></p><p><a href={t.softwarePath}>{t.softwareGuide} ↗</a></p></div></section>
       <section className="closing section-shell"><h2>{t.contact}</h2><a className="button button-primary" href={contact}>andrea@kreluna.it ↗</a></section>

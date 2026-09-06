@@ -3,6 +3,7 @@ import { siteUrl, velvetCopy, velvetUrls, type VelvetLocale } from "./velvet-con
 import { velvetIntentContent, velvetSeoDescriptions } from "./velvet-intents";
 import { velvetMethodology } from "./velvet-methodology";
 import VelvetWaitlist from "./velvet-waitlist";
+import LaunchSignup from '../launch-signup';
 
 const languageNames: Record<VelvetLocale, string> = { it: "IT", en: "EN", fr: "FR", es: "ES", de: "DE" };
 const projectHubPath: Record<VelvetLocale, string> = { it: "/progetti", en: "/en/", fr: "/fr/", es: "/es/", de: "/de/" };
@@ -14,7 +15,7 @@ export default function VelvetLanding({ locale }: { locale: VelvetLocale }) {
   const description = velvetSeoDescriptions[locale];
   const faqs = [...copy.faqs, ...intentContent.faqs];
   const pageUrl = velvetUrls[locale];
-  const headerCtaHref = locale === "en" ? "/en/velvet-table/restaurants" : locale === "it" ? "#lista-attesa" : "mailto:krelunaid@gmail.com?subject=Velvet%20Table";
+  const headerCtaHref = locale === "en" ? "/en/velvet-table/restaurants" : locale === "it" ? "#avvisami" : "#avvisami";
   const headerCtaLabel = locale === "en" ? "For restaurants" : copy.follow;
   const structuredData = {
     "@context": "https://schema.org",
@@ -52,9 +53,10 @@ export default function VelvetLanding({ locale }: { locale: VelvetLocale }) {
         <section className="velvet-atmospheres section-shell" id="atmosfere"><div className="velvet-section-heading"><div className="eyebrow velvet-text"><i /> {copy.moodsKicker}</div><h2>{copy.moodsTitle[0]}<br />{copy.moodsTitle[1]}</h2></div><p className="velvet-original-note">{copy.originalNote}</p><div className="velvet-atmosphere-grid">{copy.moods.map((mood, index) => <article key={mood.name}>{/* eslint-disable-next-line @next/next/no-img-element */}<img src={mood.image.replace(/\.jpg$/, "-1200.webp")} srcSet={`${mood.image.replace(/\.jpg$/, "-640.webp")} 640w, ${mood.image.replace(/\.jpg$/, "-1200.webp")} 1200w`} sizes="(max-width: 640px) 90vw, 33vw" decoding="async" width="1400" height="933" loading="lazy" alt={mood.alt} /><div><span>{String(index + 1).padStart(2, "0")}</span><h3>{mood.name}</h3><p>{mood.copy}</p></div></article>)}</div></section>
         <section className="velvet-intents section-shell" id="occasioni"><div className="velvet-section-heading"><div className="eyebrow velvet-text"><i /> {intentContent.kicker}</div><h2>{intentContent.title}</h2><p className="velvet-intents-intro">{intentContent.intro}</p></div><div className="velvet-intent-grid">{intentContent.intents.map((intent, index) => <article key={intent.title}><span>{String(index + 1).padStart(2, "0")}</span><h3>{intent.title}</h3><p>{intent.body}</p></article>)}</div></section>
         <section className="velvet-methodology section-shell" id="criteri"><div className="velvet-section-heading"><div className="eyebrow velvet-text"><i /> {methodology.kicker}</div><h2>{methodology.title}</h2><p className="velvet-intents-intro">{methodology.intro}</p></div><ol className="velvet-process-grid">{methodology.items.map((item, index) => <li key={item.title}><span>{String(index + 1).padStart(2, "0")}</span><h3>{item.title}</h3><p>{item.body}</p></li>)}</ol><p className="velvet-methodology-note">{methodology.note}</p></section>
-        {locale === "it" && <VelvetWaitlist />}
+        <LaunchSignup project="velvet-table" locale={locale} />
+        {locale === "it" && <details className="launch-partners section-shell" id="ristoratori"><summary>Sei un ristoratore? Scopri il percorso dedicato</summary><VelvetWaitlist /></details>}
         <section className="velvet-faq section-shell" id="faq"><div className="velvet-section-heading"><div className="eyebrow velvet-text"><i /> {copy.faqKicker}</div><h2>{copy.faqTitle}</h2></div><div className="velvet-faq-list">{faqs.map((faq) => <article key={faq.question}><h3>{faq.question}</h3><p>{faq.answer}</p></article>)}</div></section>
-        <section className="velvet-closing section-shell"><div><div className="eyebrow velvet-text"><i /> Velvet Table by Kreluna</div><h2>{copy.closingTitle}</h2><p>{copy.closingBody}</p></div><a className="button velvet-page-button" href={locale === "it" ? "#lista-attesa" : "mailto:krelunaid@gmail.com?subject=Velvet%20Table%20project"}>{copy.closingCta}</a></section>
+        <section className="velvet-closing section-shell"><div><div className="eyebrow velvet-text"><i /> Velvet Table by Kreluna</div><h2>{copy.closingTitle}</h2><p>{copy.closingBody}</p></div><a className="button velvet-page-button" href="#avvisami">{copy.closingCta}</a></section>
       </main>
       <footer className="velvet-page-footer"><Link href={projectHubPath[locale]}>Kreluna</Link><span>{copy.footer}</span><a href={locale === "it" ? "/velvet-table/privacy.html" : "/en/privacy.html"}>Privacy</a></footer>
       <script id="velvet-table-structured-data" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />

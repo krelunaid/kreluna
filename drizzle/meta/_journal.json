@@ -29,6 +29,13 @@
       "when": 1787849376000,
       "tag": "0003_clear_risonix_test_data",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1788702239299,
+      "tag": "0004_dear_the_spike",
+      "breakpoints": true
     }
   ]
 }

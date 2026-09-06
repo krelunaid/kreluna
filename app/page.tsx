@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import UpcomingProjects from "./upcoming-projects";
 import { products } from "./marketplace-data";
 
 const visibleProducts = products.filter((product) =>
@@ -285,47 +286,7 @@ export default function Home() {
         </p>
       </section>
 
-      <section className="featured-projects section-shell" id="products">
-        <div className="section-heading reveal">
-          <div>
-            <div className="eyebrow"><i /> Il progetto del momento</div>
-            <h2>CityBeam.<br /><em>Dal mondo allo schermo.</em></h2>
-          </div>
-          <p>
-            Stiamo costruendo un accesso europeo agli schermi digitali più iconici,
-            partendo da Times Square e da relazioni in corso di verifica con operatori autorizzati.
-          </p>
-        </div>
-
-        <article className="citybeam-feature reveal">
-          <div className="citybeam-feature-copy">
-            <span className="project-state"><i /> Pre-lancio</span>
-            <h3>Il tuo momento sui grandi schermi del mondo.</h3>
-            <p>
-              Un percorso più semplice per aziende, creator e persone: richiesta,
-              approvazione del contenuto, pubblicazione e prova della messa in onda.
-            </p>
-            <div className="citybeam-feature-actions">
-              <a className="button button-primary" href="/citybeam">Scopri CityBeam <ArrowIcon /></a>
-              <a className="button button-secondary" href="https://www.kreluna.it/contatti">Parla con noi</a>
-            </div>
-          </div>
-          <div className="citybeam-feature-place"><span>Prima destinazione prevista</span><strong>Times Square · New York</strong></div>
-        </article>
-
-        <div className="projects-secondary reveal">
-          <article className="velvet-project-card">
-            <div><span className="project-state"><i /> Concept in sviluppo</span><h3>Velvet Table</h3><p>Prenota l’atmosfera, non soltanto il tavolo.</p></div>
-            <a href="/velvet-table">Scopri il concept <ArrowIcon /></a>
-          </article>
-          <div className="projects-index-card">
-            <span>Archivio in crescita</span>
-            <h3>Ogni progetto ha il suo spazio.</h3>
-            <p>La homepage mostra solo ciò che conta adesso. La pagina Progetti è pronta a crescere senza diventare confusa.</p>
-            <a href="/progetti">Vedi tutti i progetti <ArrowIcon /></a>
-          </div>
-        </div>
-      </section>
+      <UpcomingProjects />
 
       <section className="editorial-home section-shell" id="come-lavoriamo">
         <div className="section-heading reveal">

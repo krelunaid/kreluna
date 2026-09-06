@@ -848,3 +848,38 @@ footer { border-top: 1px solid var(--line); padding: 64px max(5vw, 24px) 30px; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
 }
+/* Compact pre-launch cards: the signup stays on each project page. */
+.upcoming-projects { padding-top: 70px; padding-bottom: 70px; }
+.upcoming-projects > header h2 { font-size: clamp(2rem,4vw,3.3rem); letter-spacing: -.04em; }
+.upcoming-projects > header p { margin-top: 12px; color: var(--muted); font-size: 1.125rem; }
+.upcoming-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 24px; margin-top: 32px; }
+.upcoming-card { overflow: hidden; border: 1px solid var(--line); border-radius: 18px; background: #0b0c17; }
+.upcoming-card > img { display: block; width: 100%; height: 220px; object-fit: cover; }
+.upcoming-card-body { padding: 24px; }
+.upcoming-card-heading { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; justify-content: space-between; }
+.upcoming-card h3 { font-size: 1.65rem; }
+.upcoming-card-heading > span { font-size: .875rem; padding: 5px 9px; border: 1px solid #6860a7; border-radius: 5px; color: #bcb4ff; }
+.upcoming-card.velvet-table .upcoming-card-heading > span { border-color: #81683c; color: #e0bc7c; }
+.upcoming-card p { color: var(--muted); margin: 16px 0 28px; font-size: 1rem; line-height: 1.6; }
+.upcoming-card a,.upcoming-all { color: #bcb4ff; font-size: 1rem; }
+.upcoming-all { display: block; text-align: center; border-top: 1px solid var(--line); margin-top: 32px; padding-top: 24px; }
+.upcoming-card a:hover,.upcoming-all:hover { color: white; }
+@media(max-width:640px) { .upcoming-grid { grid-template-columns: 1fr; } .upcoming-card > img { height: 190px; } }
+.launch-signup { --launch-accent: #b2a5ff; max-width: 1060px; margin: 64px auto; padding: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; border: 1px solid #343348; border-radius: 20px; background: #0c0d18; text-align: left; }
+.launch-signup.velvet-table { --launch-accent: #d5b078; border-color: #50422e; }
+.launch-state { display: inline-block; color: var(--launch-accent); font-size: .875rem; margin-bottom: 18px; }
+.launch-signup h2 { font-family: var(--sans); font-size: clamp(1.75rem,3vw,2.4rem); line-height: 1.2; letter-spacing: -.035em; color: #f5f2ff; }
+.launch-signup p { color: #b5b0c4; line-height: 1.6; font-size: 1rem; margin-top: 18px; }
+.launch-signup a { color: var(--launch-accent); text-decoration: underline; text-underline-offset: 3px; }
+.launch-email { display: grid; gap: 10px; font-size: 1rem; color: #f5f2ff; }
+.launch-email input { width: 100%; min-height: 52px; border: 1px solid #646073; border-radius: 9px; padding: 12px 16px; background: #0a0b13; color: #fff; font: inherit; }
+.launch-consent { display: flex; gap: 10px; align-items: flex-start; margin: 18px 0; font-size: .875rem; line-height: 1.6; color: #c7c0d2; }
+.launch-consent input { flex: 0 0 18px; width: 18px; height: 18px; margin-top: 3px; accent-color: var(--launch-accent); }
+.launch-signup button { width: 100%; min-height: 50px; padding: 12px; border: 0; border-radius: 9px; background: var(--launch-accent); color: #101018; font: 600 1rem var(--sans); cursor: pointer; }
+.launch-signup button:disabled { opacity: .6; cursor: wait; }
+.launch-signup .launch-note { font-size: .875rem; }
+.launch-result:empty { display: none; }
+.launch-signup input:focus-visible,.launch-signup button:focus-visible,.launch-signup a:focus-visible { outline: 2px solid var(--launch-accent); outline-offset: 4px; }
+.launch-partners { margin-bottom: 40px; }.launch-partners > summary { cursor: pointer; font-size: 1rem; color: #d5b078; }
+@media(max-width:700px) { .launch-signup { grid-template-columns: 1fr; gap: 24px; padding: 24px; margin: 40px 20px; } }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }

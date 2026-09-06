@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import type { Metadata } from "next";
 import { cityBeamFaq } from "./citybeam-faq";
+import LaunchSignup from '../launch-signup';
 
 export type CityBeamLocale = "it" | "en" | "fr" | "es" | "de";
 
@@ -236,6 +237,7 @@ export default function CityBeamLanding({ locale }: { locale: CityBeamLocale }) 
         <section className="citybeam-section citybeam-use-cases" id="per-chi"><article className="citybeam-case"><span>{t.business}</span><h3>{t.businessTitle}</h3><p>{t.businessText}</p></article><article className="citybeam-case"><span>{t.personal}</span><h3>{t.personalTitle}</h3><p>{t.personalText}</p></article></section>
         <section className="citybeam-section" id="faq"><div className="citybeam-section-heading"><h2>{faq.title}</h2></div><div className="home-faq">{faq.questions.map(([question, answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}</div></section>
         <section className="citybeam-status"><span className="citybeam-kicker">{t.statusKicker}</span><h2>{t.statusTitle}</h2><p>{t.statusText}</p><a className="button citybeam-primary" href={contactPath[locale]}>{t.talk} <span aria-hidden="true">↗</span></a></section>
+        <LaunchSignup project="citybeam" locale={locale} />
       </main>
       <footer className="citybeam-footer"><span>© 2026 Kreluna · {t.provisional}</span><span>P. IVA 02114130475 · REA PT-622714</span></footer>
       <script id="citybeam-structured-data" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
