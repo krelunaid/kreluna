@@ -885,3 +885,11 @@ footer { border-top: 1px solid var(--line); padding: 64px max(5vw, 24px) 30px; }
 .launch-partners { margin-bottom: 40px; }.launch-partners > summary { cursor: pointer; font-size: 1rem; color: #d5b078; }
 @media(max-width:700px) { .launch-signup { grid-template-columns: 1fr; gap: 24px; padding: 24px; margin: 40px 20px; } }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+@media (max-width: 980px) {
+  .localized-header { position: sticky; height: auto; min-height: 76px; grid-template-columns: 1fr auto; gap: 10px 16px; padding-block: 14px; }
+  .localized-header > .button { justify-self: end; }
+  .localized-header .desktop-nav { display: flex; grid-column: 1 / -1; grid-row: 2; flex-wrap: wrap; gap: 8px 22px; }
+  .localized-header .desktop-nav a { padding-block: 10px; }
+  .localized-header + main .hero { padding-top: 64px; }
+  .localized-header + main #services { scroll-margin-top: 160px; }
+}

@@ -59,6 +59,7 @@ export function homeMetadata(locale: Locale): Metadata {
 export default function LocalizedHome({ locale }: { locale: Locale }) {
   const t = copy[locale];
   const prefix = `/${locale}`;
+  const access = { en: ['Skip to content', 'Main navigation', 'Choose language'], fr: ['Aller au contenu', 'Navigation principale', 'Choisir la langue'], es: ['Ir al contenido', 'Navegación principal', 'Elegir idioma'], de: ['Zum Inhalt', 'Hauptnavigation', 'Sprache wählen'] }[locale];
   const contact = {en:'/en/contact',fr:'/fr/contact',es:'/es/contacto',de:'/de/kontakt'}[locale];
   const data = {'@context':'https://schema.org','@graph':[
     {'@type':'Organization','@id':'https://www.kreluna.it/#organization',name:'Kreluna',url:'https://www.kreluna.it/',logo:'https://www.kreluna.it/kreluna-logo.png'},
@@ -66,9 +67,10 @@ export default function LocalizedHome({ locale }: { locale: Locale }) {
     {'@type':'FAQPage',mainEntity:[{'@type':'Question',name:t.faq,acceptedAnswer:{'@type':'Answer',text:t.answer}}]},
   ]};
   return <div id="top">
-    <header className="site-header"><a className="brand" href={prefix}><img src="/kreluna-logo.png" width="34" height="34" alt="" /><span>KRELUNA</span></a><nav className="desktop-nav"><a href="#services">{t.services}</a><a href={`${prefix}/projects`}>{t.projects}</a><a href={`${prefix}/citybeam`}>CityBeam</a></nav><a className="button button-small button-primary" href={contact}>{t.contact}</a></header>
-    <main>
-      <section className="hero section-shell"><div className="hero-copy"><div className="eyebrow">Kreluna · software · AI</div><h1>{t.heading}<br /> <em>{t.subheading}</em></h1><p>{t.intro}</p><div className="hero-actions"><a className="button button-primary" href={`${prefix}/citybeam`}>{t.discover} ↗</a><a className="button button-secondary" href="#services">{t.services}</a></div><nav className="hero-actions" aria-label="Language">{Object.entries(homeLanguages).filter(([l])=>l!=='x-default').map(([l,url])=><a key={l} href={url} hrefLang={l} lang={l} aria-current={l===locale?'page':undefined}>{l.toUpperCase()}</a>)}</nav></div></section>
+    <a className="skip-link" href="#main-content">{access[0]}</a>
+    <header className="site-header localized-header"><a className="brand" href={prefix}><img src="/kreluna-logo.png" width="34" height="34" alt="" /><span>KRELUNA</span></a><nav className="desktop-nav" aria-label={access[1]}><a href="#services">{t.services}</a><a href={`${prefix}/projects`}>{t.projects}</a><a href={`${prefix}/citybeam`}>CityBeam</a></nav><a className="button button-small button-primary" href={contact}>{t.contact}</a></header>
+    <main id="main-content" tabIndex={-1}>
+<section className="hero section-shell"><div className="hero-copy"><div className="eyebrow">Kreluna · software · AI</div><h1>{t.heading}<br /> <em>{t.subheading}</em></h1><p>{t.intro}</p><div className="hero-actions"><a className="button button-primary" href={`${prefix}/citybeam`}>{t.discover} ↗</a><a className="button button-secondary" href="#services">{t.services}</a></div><nav className="hero-actions" aria-label={access[2]}>{Object.entries(homeLanguages).filter(([l])=>l!=='x-default').map(([l,url])=><a key={l} href={url} hrefLang={l} lang={l} aria-label={({it:'Italiano',en:'English',fr:'Français',es:'Español',de:'Deutsch'} as Record<string,string>)[l]} aria-current={l===locale?'page':undefined}>{l.toUpperCase()}</a>)}</nav></div></section>
       <section className="editorial-home section-shell" id="services"><h2>{t.services}</h2><div className="editorial-home-grid">{t.cards.map(([title,text])=><article className="editorial-home-card" key={title}><h3>{title}</h3><p>{text}</p></article>)}</div></section>
       <section className="statement section-shell"><h2>{t.methodTitle}</h2><p>{t.method}</p></section>
       <UpcomingProjects locale={locale} />

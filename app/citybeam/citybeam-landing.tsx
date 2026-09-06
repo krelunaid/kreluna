@@ -217,16 +217,18 @@ export default function CityBeamLanding({ locale }: { locale: CityBeamLocale }) 
       },
     ],
   };
+  const access = { it: ['Vai al contenuto', 'Scegli la lingua'], en: ['Skip to content', 'Choose language'], fr: ['Aller au contenu', 'Choisir la langue'], es: ['Ir al contenido', 'Elegir idioma'], de: ['Zum Inhalt', 'Sprache wählen'] }[locale];
   return (
     <div className="citybeam-page" lang={t.lang}>
+      <a className="skip-link" href="#main-content">{access[0]}</a>
       <header className="citybeam-header">
-        <a className="citybeam-brand" href={locale === "it" ? "/" : `/${locale}`} aria-label={t.navHome}><img src="/kreluna-logo-64.webp" alt="" width="31" height="31" /><span>KRELUNA · CITYBEAM</span></a>
+        <a className="citybeam-brand" href={locale === "it" ? "/" : `/${locale}`} aria-label={`Kreluna · CityBeam — ${t.navHome}`}><img src="/kreluna-logo-64.webp" alt="" width="31" height="31" /><span>KRELUNA · CITYBEAM</span></a>
         <nav aria-label="CityBeam"><a href={locale === "it" ? "/" : `/${locale}`}>{t.navHome}</a><a href="#come-funziona">{t.navHow}</a><a href="#per-chi">{t.navFor}</a><a href={contactPath[locale]}>{t.navContact}</a></nav>
-        <nav className="citybeam-language" aria-label="Language">
-          {(Object.keys(localePath) as CityBeamLocale[]).map((code) => <a key={code} href={localePath[code]} aria-current={code === locale ? "page" : undefined} hrefLang={code}>{code.toUpperCase()}</a>)}
+        <nav className="citybeam-language" aria-label={access[1]}>
+          {(Object.keys(localePath) as CityBeamLocale[]).map((code) => <a key={code} href={localePath[code]} lang={code} aria-label={{it:'Italiano',en:'English',fr:'Français',es:'Español',de:'Deutsch'}[code]} aria-current={code === locale ? "page" : undefined} hrefLang={code}>{code.toUpperCase()}</a>)}
         </nav>
       </header>
-      <main>
+      <main id="main-content" tabIndex={-1}>
         <section className="citybeam-hero">
           <div className="citybeam-copy"><span className="citybeam-kicker">{t.kicker}</span><h1>{t.h1a} <em>{t.h1b}</em>{t.h1c}</h1><p>{t.intro}</p>
             <div className="citybeam-actions"><a className="button citybeam-primary" href={contactPath[locale]}>{t.info} <span aria-hidden="true">↗</span></a><a className="button button-secondary" href="#come-funziona">{t.discover}</a></div><p className="citybeam-note">{t.disclosure}</p></div>

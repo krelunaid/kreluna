@@ -18,7 +18,10 @@ test('all CityBeam locales retain content, SEO and navigation without hydration'
     assert.match(html, /image\/avif/);
     assert.match(html, /id="cookie-banner"[^>]* hidden/);
     assert.match(html, /@media \(max-width: 700px\)/);
-    assert.ok(html.includes(`aria-label="${locale === 'it' ? 'Home' : locale === 'en' ? 'Home' : locale === 'fr' ? 'Accueil' : locale === 'es' ? 'Inicio' : 'Startseite'}"`));
+assert.ok(html.includes(`aria-label="Kreluna · CityBeam — ${locale === 'it' ? 'Home' : locale === 'en' ? 'Home' : locale === 'fr' ? 'Accueil' : locale === 'es' ? 'Inicio' : 'Startseite'}"`));
+    assert.equal((html.match(/id="main-content"/g) || []).length, 1);
+    assert.match(html, /class="skip-link" href="#main-content"/);
+    assert.match(html, /<main id="main-content" tabindex="-1">/);
     for (const match of html.matchAll(/<script[^>]*type="application\/ld\+json"[^>]*>(.*?)<\/script>/gs)) JSON.parse(match[1]);
   }
 });

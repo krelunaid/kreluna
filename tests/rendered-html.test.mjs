@@ -14,6 +14,20 @@ async function render(pathname = "/") {
   );
 }
 
+test("localized homes retain accessible navigation and a unique skip target", async () => {
+  for (const locale of ['en','fr','es','de']) {
+    const html = await (await render(`/${locale}`)).text();
+    assert.match(html, /class="skip-link" href="#main-content"/);
+    assert.equal((html.match(/id="main-content"/g) || []).length, 1);
+    assert.match(html, /<main id="main-content" tabindex="-1">/);
+    assert.match(html, /class="desktop-nav" aria-label="[^"]+"/);
+    assert.doesNotMatch(html, /aria-label="Language"/);
+    assert.match(html, /aria-label="Deutsch"/);
+  }
+  const css = await readFile('app/globals.css','utf8');
+  assert.match(css, /\.localized-header \.desktop-nav \{ display: flex;/);
+});
+
 test("renders the Kreluna ecosystem homepage", async () => {
   const response = await render();
   assert.equal(response.status, 200);
