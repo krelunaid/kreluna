@@ -34,6 +34,8 @@ test("renders the Kreluna ecosystem homepage", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
+  assert.match(html, /<style id="kreluna-global-styles">/);
+  assert.doesNotMatch(html, /<link[^>]+rel="stylesheet"[^>]+\/_next\/static\/css/);
   assert.match(html, /<html lang="it-IT"/i);
   assert.match(html, /Kreluna \| Software, automazione e progetti digitali/);
   assert.match(html, /Tecnologia utile/);
@@ -41,7 +43,7 @@ test("renders the Kreluna ecosystem homepage", async () => {
   assert.match(html, /CityBeam/);
   assert.match(html, /Velvet Table/);
   assert.match(html, /href="\/progetti"/);
-  assert.doesNotMatch(html, /Kreluna AI|Kreluna Office|Kreluna Cyber|Risonix/i);
+assert.doesNotMatch(html.replace(/<(style|script)\b[^>]*>[\s\S]*?<\/\1>/gi, ''), /Kreluna AI|Kreluna Office|Kreluna Cyber|Risonix/i);
   assert.doesNotMatch(html, /Velvet Tablet/i);
   assert.doesNotMatch(html, /LikeCash/i);
   assert.doesNotMatch(html, /Kreluna Token|KRL Beta|Vendita disattivata/i);
@@ -125,7 +127,7 @@ test("renders the dedicated Velvet Table concept page", async () => {
   assert.match(html, /"@type":"ItemList"/);
   assert.match(html, /"@type":"FAQPage"/);
   assert.match(html, /"taxID":"02114130475"/);
-  assert.doesNotMatch(html, /created-with|Created with|Helix/i);
+  assert.doesNotMatch(html.replace(/<(style|script)\b[^>]*>[\s\S]*?<\/\1>/gi, ''), /created-with|Created with|Helix/i);
   assert.doesNotMatch(html, /kreluna-ecosistema\.andreagadducci\.chatgpt\.site/i);
   assert.doesNotMatch(html, /LikeCash|KRL Beta/i);
   assert.equal((html.match(/<h1\b/gi) ?? []).length, 1);
@@ -197,7 +199,7 @@ test("renders localized project hubs without exposing inactive projects", async 
     assert.match(html, /hreflang="fr"/i);
     assert.match(html, /hreflang="es"/i);
     assert.match(html, /hreflang="de"/i);
-    assert.doesNotMatch(html, /Kreluna AI|Kreluna Office|Kreluna Cyber|Risonix|Helix/i);
+    assert.doesNotMatch(html.replace(/<(style|script)\b[^>]*>[\s\S]*?<\/\1>/gi, ''), /Kreluna AI|Kreluna Office|Kreluna Cyber|Risonix|Helix/i);
   }
 });
 

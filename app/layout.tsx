@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 import CookieConsent from "./cookie-consent";
 import MetaPixel from "./meta-pixel";
 import { homeLanguages } from "./home-localized";
-import "./globals.css";
+import globalStyles from "./globals.css?inline";
 
 const assetBasePath = process.env.NEXT_PUBLIC_ARUBA_BASE_PATH ?? "";
 const isArubaPreview = assetBasePath.length > 0;
@@ -93,6 +93,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <link rel="preload" href={`${assetBasePath}/fonts/inter-latin.woff2`} as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href={`${assetBasePath}/fonts/space-grotesk-latin.woff2`} as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href={`${assetBasePath}/fonts/newsreader-500-italic.woff2`} as="font" type="font/woff2" crossOrigin="anonymous" />
+        <style id="kreluna-global-styles" dangerouslySetInnerHTML={{ __html: globalStyles }} />
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
       </head>
       <body>
