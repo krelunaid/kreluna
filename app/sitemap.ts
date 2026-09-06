@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { homeLanguages } from "./home-localized";
 import { cosmoraLanguages } from './cosmora-content';
+import { guideLanguages } from './cosmora-guide';
 import internationalRoutes from "../content/international-routes.json";
 
 const SITE_URL = "https://www.kreluna.it";
@@ -156,6 +157,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   });
 
   return [
+    ...Object.entries(guideLanguages).filter(([lang])=>lang!=='x-default').map(([,url])=>({url,lastModified:'2026-09-06',changeFrequency:'weekly' as const,priority:0.7,alternates:{languages:guideLanguages}})),
     ...Object.entries(cosmoraLanguages).filter(([lang])=>lang!=='x-default').map(([,url])=>({url,lastModified:'2026-09-06',changeFrequency:'monthly' as const,priority:0.8,alternates:{languages:cosmoraLanguages}})),
     {
       url: SITE_URL,

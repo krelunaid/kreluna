@@ -111,6 +111,25 @@ test("Cosmora has five honest, indexable localized project pages", async () => {
   }
 });
 
+test("Lucca guides are localized, linked and honest about exhibitor data", async () => {
+  for (const locale of ['it','en','fr','es','de']) {
+    const root=locale==='it'?'/cosmora':`/${locale}/cosmora`;
+    const path=`${root}/lucca-comics-2026`;
+    const response=await render(path);
+    assert.equal(response.status,200);
+    const html=await response.text();
+    assert.equal((html.match(/<h1\b/g)||[]).length,1);
+    assert.ok(html.includes(`rel="canonical" href="https://www.kreluna.it${path}"`));
+    assert.match(html,/Mappa\/Espositori/);
+    assert.match(html,/id="stands"/);
+    assert.match(html,/"@type":"Article"/);
+    assert.match(html,/https:\/\/lucca2026.luccacomicsandgames.com\/it\/info/);
+    assert.doesNotMatch(html,/"@type":"Event"|"@type":"Offer"/);
+    const parent=await (await render(root)).text();
+    assert.ok(parent.includes(`href="${path}"`));
+  }
+});
+
 test("keeps the retired KRL Beta route unavailable", async () => {
   const response = await render("/krl");
   assert.equal(response.status, 404);
@@ -279,7 +298,7 @@ test("publishes canonical localized URLs in the sitemap", async () => {
   assert.match(response.headers.get("content-type") ?? "", /(?:application|text)\/xml/i);
 
   const sitemap = await response.text();
-  assert.equal((sitemap.match(/<url>/gi) ?? []).length, 90);
+  assert.equal((sitemap.match(/<url>/gi) ?? []).length, 95);
   assert.match(sitemap, /<loc>https:\/\/www\.kreluna\.it<\/loc>/i);
   assert.match(sitemap, /<loc>https:\/\/www\.kreluna\.it\/en<\/loc>/i);
   assert.match(sitemap, /<loc>https:\/\/www\.kreluna\.it\/fr<\/loc>/i);
