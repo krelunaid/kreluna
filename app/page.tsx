@@ -136,7 +136,7 @@ function MockupScreen({ variant }: { variant: string }) {
 
 function HeroDevices() {
   return (
-    <div className="hero-devices" aria-hidden="true">
+    <div className="hero-devices">
       <div className="mockup-window hd-back">
         <MockupBar domain="kreluna.it/citybeam" />
         <MockupScreen variant="citybeam" />
@@ -145,10 +145,10 @@ function HeroDevices() {
         <MockupBar domain="kreluna.it/velvet-table" />
         <MockupScreen variant="velvet" />
       </div>
-      <div className="mockup-window hd-front">
-        <MockupBar domain="kreluna.it/progetti" />
-        <MockupScreen variant="projects" />
-      </div>
+      <a className="mockup-window hd-front hero-cosmora" href="/cosmora" aria-label="Scopri Cosmora: cosplay e community, in sviluppo">
+        <MockupBar domain="kreluna.it/cosmora" />
+        <div className="mockup-body mockup-cosmora"><img src="/cosmora-hero-mobile.jpg" width="640" height="360" alt="" decoding="async" /><span><strong>Cosmora</strong><small>Cosplay e community · In sviluppo</small></span></div>
+      </a>
     </div>
   );
 }
@@ -208,6 +208,7 @@ export default function Home() {
           <a href="#come-lavoriamo">Cosa facciamo</a>
           <a href="/progetti">Progetti</a>
           <a href="/citybeam">CityBeam</a>
+          <a className="nav-cosmora" href="/cosmora">Cosmora</a>
           <a href="https://www.kreluna.it/azienda">Azienda</a>
         </nav>
         <div className="nav-actions">
@@ -238,6 +239,7 @@ export default function Home() {
           <a href="#come-lavoriamo" onClick={() => setMenuOpen(false)}>Cosa facciamo</a>
           <a href="/progetti" onClick={() => setMenuOpen(false)}>Progetti</a>
           <a href="/citybeam" onClick={() => setMenuOpen(false)}>CityBeam</a>
+          <a className="nav-cosmora" href="/cosmora" onClick={() => setMenuOpen(false)}>Cosmora</a>
           <a href="https://www.kreluna.it/azienda">Azienda</a>
           <a href="https://www.kreluna.it/contatti">Contatti</a>
         </div>

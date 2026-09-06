@@ -903,6 +903,15 @@ footer { border-top: 1px solid var(--line); padding: 64px max(5vw, 24px) 30px; }
 .cosmora-header nav { display:flex; gap:6px; }
 .cosmora-header nav a { padding:10px; font-size:.875rem; }
 .cosmora-header [aria-current=page] { background:#38263e; border-radius:6px; }
+.cosmora-intro, .cosmora-art, .cosmora-details, .cosmora-guide { margin-inline:auto; }
+.nav-cosmora { color:#f3b4e4 !important; }
+.hero-cosmora { display:flex; text-decoration:none; border-color:#b983b4; }
+.hero-cosmora:focus-visible { outline:3px solid #f3b4e4; outline-offset:6px; }
+.mockup-cosmora { position:relative; overflow:hidden; padding:0; background:#20112e; }
+.mockup-cosmora img { width:100%; height:100%; object-fit:cover; object-position:75% center; }
+.mockup-cosmora > span { position:absolute; inset:auto 0 0; padding:35px 20px 20px; background:linear-gradient(transparent,#160c24); color:#fff; }
+.mockup-cosmora strong { display:block; font-size:1.6rem; }
+.mockup-cosmora small { display:block; margin-top:6px; font-size:.875rem; color:#ffdef4; }
 .cosmora-intro { max-width:1050px; padding-top:80px; padding-bottom:40px; text-align:center; }
 .cosmora-intro h1 { font:600 clamp(2.6rem,6vw,5.3rem)/1.08 'Space Grotesk',sans-serif; letter-spacing:-.04em; }
 .cosmora-intro > p:not(.cosmora-kicker) { max-width:740px; margin:24px auto; line-height:1.75; color:#c9bfd7; }
