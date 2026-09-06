@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { readFileSync } from "node:fs";
 
 const isArubaExport = process.env.KRELUNA_ARUBA_EXPORT === "1";
 const arubaBasePath = process.env.KRELUNA_ARUBA_BASE_PATH ?? "";
@@ -12,6 +13,13 @@ const nextConfig: NextConfig = isArubaExport
   : {
       async redirects() {
         return [
+          ...readFileSync(new URL("./public/_redirects", import.meta.url), "utf8")
+            .split("\n")
+            .filter((line) => line.startsWith("/") && line.endsWith(" 301"))
+            .map((line) => {
+              const [source, destination] = line.split(/\s+/);
+              return { source, destination, permanent: true };
+            }),
           {
             source: "/velvet-table/restaurants",
             destination: "/en/velvet-table/restaurants",

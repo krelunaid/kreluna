@@ -108,7 +108,7 @@ Sì. L’accessibilità rende contenuti e funzioni utilizzabili da più persone 
 
 Prepara una breve descrizione del risultato che vuoi ottenere, poi confronta competenze, condizioni e modalità di lavoro.
 
-**[Esplora il Marketplace Kreluna](https://www.kreluna.it/marketplace).**
+**[Scopri i progetti Kreluna](https://www.kreluna.it/progetti).**
 
 Fonti: [Google Search Essentials](https://developers.google.com/search/docs/essentials) · [Guida Google per sviluppatori](https://developers.google.com/search/docs/fundamentals/get-started-developers) · [W3C — Planning and Managing Web Accessibility](https://www.w3.org/WAI/planning-and-managing/)
 
@@ -196,7 +196,7 @@ Yes. Accessibility makes the website usable by more people and should be conside
 
 Write a short description of the outcome you need, then compare relevant experience, working methods and commercial terms.
 
-**[Explore the Kreluna Marketplace](https://www.kreluna.it/marketplace).**
+**[Explore Kreluna projects](https://www.kreluna.it/en/projects).**
 
 Sources: [Google Search Essentials](https://developers.google.com/search/docs/essentials) · [Google’s developer guide](https://developers.google.com/search/docs/fundamentals/get-started-developers) · [W3C accessibility planning](https://www.w3.org/WAI/planning-and-managing/)
 
@@ -273,7 +273,7 @@ Sí. Permite que más personas utilicen la web y debe considerarse durante el di
 
 Describe brevemente el resultado que buscas y compara experiencia, forma de trabajo y condiciones.
 
-**[Explora el Marketplace de Kreluna](https://www.kreluna.it/marketplace).**
+**[Descubre los proyectos de Kreluna](https://www.kreluna.it/es/projects).**
 
 Fuentes: [Google Search Essentials](https://developers.google.com/search/docs/essentials) · [Guía de Google para desarrolladores](https://developers.google.com/search/docs/fundamentals/get-started-developers) · [W3C — Planificación de la accesibilidad](https://www.w3.org/WAI/planning-and-managing/)
 
@@ -350,7 +350,7 @@ Oui. Elle permet à davantage de personnes d’utiliser le site et doit être pr
 
 Décrivez le résultat recherché, puis comparez l’expérience, la méthode et les conditions proposées.
 
-**[Explorez la Marketplace Kreluna](https://www.kreluna.it/marketplace).**
+**[Découvrez les projets Kreluna](https://www.kreluna.it/fr/projects).**
 
 Sources : [Google Search Essentials](https://developers.google.com/search/docs/essentials) · [Guide Google pour les développeurs](https://developers.google.com/search/docs/fundamentals/get-started-developers) · [W3C — Gestion de l’accessibilité](https://www.w3.org/WAI/planning-and-managing/)
 
@@ -427,7 +427,7 @@ Ja. Sie macht Inhalte und Funktionen für mehr Menschen nutzbar und sollte bei G
 
 Beschreiben Sie das gewünschte Ergebnis und vergleichen Sie Erfahrung, Arbeitsweise und Bedingungen.
 
-**[Entdecken Sie den Kreluna Marketplace](https://www.kreluna.it/marketplace).**
+**[Entdecken Sie die Kreluna Projekte](https://www.kreluna.it/de/projects).**
 
 Quellen: [Google Search Essentials](https://developers.google.com/search/docs/essentials) · [Google-Leitfaden für Entwickler](https://developers.google.com/search/docs/fundamentals/get-started-developers) · [W3C — Barrierefreiheit planen und verwalten](https://www.w3.org/WAI/planning-and-managing/)
 

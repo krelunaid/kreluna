@@ -82,7 +82,7 @@ Il responsabile del risultato, una persona che usa quotidianamente il processo e
 
 Approfondisci la [guida NCSC alla scelta di un provider cloud](https://www.ncsc.gov.uk/collection/cloud/choosing-a-cloud-provider), il suo [metodo leggero di valutazione della sicurezza cloud](https://www.ncsc.gov.uk/collection/cloud/the-cloud-security-principles/lightweight-approach-to-cloud-security) e i [principi GDPR per imprese e organizzazioni](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en).
 
-Per confrontare soluzioni e servizi digitali pertinenti, [esplora il Marketplace Kreluna](https://www.kreluna.it/marketplace).
+Per confrontare soluzioni e servizi digitali pertinenti, [Scopri i progetti Kreluna](https://www.kreluna.it/progetti).
 
 ---
 
@@ -145,7 +145,7 @@ Include the person accountable for the outcome, a daily user and whoever covers 
 
 Read the [NCSC guidance on choosing a cloud provider](https://www.ncsc.gov.uk/collection/cloud/choosing-a-cloud-provider), its [lightweight cloud security approach](https://www.ncsc.gov.uk/collection/cloud/the-cloud-security-principles/lightweight-approach-to-cloud-security) and the European Commission's [GDPR principles for organisations](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en).
 
-To compare relevant digital services and solutions, [explore the Kreluna Marketplace](https://www.kreluna.it/marketplace).
+To compare relevant digital services and solutions, [Explore Kreluna projects](https://www.kreluna.it/en/projects).
 
 ---
 
@@ -208,7 +208,7 @@ La persona responsable del resultado, un usuario diario y quien gestiona segurid
 
 Consulta la [guía NCSC para elegir un proveedor cloud](https://www.ncsc.gov.uk/collection/cloud/choosing-a-cloud-provider), su [evaluación ligera de seguridad](https://www.ncsc.gov.uk/collection/cloud/the-cloud-security-principles/lightweight-approach-to-cloud-security) y los [principios del RGPD](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en).
 
-Para comparar servicios y soluciones digitales, [explora el Marketplace Kreluna](https://www.kreluna.it/marketplace).
+Para comparar servicios y soluciones digitales, [Descubre los proyectos de Kreluna](https://www.kreluna.it/es/projects).
 
 ---
 
@@ -271,7 +271,7 @@ Le responsable du résultat, un utilisateur quotidien et la personne chargée de
 
 Consultez le [guide NCSC sur le choix d'un fournisseur cloud](https://www.ncsc.gov.uk/collection/cloud/choosing-a-cloud-provider), son [évaluation légère de sécurité](https://www.ncsc.gov.uk/collection/cloud/the-cloud-security-principles/lightweight-approach-to-cloud-security) et les [principes du RGPD](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en).
 
-Pour comparer des services et solutions numériques, [explorez le Marketplace Kreluna](https://www.kreluna.it/marketplace).
+Pour comparer des services et solutions numériques, [Découvrez les projets Kreluna](https://www.kreluna.it/fr/projects).
 
 ---
 
@@ -334,4 +334,4 @@ Die verantwortliche Person, ein täglicher Nutzer und die für Sicherheit oder V
 
 Lesen Sie den [NCSC-Leitfaden zur Auswahl eines Cloud-Anbieters](https://www.ncsc.gov.uk/collection/cloud/choosing-a-cloud-provider), die [kompakte Sicherheitsbewertung](https://www.ncsc.gov.uk/collection/cloud/the-cloud-security-principles/lightweight-approach-to-cloud-security) und die [DSGVO-Grundsätze](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en).
 
-Um passende digitale Dienste und Lösungen zu vergleichen, [besuchen Sie den Kreluna Marketplace](https://www.kreluna.it/marketplace).
+Um passende digitale Dienste und Lösungen zu vergleichen, [Entdecken Sie die Kreluna Projekte](https://www.kreluna.it/de/projects).

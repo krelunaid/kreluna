@@ -28,7 +28,7 @@ const homeStructuredData = {
       url: `${homeSiteUrl}/`,
       name: "Kreluna",
       publisher: { "@id": `${homeSiteUrl}/#organization` },
-      inLanguage: ["it-IT", "en-GB"],
+      inLanguage: ["it-IT", "en-GB", "fr-FR", "es-ES", "de-DE"],
     },
     {
       "@type": "WebPage",

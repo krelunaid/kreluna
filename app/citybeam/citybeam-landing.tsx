@@ -194,7 +194,7 @@ export default function CityBeamLanding({ locale }: { locale: CityBeamLocale }) 
           width: 1807,
           height: 870,
         },
-        dateModified: "2026-09-01",
+        dateModified: "2026-09-06",
       },
       {
         "@type": "Service",
@@ -204,7 +204,6 @@ export default function CityBeamLanding({ locale }: { locale: CityBeamLocale }) 
         description: t.description,
         provider: { "@id": `${siteUrl}/#organization` },
         url: canonical,
-        areaServed: "Worldwide",
         availableLanguage: Object.values(translations).map((item) => item.lang),
         serviceType: "Digital out-of-home advertising marketplace project",
       },

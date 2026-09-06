@@ -157,7 +157,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
       url: SITE_URL,
-      lastModified: "2026-09-01",
+      lastModified: "2026-09-06",
       changeFrequency: "weekly" as const,
       priority: 1,
       alternates: { languages: homeLanguages },
@@ -168,7 +168,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       .filter(([language]) => language !== "x-default")
       .map(([, url]) => ({
         url,
-        lastModified: "2026-08-28",
+        lastModified: "2026-09-06",
         changeFrequency: "monthly" as const,
         priority: 0.75,
         images: [`${SITE_URL}/assets/guide-scegliere-professionista-web.png`],
@@ -178,7 +178,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       .filter(([language]) => language !== "x-default")
       .map(([, url]) => ({
         url,
-        lastModified: "2026-08-29",
+        lastModified: "2026-09-06",
         changeFrequency: "monthly" as const,
         priority: 0.75,
         images: [`${SITE_URL}/assets/guide-scegliere-software-gestionale.png`],
@@ -198,7 +198,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       .filter(([language]) => language !== "x-default")
       .map(([, url]) => ({
         url,
-        lastModified: "2026-09-01",
+        lastModified: "2026-09-06",
         changeFrequency: "weekly" as const,
         priority: 0.8,
         images: [`${SITE_URL}/citybeam-hero.png`],
@@ -208,7 +208,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       .filter(([language]) => language !== "x-default")
       .map(([, url]) => ({
       url,
-      lastModified: "2026-08-23",
+      lastModified: "2026-09-06",
       changeFrequency: "monthly" as const,
       priority: 0.8,
       images: [
