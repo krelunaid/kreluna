@@ -35,7 +35,7 @@ export default function VelvetLanding({ locale }: { locale: VelvetLocale }) {
     <div className="velvet-page" lang={copy.locale}>
       <a className="skip-link" href="#velvet-main">{copy.skip}</a>
       <header className="velvet-page-header">
-        <Link className="velvet-page-brand" href={projectHubPath[locale]} aria-label={copy.brandAria}>{/* eslint-disable-next-line @next/next/no-img-element */}<img src="/kreluna-logo.png" width="46" height="46" alt="" /><span>KRELUNA</span></Link>
+        <Link className="velvet-page-brand" href={projectHubPath[locale]} aria-label={copy.brandAria}>{/* eslint-disable-next-line @next/next/no-img-element */}<img src="/kreluna-logo-64.webp" width="46" height="46" alt="" /><span>KRELUNA</span></Link>
         <nav className="velvet-section-nav" aria-label={copy.navAria}><a href="#come-funziona">{copy.nav[0]}</a><a href="#atmosfere">{copy.nav[1]}</a><a href="#faq">{copy.nav[2]}</a></nav>
         <div className="velvet-header-actions">
           <nav className="velvet-language-nav" aria-label="Language selector">{(Object.keys(languageNames) as VelvetLocale[]).map((lang) => <a key={lang} href={velvetUrls[lang]} hrefLang={lang} lang={lang} aria-current={lang === locale ? "page" : undefined}>{languageNames[lang]}</a>)}</nav>

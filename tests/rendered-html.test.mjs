@@ -59,7 +59,7 @@ test("renders the Kreluna ecosystem homepage", async () => {
   assert.match(html, /"@type":"WebSite"/);
   assert.match(html, /"@type":"WebPage"/);
   assert.match(html, /"@type":"FAQPage"/);
-  assert.match(html, /<img src="\/kreluna-logo\.png" alt="" width="128" height="128"/i);
+  assert.ok(html.includes('<img src="/kreluna-logo-64.webp" alt="" width="128" height="128"'));
   assert.match(html, /class="skip-link" href="#main-content"/i);
   assert.match(html, /<main id="main-content">/i);
   assert.match(html, /Kreluna/i);

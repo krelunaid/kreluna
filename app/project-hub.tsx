@@ -55,7 +55,7 @@ export default function ProjectHub({ locale }: { locale: ProjectHubLocale }) {
   return (
     <div className="projects-page" lang={t.lang}>
       <header className="projects-page-header">
-        <Link className="projects-page-brand" href={locale === "it" ? "/" : `/${locale}`} aria-label="Kreluna projects"><img src="/kreluna-logo.png" alt="" width="34" height="34" /><span>KRELUNA</span></Link>
+        <Link className="projects-page-brand" href={locale === "it" ? "/" : `/${locale}`} aria-label="Kreluna projects"><img src="/kreluna-logo-64.webp" alt="" width="34" height="34" /><span>KRELUNA</span></Link>
         <nav aria-label="Projects navigation"><Link href={locale === "it" ? "/" : `/${locale}`}>{t.home}</Link><a href={cityBeamPaths[locale]}>CityBeam</a><a className="button button-small button-primary" href={contactHref}>{t.contact}</a></nav>
       </header>
       <main>

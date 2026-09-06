@@ -158,7 +158,7 @@ function Logo() {
     <a className="brand" href="#top" aria-label="Kreluna, torna all'inizio">
       {/* The logo is a tiny local decorative asset with fixed intrinsic dimensions. */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={`${assetBasePath}/kreluna-logo.png`} alt="" width="128" height="128" decoding="async" />
+      <img src={`${assetBasePath}/kreluna-logo-64.webp`} alt="" width="128" height="128" decoding="async" />
       <span>KRELUNA</span>
     </a>
   );

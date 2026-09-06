@@ -61,7 +61,7 @@ export default function VelvetRestaurantsPage() {
     <div className="velvet-page restaurant-landing" lang="en-US">
       <a className="skip-link" href="#restaurant-main">Skip to content</a>
       <header className="velvet-page-header restaurant-header">
-        <Link className="velvet-page-brand" href="/" aria-label="Kreluna home">{/* eslint-disable-next-line @next/next/no-img-element */}<img src="/kreluna-logo.png" width="46" height="46" alt="" /><span>KRELUNA</span></Link>
+        <Link className="velvet-page-brand" href="/" aria-label="Kreluna home">{/* eslint-disable-next-line @next/next/no-img-element */}<img src="/kreluna-logo-64.webp" width="46" height="46" alt="" /><span>KRELUNA</span></Link>
         <nav className="velvet-section-nav" aria-label="Restaurant page navigation"><a href="#model">How it works</a><a href="#principles">Clear terms</a><a href="#faq">FAQ</a></nav>
         <a className="button button-small velvet-page-button" href="#restaurant-early-access">Join early access</a>
       </header>
