@@ -41,6 +41,8 @@ test("renders the Kreluna ecosystem homepage", async () => {
   assert.match(html, /Tecnologia utile/);
   assert.match(html, /Progetti che prendono forma/);
   assert.match(html, /CityBeam/);
+  assert.match(html, /COSMORA/);
+  assert.match(html, /href="\/cosmora"/);
   assert.match(html, /Velvet Table/);
   assert.match(html, /href="\/progetti"/);
 assert.doesNotMatch(html.replace(/<(style|script)\b[^>]*>[\s\S]*?<\/\1>/gi, ''), /Kreluna AI|Kreluna Office|Kreluna Cyber|Risonix/i);
@@ -91,6 +93,22 @@ assert.doesNotMatch(html.replace(/<(style|script)\b[^>]*>[\s\S]*?<\/\1>/gi, ''),
   );
   for (const fragment of localFragments) assert.ok(ids.has(fragment), `Missing #${fragment}`);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape|react-loading-skeleton/i);
+});
+
+test("Cosmora has five honest, indexable localized project pages", async () => {
+  for (const locale of ['it','en','fr','es','de']) {
+    const path=locale==='it'?'/cosmora':`/${locale}/cosmora`;
+    const response=await render(path);
+    assert.equal(response.status,200);
+    const html=await response.text();
+    assert.equal((html.match(/<h1\b/g)||[]).length,1);
+    assert.match(html,/Lucca Comics/);
+    assert.ok(html.includes(`rel="canonical" href="https://www.kreluna.it${path}"`));
+    assert.ok(html.includes('hrefLang="x-default"') || html.includes('hreflang="x-default"'));
+    assert.match(html,/creativeWorkStatus/);
+    assert.doesNotMatch(html,/apps.apple.com|play.google.com/);
+    assert.match(html,/id="cosmora-main" tabindex="-1"/);
+  }
 });
 
 test("keeps the retired KRL Beta route unavailable", async () => {
@@ -261,7 +279,7 @@ test("publishes canonical localized URLs in the sitemap", async () => {
   assert.match(response.headers.get("content-type") ?? "", /(?:application|text)\/xml/i);
 
   const sitemap = await response.text();
-  assert.equal((sitemap.match(/<url>/gi) ?? []).length, 85);
+  assert.equal((sitemap.match(/<url>/gi) ?? []).length, 90);
   assert.match(sitemap, /<loc>https:\/\/www\.kreluna\.it<\/loc>/i);
   assert.match(sitemap, /<loc>https:\/\/www\.kreluna\.it\/en<\/loc>/i);
   assert.match(sitemap, /<loc>https:\/\/www\.kreluna\.it\/fr<\/loc>/i);

@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { CosmoraFeature } from './cosmora-content';
 export type ProjectLocale = 'it' | 'en' | 'fr' | 'es' | 'de';
 const copy = {
   it: ['Progetti in arrivo.', 'Idee che stanno prendendo forma.', 'Pre-lancio', 'In sviluppo', 'Il tuo momento sui grandi schermi.', 'La serata giusta, a partire dall’atmosfera.', 'Scopri il progetto', 'Tutti i progetti'],
@@ -11,6 +12,7 @@ export default function UpcomingProjects({ locale = 'it' }: { locale?: ProjectLo
   const t = copy[locale], prefix = locale === 'it' ? '' : `/${locale}`;
   return <section className="upcoming-projects section-shell" id="products" aria-labelledby="upcoming-title">
     <header><h2 id="upcoming-title">{t[0]}</h2><p>{t[1]}</p></header>
+    <CosmoraFeature locale={locale} />
     <div className="upcoming-grid">
       {[{ name: 'CityBeam', slug: 'citybeam', image: '/citybeam-hero-640.webp', status: t[2], text: t[4] }, { name: 'Velvet Table', slug: 'velvet-table', image: '/velvet-table/hero-640.webp', status: t[3], text: t[5] }].map(project => <article className={`upcoming-card upcoming-card--${project.slug}`} key={project.slug}>
         <picture className="upcoming-image">{project.slug === 'citybeam' && <source type="image/avif" srcSet="/citybeam-hero-640.avif" />}<img src={project.image} alt="" width="640" height="360" loading="lazy" decoding="async" /></picture>

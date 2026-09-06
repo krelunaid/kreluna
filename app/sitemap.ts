@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { homeLanguages } from "./home-localized";
+import { cosmoraLanguages } from './cosmora-content';
 import internationalRoutes from "../content/international-routes.json";
 
 const SITE_URL = "https://www.kreluna.it";
@@ -155,6 +156,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   });
 
   return [
+    ...Object.entries(cosmoraLanguages).filter(([lang])=>lang!=='x-default').map(([,url])=>({url,lastModified:'2026-09-06',changeFrequency:'monthly' as const,priority:0.8,alternates:{languages:cosmoraLanguages}})),
     {
       url: SITE_URL,
       lastModified: "2026-09-06",
@@ -162,7 +164,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
       alternates: { languages: homeLanguages },
     },
-    ...Object.entries(homeLanguages).filter(([lang]) => !["it", "x-default"].includes(lang)).map(([, url]) => ({ url, lastModified: "2026-09-05", changeFrequency: "weekly" as const, priority: 0.9, alternates: { languages: homeLanguages } })),
+...Object.entries(homeLanguages).filter(([lang]) => !["it", "x-default"].includes(lang)).map(([, url]) => ({ url, lastModified: "2026-09-06", changeFrequency: "weekly" as const, priority: 0.9, alternates: { languages: homeLanguages } })),
     ...localizedPages,
     ...Object.entries(webProfessionalGuideLanguages)
       .filter(([language]) => language !== "x-default")
@@ -188,7 +190,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       .filter(([language]) => language !== "x-default")
       .map(([, url]) => ({
         url,
-        lastModified: "2026-09-01",
+        lastModified: "2026-09-06",
         changeFrequency: "weekly" as const,
         priority: 0.8,
         images: [`${SITE_URL}/og-kreluna.jpg`],

@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import type { Metadata } from "next";
 import Link from "next/link";
+import { cosmoraCopy, cosmoraPath } from './cosmora-content';
 
 export type ProjectHubLocale = "it" | "en" | "fr" | "es" | "de";
 
@@ -43,6 +44,7 @@ export default function ProjectHub({ locale }: { locale: ProjectHubLocale }) {
   const canonical = `${siteUrl}${projectHubPaths[locale]}`;
   const contactHref = {it:"/contatti",en:"/en/contact",fr:"/fr/contact",es:"/es/contacto",de:"/de/kontakt"}[locale];
   const projects = [
+    { name: "Cosmora", status: cosmoraCopy[locale].status, category: "Cosplay · Community", tagline: cosmoraCopy[locale].title, href: cosmoraPath(locale), image: "/cosmora-hero.jpg", slug: "cosmora" },
     { name: "CityBeam", status: t.cityStatus, category: t.cityCategory, tagline: t.cityTagline, href: cityBeamPaths[locale], image: "/citybeam-hero-1200.webp", slug: "citybeam" },
     { name: "Velvet Table", status: t.velvetStatus, category: t.velvetCategory, tagline: t.velvetTagline, href: velvetPaths[locale], image: "/velvet-table/hero-1200.webp", slug: "velvet-table" },
   ];
