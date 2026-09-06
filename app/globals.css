@@ -908,7 +908,15 @@ footer { border-top: 1px solid var(--line); padding: 64px max(5vw, 24px) 30px; }
 .cosmora-intro > p:not(.cosmora-kicker) { max-width:740px; margin:24px auto; line-height:1.75; color:#c9bfd7; }
 .cosmora-intro .button { margin-top:8px; }
 .cosmora-notice { font-size:.9rem; line-height:1.7; color:#c9bfd7; }
+.cosmora-event-callout { margin-top:24px; color:#fdf6ff; }
+.cosmora-event-callout .cosmora-event-question { font:600 clamp(1.5rem,2.7vw,2.3rem)/1.2 'Space Grotesk',sans-serif; color:#ffd2ee; margin:0 0 14px; }
+.cosmora-event-callout > p:not(.cosmora-event-question) { font-size:1.05rem; line-height:1.65; margin:0; max-width:440px; }
+.cosmora-event-callout small { display:block; font-size:.85rem; line-height:1.6; color:#e1cddd; margin-top:18px; }
+.cosmora-feature-copy > .cosmora-kicker { margin-top:0; }
 .cosmora-art { max-width:1250px; }
+.cosmora-art-frame { position:relative; overflow:hidden; border-radius:20px; background:#100d20; }
+.cosmora-art-frame::after { content:''; position:absolute; inset:0; background:linear-gradient(90deg,rgba(10,8,22,.93),rgba(10,8,22,.75) 40%,transparent 85%); pointer-events:none; }
+.cosmora-art-frame .cosmora-event-callout { position:absolute; z-index:1; left:5%; top:50%; transform:translateY(-50%); width:48%; margin:0; }
 .cosmora-art img { display:block; width:100%; height:auto; border-radius:20px; }
 .cosmora-art figcaption { margin-top:12px; color:var(--muted); font-size:.875rem; }
 .cosmora-details { max-width:1250px; padding-block:64px; }
@@ -928,6 +936,9 @@ footer { border-top: 1px solid var(--line); padding: 64px max(5vw, 24px) 30px; }
   .cosmora-header { gap:14px; padding:20px; }
   .cosmora-header nav { width:100%; justify-content:center; }
   .cosmora-intro { padding-top:48px; }
+  .cosmora-art-frame picture img { min-height:480px; object-fit:cover; object-position:75% top; }
+  .cosmora-art-frame::after { background:linear-gradient(0deg,#100d20,rgba(16,13,32,.93) 35%,transparent 80%); }
+  .cosmora-art-frame .cosmora-event-callout { top:auto; bottom:24px; left:24px; right:24px; width:auto; transform:none; }
   .cosmora-functions { grid-template-columns:1fr; gap:8px; }
   .cosmora-event { padding:24px; }
 }

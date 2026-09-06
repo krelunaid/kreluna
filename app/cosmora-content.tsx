@@ -9,6 +9,17 @@ export const cosmoraCopy = {
   de: { status:'In Entwicklung', label:'Die nächste Kreluna Welt', title:'Deine Cosplay-Welt. Deine Community.', intro:'Kreationen, Sammlerstücke und Menschen, die deine Leidenschaft teilen. Cosmora verbindet die Community – auf Events und darüber hinaus.', discover:'Cosmora entdecken', home:'Startseite', projects:'Alle Projekte', contact:'Informationen anfragen', skip:'Zum Inhalt', languages:'Sprache wählen', preview:'Illustration zum Projekt Cosmora', heading:'Gemeinsame Interessen. Neue Kontakte.', features:[['Community','Ein Ort, um Kreationen, Fotos und Videos zu teilen und andere Fans kennenzulernen.'],['Cosplay und Sammeln','Anzeigen und Profile rund um Cosplay, Manga, Comics, Figuren, Karten und Gaming.'],['Crews und Treffen','Gruppen, Nachrichten und Veranstaltungen für Menschen mit gemeinsamen Interessen.']], eventTitle:'Bereitest du dich auf Lucca Comics & Games vor?', event:'Cosmora entsteht für die Cosplay- und Sammlercommunity – auch für Besucher von Veranstaltungen wie Lucca Comics & Games, die Kontakte knüpfen und ihre Kreationen teilen möchten. Die öffentliche Version ist in Vorbereitung. Diese Seite stellt das Projekt vor, keinen offiziellen Veranstaltungsdienst.', notice:'Testversion. Ein öffentlicher Starttermin steht noch nicht fest. Echte Zahlungen und Käufe sind nicht verfügbar.', independent:'Cosmora ist ein unabhängiges Kreluna Projekt und nicht mit Lucca Comics & Games oder anderen genannten Veranstaltern und Marken verbunden.' }
 };
 export const cosmoraPath = (locale:CosmoraLocale) => locale === 'it' ? '/cosmora' : `/${locale}/cosmora`;
+const eventCallout = {
+  it: ['Vai a Lucca Comics 2026?', 'Scopri Cosmora, il progetto per cosplay e community.', 'Non affiliato all’evento'],
+  en: ['Going to Lucca Comics 2026?', 'Discover Cosmora, a project for cosplay and community.', 'Not affiliated with the event'],
+  fr: ['Vous allez à Lucca Comics 2026 ?', 'Découvrez Cosmora, le projet dédié au cosplay et à la communauté.', 'Sans affiliation à l’événement'],
+  es: ['¿Vas a Lucca Comics 2026?', 'Descubre Cosmora, el proyecto de cosplay y comunidad.', 'Sin afiliación al evento'],
+  de: ['Auf zur Lucca Comics 2026?', 'Entdecke Cosmora, das Projekt für Cosplay und Community.', 'Nicht mit der Veranstaltung verbunden'],
+};
+function CosmoraEventCallout({locale}:{locale:CosmoraLocale}) {
+  const [title, description, independent] = eventCallout[locale];
+  return <div className="cosmora-event-callout"><p className="cosmora-event-question">{title}</p><p>{description}</p><small>{cosmoraCopy[locale].status} · {independent}</small></div>;
+}
 export const cosmoraLanguages = Object.fromEntries([...(['it','en','fr','es','de'] as CosmoraLocale[]).map(l=>[l,`https://www.kreluna.it${cosmoraPath(l)}`]),['x-default','https://www.kreluna.it/cosmora']]);
 export function cosmoraMetadata(locale:CosmoraLocale):Metadata {
   const t=cosmoraCopy[locale], title=`Cosmora | ${t.title}`;
@@ -18,7 +29,7 @@ export function CosmoraFeature({locale}:{locale:CosmoraLocale}) {
   const t=cosmoraCopy[locale];
   return <article className="cosmora-feature">
     <picture><source media="(max-width:640px)" srcSet="/cosmora-hero-mobile.jpg" /><img src="/cosmora-hero.jpg" alt="" width="1672" height="941" loading="lazy" decoding="async" /></picture>
-    <div className="cosmora-feature-copy"><span className="cosmora-status">{t.status}</span><p className="cosmora-kicker">{t.label}</p><h3>COSMORA</h3><p className="cosmora-tagline">{t.title}</p><p>{t.intro}</p><a className="button button-primary" href={cosmoraPath(locale)}>{t.discover} <span aria-hidden="true">↗</span></a></div>
+    <div className="cosmora-feature-copy"><p className="cosmora-kicker">COSPLAY · COMMUNITY · COLLECT</p><h3>COSMORA</h3><CosmoraEventCallout locale={locale} /><a className="button button-primary" href={cosmoraPath(locale)}>{t.discover} <span aria-hidden="true">↗</span></a></div>
   </article>;
 }
 export default function CosmoraPage({locale}:{locale:CosmoraLocale}) {
@@ -29,7 +40,7 @@ export default function CosmoraPage({locale}:{locale:CosmoraLocale}) {
     <header className="cosmora-header"><a href={root}>KRELUNA <span>· COSMORA</span></a><a href={root}>{t.home}</a><nav aria-label={t.languages}>{(['it','en','fr','es','de'] as CosmoraLocale[]).map(l=><a href={cosmoraPath(l)} key={l} hrefLang={l} lang={l} aria-label={{it:'Italiano',en:'English',fr:'Français',es:'Español',de:'Deutsch'}[l]} aria-current={locale===l?'page':undefined}>{l.toUpperCase()}</a>)}</nav></header>
     <main id="cosmora-main" tabIndex={-1}>
       <section className="cosmora-intro section-shell"><span className="cosmora-status">{t.status}</span><p className="cosmora-kicker">COSMORA · COSPLAY & COLLECT</p><h1>{t.title}</h1><p>{t.intro}</p><a className="button button-primary" href={contact}>{t.contact} ↗</a><p className="cosmora-notice">{t.notice}</p></section>
-      <figure className="cosmora-art section-shell"><picture><source media="(max-width:640px)" srcSet="/cosmora-hero-mobile.jpg" /><img src="/cosmora-hero.jpg" alt={t.preview} width="1672" height="941" decoding="async" /></picture><figcaption>{t.preview}</figcaption></figure>
+      <figure className="cosmora-art section-shell"><div className="cosmora-art-frame"><picture><source media="(max-width:640px)" srcSet="/cosmora-hero-mobile.jpg" /><img src="/cosmora-hero.jpg" alt={t.preview} width="1672" height="941" decoding="async" /></picture><CosmoraEventCallout locale={locale} /></div><figcaption>{t.preview}</figcaption></figure>
       <section className="cosmora-details section-shell"><h2>{t.heading}</h2><div className="cosmora-functions">{t.features.map(([title,body])=><article key={title}><h3>{title}</h3><p>{body}</p></article>)}</div><aside className="cosmora-event"><h2>{t.eventTitle}</h2><p>{t.event}</p><p className="cosmora-notice">{t.independent}</p></aside><a href={locale==='it'?'/progetti':`/${locale}/projects`}>{t.projects} ↗</a></section>
     </main><footer className="projects-page-footer">© 2026 Kreluna · P. IVA 02114130475 · REA PT-622714</footer>
     <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(data)}} />
