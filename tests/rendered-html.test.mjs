@@ -122,11 +122,16 @@ test("Lucca guides are localized, linked and honest about exhibitor data", async
     assert.ok(html.includes(`rel="canonical" href="https://www.kreluna.it${path}"`));
     assert.match(html,/Mappa\/Espositori/);
     assert.match(html,/id="stands"/);
+    assert.match(html,/id="practical"/);
+    assert.equal((html.match(/class="guide-answer"/g)||[]).length,6);
+    assert.match(html,/"@type":"BreadcrumbList"/);
     assert.match(html,/"@type":"Article"/);
     assert.match(html,/https:\/\/lucca2026.luccacomicsandgames.com\/it\/info/);
     assert.doesNotMatch(html,/"@type":"Event"|"@type":"Offer"/);
     const parent=await (await render(root)).text();
     assert.ok(parent.includes(`href="${path}"`));
+    const home=await (await render(locale==='it'?'/':`/${locale}`)).text();
+    assert.ok(home.includes(`href="${path}"`));
   }
 });
 

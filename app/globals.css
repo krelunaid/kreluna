@@ -916,6 +916,10 @@ footer { border-top: 1px solid var(--line); padding: 64px max(5vw, 24px) 30px; }
 .cosmora-guide { max-width:960px; padding-block:56px; }
 .cosmora-guide h1 { font:600 clamp(2.25rem,5vw,4rem)/1.12 'Space Grotesk',sans-serif; letter-spacing:-.035em; }
 .cosmora-guide h2 { font-size:clamp(1.5rem,3vw,2rem); line-height:1.25; }
+.guide-answer { padding-block:24px; border-bottom:1px solid var(--line); }
+.guide-answer h3 { font-size:1.2rem; line-height:1.4; }
+.guide-answer a { display:inline-block; margin-top:12px; }
+.cosmora-home-guide { display:block; margin-top:18px; padding:12px 0; font-size:1rem; line-height:1.6; }
 .cosmora-guide p, .cosmora-guide li { font-size:1rem; line-height:1.85; color:#d3c9dd; margin-top:16px; }
 .cosmora-guide .guide-lead { font-size:1.2rem; }
 .cosmora-guide section { margin-top:40px; scroll-margin-top:24px; }

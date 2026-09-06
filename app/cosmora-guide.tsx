@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import PracticalGuide from './cosmora-guide-practical';
 import { cosmoraCopy, cosmoraPath, type CosmoraLocale } from './cosmora-content';
 
 const official = 'https://lucca2026.luccacomicsandgames.com/it/home';
@@ -52,13 +53,15 @@ export function guideMetadata(l:CosmoraLocale):Metadata {
 }
 export default function CosmoraGuide({locale}:{locale:CosmoraLocale}) {
  const t=copy[locale],p=cosmoraCopy[locale],url=`https://www.kreluna.it${guidePath(locale)}`;
+ const crumbs={'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:p.home,item:`https://www.kreluna.it${locale==='it'?'/':`/${locale}`}`},{'@type':'ListItem',position:2,name:'Cosmora',item:`https://www.kreluna.it${cosmoraPath(locale)}`},{'@type':'ListItem',position:3,name:t.title,item:url}]};
  const data={'@context':'https://schema.org','@type':'Article',headline:t.title,description:t.intro,inLanguage:locale,datePublished:'2026-09-06',dateModified:'2026-09-06',mainEntityOfPage:url,author:{'@type':'Organization',name:'Kreluna',url:'https://www.kreluna.it/'},publisher:{'@type':'Organization',name:'Kreluna',url:'https://www.kreluna.it/'}};
  return <div lang={locale}><a className="skip-link" href="#guide-main">{p.skip}</a><header className="cosmora-header"><a href={locale==='it'?'/':`/${locale}`}>KRELUNA <span>· COSMORA</span></a><a href={cosmoraPath(locale)}>Cosmora</a><nav aria-label={p.languages}>{locales.map(l=><a key={l} href={guidePath(l)} hrefLang={l} lang={l} aria-label={{it:'Italiano',en:'English',fr:'Français',es:'Español',de:'Deutsch'}[l]} aria-current={l===locale?'page':undefined}>{l.toUpperCase()}</a>)}</nav></header>
- <main id="guide-main" tabIndex={-1} className="cosmora-guide section-shell"><article><p className="cosmora-kicker">COSMORA · GUIDE</p><h1>{t.title}</h1><p className="guide-lead">{t.intro}</p><p className="cosmora-notice">{t.updated}</p><nav className="guide-index" aria-label={t.title}><a href="#stands">{t.stands}</a><a href="#cosplay">Cosplay</a><a href="#manga">Manga</a><a href="#cosmora">Cosmora</a></nav>
+ <main id="guide-main" tabIndex={-1} className="cosmora-guide section-shell"><article><p><a href={locale==='it'?'/':`/${locale}`}>{p.home}</a> / <a href={cosmoraPath(locale)}>Cosmora</a> / Lucca Comics 2026</p><p className="cosmora-kicker">COSMORA · GUIDE</p><h1>{t.title}</h1><p className="guide-lead">{t.intro}</p><p className="cosmora-notice">{t.updated}</p><nav className="guide-index" aria-label={t.title}><a href="#stands">{t.stands}</a><a href="#cosplay">Cosplay</a><a href="#manga">Manga</a><a href="#practical">{ {it:'Domande pratiche',en:'Practical questions',fr:'Questions pratiques',es:'Preguntas prácticas',de:'Praktische Fragen'}[locale]}</a><a href="#cosmora">Cosmora</a></nav>
  <section><h2>{t.dates}</h2><p>{t.dateText}</p><a href={official}>{t.source} ↗</a></section>
  <section id="stands"><h2>{t.stands}</h2><p>{t.standText}</p><ol>{t.steps.map(s=><li key={s}>{s}</li>)}</ol><a href={official}>{t.source} ↗</a></section>
  {t.topics.map(([title,body],i)=><section key={title} id={['cosplay','manga','collect'][i]}><h2>{title}</h2><p>{body}</p></section>)}
+ <PracticalGuide locale={locale} />
  <section><h2>{t.useful}</h2><ul><li><a href="https://lucca2026.luccacomicsandgames.com/it/info">{t.info} ↗</a></li><li><a href="https://lucca2026.luccacomicsandgames.com/it/biglietti">{t.tickets} ↗</a></li></ul></section>
  <section id="cosmora" className="cosmora-event"><h2>{t.cosmora}</h2><p>{t.project}</p><p className="cosmora-notice">{p.independent}</p><a className="button button-primary" href={cosmoraPath(locale)}>{p.discover} ↗</a></section>
- </article></main><footer className="projects-page-footer">© 2026 Kreluna · P. IVA 02114130475 · REA PT-622714</footer><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(data)}} /></div>;
+ </article></main><footer className="projects-page-footer">© 2026 Kreluna · P. IVA 02114130475 · REA PT-622714</footer><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify([data,crumbs])}} /></div>;
 }
