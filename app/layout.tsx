@@ -39,10 +39,13 @@ export const metadata: Metadata = {
       },
   icons: {
     icon: [
-      { url: `${assetBasePath}/favicon-32.png`, type: "image/png", sizes: "32x32" },
-      { url: `${assetBasePath}/favicon-192.png`, type: "image/png", sizes: "192x192" },
+      { url: `${assetBasePath}/favicon.svg?v=c4f455`, type: "image/svg+xml" },
+      { url: `${assetBasePath}/favicon-32.png?v=c4f455`, type: "image/png", sizes: "32x32" },
+      { url: `${assetBasePath}/favicon-48.png?v=c4f455`, type: "image/png", sizes: "48x48" },
+      { url: `${assetBasePath}/favicon-192.png?v=c4f455`, type: "image/png", sizes: "192x192" },
     ],
-    apple: [{ url: `${assetBasePath}/favicon-192.png`, type: "image/png", sizes: "192x192" }],
+    shortcut: `${assetBasePath}/favicon-48.png?v=c4f455`,
+    apple: [{ url: `${assetBasePath}/apple-touch-icon.png?v=c4f455`, type: "image/png", sizes: "180x180" }],
   },
   manifest: `${assetBasePath}/site.webmanifest`,
   openGraph: {

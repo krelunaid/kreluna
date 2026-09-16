@@ -34,6 +34,12 @@ test("renders the Kreluna ecosystem homepage", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
+  assert.match(html, /favicon\.svg\?v=c4f455/);
+  assert.match(html, /favicon-32\.png\?v=c4f455/);
+  assert.match(html, /favicon-48\.png\?v=c4f455/);
+  assert.match(html, /favicon-192\.png\?v=c4f455/);
+  assert.match(html, /apple-touch-icon\.png\?v=c4f455/);
+  assert.doesNotMatch(html, /href="\[object Object\]"/);
   assert.match(html, /<style id="kreluna-global-styles">/);
   assert.doesNotMatch(html, /<link[^>]+rel="stylesheet"[^>]+\/_next\/static\/css/);
   assert.match(html, /<html lang="it-IT"/i);
@@ -332,6 +338,22 @@ test("ships lightweight, production-ready discovery assets", async () => {
   assert.equal(manifest.start_url, "/");
   assert.equal(manifest.icons[0].src, "/favicon-192.png");
   assert.equal(manifest.icons[1].src, "/favicon-512.png");
+
+  const brandMark = await readFile("public/favicon.svg", "utf8");
+  assert.match(brandMark, /fill="#c4f455"/);
+  assert.match(brandMark, /stroke="#191d18"/);
+  for (const file of [
+    "public/favicon.ico",
+    "public/favicon-32.png",
+    "public/favicon-48.png",
+    "public/favicon-192.png",
+    "public/favicon-512.png",
+    "public/apple-touch-icon.png",
+    "public/assets/favicon-32.png",
+    "public/assets/favicon-192.png",
+  ]) {
+    assert.ok((await stat(file)).size > 0, `${file} is missing`);
+  }
 
   const socialImage = await stat("public/og-kreluna.jpg");
   assert.ok(socialImage.size < 250_000, `Social image is ${socialImage.size} bytes`);
