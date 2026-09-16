@@ -39,6 +39,7 @@ test("renders the Kreluna ecosystem homepage", async () => {
   assert.match(html, /favicon-48\.png\?v=c4f455/);
   assert.match(html, /favicon-192\.png\?v=c4f455/);
   assert.match(html, /apple-touch-icon\.png\?v=c4f455/);
+  assert.doesNotMatch(html, /href="\[object Object\]"/);
   assert.match(html, /<style id="kreluna-global-styles">/);
   assert.doesNotMatch(html, /<link[^>]+rel="stylesheet"[^>]+\/_next\/static\/css/);
   assert.match(html, /<html lang="it-IT"/i);

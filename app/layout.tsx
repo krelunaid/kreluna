@@ -44,7 +44,7 @@ export const metadata: Metadata = {
       { url: `${assetBasePath}/favicon-48.png?v=c4f455`, type: "image/png", sizes: "48x48" },
       { url: `${assetBasePath}/favicon-192.png?v=c4f455`, type: "image/png", sizes: "192x192" },
     ],
-    shortcut: { url: `${assetBasePath}/favicon-48.png?v=c4f455`, type: "image/png" },
+    shortcut: `${assetBasePath}/favicon-48.png?v=c4f455`,
     apple: [{ url: `${assetBasePath}/apple-touch-icon.png?v=c4f455`, type: "image/png", sizes: "180x180" }],
   },
   manifest: `${assetBasePath}/site.webmanifest`,
