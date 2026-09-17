@@ -439,6 +439,7 @@ export default function Home() {
           </div>
           <div className="footer-column">
             <p className="footer-heading">Kreluna</p>
+            <a href="https://software.kreluna.it/">Kreluna Software · siti, app e software su misura</a>
             <a href="https://www.kreluna.it/azienda">Azienda</a>
             <a href="https://www.kreluna.it/risorse">Risorse</a>
             <a href="https://www.kreluna.it/contatti">Contatti</a>
