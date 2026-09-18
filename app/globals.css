@@ -210,6 +210,10 @@ h1 em, h2 em { font-family: var(--serif); font-weight: 500; background: linear-g
 .software-bridge { max-width: 1500px; margin: 0 auto; padding-top: 55px; padding-bottom: 80px; display: grid; grid-template-columns: minmax(0,1.05fr) minmax(420px,.95fr); gap: clamp(45px,7vw,110px); align-items: center; }
 .software-bridge-copy h2 { margin-top: 20px; font-size: clamp(2.6rem,4.9vw,5rem); line-height: 1.02; letter-spacing: -.05em; }
 .software-bridge-copy > p { max-width: 680px; margin-top: 24px; color: var(--muted); line-height: 1.75; }
+.software-bridge-copy > .software-bridge-proof { margin-top: 18px; padding: 16px 18px; border: 1px solid rgba(139,124,255,.24); border-radius: 16px; background: linear-gradient(120deg,rgba(139,124,255,.1),rgba(79,184,238,.06)); color: var(--text); font-size: .9rem; }
+.software-bridge-proof strong { color: var(--violet); }
+.software-bridge-proof a { color: var(--cyan); font-weight: 650; text-decoration: underline; text-decoration-color: rgba(79,184,238,.42); text-underline-offset: 4px; }
+.software-bridge-proof a:hover { color: var(--text); }
 .software-bridge-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
 .software-bridge-services { overflow: hidden; border: 1px solid var(--line); border-radius: 24px; background: radial-gradient(circle at 85% 5%,rgba(79,184,238,.14),transparent 42%),var(--panel); }
 .software-bridge-services a { display: grid; grid-template-columns: 38px 1fr; gap: 7px 15px; padding: 24px 26px; border-bottom: 1px solid var(--line); transition: background .25s ease; }

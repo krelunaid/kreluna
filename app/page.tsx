@@ -299,13 +299,20 @@ export default function Home() {
             gestionali su misura. Servizi, prezzi di partenza, demo e metodo sono raccolti
             nel sito Kreluna Software.
           </p>
+          <p className="software-bridge-proof">
+            <strong>Una prova concreta:</strong> il sito che stai visitando è un progetto interno
+            reale, progettato e sviluppato da Kreluna Software.{' '}
+            <a href="https://software.kreluna.it/montecatini-terme/siti-web/">
+              Scopri come realizziamo siti web a Montecatini Terme →
+            </a>
+          </p>
           <div className="software-bridge-actions">
             <a className="button button-primary" href="https://software.kreluna.it/">Scopri Kreluna Software <ArrowIcon /></a>
             <a className="button button-secondary" href="https://software.kreluna.it/check-sito/">Controlla gratis il tuo sito <ArrowIcon /></a>
           </div>
         </div>
         <div className="software-bridge-services" aria-label="Servizi Kreluna Software">
-          <a href="https://software.kreluna.it/servizi/realizzazione-siti-web/"><span>01</span><strong>Siti web ed e-commerce</strong><small>Identità, contenuti, contatti e vendita online.</small></a>
+          <a href="https://software.kreluna.it/montecatini-terme/siti-web/"><span>01</span><strong>Siti web a Montecatini Terme</strong><small>Identità, contenuti, contatti e vendita online.</small></a>
           <a href="https://software.kreluna.it/servizi/sviluppo-app/"><span>02</span><strong>App iOS, Android e web</strong><small>Prenotazioni, servizi e percorsi digitali.</small></a>
           <a href="https://software.kreluna.it/servizi/software-su-misura/"><span>03</span><strong>Software su misura</strong><small>Processi, ruoli e dati riuniti in uno strumento chiaro.</small></a>
         </div>
