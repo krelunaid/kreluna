@@ -206,6 +206,7 @@ export default function Home() {
         <Logo />
         <nav className="desktop-nav" aria-label="Navigazione principale">
           <a href="#come-lavoriamo">Cosa facciamo</a>
+          <a className="nav-software" href="https://software.kreluna.it/">Siti, app e software</a>
           <a href="/progetti">Progetti</a>
           <a href="/citybeam">CityBeam</a>
           <a className="nav-cosmora" href="/cosmora">Cosmora</a>
@@ -237,6 +238,7 @@ export default function Home() {
             aria-label="Chiudi il menu"
           >×</button>
           <a href="#come-lavoriamo" onClick={() => setMenuOpen(false)}>Cosa facciamo</a>
+          <a className="nav-software" href="https://software.kreluna.it/">Siti, app e software</a>
           <a href="/progetti" onClick={() => setMenuOpen(false)}>Progetti</a>
           <a href="/citybeam" onClick={() => setMenuOpen(false)}>CityBeam</a>
           <a className="nav-cosmora" href="/cosmora" onClick={() => setMenuOpen(false)}>Cosmora</a>
@@ -286,6 +288,27 @@ export default function Home() {
           Partiamo da un bisogno reale, definiamo cosa deve funzionare e costruiamo
           soltanto ciò che serve. Ogni progetto resta comprensibile, verificabile e umano.
         </p>
+      </section>
+
+      <section className="software-bridge section-shell reveal" aria-labelledby="software-bridge-title">
+        <div className="software-bridge-copy">
+          <div className="eyebrow"><i /> Kreluna Software</div>
+          <h2 id="software-bridge-title">Un sito, un’app o un software<br /><em>costruito intorno al tuo lavoro.</em></h2>
+          <p>
+            Per attività, professionisti e imprese realizziamo siti web, e-commerce, app e
+            gestionali su misura. Servizi, prezzi di partenza, demo e metodo sono raccolti
+            nel sito Kreluna Software.
+          </p>
+          <div className="software-bridge-actions">
+            <a className="button button-primary" href="https://software.kreluna.it/">Scopri Kreluna Software <ArrowIcon /></a>
+            <a className="button button-secondary" href="https://software.kreluna.it/check-sito/">Controlla gratis il tuo sito <ArrowIcon /></a>
+          </div>
+        </div>
+        <div className="software-bridge-services" aria-label="Servizi Kreluna Software">
+          <a href="https://software.kreluna.it/servizi/realizzazione-siti-web/"><span>01</span><strong>Siti web ed e-commerce</strong><small>Identità, contenuti, contatti e vendita online.</small></a>
+          <a href="https://software.kreluna.it/servizi/sviluppo-app/"><span>02</span><strong>App iOS, Android e web</strong><small>Prenotazioni, servizi e percorsi digitali.</small></a>
+          <a href="https://software.kreluna.it/servizi/software-su-misura/"><span>03</span><strong>Software su misura</strong><small>Processi, ruoli e dati riuniti in uno strumento chiaro.</small></a>
+        </div>
       </section>
 
       <UpcomingProjects />
@@ -439,6 +462,7 @@ export default function Home() {
           </div>
           <div className="footer-column">
             <p className="footer-heading">Kreluna</p>
+            <a href="https://software.kreluna.it/">Kreluna Software · siti, app e software su misura</a>
             <a href="https://www.kreluna.it/azienda">Azienda</a>
             <a href="https://www.kreluna.it/risorse">Risorse</a>
             <a href="https://www.kreluna.it/contatti">Contatti</a>
