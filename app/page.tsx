@@ -156,9 +156,12 @@ function HeroDevices() {
 function Logo() {
   return (
     <a className="brand" href="#top" aria-label="Kreluna, torna all'inizio">
-      {/* The logo is a tiny local decorative asset with fixed intrinsic dimensions. */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={`${assetBasePath}/kreluna-logo-64.webp`} alt="" width="128" height="128" decoding="async" />
+      <svg className="brand-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <rect width="24" height="24" rx="6" fill="#c4f455" />
+        <g fill="none" stroke="#121212" strokeWidth="2.2" strokeLinecap="round">
+          <path d="M12 6v12M17.196 9 6.804 15m0-6 10.392 6" />
+        </g>
+      </svg>
       <span>KRELUNA</span>
     </a>
   );
