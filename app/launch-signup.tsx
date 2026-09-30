@@ -7,7 +7,15 @@ export const launchCopy = {
   de: {title:'Wir informieren dich zum Start.',intro:'Hinterlasse deine E-Mail für die Startbenachrichtigung zu',email:'Deine E-Mail',button:'Zum Start benachrichtigen',consent:'Ich möchte nur die Startbenachrichtigung für diese App erhalten.',note:'Keine Zahlung. Du kannst jederzeit die Löschung anfordern.',cancel:'Löschung anfordern',busy:'Wird eingetragen…',success:'Anmeldung gespeichert. Wir informieren dich, wenn diese App startet.',error:'Anmeldung fehlgeschlagen. Bitte erneut versuchen oder eine E-Mail senden.',fallback:'Falls das Formular nicht funktioniert, schreibe an',state:'In Entwicklung'},
 };
 export default function LaunchSignup({project, locale}:{project:'citybeam'|'velvet-table';locale:ProjectLocale}) {
-  const t=launchCopy[locale], name=project==='citybeam'?'CityBeam':'Velvet Table';
+  const base=launchCopy[locale], name=project==='citybeam'?'CityBeam':'Velvet Table';
+  const citybeamCopy = {
+    it: {title:'Ti avvisiamo al lancio.', consent:'Acconsento a ricevere solo l’avviso di lancio di CityBeam.', success:'Iscrizione registrata. Ti avviseremo al lancio di CityBeam.', state:'In fase di avvio'},
+    en: {title:'Hear from us at launch.', consent:'I agree to receive only the CityBeam launch notice.', success:'You’re on the list. We’ll notify you when CityBeam launches.', state:'Launch stage'},
+    fr: {title:'Recevez un avis au lancement.', consent:'J’accepte de recevoir uniquement l’avis de lancement de CityBeam.', success:'Inscription enregistrée. Nous vous informerons du lancement de CityBeam.', state:'En phase de lancement'},
+    es: {title:'Te avisamos al lanzamiento.', consent:'Acepto recibir únicamente el aviso de lanzamiento de CityBeam.', success:'Registro completado. Te avisaremos del lanzamiento de CityBeam.', state:'En fase de lanzamiento'},
+    de: {title:'Wir informieren dich zum Start.', consent:'Ich möchte nur die Startbenachrichtigung für CityBeam erhalten.', success:'Anmeldung gespeichert. Wir informieren dich, wenn CityBeam startet.', state:'In der Startphase'},
+  };
+  const t=project==='citybeam'?{...base,...citybeamCopy[locale]}:base;
   return <section className={`launch-signup launch-signup--${project}`} id="avvisami" aria-labelledby="launch-title">
     <div><span className="launch-state">{name} · {t.state}</span><h2 id="launch-title">{t.title}</h2><p>{t.intro} {name}.</p></div>
     <form data-launch-signup data-busy={t.busy} data-success={t.success} data-error={t.error} action="/api/launch-waitlist" method="post">

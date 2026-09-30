@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import type { Metadata } from 'next';
 import UpcomingProjects from "./upcoming-projects";
+import CityBeamHome from "./citybeam/citybeam-home";
 
 export const homeLanguages = { it: 'https://www.kreluna.it/', en: 'https://www.kreluna.it/en', fr: 'https://www.kreluna.it/fr', es: 'https://www.kreluna.it/es', de: 'https://www.kreluna.it/de', 'x-default': 'https://www.kreluna.it/' };
 type Locale = 'en' | 'fr' | 'es' | 'de';
@@ -71,6 +72,7 @@ export default function LocalizedHome({ locale }: { locale: Locale }) {
 <header className="site-header localized-header"><a className="brand" href={prefix} aria-label="Kreluna"><svg className="brand-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="6" fill="#c4f455" /><g fill="none" stroke="#121212" strokeWidth="2.2" strokeLinecap="round"><path d="M12 6v12M17.196 9 6.804 15m0-6 10.392 6" /></g></svg><span>KRELUNA</span></a><nav className="desktop-nav" aria-label={access[1]}><a href="#services">{t.services}</a><a href={`${prefix}/projects`}>{t.projects}</a><a href={`${prefix}/citybeam`}>CityBeam</a><a className="nav-cosmora" href={`${prefix}/cosmora`}>Cosmora</a></nav><a className="button button-small button-primary" href={contact}>{t.contact}</a></header>
     <main id="main-content" tabIndex={-1}>
 <section className="hero section-shell"><div className="hero-copy"><div className="eyebrow">Kreluna · software · AI</div><h1>{t.heading}<br /> <em>{t.subheading}</em></h1><p>{t.intro}</p><div className="hero-actions"><a className="button button-primary" href={`${prefix}/citybeam`}>{t.discover} ↗</a><a className="button button-secondary" href="#services">{t.services}</a></div><nav className="hero-actions" aria-label={access[2]}>{Object.entries(homeLanguages).filter(([l])=>l!=='x-default').map(([l,url])=><a key={l} href={url} hrefLang={l} lang={l} aria-label={({it:'Italiano',en:'English',fr:'Français',es:'Español',de:'Deutsch'} as Record<string,string>)[l]} aria-current={l===locale?'page':undefined}>{l.toUpperCase()}</a>)}</nav></div></section>
+      <CityBeamHome locale={locale} />
       <section className="editorial-home section-shell" id="services"><h2>{t.services}</h2><div className="editorial-home-grid">{t.cards.map(([title,text])=><article className="editorial-home-card" key={title}><h3>{title}</h3><p>{text}</p></article>)}</div></section>
       <section className="statement section-shell"><h2>{t.methodTitle}</h2><p>{t.method}</p></section>
       <UpcomingProjects locale={locale} />

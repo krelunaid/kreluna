@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import type { Metadata } from "next";
 import { cityBeamFaq } from "./citybeam-faq";
+import { cityBeamContent as translations } from "./citybeam-content";
 import LaunchSignup from '../launch-signup';
 
 export type CityBeamLocale = "it" | "en" | "fr" | "es" | "de";
@@ -14,14 +15,6 @@ const localePath: Record<CityBeamLocale, string> = {
   de: "/de/citybeam",
 };
 
-const contactPath: Record<CityBeamLocale, string> = {
-  it: "/contatti",
-  en: "/en/contact",
-  fr: "/fr/contact",
-  es: "/es/contacto",
-  de: "/de/kontakt",
-};
-
 const openGraphLocale: Record<CityBeamLocale, string> = {
   it: "it_IT",
   en: "en_GB",
@@ -29,94 +22,6 @@ const openGraphLocale: Record<CityBeamLocale, string> = {
   es: "es_ES",
   de: "de_DE",
 };
-
-const translations = {
-  it: {
-    lang: "it-IT", title: "CityBeam | Pubblicità a Times Square e sui maxi-schermi",
-    description: "CityBeam è il progetto Kreluna in pre-lancio per rendere più semplice la richiesta di spot su maxi-schermi iconici, iniziando da Times Square.",
-    navHome: "Home", navHow: "Come funziona", navFor: "Per chi", navContact: "Contatti", kicker: "CityBeam · progetto in fase di lancio",
-    h1a: "Il tuo momento sui", h1b: "grandi schermi", h1c: " del mondo.",
-    intro: "Kreluna sta sviluppando un marketplace europeo per rendere più semplice la richiesta di spot sui maxi-schermi delle destinazioni più iconiche. La prima destinazione prevista è Times Square, a New York.",
-    info: "Richiedi informazioni", discover: "Scopri il progetto",
-    disclosure: "CityBeam è in pre-lancio. Schermi, disponibilità, immagini, prezzi e prenotazioni saranno pubblicati esclusivamente dopo la conferma degli operatori autorizzati.",
-    destination: "Prima destinazione prevista", howKicker: "Un percorso più semplice", howTitle: "Dall’idea alla pubblicazione.",
-    howIntro: "CityBeam è pensato per trasformare un acquisto oggi complesso in un percorso chiaro, mantenendo sempre l’approvazione finale degli operatori e delle loro policy.",
-    steps: [["Scegli il momento", "Indica destinazione, periodo, occasione e tipo di visibilità desiderata."], ["Prepara il contenuto", "Carica foto o video seguendo specifiche tecniche e regole editoriali confermate."], ["Ricevi la conferma", "Dopo approvazione e pubblicazione, ricevi la prova disponibile della messa in onda."]],
-    business: "Aziende e creator", businessTitle: "Lancia un prodotto dove il mondo guarda.", businessText: "Campagne, eventi, contenuti creativi e momenti di marca su schermi ad alta visibilità.",
-    personal: "Momenti personali", personalTitle: "Trasforma un messaggio in un ricordo.", personalText: "Auguri, dediche e celebrazioni, sempre nel rispetto delle policy applicabili.",
-    statusKicker: "La rete è in costruzione", statusTitle: "Stiamo parlando con gli operatori.",
-    statusText: "CityBeam non vende ancora spazi pubblicitari. Stiamo verificando disponibilità, condizioni di rivendita, specifiche tecniche e sistemi di prova della pubblicazione con operatori qualificati.",
-    talk: "Parla con Kreluna", provisional: "CityBeam è un nome provvisorio",
-  },
-  en: {
-    lang: "en-GB", title: "CityBeam | Times Square and digital billboard advertising",
-    description: "CityBeam is Kreluna’s pre-launch project designed to simplify access to iconic digital billboards, starting with Times Square.",
-    navHome: "Home", navHow: "How it works", navFor: "Who it’s for", navContact: "Contact", kicker: "CityBeam · pre-launch project",
-    h1a: "Your moment on the", h1b: "world’s biggest screens", h1c: ".",
-    intro: "Kreluna is developing a European marketplace designed to simplify requests for placements on iconic digital billboards. Times Square in New York is the first planned destination.",
-    info: "Request information", discover: "Explore the project",
-    disclosure: "CityBeam is in pre-launch. Screens, availability, images, pricing and bookings will be published only after confirmation from authorised operators.",
-    destination: "First planned destination", howKicker: "A simpler journey", howTitle: "From idea to display.",
-    howIntro: "CityBeam is designed to turn a complex media purchase into a clear journey while preserving the operators’ final approval and content policies.",
-    steps: [["Choose the moment", "Select the destination, timing, occasion and visibility you are looking for."], ["Prepare the content", "Upload a photo or video that follows confirmed technical and editorial requirements."], ["Receive confirmation", "After approval and display, receive the available proof of play."]],
-    business: "Brands and creators", businessTitle: "Launch where the world is watching.", businessText: "Campaigns, events, creative content and brand moments on high-visibility screens.",
-    personal: "Personal moments", personalTitle: "Turn a message into a memory.", personalText: "Greetings, dedications and celebrations, always subject to the applicable policies.",
-    statusKicker: "The network is being built", statusTitle: "We are speaking with operators.",
-    statusText: "CityBeam is not yet selling advertising space. We are verifying availability, resale terms, technical specifications and proof-of-play options with qualified operators.",
-    talk: "Talk to Kreluna", provisional: "CityBeam is a working name",
-  },
-  fr: {
-    lang: "fr-FR", title: "CityBeam | Publicité à Times Square et écrans géants",
-    description: "CityBeam est le projet Kreluna en pré-lancement pour simplifier l’accès aux écrans numériques iconiques, en commençant par Times Square.",
-    navHome: "Accueil", navHow: "Fonctionnement", navFor: "Pour qui", navContact: "Contact", kicker: "CityBeam · projet en pré-lancement",
-    h1a: "Votre moment sur les", h1b: "plus grands écrans", h1c: " du monde.",
-    intro: "Kreluna développe une marketplace européenne pour simplifier les demandes de diffusion sur les écrans numériques des destinations les plus iconiques. Times Square, à New York, est la première destination prévue.",
-    info: "Demander des informations", discover: "Découvrir le projet",
-    disclosure: "CityBeam est en pré-lancement. Les écrans, disponibilités, images, tarifs et réservations seront publiés uniquement après confirmation des opérateurs autorisés.",
-    destination: "Première destination prévue", howKicker: "Un parcours plus simple", howTitle: "De l’idée à la diffusion.",
-    howIntro: "CityBeam veut transformer un achat média complexe en un parcours clair, tout en respectant l’approbation finale et les règles de contenu des opérateurs.",
-    steps: [["Choisissez le moment", "Indiquez la destination, la période, l’occasion et la visibilité souhaitée."], ["Préparez le contenu", "Importez une photo ou une vidéo conforme aux spécifications techniques et éditoriales confirmées."], ["Recevez la confirmation", "Après approbation et diffusion, recevez la preuve de passage disponible."]],
-    business: "Marques et créateurs", businessTitle: "Lancez votre projet là où le monde regarde.", businessText: "Campagnes, événements, contenus créatifs et temps forts de marque sur des écrans à forte visibilité.",
-    personal: "Moments personnels", personalTitle: "Transformez un message en souvenir.", personalText: "Vœux, dédicaces et célébrations, toujours dans le respect des règles applicables.",
-    statusKicker: "Le réseau se construit", statusTitle: "Nous échangeons avec les opérateurs.",
-    statusText: "CityBeam ne vend pas encore d’espaces publicitaires. Nous vérifions les disponibilités, conditions de revente, spécifications techniques et preuves de diffusion avec des opérateurs qualifiés.",
-    talk: "Parler à Kreluna", provisional: "CityBeam est un nom provisoire",
-  },
-  es: {
-    lang: "es-ES", title: "CityBeam | Publicidad en Times Square y pantallas gigantes",
-    description: "CityBeam es el proyecto de Kreluna en prelanzamiento para simplificar el acceso a pantallas digitales icónicas, empezando por Times Square.",
-    navHome: "Inicio", navHow: "Cómo funciona", navFor: "Para quién", navContact: "Contacto", kicker: "CityBeam · proyecto en prelanzamiento",
-    h1a: "Tu momento en las", h1b: "pantallas más grandes", h1c: " del mundo.",
-    intro: "Kreluna está desarrollando un marketplace europeo para simplificar las solicitudes de anuncios en las pantallas digitales de los destinos más icónicos. Times Square, en Nueva York, es el primer destino previsto.",
-    info: "Solicitar información", discover: "Descubrir el proyecto",
-    disclosure: "CityBeam está en prelanzamiento. Las pantallas, disponibilidad, imágenes, precios y reservas se publicarán únicamente tras la confirmación de los operadores autorizados.",
-    destination: "Primer destino previsto", howKicker: "Un proceso más sencillo", howTitle: "De la idea a la publicación.",
-    howIntro: "CityBeam busca convertir una compra de medios compleja en un proceso claro, manteniendo siempre la aprobación final y las políticas de contenido de los operadores.",
-    steps: [["Elige el momento", "Indica el destino, el periodo, la ocasión y el tipo de visibilidad que buscas."], ["Prepara el contenido", "Sube una foto o un vídeo siguiendo las especificaciones técnicas y editoriales confirmadas."], ["Recibe la confirmación", "Tras la aprobación y publicación, recibe la prueba de emisión disponible."]],
-    business: "Marcas y creadores", businessTitle: "Lanza tu proyecto donde mira el mundo.", businessText: "Campañas, eventos, contenido creativo y momentos de marca en pantallas de gran visibilidad.",
-    personal: "Momentos personales", personalTitle: "Convierte un mensaje en un recuerdo.", personalText: "Felicitaciones, dedicatorias y celebraciones, siempre de acuerdo con las políticas aplicables.",
-    statusKicker: "La red está en construcción", statusTitle: "Estamos hablando con los operadores.",
-    statusText: "CityBeam todavía no vende espacios publicitarios. Estamos verificando disponibilidad, condiciones de reventa, especificaciones técnicas y pruebas de emisión con operadores cualificados.",
-    talk: "Habla con Kreluna", provisional: "CityBeam es un nombre provisional",
-  },
-  de: {
-    lang: "de-DE", title: "CityBeam | Werbung am Times Square und auf Großbildschirmen",
-    description: "CityBeam ist Krelunas Pre-Launch-Projekt für einen einfacheren Zugang zu ikonischen Digitalflächen – beginnend am Times Square.",
-    navHome: "Startseite", navHow: "So funktioniert es", navFor: "Für wen", navContact: "Kontakt", kicker: "CityBeam · Projekt vor dem Start",
-    h1a: "Dein Moment auf den", h1b: "größten Bildschirmen", h1c: " der Welt.",
-    intro: "Kreluna entwickelt einen europäischen Marktplatz, der Anfragen für Werbeplätze auf ikonischen digitalen Großbildschirmen vereinfacht. Der Times Square in New York ist das erste geplante Ziel.",
-    info: "Informationen anfordern", discover: "Projekt entdecken",
-    disclosure: "CityBeam befindet sich vor dem Start. Bildschirme, Verfügbarkeit, Bilder, Preise und Buchungen werden erst nach Bestätigung durch autorisierte Betreiber veröffentlicht.",
-    destination: "Erstes geplantes Ziel", howKicker: "Ein einfacherer Weg", howTitle: "Von der Idee zur Ausstrahlung.",
-    howIntro: "CityBeam soll einen komplexen Mediaeinkauf in einen klaren Ablauf verwandeln und dabei die endgültige Freigabe und Inhaltsrichtlinien der Betreiber wahren.",
-    steps: [["Wähle den Moment", "Bestimme Ziel, Zeitraum, Anlass und die gewünschte Sichtbarkeit."], ["Bereite den Inhalt vor", "Lade ein Foto oder Video gemäß den bestätigten technischen und redaktionellen Vorgaben hoch."], ["Erhalte die Bestätigung", "Nach Freigabe und Ausstrahlung erhältst du den verfügbaren Ausspielungsnachweis."]],
-    business: "Marken und Creator", businessTitle: "Starte dort, wo die Welt hinsieht.", businessText: "Kampagnen, Events, kreative Inhalte und Markenmomente auf aufmerksamkeitsstarken Bildschirmen.",
-    personal: "Persönliche Momente", personalTitle: "Mach aus einer Botschaft eine Erinnerung.", personalText: "Glückwünsche, Widmungen und Feiern – immer gemäß den geltenden Richtlinien.",
-    statusKicker: "Das Netzwerk entsteht", statusTitle: "Wir sprechen mit den Betreibern.",
-    statusText: "CityBeam verkauft noch keine Werbeflächen. Wir prüfen Verfügbarkeit, Wiederverkaufsbedingungen, technische Spezifikationen und Ausspielungsnachweise mit qualifizierten Betreibern.",
-    talk: "Mit Kreluna sprechen", provisional: "CityBeam ist ein vorläufiger Name",
-  },
-} as const;
 
 const photoStory = {
   it: {
@@ -196,17 +101,17 @@ const photoStory = {
   },
 } as const;
 
-function CityBeamProofPhoto({ file, alt, brand, featured = false }: { file: string; alt: string; brand: string; featured?: boolean }) {
+function CityBeamProofPhoto({ file, alt, brand, scene, label, hero = false }: { file: string; alt: string; brand: string; scene: string; label: string; hero?: boolean }) {
   const base = `/citybeam/ny-d020/${file}`;
-  return (
-    <figure className={`citybeam-proof-photo${featured ? " citybeam-proof-photo-featured" : ""}`}>
-      <picture>
-        <source type="image/avif" srcSet={`${base}-640.avif 640w, ${base}-1200.avif 1200w`} sizes="(max-width: 700px) calc(100vw - 40px), (max-width: 980px) 42vw, 42vw" />
-        <img src={`${base}-1200.webp`} srcSet={`${base}-640.webp 640w, ${base}-1200.webp 1200w`} sizes="(max-width: 700px) calc(100vw - 40px), (max-width: 980px) 42vw, 42vw" alt={alt} width="1200" height="800" loading="lazy" decoding="async" />
-      </picture>
-      <figcaption><span>NY-D020 · Times Square</span><strong>{brand}</strong></figcaption>
-    </figure>
-  );
+  const sizes = hero ? '(max-width: 800px) 90vw, 54vw' : '(max-width: 700px) 90vw, 30vw';
+  return <figure className={hero ? 'citybeam-visual' : 'citybeam-proof-photo'}>
+    <a className="citybeam-photo-link" href={`${base}-1200.webp`} data-cb-photo data-caption={`${brand} · NY-D020 · Heritage Outdoor`} aria-label={`${label}: ${brand}`}>
+      <picture><source type="image/avif" srcSet={`${base}-640.avif 640w, ${base}-1200.avif 1200w`} sizes={sizes} />
+        <img src={`${base}-1200.webp`} srcSet={`${base}-640.webp 640w, ${base}-1200.webp 1200w`} sizes={sizes} alt={alt} width="1200" height="800" loading={hero ? 'eager' : 'lazy'} fetchPriority={hero ? 'high' : undefined} decoding="async" />
+      </picture><span className="citybeam-photo-expand" aria-hidden="true">↗</span>
+    </a>
+    <figcaption><div><span>{scene}</span><strong>{hero ? '1530 Broadway · Times Square' : brand}</strong></div><span className="citybeam-photo-number">{hero ? 'NY-D020 / NYC' : 'NY-D020'}</span></figcaption>
+  </figure>;
 }
 
 export function cityBeamMetadata(locale: CityBeamLocale): Metadata {
@@ -284,11 +189,11 @@ export default function CityBeamLanding({ locale }: { locale: CityBeamLocale }) 
         about: { "@id": `${canonical}#project` },
         primaryImageOfPage: {
           "@type": "ImageObject",
-          url: `${siteUrl}/citybeam/ny-d020/ny-d020-asos-hero-1600.webp`,
-          width: 1600,
-          height: 1067,
+          url: `${siteUrl}/citybeam/ny-d020/ny-d020-the-economist-1200.webp`,
+          width: 1200,
+          height: 800,
         },
-        dateModified: "2026-09-29",
+        dateModified: "2026-09-30",
       },
       {
         "@type": "Service",
@@ -299,7 +204,7 @@ export default function CityBeamLanding({ locale }: { locale: CityBeamLocale }) 
         provider: { "@id": `${siteUrl}/#organization` },
         url: canonical,
         availableLanguage: Object.values(translations).map((item) => item.lang),
-        serviceType: "Digital out-of-home advertising marketplace project",
+        serviceType: "Digital out-of-home advertising enquiry service",
       },
       {
         "@type": "BreadcrumbList",
@@ -315,39 +220,52 @@ export default function CityBeamLanding({ locale }: { locale: CityBeamLocale }) 
     <div className="citybeam-page" lang={t.lang}>
       <a className="skip-link" href="#main-content">{access[0]}</a>
       <header className="citybeam-header">
-        <a className="citybeam-brand" href={locale === "it" ? "/" : `/${locale}`} aria-label={`Kreluna · CityBeam — ${t.navHome}`}><svg className="brand-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="6" fill="#c4f455" /><g fill="none" stroke="#121212" strokeWidth="2.2" strokeLinecap="round"><path d="M12 6v12M17.196 9 6.804 15m0-6 10.392 6" /></g></svg><span>KRELUNA · CITYBEAM</span></a>
-        <nav aria-label="CityBeam"><a href={locale === "it" ? "/" : `/${locale}`}>{t.navHome}</a><a href="#come-funziona">{t.navHow}</a><a href="#per-chi">{t.navFor}</a><a href={contactPath[locale]}>{t.navContact}</a></nav>
+        <a className="citybeam-brand" href={locale === "it" ? "/" : `/${locale}`} aria-label={`Kreluna · CityBeam — ${t.navHome}`}><svg className="brand-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="6" fill="#c4f455" /><g fill="none" stroke="#121212" strokeWidth="2.2" strokeLinecap="round"><path d="M12 6v12M17.196 9 6.804 15m0-6 10.392 6" /></g></svg><span>CITYBEAM <small>BY KRELUNA</small></span></a>
+        <nav aria-label="CityBeam"><a href="#come-funziona">{t.navHow}</a><a href="#formule">{t.navFor}</a><a href="#richiesta">{t.navContact} ↗</a></nav>
         <nav className="citybeam-language" aria-label={access[1]}>
           {(Object.keys(localePath) as CityBeamLocale[]).map((code) => <a key={code} href={localePath[code]} lang={code} aria-label={{it:'Italiano',en:'English',fr:'Français',es:'Español',de:'Deutsch'}[code]} aria-current={code === locale ? "page" : undefined} hrefLang={code}>{code.toUpperCase()}</a>)}
         </nav>
       </header>
       <main id="main-content" tabIndex={-1}>
         <section className="citybeam-hero">
-          <div className="citybeam-copy"><span className="citybeam-kicker">{t.kicker}</span><h1>{t.h1a} <em>{t.h1b}</em>{t.h1c}</h1><p>{t.intro}</p>
-            <div className="citybeam-actions"><a className="button citybeam-primary" href={contactPath[locale]}>{t.info}</a><a className="button button-secondary" href="#come-funziona">{t.discover}</a></div></div>
-          <figure className="citybeam-visual"><picture><source type="image/avif" srcSet="/citybeam/ny-d020/ny-d020-asos-hero-960.avif 960w, /citybeam/ny-d020/ny-d020-asos-hero-1600.avif 1600w" sizes="(max-width: 980px) 90vw, 52vw" /><img src="/citybeam/ny-d020/ny-d020-asos-hero-1600.webp" srcSet="/citybeam/ny-d020/ny-d020-asos-hero-960.webp 960w, /citybeam/ny-d020/ny-d020-asos-hero-1600.webp 1600w" sizes="(max-width: 980px) 90vw, 52vw" alt={proof.heroAlt} width="1600" height="1067" fetchPriority="high" decoding="async" /></picture><figcaption><div><span>{t.destination}</span><strong>Times Square, New York</strong></div><span className="citybeam-visual-credit">NY-D020<br />ASOS · Heritage Outdoor</span></figcaption></figure>
-          <p className="citybeam-note">{t.disclosure}</p>
-        </section>
-        <section className="citybeam-photo-story" aria-labelledby="citybeam-photo-title">
-          <div className="citybeam-photo-intro">
-            <div><span className="citybeam-kicker">{proof.kicker}</span>
-            <h2 id="citybeam-photo-title">{proof.title}</h2>
-            </div><div className="citybeam-photo-context"><p>{proof.intro}</p>
-            <p className="citybeam-photo-credit">{proof.credit}</p></div>
+          <div className="citybeam-copy"><span className="citybeam-kicker">{t.kicker}</span><h1>{t.h1a}<em>{t.h1b}</em></h1><p>{t.intro}</p>
+            <div className="citybeam-actions"><a className="button citybeam-primary" href="#richiesta">{t.info} <span aria-hidden="true">↗</span></a><a className="citybeam-text-link" href="#schermo">{t.discover} <span aria-hidden="true">↓</span></a></div><span className="citybeam-micro">{t.micro}</span>
           </div>
-          <div className="citybeam-proof-grid">
-            {proof.images.map((photo, index) => <CityBeamProofPhoto key={photo.file} {...photo} featured={index === 0} />)}
-          </div>
-          <p className="citybeam-photo-note">{proof.note}</p>
+          <CityBeamProofPhoto {...proof.images[2]} hero scene={t.destination} label={t.enlarge} />
+          <div className="citybeam-facts">{t.facts.map((fact, index) => <span key={fact}><i aria-hidden="true">{['↗', '▣', '◉'][index]}</i>{fact}</span>)}<span className="citybeam-source">{proof.credit}</span></div>
         </section>
-        <section className="citybeam-section" id="come-funziona"><div className="citybeam-section-heading"><span className="citybeam-kicker">{t.howKicker}</span><h2>{t.howTitle}</h2><p>{t.howIntro}</p></div>
-          <ol className="citybeam-steps">{t.steps.map(([title, text], index) => <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><h3>{title}</h3><p>{text}</p></li>)}</ol></section>
-        <section className="citybeam-section citybeam-use-cases" id="per-chi"><article className="citybeam-case"><span>{t.business}</span><h3>{t.businessTitle}</h3><p>{t.businessText}</p></article><article className="citybeam-case"><span>{t.personal}</span><h3>{t.personalTitle}</h3><p>{t.personalText}</p></article></section>
-        <section className="citybeam-section" id="faq"><div className="citybeam-section-heading"><h2>{faq.title}</h2></div><div className="home-faq">{faq.questions.map(([question, answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}</div></section>
-        <section className="citybeam-status"><span className="citybeam-kicker">{t.statusKicker}</span><h2>{t.statusTitle}</h2><p>{t.statusText}</p><a className="button citybeam-primary" href={contactPath[locale]}>{t.talk}</a></section>
-        <LaunchSignup project="citybeam" locale={locale} />
+        <section className="citybeam-section citybeam-why" aria-labelledby="citybeam-why-title">
+          <div className="citybeam-section-heading"><span className="citybeam-kicker">{t.whyKicker}</span><h2 id="citybeam-why-title">{t.whyTitle}</h2></div>
+          <div className="citybeam-benefits">{t.benefits.map(([title, text], index) => <article key={title}><span aria-hidden="true">0{index + 1}</span><h3>{title}</h3><p>{text}</p></article>)}</div>
+        </section>
+        <section className="citybeam-section citybeam-photo-story" id="schermo" aria-labelledby="citybeam-photo-title">
+          <div className="citybeam-photo-intro"><div className="citybeam-section-heading"><span className="citybeam-kicker">{t.galleryKicker}</span><h2 id="citybeam-photo-title">{t.galleryTitle}</h2></div><p>{t.galleryIntro}</p></div>
+          <div className="citybeam-proof-grid">{[proof.images[0], proof.images[3], proof.images[4]].map((photo, index) => <CityBeamProofPhoto key={photo.file} {...photo} scene={t.scenes[index]} label={t.enlarge} />)}</div>
+          <p className="citybeam-photo-note">{proof.credit} {proof.note}</p>
+        </section>
+        <section className="citybeam-formats" id="formule" aria-labelledby="citybeam-formats-title"><div className="citybeam-section">
+          <div className="citybeam-section-heading"><span className="citybeam-kicker">{t.formatsKicker}</span><h2 id="citybeam-formats-title">{t.formatsTitle}</h2><p>{t.formatsIntro}</p></div>
+          <div className="citybeam-plan-grid">{t.plans.map(([name, headline, body, footnote], index) => <article className="citybeam-plan" key={name}><span className="citybeam-plan-name">{name}</span><h3>{headline}</h3><p>{body}</p><div className="citybeam-plan-footer"><span>{footnote}</span><strong>{t.quote}</strong><a className="button" href="#richiesta" data-cb-plan={index === 0 ? 'daily' : 'roadblock'}>{t.choose} <span aria-hidden="true">↗</span></a></div></article>)}</div><p className="citybeam-price-note">{t.priceNote}</p>
+        </div></section>
+        <section className="citybeam-section" id="come-funziona"><div className="citybeam-section-heading"><span className="citybeam-kicker">{t.howKicker}</span><h2>{t.howTitle}</h2><p>{t.howIntro}</p></div><ol className="citybeam-steps">{t.steps.map(([title, text], index) => <li key={title}><span>0{index + 1}</span><h3>{title}</h3><p>{text}</p></li>)}</ol></section>
+        <section className="citybeam-section citybeam-request" id="richiesta" aria-labelledby="citybeam-request-title">
+          <div className="citybeam-section-heading"><span className="citybeam-kicker">{t.requestKicker}</span><h2 id="citybeam-request-title">{t.requestTitle}</h2><p>{t.requestText}</p><div className="citybeam-person"><span aria-hidden="true">AG</span><div><strong>Andrea Gadducci</strong><span>Kreluna · CityBeam</span></div></div><p className="citybeam-direct">{t.direct}<br /><a href={`mailto:andrea@kreluna.it?subject=${encodeURIComponent(t.emailSubject)}`}>andrea@kreluna.it ↗</a></p></div>
+          <div className="citybeam-request-panel">
+            <form className="citybeam-enquiry" data-cb-enquiry hidden data-subject={t.emailSubject} data-intro={t.mailIntro} data-labels={JSON.stringify(t.mailLabels)} data-status={t.emailStatus}>
+              <label htmlFor="cb-plan">{t.planLabel}</label><select id="cb-plan" name="format" defaultValue="advice"><option value="advice">{t.undecided}</option><option value="daily">{t.plans[0][0]} — {t.plans[0][1]}</option><option value="roadblock">{t.plans[1][0]} — {t.plans[1][1]}</option></select>
+              <label htmlFor="cb-date">{t.dateLabel}</label><input id="cb-date" name="date" type="date" />
+              <label htmlFor="cb-idea">{t.ideaLabel}</label><textarea id="cb-idea" name="idea" rows={4} maxLength={1200} required placeholder={t.ideaPlaceholder} />
+              <button type="submit" className="button citybeam-primary">{t.emailButton}<span aria-hidden="true">↗</span></button><p className="citybeam-email-note">{t.emailNote}</p><p className="citybeam-email-status" role="status" aria-live="polite" />
+            </form>
+            <p className="citybeam-note">{t.disclosure}</p>
+          </div>
+        </section>
+        <section className="citybeam-section citybeam-faq" id="faq"><div className="citybeam-section-heading"><h2>{faq.title}</h2></div><div className="home-faq">{faq.questions.map(([question, answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}</div></section>
+        <details className="citybeam-updates"><summary>{t.updates}</summary><LaunchSignup project="citybeam" locale={locale} /></details>
       </main>
-      <footer className="citybeam-footer"><span>© 2026 Kreluna · {t.provisional}</span><span>P. IVA 02114130475 · REA PT-622714</span></footer>
+      <footer className="citybeam-footer"><span>© 2026 Kreluna · {t.provisional}</span><span>P. IVA 02114130475 · REA PT-622714</span><a href={locale === 'it' ? '/privacy' : '/en/privacy'}>Privacy</a></footer>
+      <dialog className="citybeam-lightbox" aria-label={t.enlarge}><button type="button" data-cb-close aria-label={t.close}>×</button><figure><img alt="" /><figcaption /></figure></dialog>
+      <script src="/assets/citybeam-experience.js" defer />
       <script id="citybeam-structured-data" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
     </div>
   );

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import UpcomingProjects from "./upcoming-projects";
+import CityBeamHome from "./citybeam/citybeam-home";
 import { products } from "./marketplace-data";
 
 const visibleProducts = products.filter((product) =>
@@ -281,6 +282,8 @@ export default function Home() {
 
         <a className="scroll-cue" href="#products">Il progetto del momento <span>↓</span></a>
       </section>
+
+      <CityBeamHome />
 
       <section className="statement section-shell" id="vision">
         <h2 className="statement-line reveal">
