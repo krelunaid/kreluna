@@ -29,12 +29,20 @@
     const previewMessage = page.querySelector('[data-cb-preview-message]');
     const previewInput = page.querySelector('#cb-preview-text');
     const previewImage = page.querySelector('[data-cb-preview-image]');
+    const previewVideo = page.querySelector('[data-cb-preview-video]');
+    const videoControls = page.querySelector('[data-cb-video-controls]');
+    const videoPlay = page.querySelector('[data-cb-video-play]');
+    const videoSeek = page.querySelector('#cb-video-seek');
+    const videoTime = page.querySelector('[data-cb-video-time]');
+    const hasMedia = () => !previewImage.hidden || !previewVideo.hidden;
     const fileInput = page.querySelector('#cb-preview-file');
     const imageStatus = page.querySelector('#cb-image-status');
     const removeImage = page.querySelector('[data-cb-remove-image]');
     const badge = page.querySelector('[data-cb-preview-badge]');
     let imageUrl;
     let imageSequence = 0;
+    let cancelCandidate;
+    let videoVisible = true;
     let previewIncluded = false;
     let selectedTheme = 'lime';
     const requestPreview = page.querySelector('[data-cb-request-preview]');
@@ -42,11 +50,12 @@
     const requestPreviewNote = page.querySelector('[data-cb-request-preview-note]');
     const syncPreview = () => {
       if (!previewIncluded) return;
-      requestPreviewText.textContent = previewImage.hidden ? previewMessage.textContent : requestPreview.dataset.imageSummary;
-      requestPreviewNote.textContent = previewImage.hidden ? requestPreviewNote.dataset.textNote : requestPreviewNote.dataset.imageNote;
+      requestPreviewText.textContent = !previewVideo.hidden ? requestPreview.dataset.videoSummary : !previewImage.hidden ? requestPreview.dataset.imageSummary : previewMessage.textContent;
+      requestPreviewNote.textContent = !hasMedia() ? requestPreviewNote.dataset.textNote : requestPreviewNote.dataset.imageNote;
     };
     const showView = mode => {
       screen.hidden = mode === 'original';
+      if (screen.hidden) previewVideo.pause();
       stageWrap.setAttribute('aria-label', mode === 'original' ? stageWrap.dataset.originalLabel : stageWrap.dataset.simulationLabel);
       badge.textContent = mode === 'original' ? badge.dataset.original : badge.dataset.simulation;
       page.querySelectorAll('[data-cb-view]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.cbView === mode)));
@@ -75,40 +84,103 @@
         page.querySelectorAll('[data-cb-theme]').forEach(option => option.setAttribute('aria-pressed', String(option === button)));
         showView('simulation');
       }));
+      const clock = value => `${Math.floor(value / 60)}:${String(Math.floor(value % 60)).padStart(2, '0')}`;
+      const syncVideo = () => {
+        const duration = Number.isFinite(previewVideo.duration) ? previewVideo.duration : 0;
+        videoSeek.max = String(duration || 1);
+        videoSeek.value = String(previewVideo.currentTime || 0);
+        videoTime.textContent = `${clock(previewVideo.currentTime || 0)} / ${clock(duration)}`;
+        videoPlay.textContent = previewVideo.paused ? videoPlay.dataset.playLabel : videoPlay.dataset.pauseLabel;
+      };
+      ['play','pause','timeupdate','loadedmetadata','ended'].forEach(name => previewVideo.addEventListener(name, syncVideo));
+      const play = async () => {
+        if (previewVideo.hidden || !videoVisible) return;
+        showView('simulation');
+        try { await previewVideo.play(); } catch { imageStatus.textContent = page.querySelector('.cb-preview-editor').dataset.imageError; }
+      };
+      videoPlay.addEventListener('click', () => { if (previewVideo.paused) void play(); else previewVideo.pause(); });
+      page.querySelector('[data-cb-video-restart]').addEventListener('click', () => { previewVideo.currentTime = 0; void play(); });
+      videoSeek.addEventListener('input', () => { if (Number.isFinite(previewVideo.duration)) previewVideo.currentTime = Math.min(Number(videoSeek.value), previewVideo.duration); });
+      document.addEventListener('visibilitychange', () => { if (document.hidden) previewVideo.pause(); });
+      if ('IntersectionObserver' in window) new IntersectionObserver(entries => { videoVisible = entries[0].isIntersecting; if (!videoVisible) previewVideo.pause(); }).observe(stageWrap);
+      const clearMedia = () => {
+        previewVideo.pause();
+        previewVideo.hidden = true;
+        previewVideo.removeAttribute('src');
+        previewVideo.load();
+        videoControls.hidden = true;
+        previewImage.hidden = true;
+        previewImage.removeAttribute('src');
+        if (imageUrl) URL.revokeObjectURL(imageUrl);
+        imageUrl = undefined;
+      };
       fileInput.addEventListener('change', () => {
         const file = fileInput.files?.[0];
         if (!file) return;
         const sequence = ++imageSequence;
-        const invalid = () => { imageStatus.textContent = page.querySelector('.cb-preview-editor').dataset.imageError; fileInput.value = ''; };
-        if (!['image/jpeg','image/png','image/webp'].includes(file.type) || file.size > 5 * 1024 * 1024) { invalid(); return; }
+        cancelCandidate?.();
+        const editor = page.querySelector('.cb-preview-editor');
+        const invalid = () => { imageStatus.textContent = editor.dataset.imageError; fileInput.value = ''; };
+        const isVideo = ['video/mp4','video/webm'].includes(file.type) || (!file.type && /\.(mp4|webm)$/i.test(file.name));
+        if ((!isVideo && !['image/jpeg','image/png','image/webp'].includes(file.type)) || !file.size || file.size > (isVideo ? 50 : 5) * 1024 * 1024) { invalid(); return; }
         const candidateUrl = URL.createObjectURL(file);
-        const candidate = new Image();
-        candidate.onload = () => {
-          if (sequence !== imageSequence) { URL.revokeObjectURL(candidateUrl); return; }
-          if (!candidate.naturalWidth || candidate.naturalWidth * candidate.naturalHeight > 40000000) { URL.revokeObjectURL(candidateUrl); invalid(); return; }
-          if (imageUrl) URL.revokeObjectURL(imageUrl);
+        const candidate = isVideo ? document.createElement('video') : new Image();
+        let settled = false;
+        let timer;
+        const cleanup = keepUrl => {
+          clearTimeout(timer);
+          candidate.onload = candidate.onerror = candidate.onloadeddata = null;
+          if (isVideo) { candidate.pause(); candidate.removeAttribute('src'); candidate.load(); }
+          if (!keepUrl) URL.revokeObjectURL(candidateUrl);
+          cancelCandidate = undefined;
+        };
+        cancelCandidate = () => { settled = true; cleanup(false); };
+        const finish = valid => {
+          if (settled) return;
+          settled = true;
+          if (sequence !== imageSequence || !valid) { cleanup(false); if (sequence === imageSequence) invalid(); return; }
+          cleanup(true);
+          clearMedia();
           imageUrl = candidateUrl;
-          previewImage.src = imageUrl;
-          previewImage.hidden = false;
+          if (isVideo) {
+            previewVideo.src = imageUrl;
+            previewVideo.hidden = false;
+            previewVideo.muted = true;
+            previewVideo.load();
+            videoControls.hidden = false;
+            syncVideo();
+          } else { previewImage.src = imageUrl; previewImage.hidden = false; }
           removeImage.hidden = false;
           imageStatus.textContent = file.name;
           syncPreview();
           showView('simulation');
         };
-        candidate.onerror = () => { URL.revokeObjectURL(candidateUrl); if (sequence === imageSequence) invalid(); };
+        imageStatus.textContent = editor.dataset.videoLoading;
+        timer = setTimeout(() => finish(false), 20000);
+        candidate.onerror = () => finish(false);
+        if (isVideo) {
+          candidate.muted = true;
+          candidate.playsInline = true;
+          candidate.preload = 'auto';
+          candidate.onloadeddata = () => finish(Number.isFinite(candidate.duration) && candidate.duration > 0 && candidate.duration <= 120 && candidate.videoWidth > 0 && candidate.videoWidth * candidate.videoHeight <= 8294400);
+        } else candidate.onload = () => finish(candidate.naturalWidth > 0 && candidate.naturalWidth * candidate.naturalHeight <= 40000000);
         candidate.src = candidateUrl;
+      });
+      previewVideo.addEventListener('error', () => {
+        if (previewVideo.hidden || !previewVideo.getAttribute('src')) return;
+        previewVideo.pause();
+        imageStatus.textContent = page.querySelector('.cb-preview-editor').dataset.imageError;
       });
       removeImage.addEventListener('click', () => {
         imageSequence++;
-        previewImage.hidden = true;
-        previewImage.removeAttribute('src');
-        if (imageUrl) URL.revokeObjectURL(imageUrl);
-        imageUrl = undefined;
+        cancelCandidate?.();
+        clearMedia();
         fileInput.value = '';
         removeImage.hidden = true;
         imageStatus.textContent = '';
         syncPreview();
       });
+      window.addEventListener('pagehide', () => { previewVideo.pause(); cancelCandidate?.(); });
     }
     const form = page.querySelector('[data-cb-enquiry]');
     if (!form) return;
@@ -125,7 +197,7 @@
       previewIncluded = true;
       updateText();
       requestPreview.hidden = false;
-      if (!idea.value.trim() && previewImage.hidden) idea.value = previewMessage.textContent;
+      if (!idea.value.trim() && !hasMedia()) idea.value = previewMessage.textContent;
     });
     form.addEventListener('submit', async event => {
       event.preventDefault();
@@ -138,7 +210,7 @@
       status.textContent = '';
       const values = new FormData(form);
       let succeeded = false;
-      const payload = {name:values.get('name'), email:values.get('email'), format:values.get('format'), date:values.get('date'), idea:values.get('idea'), website:values.get('website'), privacy:values.get('privacy') === 'on', locale:form.dataset.locale, previewMessage:previewIncluded && previewImage.hidden ? previewMessage.textContent : '', previewTheme:previewIncluded ? selectedTheme : ''};
+      const payload = {name:values.get('name'), email:values.get('email'), format:values.get('format'), date:values.get('date'), idea:values.get('idea'), website:values.get('website'), privacy:values.get('privacy') === 'on', locale:form.dataset.locale, previewMessage:previewIncluded && !hasMedia() ? previewMessage.textContent : '', previewTheme:previewIncluded ? selectedTheme : ''};
       const fingerprint = JSON.stringify(payload);
       if (lastPayload && lastPayload !== fingerprint) requestId = crypto.randomUUID();
       lastPayload = fingerprint;
