@@ -78,6 +78,7 @@ export default function MetaPixel() {
 
   useEffect(() => {
     const page = pathname || window.location.pathname;
+    if (/\/citybeam\/(pratica|gestione)(?:\/|$)/.test(page)) return;
     trackPageView(page);
 
     const onConsentChange = (event: Event) => {

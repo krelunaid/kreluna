@@ -138,3 +138,27 @@ export const risonixLicenseEvents = sqliteTable(
   },
   (table) => [index("idx_risonix_events_license").on(table.licenseId)],
 );
+
+export const citybeamBookings = sqliteTable('citybeam_bookings', {
+  id: text('id').primaryKey(), requestId: text('request_id').notNull().references(() => citybeamRequests.id),
+  tokenHash: text('token_hash').notNull(), tokenExpires: integer('token_expires').notNull(),
+  amount: integer('amount').notNull(), currency: text('currency').notNull(),
+  description: text('description').notNull(), campaignDate: text('campaign_date').notNull(),
+  supplierReference: text('supplier_reference').notNull(), terms: text('terms').notNull(),
+  expiresAt: integer('expires_at').notNull(), status: text('status').notNull().default('quoted'),
+  acceptedAt: integer('accepted_at'), checkoutStarted: integer('checkout_started'),
+  stripeSession: text('stripe_session'), stripeUrl: text('stripe_url'), paymentIntent: text('payment_intent'),
+  paidAt: integer('paid_at'), campaignReference: text('campaign_reference'),
+  createdAt: integer('created_at').notNull(), updatedAt: integer('updated_at').notNull(),
+}, table => [uniqueIndex('idx_citybeam_booking_request').on(table.requestId), uniqueIndex('idx_citybeam_booking_token').on(table.tokenHash), uniqueIndex('idx_citybeam_booking_session').on(table.stripeSession)]);
+
+export const citybeamMaterials = sqliteTable('citybeam_materials', {
+  id: text('id').primaryKey(), bookingId: text('booking_id').notNull().references(() => citybeamBookings.id),
+  objectKey: text('object_key').notNull(), name: text('name').notNull(), mime: text('mime').notNull(),
+  size: integer('size').notNull(), uploadStatus: text('upload_status').notNull().default('uploading'), createdAt: integer('created_at').notNull(),
+}, table => [index('idx_citybeam_material_booking').on(table.bookingId)]);
+
+export const citybeamBookingEvents = sqliteTable('citybeam_booking_events', {
+  id: text('id').primaryKey(), bookingId: text('booking_id').notNull().references(() => citybeamBookings.id),
+  kind: text('kind').notNull(), actor: text('actor').notNull(), createdAt: integer('created_at').notNull(),
+}, table => [index('idx_citybeam_booking_event').on(table.bookingId)]);

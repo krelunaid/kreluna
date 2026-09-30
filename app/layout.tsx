@@ -89,6 +89,7 @@ function documentLanguage(pathname: string): string {
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const requestHeaders = await headers();
   const pathname = requestHeaders.get("x-kreluna-pathname") ?? "/";
+  const privateCityBeam = /\/citybeam\/(pratica|gestione)(?:\/|$)/.test(pathname);
 
   return (
     <html lang={documentLanguage(pathname)} suppressHydrationWarning>
@@ -103,12 +104,12 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         {children}
         {/* Cloudflare's official module beacon is deferred by the browser. */}
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}
-        <script
+        {!privateCityBeam && <script
           type="module"
           src="https://static.cloudflareinsights.com/beacon.min.js"
           data-cf-beacon='{"token":"563650c804544d489377014a00cc36f7"}'
-        />
-        <MetaPixel />
+        />}
+        {!privateCityBeam && <MetaPixel />}
         <CookieConsent initialLanguage={documentLanguage(pathname).slice(0, 2)} />
       </body>
     </html>

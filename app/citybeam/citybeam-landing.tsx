@@ -222,7 +222,7 @@ export default function CityBeamLanding({ locale }: { locale: CityBeamLocale }) 
       <a className="skip-link" href="#main-content">{access[0]}</a>
       <header className="citybeam-header">
         <a className="citybeam-brand" href={locale === "it" ? "/" : `/${locale}`} aria-label={`Kreluna · CityBeam — ${t.navHome}`}><svg className="brand-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="6" fill="#c4f455" /><g fill="none" stroke="#121212" strokeWidth="2.2" strokeLinecap="round"><path d="M12 6v12M17.196 9 6.804 15m0-6 10.392 6" /></g></svg><span>CITYBEAM <small>BY KRELUNA</small></span></a>
-        <nav aria-label="CityBeam"><a href="#anteprima">{t.info}</a><a href="#formule">{t.navFor}</a><a href="#richiesta">{t.navContact} ↗</a></nav>
+        <nav aria-label="CityBeam"><a href="#anteprima">{t.info}</a><a href="#formule">{t.navFor}</a><a href={`${locale === 'it' ? '' : '/' + locale}/citybeam/prenota`}>{t.navContact}</a></nav>
         <nav className="citybeam-language" aria-label={access[1]}>
           {(Object.keys(localePath) as CityBeamLocale[]).map((code) => <a key={code} href={localePath[code]} lang={code} aria-label={{it:'Italiano',en:'English',fr:'Français',es:'Español',de:'Deutsch'}[code]} aria-current={code === locale ? "page" : undefined} hrefLang={code}>{code.toUpperCase()}</a>)}
         </nav>
