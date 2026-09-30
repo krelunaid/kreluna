@@ -14,10 +14,11 @@ function compile(source, dependencies = {}) {
   new Function('require', 'exports', js)(id => dependencies[id] ?? require(id), exports);
   return exports;
 }
+const experience = compile(await readFile('app/citybeam/citybeam-experience-content.ts', 'utf8'));
 const content = compile(await readFile('app/citybeam/citybeam-content.ts', 'utf8'));
 const faq = compile(await readFile('app/citybeam/citybeam-faq.ts', 'utf8'));
 const launchSignup = compile(await readFile('app/launch-signup.tsx', 'utf8'));
-const landing = compile(await readFile('app/citybeam/citybeam-landing.tsx', 'utf8'), { './citybeam-faq': faq, './citybeam-content': content, '../launch-signup': launchSignup });
+const landing = compile(await readFile('app/citybeam/citybeam-landing.tsx', 'utf8'), { './citybeam-faq': faq, './citybeam-content': content, './citybeam-experience-content': experience, '../launch-signup': launchSignup });
 const cookieSource = ts.createSourceFile('cookie.tsx', await readFile('app/cookie-consent.tsx', 'utf8'), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
 let cookieInitializer;
 cookieSource.forEachChild(node => {

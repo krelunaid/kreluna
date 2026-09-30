@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import { cityBeamFaq } from "./citybeam-faq";
 import { cityBeamContent as translations } from "./citybeam-content";
+import { cityBeamExperience } from "./citybeam-experience-content";
 import LaunchSignup from '../launch-signup';
 
 export type CityBeamLocale = "it" | "en" | "fr" | "es" | "de";
@@ -103,7 +104,7 @@ const photoStory = {
 
 function CityBeamProofPhoto({ file, alt, brand, scene, label, hero = false }: { file: string; alt: string; brand: string; scene: string; label: string; hero?: boolean }) {
   const base = `/citybeam/ny-d020/${file}`;
-  const sizes = hero ? '(max-width: 800px) 90vw, 54vw' : '(max-width: 700px) 90vw, 30vw';
+  const sizes = hero ? '(max-width: 1550px) 90vw, 1395px' : '(max-width: 700px) 90vw, 30vw';
   return <figure className={hero ? 'citybeam-visual' : 'citybeam-proof-photo'}>
     <a className="citybeam-photo-link" href={`${base}-1200.webp`} data-cb-photo data-caption={`${brand} · NY-D020 · Heritage Outdoor`} aria-label={`${label}: ${brand}`}>
       <picture><source type="image/avif" srcSet={`${base}-640.avif 640w, ${base}-1200.avif 1200w`} sizes={sizes} />
@@ -155,7 +156,7 @@ export function cityBeamMetadata(locale: CityBeamLocale): Metadata {
 }
 
 export default function CityBeamLanding({ locale }: { locale: CityBeamLocale }) {
-  const t = translations[locale];
+  const t = { ...translations[locale], ...cityBeamExperience[locale] };
   const proof = photoStory[locale];
   const faq = cityBeamFaq[locale];
   const canonical = `${siteUrl}${localePath[locale]}`;
@@ -221,22 +222,35 @@ export default function CityBeamLanding({ locale }: { locale: CityBeamLocale }) 
       <a className="skip-link" href="#main-content">{access[0]}</a>
       <header className="citybeam-header">
         <a className="citybeam-brand" href={locale === "it" ? "/" : `/${locale}`} aria-label={`Kreluna · CityBeam — ${t.navHome}`}><svg className="brand-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="6" fill="#c4f455" /><g fill="none" stroke="#121212" strokeWidth="2.2" strokeLinecap="round"><path d="M12 6v12M17.196 9 6.804 15m0-6 10.392 6" /></g></svg><span>CITYBEAM <small>BY KRELUNA</small></span></a>
-        <nav aria-label="CityBeam"><a href="#come-funziona">{t.navHow}</a><a href="#formule">{t.navFor}</a><a href="#richiesta">{t.navContact} ↗</a></nav>
+        <nav aria-label="CityBeam"><a href="#anteprima">{t.info}</a><a href="#formule">{t.navFor}</a><a href="#richiesta">{t.navContact} ↗</a></nav>
         <nav className="citybeam-language" aria-label={access[1]}>
           {(Object.keys(localePath) as CityBeamLocale[]).map((code) => <a key={code} href={localePath[code]} lang={code} aria-label={{it:'Italiano',en:'English',fr:'Français',es:'Español',de:'Deutsch'}[code]} aria-current={code === locale ? "page" : undefined} hrefLang={code}>{code.toUpperCase()}</a>)}
         </nav>
       </header>
       <main id="main-content" tabIndex={-1}>
         <section className="citybeam-hero">
-          <div className="citybeam-copy"><span className="citybeam-kicker">{t.kicker}</span><h1>{t.h1a}<em>{t.h1b}</em></h1><p>{t.intro}</p>
-            <div className="citybeam-actions"><a className="button citybeam-primary" href="#richiesta">{t.info} <span aria-hidden="true">↗</span></a><a className="citybeam-text-link" href="#schermo">{t.discover} <span aria-hidden="true">↓</span></a></div><span className="citybeam-micro">{t.micro}</span>
+          <div className="citybeam-copy"><div><span className="citybeam-kicker">{t.kicker}</span><h1>{t.h1a}<em>{t.h1b}</em></h1></div><div className="citybeam-hero-invite"><p>{t.intro}</p>
+            <div className="citybeam-actions"><a className="button citybeam-primary" href="#anteprima">{t.info} <span aria-hidden="true">↗</span></a><a className="citybeam-text-link" href="#schermo">{t.discover} <span aria-hidden="true">↓</span></a></div><span className="citybeam-micro">{t.micro}</span></div>
           </div>
           <CityBeamProofPhoto {...proof.images[2]} hero scene={t.destination} label={t.enlarge} />
           <div className="citybeam-facts">{t.facts.map((fact, index) => <span key={fact}><i aria-hidden="true">{['↗', '▣', '◉'][index]}</i>{fact}</span>)}<span className="citybeam-source">{proof.credit}</span></div>
         </section>
-        <section className="citybeam-section citybeam-why" aria-labelledby="citybeam-why-title">
-          <div className="citybeam-section-heading"><span className="citybeam-kicker">{t.whyKicker}</span><h2 id="citybeam-why-title">{t.whyTitle}</h2></div>
-          <div className="citybeam-benefits">{t.benefits.map(([title, text], index) => <article key={title}><span aria-hidden="true">0{index + 1}</span><h3>{title}</h3><p>{text}</p></article>)}</div>
+        <section className="citybeam-section citybeam-preview" id="anteprima" aria-labelledby="cb-preview-title">
+          <div className="citybeam-photo-intro"><div className="citybeam-section-heading"><span className="citybeam-kicker">{t.previewKicker}</span><h2 id="cb-preview-title">{t.previewTitle}</h2></div><p>{t.previewIntro}</p></div>
+          <div className="cb-studio">
+            <div className="cb-preview-visual"><div className="cb-stage-wrap" role="img" aria-label={proof.images[2].alt} data-original-label={proof.images[2].alt} data-simulation-label={t.previewImageAlt}>
+              <div className="cb-stage"><img className="cb-stage-photo" src="/citybeam/ny-d020/ny-d020-the-economist-1200.webp" alt="" width="1200" height="800" loading="lazy" decoding="async" />
+                <div className="cb-screen" data-theme="lime" hidden><div className="cb-screen-copy"><span>CITYBEAM / NEW YORK</span><strong data-cb-preview-message>{t.previewDefault}</strong><span>YOUR STORY. HERE.</span></div><img data-cb-preview-image hidden alt="" /></div>
+              </div><span className="cb-preview-badge" data-cb-preview-badge data-simulation={t.simulation} data-original={t.original}>{t.original}</span>
+            </div><div className="cb-preview-switch" data-cb-preview-controls hidden><button type="button" data-cb-view="simulation" aria-pressed="true">{t.simulation}</button><button type="button" data-cb-view="original" aria-pressed="false">{t.original}</button></div><p className="citybeam-photo-note">{proof.credit} {t.previewNote}</p></div>
+            <div className="cb-preview-editor" data-cb-preview-controls hidden data-image-error={t.imageError}>
+              <label htmlFor="cb-preview-text">{t.previewLabel}</label><textarea id="cb-preview-text" rows={3} maxLength={60} placeholder={t.previewPlaceholder} defaultValue={t.previewDefault} />
+              <fieldset><legend>{t.previewTheme}</legend><div className="cb-theme-options">{(['lime', 'violet', 'ivory'] as const).map((theme, i) => <button className="cb-theme" data-cb-theme={theme} type="button" key={theme} aria-label={t.themes[i]} aria-pressed={i === 0}><span data-theme={theme} aria-hidden="true" />{t.themes[i]}</button>)}</div></fieldset>
+              <label className="cb-image-label" htmlFor="cb-preview-file">{t.upload}<span aria-hidden="true">＋</span></label><input className="cb-image-input" id="cb-preview-file" type="file" accept="image/jpeg,image/png,image/webp" aria-describedby="cb-image-note cb-image-status" />
+              <button className="cb-remove-image" type="button" data-cb-remove-image hidden>{t.removeImage}</button><p className="cb-editor-note" id="cb-image-note">{t.imageNote}</p><p className="cb-editor-note" id="cb-image-status" role="status" aria-live="polite" />
+              <a className="button citybeam-primary" href="#richiesta" data-cb-use-preview>{t.previewCta} <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
         </section>
         <section className="citybeam-section citybeam-photo-story" id="schermo" aria-labelledby="citybeam-photo-title">
           <div className="citybeam-photo-intro"><div className="citybeam-section-heading"><span className="citybeam-kicker">{t.galleryKicker}</span><h2 id="citybeam-photo-title">{t.galleryTitle}</h2></div><p>{t.galleryIntro}</p></div>
@@ -247,15 +261,19 @@ export default function CityBeamLanding({ locale }: { locale: CityBeamLocale }) 
           <div className="citybeam-section-heading"><span className="citybeam-kicker">{t.formatsKicker}</span><h2 id="citybeam-formats-title">{t.formatsTitle}</h2><p>{t.formatsIntro}</p></div>
           <div className="citybeam-plan-grid">{t.plans.map(([name, headline, body, footnote], index) => <article className="citybeam-plan" key={name}><span className="citybeam-plan-name">{name}</span><h3>{headline}</h3><p>{body}</p><div className="citybeam-plan-footer"><span>{footnote}</span><strong>{t.quote}</strong><a className="button" href="#richiesta" data-cb-plan={index === 0 ? 'daily' : 'roadblock'}>{t.choose} <span aria-hidden="true">↗</span></a></div></article>)}</div><p className="citybeam-price-note">{t.priceNote}</p>
         </div></section>
-        <section className="citybeam-section" id="come-funziona"><div className="citybeam-section-heading"><span className="citybeam-kicker">{t.howKicker}</span><h2>{t.howTitle}</h2><p>{t.howIntro}</p></div><ol className="citybeam-steps">{t.steps.map(([title, text], index) => <li key={title}><span>0{index + 1}</span><h3>{title}</h3><p>{text}</p></li>)}</ol></section>
+        <section className="citybeam-section" id="come-funziona"><div className="citybeam-section-heading"><span className="citybeam-kicker">{t.howKicker}</span><h2>{t.howTitle}</h2></div><ol className="citybeam-steps">{t.steps.map(([title, text], index) => <li key={title}><span>0{index + 1}</span><h3>{title}</h3><p>{text}</p></li>)}</ol></section>
         <section className="citybeam-section citybeam-request" id="richiesta" aria-labelledby="citybeam-request-title">
           <div className="citybeam-section-heading"><span className="citybeam-kicker">{t.requestKicker}</span><h2 id="citybeam-request-title">{t.requestTitle}</h2><p>{t.requestText}</p><div className="citybeam-person"><span aria-hidden="true">i</span><div><strong>{t.office}</strong><span>Kreluna · CityBeam</span></div></div><p className="citybeam-direct">{t.direct}<br /><a href={`mailto:info@kreluna.it?subject=${encodeURIComponent(t.emailSubject)}`}>info@kreluna.it ↗</a></p></div>
           <div className="citybeam-request-panel">
-            <form className="citybeam-enquiry" data-cb-enquiry hidden data-subject={t.emailSubject} data-intro={t.mailIntro} data-labels={JSON.stringify(t.mailLabels)} data-status={t.emailStatus}>
+            <form className="citybeam-enquiry" data-cb-enquiry hidden action="/api/citybeam/requests" method="post" data-locale={locale} data-sending={t.sending} data-success={t.success} data-error={t.failure} data-rate-limit={t.rateLimit}>
+              <div className="cb-form-row"><div><label htmlFor="cb-name">{t.nameLabel}</label><input id="cb-name" name="name" type="text" required maxLength={100} autoComplete="name" /></div><div><label htmlFor="cb-email">{t.emailLabel}</label><input id="cb-email" name="email" type="email" required maxLength={254} autoComplete="email" /></div></div>
               <label htmlFor="cb-plan">{t.planLabel}</label><select id="cb-plan" name="format" defaultValue="advice"><option value="advice">{t.undecided}</option><option value="daily">{t.plans[0][0]} — {t.plans[0][1]}</option><option value="roadblock">{t.plans[1][0]} — {t.plans[1][1]}</option></select>
               <label htmlFor="cb-date">{t.dateLabel}</label><input id="cb-date" name="date" type="date" />
               <label htmlFor="cb-idea">{t.ideaLabel}</label><textarea id="cb-idea" name="idea" rows={4} maxLength={1200} required placeholder={t.ideaPlaceholder} />
-              <button type="submit" className="button citybeam-primary">{t.emailButton}<span aria-hidden="true">↗</span></button><p className="citybeam-email-note">{t.emailNote}</p><p className="citybeam-email-status" role="status" aria-live="polite" />
+              <div className="cb-request-preview" data-cb-request-preview hidden data-image-summary={t.imageSummary}><strong>{t.previewSummary}</strong><p data-cb-request-preview-text /><small data-cb-request-preview-note data-text-note={t.previewAttached} data-image-note={t.imageNote}>{t.previewAttached}</small></div>
+              <div hidden aria-hidden="true"><label>Website<input name="website" tabIndex={-1} autoComplete="off" /></label></div>
+              <label className="cb-consent"><input name="privacy" type="checkbox" required /><span>{t.privacyLabel} <a href={locale === 'it' ? '/privacy' : '/en/privacy'} target="_blank" rel="noopener">Privacy ↗</a></span></label>
+              <button type="submit" className="button citybeam-primary"><span data-cb-submit-label>{t.submit}</span><span aria-hidden="true">↗</span></button><p className="citybeam-email-note">{t.requestNote}</p><p className="citybeam-email-status" role="status" aria-live="polite" tabIndex={-1} />
             </form>
             <p className="citybeam-note">{t.disclosure}</p>
           </div>

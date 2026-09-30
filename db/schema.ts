@@ -1,6 +1,26 @@
 import { sql } from "drizzle-orm";
 import { index, integer, sqliteTable, text, uniqueIndex } from "drizzle-orm/sqlite-core";
 
+export const citybeamRequests = sqliteTable('citybeam_requests', {
+  id: text('id').primaryKey(),
+  payloadHash: text('payload_hash').notNull(),
+  name: text('name').notNull(),
+  email: text('email').notNull(),
+  locale: text('locale').notNull(),
+  format: text('format').notNull(),
+  preferredDate: text('preferred_date'),
+  idea: text('idea').notNull(),
+  previewMessage: text('preview_message'),
+  previewTheme: text('preview_theme'),
+  privacyVersion: text('privacy_version').notNull(),
+  status: text('status').notNull().default('new'),
+  notificationStatus: text('notification_status').notNull().default('pending'),
+  notificationId: text('notification_id'),
+  notificationAttempts: integer('notification_attempts').notNull().default(0),
+  notificationAttemptedAt: integer('notification_attempted_at'),
+  createdAt: integer('created_at').notNull(),
+}, table => [index('idx_citybeam_requests_email_created').on(table.email, table.createdAt), index('idx_citybeam_requests_created').on(table.createdAt)]);
+
 export const appLaunchWaitlist = sqliteTable('app_launch_waitlist', {
   id: integer('id').primaryKey({autoIncrement:true}),
   project: text('project').notNull(),
