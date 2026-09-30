@@ -42,7 +42,6 @@
     let imageUrl;
     let imageSequence = 0;
     let cancelCandidate;
-    let videoVisible = true;
     let previewIncluded = false;
     let selectedTheme = 'lime';
     const requestPreview = page.querySelector('[data-cb-request-preview]');
@@ -94,7 +93,7 @@
       };
       ['play','pause','timeupdate','loadedmetadata','ended'].forEach(name => previewVideo.addEventListener(name, syncVideo));
       const play = async () => {
-        if (previewVideo.hidden || !videoVisible) return;
+        if (previewVideo.hidden) return;
         showView('simulation');
         try { await previewVideo.play(); } catch { imageStatus.textContent = page.querySelector('.cb-preview-editor').dataset.imageError; }
       };
@@ -102,7 +101,7 @@
       page.querySelector('[data-cb-video-restart]').addEventListener('click', () => { previewVideo.currentTime = 0; void play(); });
       videoSeek.addEventListener('input', () => { if (Number.isFinite(previewVideo.duration)) previewVideo.currentTime = Math.min(Number(videoSeek.value), previewVideo.duration); });
       document.addEventListener('visibilitychange', () => { if (document.hidden) previewVideo.pause(); });
-      if ('IntersectionObserver' in window) new IntersectionObserver(entries => { videoVisible = entries[0].isIntersecting; if (!videoVisible) previewVideo.pause(); }).observe(stageWrap);
+      if ('IntersectionObserver' in window) new IntersectionObserver(entries => { if (!entries[0].isIntersecting) previewVideo.pause(); }).observe(page.querySelector('.cb-preview-visual'));
       const clearMedia = () => {
         previewVideo.pause();
         previewVideo.hidden = true;
