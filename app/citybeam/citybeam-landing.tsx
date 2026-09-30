@@ -324,26 +324,27 @@ export default function CityBeamLanding({ locale }: { locale: CityBeamLocale }) 
       <main id="main-content" tabIndex={-1}>
         <section className="citybeam-hero">
           <div className="citybeam-copy"><span className="citybeam-kicker">{t.kicker}</span><h1>{t.h1a} <em>{t.h1b}</em>{t.h1c}</h1><p>{t.intro}</p>
-            <div className="citybeam-actions"><a className="button citybeam-primary" href={contactPath[locale]}>{t.info} <span aria-hidden="true">↗</span></a><a className="button button-secondary" href="#come-funziona">{t.discover}</a></div><p className="citybeam-note">{t.disclosure}</p></div>
-          <figure className="citybeam-visual"><picture><source type="image/avif" srcSet="/citybeam/ny-d020/ny-d020-asos-hero-960.avif 960w, /citybeam/ny-d020/ny-d020-asos-hero-1600.avif 1600w" sizes="(max-width: 980px) 90vw, 52vw" /><img src="/citybeam/ny-d020/ny-d020-asos-hero-1600.webp" srcSet="/citybeam/ny-d020/ny-d020-asos-hero-960.webp 960w, /citybeam/ny-d020/ny-d020-asos-hero-1600.webp 1600w" sizes="(max-width: 980px) 90vw, 52vw" alt={proof.heroAlt} width="1600" height="1067" fetchPriority="high" decoding="async" /></picture><figcaption><span>NY-D020 · Times Square</span><strong>ASOS · Heritage Outdoor</strong></figcaption></figure>
+            <div className="citybeam-actions"><a className="button citybeam-primary" href={contactPath[locale]}>{t.info}</a><a className="button button-secondary" href="#come-funziona">{t.discover}</a></div></div>
+          <figure className="citybeam-visual"><picture><source type="image/avif" srcSet="/citybeam/ny-d020/ny-d020-asos-hero-960.avif 960w, /citybeam/ny-d020/ny-d020-asos-hero-1600.avif 1600w" sizes="(max-width: 980px) 90vw, 52vw" /><img src="/citybeam/ny-d020/ny-d020-asos-hero-1600.webp" srcSet="/citybeam/ny-d020/ny-d020-asos-hero-960.webp 960w, /citybeam/ny-d020/ny-d020-asos-hero-1600.webp 1600w" sizes="(max-width: 980px) 90vw, 52vw" alt={proof.heroAlt} width="1600" height="1067" fetchPriority="high" decoding="async" /></picture><figcaption><div><span>{t.destination}</span><strong>Times Square, New York</strong></div><span className="citybeam-visual-credit">NY-D020<br />ASOS · Heritage Outdoor</span></figcaption></figure>
+          <p className="citybeam-note">{t.disclosure}</p>
         </section>
         <section className="citybeam-photo-story" aria-labelledby="citybeam-photo-title">
           <div className="citybeam-photo-intro">
-            <span className="citybeam-kicker">{proof.kicker}</span>
+            <div><span className="citybeam-kicker">{proof.kicker}</span>
             <h2 id="citybeam-photo-title">{proof.title}</h2>
-            <p>{proof.intro}</p>
-            <p className="citybeam-photo-credit">{proof.credit}</p>
-            <p className="citybeam-photo-note">{proof.note}</p>
+            </div><div className="citybeam-photo-context"><p>{proof.intro}</p>
+            <p className="citybeam-photo-credit">{proof.credit}</p></div>
           </div>
           <div className="citybeam-proof-grid">
             {proof.images.map((photo, index) => <CityBeamProofPhoto key={photo.file} {...photo} featured={index === 0} />)}
           </div>
+          <p className="citybeam-photo-note">{proof.note}</p>
         </section>
         <section className="citybeam-section" id="come-funziona"><div className="citybeam-section-heading"><span className="citybeam-kicker">{t.howKicker}</span><h2>{t.howTitle}</h2><p>{t.howIntro}</p></div>
           <ol className="citybeam-steps">{t.steps.map(([title, text], index) => <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><h3>{title}</h3><p>{text}</p></li>)}</ol></section>
         <section className="citybeam-section citybeam-use-cases" id="per-chi"><article className="citybeam-case"><span>{t.business}</span><h3>{t.businessTitle}</h3><p>{t.businessText}</p></article><article className="citybeam-case"><span>{t.personal}</span><h3>{t.personalTitle}</h3><p>{t.personalText}</p></article></section>
         <section className="citybeam-section" id="faq"><div className="citybeam-section-heading"><h2>{faq.title}</h2></div><div className="home-faq">{faq.questions.map(([question, answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}</div></section>
-        <section className="citybeam-status"><span className="citybeam-kicker">{t.statusKicker}</span><h2>{t.statusTitle}</h2><p>{t.statusText}</p><a className="button citybeam-primary" href={contactPath[locale]}>{t.talk} <span aria-hidden="true">↗</span></a></section>
+        <section className="citybeam-status"><span className="citybeam-kicker">{t.statusKicker}</span><h2>{t.statusTitle}</h2><p>{t.statusText}</p><a className="button citybeam-primary" href={contactPath[locale]}>{t.talk}</a></section>
         <LaunchSignup project="citybeam" locale={locale} />
       </main>
       <footer className="citybeam-footer"><span>© 2026 Kreluna · {t.provisional}</span><span>P. IVA 02114130475 · REA PT-622714</span></footer>
