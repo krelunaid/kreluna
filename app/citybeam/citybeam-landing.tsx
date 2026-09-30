@@ -118,8 +118,100 @@ const translations = {
   },
 } as const;
 
+const photoStory = {
+  it: {
+    kicker: "Scatti reali · Times Square",
+    title: "Lo schermo, dentro la città.",
+    intro: "Queste fotografie mostrano campagne apparse sul display digitale NY-D020 a Times Square: la scala dello schermo, la strada e la vita intorno.",
+    credit: "Fotografie fornite da Heritage Outdoor.",
+    note: "I marchi e i contenuti appartengono ai rispettivi proprietari. Le immagini documentano lo schermo e non indicano offerte, approvazioni o prenotazioni attive tramite CityBeam.",
+    heroAlt: "Campagna ASOS sul display digitale NY-D020 a Times Square, fotografata da Heritage Outdoor.",
+    images: [
+      { file: "ny-d020-soundcloud-wiz-khalifa", brand: "SoundCloud · Wiz Khalifa", alt: "Campagna SoundCloud con Wiz Khalifa sul display NY-D020 a Times Square." },
+      { file: "ny-d020-soundcloud", brand: "SoundCloud", alt: "Campagna SoundCloud sul display digitale NY-D020 a Times Square." },
+      { file: "ny-d020-the-economist", brand: "The Economist", alt: "Campagna The Economist sul display NY-D020, vista dalla strada." },
+      { file: "ny-d020-asos-times-square", brand: "ASOS", alt: "Campagna ASOS sul display NY-D020, tra i negozi di Times Square." },
+      { file: "ny-d020-times-square-context", brand: "NY-D020 · Times Square", alt: "Il display digitale NY-D020 nel flusso urbano di Times Square." },
+    ],
+  },
+  en: {
+    kicker: "Real photographs · Times Square",
+    title: "The screen, in the city.",
+    intro: "These photographs show campaigns that appeared on the NY-D020 digital display in Times Square, with the street and city life around it.",
+    credit: "Photographs provided by Heritage Outdoor.",
+    note: "Brands and creative content remain the property of their respective owners. These images document the screen and do not imply active CityBeam inventory, endorsement or booking.",
+    heroAlt: "An ASOS campaign on the NY-D020 digital display in Times Square, photographed by Heritage Outdoor.",
+    images: [
+      { file: "ny-d020-soundcloud-wiz-khalifa", brand: "SoundCloud · Wiz Khalifa", alt: "A SoundCloud campaign featuring Wiz Khalifa on the NY-D020 display in Times Square." },
+      { file: "ny-d020-soundcloud", brand: "SoundCloud", alt: "A SoundCloud campaign on the NY-D020 digital display in Times Square." },
+      { file: "ny-d020-the-economist", brand: "The Economist", alt: "A The Economist campaign on the NY-D020 display, seen from the street." },
+      { file: "ny-d020-asos-times-square", brand: "ASOS", alt: "An ASOS campaign on the NY-D020 display among Times Square shops." },
+      { file: "ny-d020-times-square-context", brand: "NY-D020 · Times Square", alt: "The NY-D020 digital display in the flow of Times Square." },
+    ],
+  },
+  fr: {
+    kicker: "Photos réelles · Times Square",
+    title: "L’écran, au cœur de la ville.",
+    intro: "Ces photos montrent des campagnes diffusées sur l’écran numérique NY-D020 à Times Square, avec la rue et la vie autour.",
+    credit: "Photographies fournies par Heritage Outdoor.",
+    note: "Les marques et les créations restent la propriété de leurs propriétaires respectifs. Ces images documentent l’écran et ne signifient ni offre, ni approbation, ni réservation CityBeam active.",
+    heroAlt: "Campagne ASOS sur l’écran numérique NY-D020 à Times Square, photographiée par Heritage Outdoor.",
+    images: [
+      { file: "ny-d020-soundcloud-wiz-khalifa", brand: "SoundCloud · Wiz Khalifa", alt: "Campagne SoundCloud avec Wiz Khalifa sur l’écran NY-D020 à Times Square." },
+      { file: "ny-d020-soundcloud", brand: "SoundCloud", alt: "Campagne SoundCloud sur l’écran numérique NY-D020 à Times Square." },
+      { file: "ny-d020-the-economist", brand: "The Economist", alt: "Campagne The Economist sur l’écran NY-D020, vue depuis la rue." },
+      { file: "ny-d020-asos-times-square", brand: "ASOS", alt: "Campagne ASOS sur l’écran NY-D020 parmi les boutiques de Times Square." },
+      { file: "ny-d020-times-square-context", brand: "NY-D020 · Times Square", alt: "L’écran numérique NY-D020 dans le flux urbain de Times Square." },
+    ],
+  },
+  es: {
+    kicker: "Fotografías reales · Times Square",
+    title: "La pantalla, en plena ciudad.",
+    intro: "Estas fotografías muestran campañas emitidas en la pantalla digital NY-D020 de Times Square, con la calle y la vida que la rodean.",
+    credit: "Fotografías facilitadas por Heritage Outdoor.",
+    note: "Las marcas y las creatividades pertenecen a sus respectivos propietarios. Las imágenes documentan la pantalla y no implican disponibilidad, aprobación ni reserva activa en CityBeam.",
+    heroAlt: "Campaña de ASOS en la pantalla digital NY-D020 de Times Square, fotografiada por Heritage Outdoor.",
+    images: [
+      { file: "ny-d020-soundcloud-wiz-khalifa", brand: "SoundCloud · Wiz Khalifa", alt: "Campaña de SoundCloud con Wiz Khalifa en la pantalla NY-D020 de Times Square." },
+      { file: "ny-d020-soundcloud", brand: "SoundCloud", alt: "Campaña de SoundCloud en la pantalla digital NY-D020 de Times Square." },
+      { file: "ny-d020-the-economist", brand: "The Economist", alt: "Campaña de The Economist en la pantalla NY-D020, vista desde la calle." },
+      { file: "ny-d020-asos-times-square", brand: "ASOS", alt: "Campaña de ASOS en la pantalla NY-D020 entre las tiendas de Times Square." },
+      { file: "ny-d020-times-square-context", brand: "NY-D020 · Times Square", alt: "La pantalla digital NY-D020 en el movimiento urbano de Times Square." },
+    ],
+  },
+  de: {
+    kicker: "Echte Fotos · Times Square",
+    title: "Der Screen mitten in der Stadt.",
+    intro: "Diese Fotos zeigen Kampagnen auf dem digitalen Display NY-D020 am Times Square, mit der Straße und dem Stadtleben ringsum.",
+    credit: "Fotos von Heritage Outdoor.",
+    note: "Marken und Werbemotive gehören den jeweiligen Rechteinhabern. Die Bilder dokumentieren den Screen und bedeuten weder verfügbares CityBeam-Inventar noch Empfehlung oder aktive Buchung.",
+    heroAlt: "Eine ASOS-Kampagne auf dem digitalen Display NY-D020 am Times Square, fotografiert von Heritage Outdoor.",
+    images: [
+      { file: "ny-d020-soundcloud-wiz-khalifa", brand: "SoundCloud · Wiz Khalifa", alt: "SoundCloud-Kampagne mit Wiz Khalifa auf dem Display NY-D020 am Times Square." },
+      { file: "ny-d020-soundcloud", brand: "SoundCloud", alt: "SoundCloud-Kampagne auf dem digitalen Display NY-D020 am Times Square." },
+      { file: "ny-d020-the-economist", brand: "The Economist", alt: "The-Economist-Kampagne auf dem Display NY-D020, von der Straße aus gesehen." },
+      { file: "ny-d020-asos-times-square", brand: "ASOS", alt: "ASOS-Kampagne auf dem Display NY-D020 zwischen den Geschäften am Times Square." },
+      { file: "ny-d020-times-square-context", brand: "NY-D020 · Times Square", alt: "Das digitale Display NY-D020 im Stadtleben am Times Square." },
+    ],
+  },
+} as const;
+
+function CityBeamProofPhoto({ file, alt, brand, featured = false }: { file: string; alt: string; brand: string; featured?: boolean }) {
+  const base = `/citybeam/ny-d020/${file}`;
+  return (
+    <figure className={`citybeam-proof-photo${featured ? " citybeam-proof-photo-featured" : ""}`}>
+      <picture>
+        <source type="image/avif" srcSet={`${base}-640.avif 640w, ${base}-1200.avif 1200w`} sizes="(max-width: 700px) calc(100vw - 40px), (max-width: 980px) 42vw, 42vw" />
+        <img src={`${base}-1200.webp`} srcSet={`${base}-640.webp 640w, ${base}-1200.webp 1200w`} sizes="(max-width: 700px) calc(100vw - 40px), (max-width: 980px) 42vw, 42vw" alt={alt} width="1200" height="800" loading="lazy" decoding="async" />
+      </picture>
+      <figcaption><span>NY-D020 · Times Square</span><strong>{brand}</strong></figcaption>
+    </figure>
+  );
+}
+
 export function cityBeamMetadata(locale: CityBeamLocale): Metadata {
   const t = translations[locale];
+  const proof = photoStory[locale];
   const canonical = `${siteUrl}${localePath[locale]}`;
   const languages = Object.fromEntries(Object.entries(localePath).map(([language, path]) => [language, `${siteUrl}${path}`]));
   return {
@@ -151,14 +243,15 @@ export function cityBeamMetadata(locale: CityBeamLocale): Metadata {
         .filter(([language]) => language !== locale)
         .map(([, value]) => value),
       type: "website",
-      images: [{ url: `${siteUrl}/citybeam-og.png`, width: 1200, height: 630, type: "image/png", alt: t.title }],
+      images: [{ url: `${siteUrl}/citybeam-ny-d020-og.jpg`, width: 1200, height: 630, type: "image/jpeg", alt: proof.heroAlt }],
     },
-    twitter: { card: "summary_large_image", title: t.title, description: t.description, images: [`${siteUrl}/citybeam-og.png`] },
+    twitter: { card: "summary_large_image", title: t.title, description: t.description, images: [`${siteUrl}/citybeam-ny-d020-og.jpg`] },
   };
 }
 
 export default function CityBeamLanding({ locale }: { locale: CityBeamLocale }) {
   const t = translations[locale];
+  const proof = photoStory[locale];
   const faq = cityBeamFaq[locale];
   const canonical = `${siteUrl}${localePath[locale]}`;
   const structuredData = {
@@ -191,11 +284,11 @@ export default function CityBeamLanding({ locale }: { locale: CityBeamLocale }) 
         about: { "@id": `${canonical}#project` },
         primaryImageOfPage: {
           "@type": "ImageObject",
-          url: `${siteUrl}/citybeam-hero.png`,
-          width: 1807,
-          height: 870,
+          url: `${siteUrl}/citybeam/ny-d020/ny-d020-asos-hero-1600.webp`,
+          width: 1600,
+          height: 1067,
         },
-        dateModified: "2026-09-06",
+        dateModified: "2026-09-29",
       },
       {
         "@type": "Service",
@@ -222,7 +315,7 @@ export default function CityBeamLanding({ locale }: { locale: CityBeamLocale }) 
     <div className="citybeam-page" lang={t.lang}>
       <a className="skip-link" href="#main-content">{access[0]}</a>
       <header className="citybeam-header">
-        <a className="citybeam-brand" href={locale === "it" ? "/" : `/${locale}`} aria-label={`Kreluna · CityBeam — ${t.navHome}`}><img src="/kreluna-logo-64.webp" alt="" width="31" height="31" /><span>KRELUNA · CITYBEAM</span></a>
+        <a className="citybeam-brand" href={locale === "it" ? "/" : `/${locale}`} aria-label={`Kreluna · CityBeam — ${t.navHome}`}><svg className="brand-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="6" fill="#c4f455" /><g fill="none" stroke="#121212" strokeWidth="2.2" strokeLinecap="round"><path d="M12 6v12M17.196 9 6.804 15m0-6 10.392 6" /></g></svg><span>KRELUNA · CITYBEAM</span></a>
         <nav aria-label="CityBeam"><a href={locale === "it" ? "/" : `/${locale}`}>{t.navHome}</a><a href="#come-funziona">{t.navHow}</a><a href="#per-chi">{t.navFor}</a><a href={contactPath[locale]}>{t.navContact}</a></nav>
         <nav className="citybeam-language" aria-label={access[1]}>
           {(Object.keys(localePath) as CityBeamLocale[]).map((code) => <a key={code} href={localePath[code]} lang={code} aria-label={{it:'Italiano',en:'English',fr:'Français',es:'Español',de:'Deutsch'}[code]} aria-current={code === locale ? "page" : undefined} hrefLang={code}>{code.toUpperCase()}</a>)}
@@ -232,7 +325,19 @@ export default function CityBeamLanding({ locale }: { locale: CityBeamLocale }) 
         <section className="citybeam-hero">
           <div className="citybeam-copy"><span className="citybeam-kicker">{t.kicker}</span><h1>{t.h1a} <em>{t.h1b}</em>{t.h1c}</h1><p>{t.intro}</p>
             <div className="citybeam-actions"><a className="button citybeam-primary" href={contactPath[locale]}>{t.info} <span aria-hidden="true">↗</span></a><a className="button button-secondary" href="#come-funziona">{t.discover}</a></div><p className="citybeam-note">{t.disclosure}</p></div>
-          <figure className="citybeam-visual"><picture><source type="image/avif" srcSet="/citybeam-hero-640.avif 640w, /citybeam-hero-1200.avif 1200w" sizes="(max-width: 980px) 90vw, 52vw" /><img src="/citybeam-hero-1200.webp" srcSet="/citybeam-hero-640.webp 640w, /citybeam-hero-1200.webp 1200w" sizes="(max-width: 980px) 90vw, 52vw" alt={t.title} width="1807" height="870" decoding="async" /></picture><figcaption><span>{t.destination}</span><strong>Times Square · New York</strong></figcaption></figure>
+          <figure className="citybeam-visual"><picture><source type="image/avif" srcSet="/citybeam/ny-d020/ny-d020-asos-hero-960.avif 960w, /citybeam/ny-d020/ny-d020-asos-hero-1600.avif 1600w" sizes="(max-width: 980px) 90vw, 52vw" /><img src="/citybeam/ny-d020/ny-d020-asos-hero-1600.webp" srcSet="/citybeam/ny-d020/ny-d020-asos-hero-960.webp 960w, /citybeam/ny-d020/ny-d020-asos-hero-1600.webp 1600w" sizes="(max-width: 980px) 90vw, 52vw" alt={proof.heroAlt} width="1600" height="1067" fetchPriority="high" decoding="async" /></picture><figcaption><span>NY-D020 · Times Square</span><strong>ASOS · Heritage Outdoor</strong></figcaption></figure>
+        </section>
+        <section className="citybeam-photo-story" aria-labelledby="citybeam-photo-title">
+          <div className="citybeam-photo-intro">
+            <span className="citybeam-kicker">{proof.kicker}</span>
+            <h2 id="citybeam-photo-title">{proof.title}</h2>
+            <p>{proof.intro}</p>
+            <p className="citybeam-photo-credit">{proof.credit}</p>
+            <p className="citybeam-photo-note">{proof.note}</p>
+          </div>
+          <div className="citybeam-proof-grid">
+            {proof.images.map((photo, index) => <CityBeamProofPhoto key={photo.file} {...photo} featured={index === 0} />)}
+          </div>
         </section>
         <section className="citybeam-section" id="come-funziona"><div className="citybeam-section-heading"><span className="citybeam-kicker">{t.howKicker}</span><h2>{t.howTitle}</h2><p>{t.howIntro}</p></div>
           <ol className="citybeam-steps">{t.steps.map(([title, text], index) => <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><h3>{title}</h3><p>{text}</p></li>)}</ol></section>
