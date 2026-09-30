@@ -16,6 +16,7 @@ export default function LaunchSignup({project, locale}:{project:'citybeam'|'velv
     de: {title:'Wir informieren dich zum Start.', consent:'Ich möchte nur die Startbenachrichtigung für CityBeam erhalten.', success:'Anmeldung gespeichert. Wir informieren dich, wenn CityBeam startet.', state:'In der Startphase'},
   };
   const t=project==='citybeam'?{...base,...citybeamCopy[locale]}:base;
+  const contactEmail=project==='citybeam'?'info@kreluna.it':'andrea@kreluna.it';
   return <section className={`launch-signup launch-signup--${project}`} id="avvisami" aria-labelledby="launch-title">
     <div><span className="launch-state">{name} · {t.state}</span><h2 id="launch-title">{t.title}</h2><p>{t.intro} {name}.</p></div>
     <form data-launch-signup data-busy={t.busy} data-success={t.success} data-error={t.error} action="/api/launch-waitlist" method="post">
@@ -24,8 +25,8 @@ export default function LaunchSignup({project, locale}:{project:'citybeam'|'velv
       <div hidden aria-hidden="true"><label>Website<input name="website" tabIndex={-1} autoComplete="off"/></label></div>
       <label className="launch-consent"><input name="consent" type="checkbox" required/><span>{t.consent} <a href={locale==='it'?'/privacy':'/en/privacy'}>Privacy</a></span></label>
       <button type="submit">{t.button}</button><p className="launch-result" role="status" aria-live="polite"/>
-      <p className="launch-note">{t.note} <a href={`mailto:andrea@kreluna.it?subject=${encodeURIComponent(`Unsubscribe ${name}`)}`}>{t.cancel}</a>.</p>
-      <noscript><p>{t.fallback} <a href="mailto:andrea@kreluna.it">andrea@kreluna.it</a>.</p></noscript>
+      <p className="launch-note">{t.note} <a href={`mailto:${contactEmail}?subject=${encodeURIComponent(`Unsubscribe ${name}`)}`}>{t.cancel}</a>.</p>
+      <noscript><p>{t.fallback} <a href={`mailto:${contactEmail}`}>{contactEmail}</a>.</p></noscript>
     </form><script src="/assets/launch-signup.js" defer/>
   </section>;
 }

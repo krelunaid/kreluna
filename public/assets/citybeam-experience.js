@@ -34,7 +34,7 @@
       event.preventDefault();
       if (!form.reportValidity()) return;
       const body = `${form.dataset.intro}\n\n${labels[0]}: ${format.selectedOptions[0].text}\n${labels[1]}: ${date.value || labels[3]}\n\n${labels[2]}:\n${idea.value.trim()}`;
-      const mailto = `mailto:andrea@kreluna.it?subject=${encodeURIComponent(form.dataset.subject)}&body=${encodeURIComponent(body)}`;
+      const mailto = `mailto:info@kreluna.it?subject=${encodeURIComponent(form.dataset.subject)}&body=${encodeURIComponent(body)}`;
       window.location.href = mailto;
       status.textContent = form.dataset.status;
     });
