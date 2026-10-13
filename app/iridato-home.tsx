@@ -1,0 +1,2 @@
+import {iridatoCopy,type IridatoLocale} from './iridato-copy';
+export default function IridatoHome({locale='it'}:{locale?:IridatoLocale}){const t=iridatoCopy[locale],href=locale==='it'?'/iridato':`/${locale}/iridato`;return <section className="plt-home section-shell"><a href={href}><div><p>IRIDATO BY KRELUNA · iOS & ANDROID</p><h2>{t.title.join(' ')}</h2><span>{t.roles.map(r=>r[0]).join(' · ')}</span><strong>{t.nav[0]} ↗</strong></div><span className="plt-home-mark" aria-hidden="true">↗</span></a></section>;}
