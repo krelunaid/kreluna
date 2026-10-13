@@ -1,5 +1,6 @@
 "use client";
 
+import IridatoHome from "./iridato-home";
 import { useEffect, useRef, useState } from "react";
 import UpcomingProjects from "./upcoming-projects";
 import { products } from "./marketplace-data";
@@ -278,6 +279,8 @@ export default function Home() {
 
         <a className="scroll-cue" href="#products">Il progetto del momento <span>↓</span></a>
       </section>
+
+      <IridatoHome />
 
       <section className="statement section-shell" id="vision">
         <h2 className="statement-line reveal">

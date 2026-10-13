@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import type { Metadata } from 'next';
+import IridatoHome from './iridato-home';
 import UpcomingProjects from "./upcoming-projects";
 
 export const homeLanguages = { it: 'https://www.kreluna.it/', en: 'https://www.kreluna.it/en', fr: 'https://www.kreluna.it/fr', es: 'https://www.kreluna.it/es', de: 'https://www.kreluna.it/de', 'x-default': 'https://www.kreluna.it/' };
@@ -73,6 +74,7 @@ export default function LocalizedHome({ locale }: { locale: Locale }) {
 <section className="hero section-shell"><div className="hero-copy"><div className="eyebrow">Kreluna · software · AI</div><h1>{t.heading}<br /> <em>{t.subheading}</em></h1><p>{t.intro}</p><div className="hero-actions"><a className="button button-primary" href={`${prefix}/citybeam`}>{t.discover} ↗</a><a className="button button-secondary" href="#services">{t.services}</a></div><nav className="hero-actions" aria-label={access[2]}>{Object.entries(homeLanguages).filter(([l])=>l!=='x-default').map(([l,url])=><a key={l} href={url} hrefLang={l} lang={l} aria-label={({it:'Italiano',en:'English',fr:'Français',es:'Español',de:'Deutsch'} as Record<string,string>)[l]} aria-current={l===locale?'page':undefined}>{l.toUpperCase()}</a>)}</nav></div></section>
       <section className="editorial-home section-shell" id="services"><h2>{t.services}</h2><div className="editorial-home-grid">{t.cards.map(([title,text])=><article className="editorial-home-card" key={title}><h3>{title}</h3><p>{text}</p></article>)}</div></section>
       <section className="statement section-shell"><h2>{t.methodTitle}</h2><p>{t.method}</p></section>
+      <IridatoHome locale={locale} />
       <UpcomingProjects locale={locale} />
       <section className="editorial-trust section-shell"><h2>{t.trust}</h2><p>{t.trustText}</p><details><summary>{t.faq}</summary><p>{t.answer}</p></details></section>
       <section className="resources-home section-shell"><div><h2>{t.resources}</h2><p><a href={t.guidePath}>{t.guide} ↗</a></p><p><a href={t.softwarePath}>{t.softwareGuide} ↗</a></p></div></section>
